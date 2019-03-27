@@ -1,6 +1,7 @@
 # Interact
 
-For a few years now, you could use Javascript to create interactive plots to include on 
+`\r newthought("For a few years now, you")` have been able to use Javascript to create 
+interactive plots to include on 
 websites. These plots respond to actions from your mouse. When you scroll over a point, 
 for example, some information about the point might show up, or when you click on a marker
 on a map, you might get a pop-up box with some information. 
@@ -26,7 +27,9 @@ the data in the table. You can use the arrows beside the column names to rearran
 the rows based on the values they have in a column. With the search box in the top right, 
 you can try searching for specific elements in the data.^[As an example, try searching for
 "2017-09-10" in the search box to get the accidents that occurred on the day of Hurricane
-Irma's Florida landfall, September 10, 2017.]
+Irma's Florida landfall, September 10, 2017. Then try clicking on the "fatals" column 
+name until the arrow beside it points down, to see what the maximum number of fatalities 
+during an accident was.]
 
 You can build this table using the `DT` package in the `htmlwidgets` family of packages. 
 First, you need to read in the data you'd like to print. We're using one of the datasets
@@ -44,7 +47,7 @@ fl_accidents <- read_csv("data/fl_accidents.csv")
 Now, to print this dataframe as an interactive data table, just run the data frame through
 the `datatable` function. 
 
-```{r dt_example, caption = "Example of an interactive data table. Each observation (row) is the information for one of the fatal motor vehicle accidents in Florida the week of Hurricane Irma's landfall, with columns for the county where the accident occurred, the date of the accident, and the number of fatalities."}
+```{r dt_example, fig.fullwidth = FALSE}
 library(DT)
 fl_accidents %>% 
   datatable()
@@ -54,12 +57,12 @@ In your R Studio session, the interactive table should show up
 in the "Viewer" pane. If you want to see it in a separate window, click on the "Zoom" button, 
 and it will open the table in a separate window that you can rescale. 
 
-You can do a lot of customizations through the `datatable` call. For example, you can 
+You can do a lot of customization through the `datatable` call. For example, you can 
 add a caption to the table, change the appearance using the `class` parameter, and 
-use clearer names for the columns. Try the next call to see an example of how these
+use clearer names for the columns. Try the following example code to see an example of how these
 changes can change the table's appearance:
 
-```{r}
+```{r fig.fullwidth = FALSE}
 datatable(fl_accidents, 
           class = "compact", 
           caption = "Example of an interactive data table. Each observation (row) is the information for one of the fatal motor vehicle accidents in Florida the week of Hurricane Irma's landfall, with columns for the county where the accident occurred, the date of the accident, and the number of fatalities.",
