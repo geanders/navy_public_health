@@ -1278,7 +1278,8 @@ the ``Viewer'' pane in R Studio, just like you can see plots in the ``Plots'' pa
 \hypertarget{dt-datatables}{%
 \section{DT: Datatables}\label{dt-datatables}}
 
-One of the easiest interactive visualizations to create in R is an interactive datatable.
+One of the easiest interactive visualizations to create in R is an interactive datatable,
+which you can create using the \texttt{DT} package.
 You can scroll down to see one example. Explore this table a little bit. You'll
 see that you can click the numbers at the bottom right of the table to page through all
 the data in the table. You can use the arrows beside the column names to rearrange
@@ -1329,7 +1330,7 @@ changes can change the table's appearance:
 \begin{Highlighting}[]
 \KeywordTok{datatable}\NormalTok{(fl_accidents, }\DataTypeTok{class =} \StringTok{"compact"}\NormalTok{, }\DataTypeTok{caption =} \StringTok{"Example of an interactive data table. Each observation (row) is the information for one of the fatal motor vehicle accidents in Florida the week of Hurricane Irma's landfall, with columns for the county where the accident occurred, the date of the accident, and the number of fatalities."}\NormalTok{, }
     \DataTypeTok{colnames =} \KeywordTok{c}\NormalTok{(}\StringTok{"County FIPS"}\NormalTok{, }\StringTok{"Date"}\NormalTok{, }\StringTok{"Latitude"}\NormalTok{, }
-        \StringTok{"Longitude"}\NormalTok{, }\StringTok{"# fatalities"}\NormalTok{))}
+        \StringTok{"Longitude"}\NormalTok{, }\StringTok{"# fatalities"}\NormalTok{), }\DataTypeTok{width =} \DecValTok{500}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

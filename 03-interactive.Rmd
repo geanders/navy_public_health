@@ -20,7 +20,10 @@ the "Viewer" pane in R Studio, just like you can see plots in the "Plots" pane.
 
 ## DT: Datatables
 
-One of the easiest interactive visualizations to create in R is an interactive datatable. 
+One of the easiest interactive visualizations to create in R is an interactive datatable,
+which you can create using the `DT` package [@R-DT].
+If you went through the "Prerequisites", you should have installed that package to your 
+computer. 
 You can scroll down to see one example. Explore this table a little bit. You'll 
 see that you can click the numbers at the bottom right of the table to page through all 
 the data in the table. You can use the arrows beside the column names to rearrange
@@ -58,7 +61,8 @@ in the "Viewer" pane. If you want to see it in a separate window, click on the "
 and it will open the table in a separate window that you can rescale. 
 
 You can do a lot of customization through the `datatable` call. For example, you can 
-add a caption to the table, change the appearance using the `class` parameter, and 
+add a caption to the table, change the appearance using the `class` parameter, change the
+table width, and 
 use clearer names for the columns. Try the following example code to see an example of how these
 changes can change the table's appearance:
 
@@ -67,14 +71,15 @@ datatable(fl_accidents,
           class = "compact", 
           caption = "Example of an interactive data table. Each observation (row) is the information for one of the fatal motor vehicle accidents in Florida the week of Hurricane Irma's landfall, with columns for the county where the accident occurred, the date of the accident, and the number of fatalities.",
           colnames = c("County FIPS", "Date",
-                       "Latitude", "Longitude", "# fatalities"))
+                       "Latitude", "Longitude", "# fatalities"),
+          width = 800)
 ```
 
 To get more details on all the options available, see the helpfile for `datatable` (run `?datatable`) or read through the [online tutorial]() for the package.
 
 ## Plotly
 
-One of the easiest ways to make a `ggplot` plot interactive is with the `plotly` package. 
+One of the easiest ways to make a `ggplot` plot interactive is with the `plotly` package [@R-plotly]. 
 If you went through the "Prerequisites", you should have installed that package to your 
 computer. This package has a function, `ggplotly`, that allows you to make a `ggplot`
 plot interactive with a single line of code. 
@@ -82,7 +87,8 @@ plot interactive with a single line of code.
 For example, try it out with the Florida motor vehicle fatality time series from the "Plot" 
 section.^[To run this code, you should make sure you've run the code in the "Plot" section
 in your current R session. If the "Environment" pane of your RStudio session includes 
-"daily_fatalities" in its list, you should be okay.] First, save the plot to an object
+"daily_fatalities" in its list, you should be okay. The code itself should look familiar from 
+the "Plot" section.] First, save the plot to an object
 called `fatality_plot` using the gets arrow:
 
 ```{r}
@@ -104,8 +110,9 @@ it out anytime you want by calling the name you assigned it (Figure \@ref(fig:pl
 fatality_plot
 ```
 
-To use plotly to make this plot interactive, all you need to do is run this `ggplot` object
-through the `plotly` function. You can use the **pipe operator** (`%>%`) to do that: 
+To use plotly to make this plot interactive, all you need to do is load the `plotly` package and
+run this `ggplot` object
+through its `ggplotly` function: 
 
 ```{r plotly2, message = FALSE, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3}
 library(plotly)

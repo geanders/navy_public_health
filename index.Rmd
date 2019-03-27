@@ -63,7 +63,8 @@ links at the top of the page) to continue.
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'ggplot2', 'readr',
-  'forcats', 'magrittr', 'dplyr', 'sf', 'htmlwidgets'
+  'forcats', 'magrittr', 'dplyr', 'sf', 'htmlwidgets', 'DT', 'plotly', 
+  'leaflet'
 ), 'packages.bib')
 ```
 
