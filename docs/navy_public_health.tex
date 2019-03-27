@@ -1291,6 +1291,32 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \hypertarget{plotly}{%
 \section{Plotly}\label{plotly}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fatality_plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ daily_fatalities) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ fatals), }\DataTypeTok{color =} \StringTok{"darkgray"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date, }\DataTypeTok{y =}\NormalTok{ fatals, }\DataTypeTok{color =}\NormalTok{ weekday), }
+        \DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{expand_limits}\NormalTok{(}\DataTypeTok{y =} \DecValTok{0}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_viridis_d}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Date"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"# of fatalities"}\NormalTok{, }\DataTypeTok{color =} \StringTok{"Day of week"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Motor vehicle fatalities in Florida"}\NormalTok{, }
+        \DataTypeTok{subtitle =} \StringTok{"Late summer / early fall of 2019"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\NormalTok{fatality_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plotly)}
+\NormalTok{fatality_plot }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplotly}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure*}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1} \end{figure*}
+
 \hypertarget{leaflet}{%
 \section{Leaflet}\label{leaflet}}
 
@@ -1299,18 +1325,18 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \KeywordTok{library}\NormalTok{(magrittr)}
 \KeywordTok{library}\NormalTok{(leaflet)}
 \NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(}\DataTypeTok{coords =} \KeywordTok{c}\NormalTok{(}\StringTok{"longitud"}\NormalTok{, }
-    \StringTok{"latitude"}\NormalTok{))}
+    \StringTok{"latitude"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_sf}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(purrr)}
 \NormalTok{irma_track <-}\StringTok{ }\KeywordTok{st_read}\NormalTok{(}\StringTok{"data/al112017_best_track"}\NormalTok{, }
-    \DataTypeTok{layer =} \StringTok{"al112017_lin"}\NormalTok{)}
+    \DataTypeTok{layer =} \StringTok{"al112017_lin"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_transform}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1333,12 +1359,7 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Warning: sf layer has inconsistent datum (+proj=longlat +a=6371200 +b=6371200 +no_defs).
-## Need '+proj=longlat +datum=WGS84'
-\end{verbatim}
-
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-25-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1353,12 +1374,7 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Warning: sf layer has inconsistent datum (+proj=longlat +a=6371200 +b=6371200 +no_defs).
-## Need '+proj=longlat +datum=WGS84'
-\end{verbatim}
-
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-26-1}
 
 \hypertarget{learn-more-2}{%
 \section{Learn more}\label{learn-more-2}}

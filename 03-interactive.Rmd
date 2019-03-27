@@ -25,13 +25,34 @@ datatable(fl_accidents,
 
 ## Plotly
 
+```{r}
+fatality_plot <- ggplot(data = daily_fatalities) + 
+  geom_line(aes(x = date, y = fatals), color = "darkgray") + 
+  geom_point(aes(x = date, y = fatals, color = weekday), size = 2) + 
+  expand_limits(y = 0) + 
+  scale_color_viridis_d() + 
+  labs(x = "Date", y = "# of fatalities", color = "Day of week") + 
+  ggtitle("Motor vehicle fatalities in Florida",
+          subtitle = "Late summer / early fall of 2019") +
+  theme(legend.position = "bottom")
+fatality_plot
+```
+
+```{r message = FALSE, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3}
+library(plotly)
+fatality_plot %>% 
+  ggplotly()
+```
+
+
 ## Leaflet
 
 ```{r}
 library(magrittr)
 library(leaflet)
 fl_accidents %<>% 
-  st_as_sf(coords = c("longitud", "latitude"))
+  st_as_sf(coords = c("longitud", "latitude")) %>% 
+  st_sf(crs = 4326)
 leaflet() %>% 
   addTiles() %>% 
   addMarkers(data = fl_accidents)
@@ -40,8 +61,8 @@ leaflet() %>%
 ```{r}
 library(purrr)
 irma_track <- st_read("data/al112017_best_track", 
-                      layer = "al112017_lin") 
-
+                      layer = "al112017_lin") %>% 
+  st_transform(crs = 4326)
 leaflet() %>% 
   addTiles() %>%
   fitBounds(lng1 = -88, lng2 = -80, lat1 = 24.5, lat2 = 31.5) %>% 
