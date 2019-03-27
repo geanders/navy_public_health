@@ -55,6 +55,8 @@ means that the blocks can be joined together in an extraordinary number of
 different combinations, and that you can imagine and then make very complex 
 structures with the blocks. 
 
+
+
 ## Subsetting
 
 ### Selecting columns
