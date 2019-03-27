@@ -7,4 +7,3 @@ _bookdown_files
 rsconnect
 .DS_Store
 old_data/*
-workshop_slides/workshop_slides.Rmd
