@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  27 MAR 2019 09:31
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  27 MAR 2019 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1613,7 +1613,45 @@ Dictionary: translator-theorem-dictionary, Language: English
 
 ] [2
 
-] [3
+]
+LaTeX Font Info:    Try loading font information for OT1+NotoSans-Regular(1) on
+ input line 185.
+LaTeX Font Info:    No file OT1NotoSans-Regular(1).fd. on input line 185.
+
+LaTeX Font Warning: Font shape `OT1/NotoSans-Regular(1)/m/n' undefined
+(Font)              using `OT1/cmr/m/n' instead on input line 185.
+
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 185.
+
+(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 185
+.
+(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 185
+.
+(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <14.4> on input line 185.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 185.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 185.
+LaTeX Font Info:    Try loading font information for U+msa on input line 185.
+
+(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 185.
+
+(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [3
 
 ] [4
 
@@ -1621,10 +1659,7 @@ Dictionary: translator-theorem-dictionary, Language: English
 
 ] [6
 
-]
-\openout4 = `workshop_slides.vrb'.
-
-(./workshop_slides.vrb) [7
+] [7
 
 ]
 \openout4 = `workshop_slides.vrb'.
@@ -1632,85 +1667,54 @@ Dictionary: translator-theorem-dictionary, Language: English
 (./workshop_slides.vrb) [8
 
 ]
+\openout4 = `workshop_slides.vrb'.
+
+(./workshop_slides.vrb) [9
+
+]
 File: images/nametag.png Graphic file (type bmp)
 <images/nametag.png>
-[9
+[10
 
-] [10
+] [11
 
 ]
 \openout4 = `workshop_slides.vrb'.
 
-(./workshop_slides.vrb) [11
+(./workshop_slides.vrb) [12
+
+]
+File: images/irma_track.png Graphic file (type bmp)
+<images/irma_track.png>
+[13
 
 ]
 File: images/nsw_irma_warning.png Graphic file (type bmp)
 <images/nsw_irma_warning.png>
-[12
+[14
 
 ]
 File: images/irma_evac.png Graphic file (type bmp)
 <images/irma_evac.png>
 
-Overfull \vbox (7.03809pt too high) detected at line 312
+Overfull \vbox (7.03809pt too high) detected at line 330
  []
 
-[13
+[15
 
 ]
 File: images/fars.png Graphic file (type bmp)
 <images/fars.png>
-LaTeX Font Info:    Try loading font information for OT1+NotoSans-Regular(1) on
- input line 322.
-LaTeX Font Info:    No file OT1NotoSans-Regular(1).fd. on input line 322.
-
-LaTeX Font Warning: Font shape `OT1/NotoSans-Regular(1)/m/n' undefined
-(Font)              using `OT1/cmr/m/n' instead on input line 322.
-
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 322.
-
-(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
-File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 322
-.
-(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
-File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 322
-.
-(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
-File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 322.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 322.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 322.
-LaTeX Font Info:    Try loading font information for U+msa on input line 322.
-
-(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 322.
-
-(/Users/georgianaanderson/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [14
+[16
 
 ]
 \openout4 = `workshop_slides.vrb'.
 
 (./workshop_slides.vrb)
-Overfull \vbox (9.54883pt too high) detected at line 352
+Overfull \vbox (9.54883pt too high) detected at line 370
  []
 
-[15
-
-] [16
-
-] [17
+[17
 
 ] [18
 
@@ -1722,78 +1726,82 @@ Overfull \vbox (9.54883pt too high) detected at line 352
 
 ] [22
 
-]
-File: images/example_code.png Graphic file (type bmp)
-<images/example_code.png>
-[23
+] [23
 
 ] [24
 
-] [25
+]
+File: images/example_code.png Graphic file (type bmp)
+<images/example_code.png>
+[25
 
 ] [26
+
+] [27
+
+] [28
 
 ]
 File: images/knuth_bi.jpg Graphic file (type bmp)
 <images/knuth_bi.jpg>
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 447.
+(Font)              <12> on input line 465.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 447.
+(Font)              <8> on input line 465.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 447.
-[27
+(Font)              <6> on input line 465.
+[29
 
 ]
 File: images/yihui.jpg Graphic file (type bmp)
 <images/yihui.jpg>
-[28
+[30
 
-] [29
-
-]
-\openout4 = `workshop_slides.vrb'.
-
-(./workshop_slides.vrb) [30
+] [31
 
 ]
 \openout4 = `workshop_slides.vrb'.
 
-(./workshop_slides.vrb) [31
+(./workshop_slides.vrb) [32
 
 ]
-File: images/example_code.png Graphic file (type bmp)
-<images/example_code.png>
-[32
+\openout4 = `workshop_slides.vrb'.
 
-] [33
+(./workshop_slides.vrb) [33
 
 ]
 File: images/example_code.png Graphic file (type bmp)
 <images/example_code.png>
 [34
 
+] [35
+
 ]
-LaTeX Font Info:    Calculating math sizes for size <17.52472> on input line 56
-7.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <17.52472> on input line 567.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12.26724> on input line 567.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8.76236> on input line 567.
-[35
+File: images/example_code.png Graphic file (type bmp)
+<images/example_code.png>
+[36
 
-] [36
-
-] [37
+]
+LaTeX Font Info:    Calculating math sizes for size <17.52472> on input line 58
+5.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <17.52472> on input line 585.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12.26724> on input line 585.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8.76236> on input line 585.
+[37
 
 ] [38
+
+] [39
+
+] [40
 
 ]
 File: images/skeleton.jpg Graphic file (type bmp)
 <images/skeleton.jpg>
-[39
+[41
 
 ]
 \tf@nav=\write7
@@ -1805,11 +1813,11 @@ File: images/skeleton.jpg Graphic file (type bmp)
 \tf@snm=\write9
 \openout9 = `workshop_slides.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 618.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 618.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 636.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 636.
 (./workshop_slides.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 618.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 618.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 636.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 636.
 Package rerunfilecheck Info: File `workshop_slides.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
 
@@ -1817,12 +1825,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 36446 strings out of 494921
- 739738 string characters out of 6174292
- 808417 words of memory out of 5000000
- 39704 multiletter control sequences out of 15000+600000
+ 36430 strings out of 494921
+ 739268 string characters out of 6174292
+ 808619 words of memory out of 5000000
+ 39687 multiletter control sequences out of 15000+600000
  544839 words of font info for 129 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  50i,15n,80p,802b,807s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on workshop_slides.pdf (39 pages).
+Output written on workshop_slides.pdf (41 pages).

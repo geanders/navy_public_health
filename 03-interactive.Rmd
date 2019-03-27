@@ -2,8 +2,39 @@
 
 ## DT: Datatables
 
+```{r message = FALSE}
+library(readr)
+library(dplyr)
+library(sf)
+fl_accidents <- read_csv("data/fl_accidents.csv") 
+```
+
+```{r}
+library(DT)
+datatable(fl_accidents)
+```
+
+
+```{r}
+datatable(fl_accidents, 
+          class = "compact", 
+          caption = "Fatal motor vehicle accidents in Florida the week of Hurricane Irma",
+          colnames = c("County FIPS", "Date",
+                       "Latitude", "Longitude", "# fatalities"))
+```
+
 ## Plotly
 
 ## Leaflet
+
+```{r}
+library(magrittr)
+library(leaflet)
+fl_accidents %<>% 
+  st_as_sf(coords = c("longitud", "latitude"))
+leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(data = fl_accidents)
+```
 
 ## Learn more

@@ -1260,11 +1260,51 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \hypertarget{dt-datatables}{%
 \section{DT: Datatables}\label{dt-datatables}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(sf)}
+\NormalTok{fl_accidents <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/fl_accidents.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(DT)}
+\KeywordTok{datatable}\NormalTok{(fl_accidents)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-20-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{datatable}\NormalTok{(fl_accidents, }\DataTypeTok{class =} \StringTok{"compact"}\NormalTok{, }\DataTypeTok{caption =} \StringTok{"Fatal motor vehicle accidents in Florida the week of Hurricane Irma"}\NormalTok{, }
+    \DataTypeTok{colnames =} \KeywordTok{c}\NormalTok{(}\StringTok{"County FIPS"}\NormalTok{, }\StringTok{"Date"}\NormalTok{, }\StringTok{"Latitude"}\NormalTok{, }
+        \StringTok{"Longitude"}\NormalTok{, }\StringTok{"# fatalities"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-21-1}
+
 \hypertarget{plotly}{%
 \section{Plotly}\label{plotly}}
 
 \hypertarget{leaflet}{%
 \section{Leaflet}\label{leaflet}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(magrittr)}
+\KeywordTok{library}\NormalTok{(leaflet)}
+\NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(}\DataTypeTok{coords =} \KeywordTok{c}\NormalTok{(}\StringTok{"longitud"}\NormalTok{, }
+    \StringTok{"latitude"}\NormalTok{))}
+\KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
 
 \hypertarget{learn-more-2}{%
 \section{Learn more}\label{learn-more-2}}

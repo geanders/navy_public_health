@@ -23,7 +23,7 @@ library(leaflet)
 # save(fl_counties, file = "data/fl_counties.RData")
 load("../data/fl_counties.RData")
 
-fl_accidents <- read_csv("../data/FARS2017NationalCSV/accident.csv")
+fl_accidents <- read_csv("../old_data/FARS2017NationalCSV/accident.csv")
 fl_accidents %<>% 
   rename_all(str_to_lower) %>% 
   select(state, county, day, month, year, latitude, longitud, fatals) %>% 

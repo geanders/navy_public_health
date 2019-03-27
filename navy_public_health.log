@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  27 MAR 2019 10:54
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  27 MAR 2019 13:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1569,13 +1569,43 @@ This message occurred on input line 1258.
 
 [32]
 Chapter 4.
+File: navy_public_health_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file
+ (type pdf)
+<use navy_public_health_files/figure-latex/unnamed-chunk-20-1.pdf>
+
+Overfull \hbox (11.9917pt too wide) in paragraph at lines 1279--1280
+[][]  
+ []
+
+File: navy_public_health_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file
+ (type pdf)
+<use navy_public_health_files/figure-latex/unnamed-chunk-21-1.pdf>
+
+Overfull \hbox (11.9917pt too wide) in paragraph at lines 1289--1290
+[][]  
+ []
+
 [33
 
-] [34
-
 ]
+File: navy_public_health_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file
+ (type pdf)
+<use navy_public_health_files/figure-latex/unnamed-chunk-22-1.pdf>
+
+Overfull \hbox (12.02463pt too wide) in paragraph at lines 1307--1308
+[][]  
+ []
+
+
+Class tufte-book Warning: Proper spacing of small-caps letters has not been set
+ up.
+This message occurred on input line 1313.
+
+[34]
 Chapter 5.
-[35] [36
+[35
+
+] [36
 
 ]
 Chapter 6.
@@ -1589,7 +1619,7 @@ LaTeX Warning: Marginpar on page 37 moved.
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1363.
+This message occurred on input line 1403.
 
 [38]
 Chapter 7.
@@ -1600,25 +1630,25 @@ Chapter 7.
 ]
 Chapter 8.
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1371.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1411.
 [41]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1371.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1411.
 (./navy_public_health.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1371.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1371.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1411.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1411.
 
 Package rerunfilecheck Info: File `navy_public_health.out' has not changed.
 (rerunfilecheck)             Checksum: E8FDA101691C44644E638862A6197405.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1371.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1411.
  ) 
 Here is how much of TeX's memory you used:
- 24445 strings out of 494921
- 454676 string characters out of 6174292
+ 24457 strings out of 494921
+ 455369 string characters out of 6174292
  589753 words of memory out of 5000000
- 28036 multiletter control sequences out of 15000+600000
+ 28045 multiletter control sequences out of 15000+600000
  537891 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  55i,11n,116p,536b,488s stack positions out of 5000i,500n,10000p,200000b,80000s

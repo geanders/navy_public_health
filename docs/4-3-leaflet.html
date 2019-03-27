@@ -26,6 +26,22 @@
 
 <link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
 <link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/jquery-1.12.4/jquery.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.5/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -161,6 +177,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <div id="leaflet" class="section level2">
 <h2><span class="header-section-number">4.3</span> Leaflet</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+<span class="kw">library</span>(leaflet)
+fl_accidents <span class="op">%&lt;&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;longitud&quot;</span>, <span class="st">&quot;latitude&quot;</span>))
+<span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">addMarkers</span>(<span class="dt">data =</span> fl_accidents)</code></pre>
+<div id="htmlwidget-88b77167ba343b7c7fb8" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-88b77167ba343b7c7fb8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[30.2474,28.51796389,28.26148889,28.573275,30.22845833,30.56341111,30.13608333,29.56196111,30.06197778,30.37913056,30.39993056,30.15676389,27.51623056,29.02606944,28.30813056,27.48831389,30.42301667,28.19993889,28.32404444,25.86673889,27.39658056,27.58978611,26.48524167,26.5089,28.13113056,30.38643889,27.58766944,28.52425,28.01073333,30.10211944,25.6876,28.36670833,29.02935,30.16451111,28.34871111,28.15358333,30.65893611],[-81.5407,-81.41926667,-81.34221111,-81.18188056,-81.84293889,-87.3797,-82.71024444,-82.87318056,-85.25815,-81.76085556,-81.74076111,-85.6355,-80.44788889,-82.12029444,-82.66615,-81.76585556,-84.24898333,-82.64678889,-82.69583889,-80.32331944,-82.56328611,-82.24605833,-81.94330278,-81.95595,-81.07623056,-84.71040278,-82.4255,-82.49176111,-81.75111111,-81.72336944,-80.34971111,-82.69068889,-82.0448,-81.74728611,-81.49691667,-80.58482778,-86.87985833],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.6876,30.65893611],"lng":[-87.3797,-80.32331944]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p style="text-align: center;">
 <a href="4-2-plotly.html"><button class="btn btn-default">Previous</button></a>

@@ -21,6 +21,12 @@ knitr::opts_knit$set(root.dir = "..")
 - UNDERSTAND what R can do for visualizations \bigskip
 - KNOW what to do next to learn more
 
+## "Homework"
+
+\begin{center}
+\url{goo.gl/7fPYUx}
+\end{center}
+
 ## Today's plan
 
 \montserratfont
