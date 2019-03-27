@@ -614,7 +614,7 @@ which should be the R project directory you're using for the examples if you fol
 set-up in "Prerequisites". It will save the file as a pdf that is 6 inches tall by 5 inches
 wide. 
 
-```{r}
+```{r eval = FALSE}
 ggsave(irma_fatalities_plot, 
        filename = "irma_fatalities.pdf",
        device = "pdf",
