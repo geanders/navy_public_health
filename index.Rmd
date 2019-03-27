@@ -1,0 +1,69 @@
+--- 
+title: "Data Visualization in R"
+subtitle: "Workshop for the 2019 Navy and Marine Corps Public Health Conference"
+author: "Brooke Anderson"
+date: "March 28, 2019"
+site: bookdown::bookdown_site
+output:
+  bookdown::tufte_html_book:
+    toc: yes
+    css: toc.css
+    tufte_variant: "envisioned"
+  bookdown::tufte_book2:
+    toc: yes
+    includes:
+      in_header: preamble.tex
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+```{r include = FALSE}
+library(tufte)
+library(knitr)
+```
+
+# Prerequisites
+
+`r newthought("I have based this workshop")` on examples for you to try yourself, 
+because you 
+won't be able to learn how to program unless you try it out. I've picked 
+example data that I hope will be interesting to Navy and Marine Corp public
+health researchers and practitioners. 
+
+To try out these examples, you need some set-up: 
+
+1. Download R
+2. Download RStudio
+3. Install some R packages
+4. Create an R Project for the examples
+5. Download the example data and save it in the R Project
+
+This section will walk you through each step, explaining both *how* and 
+*why* to do the step. Click on the **Next** button (or navigate using the
+links at the top of the page) to continue.
+
+## Download R
+
+## Download RStudio
+
+## Install some R packages
+
+## Create an R Project
+
+## Download example data
+
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'ggplot2', 'readr',
+  'forcats', 'magrittr', 'dplyr', 'sf'
+), 'packages.bib')
+```
+

@@ -1,0 +1,315 @@
+---
+author: Brooke Anderson
+address: Colorado State University
+title: R PROGRAMMING
+subtitle: for data visualization
+date: \today
+header-includes:
+   - \usepackage{epigraph}
+   - \setlength{\epigraphwidth}{0.4\textwidth}
+output: binb::presento
+---
+
+```{r echo = FALSE}
+knitr::opts_knit$set(root.dir = "..")
+```
+
+
+## Today's goals
+
+- LEARN principles of a key R plotting framework \bigskip
+- UNDERSTAND what R can do for visualizations \bigskip
+- KNOW what to do next to learn more
+
+## Today's plan
+
+\montserratfont
+- \largetext{PLOT} \bigskip
+- \largetext{MAP} \bigskip
+- \largetext{INTERACT} \bigskip
+- \largetext{REPORT} \bigskip
+- \largetext{TIDY} 
+
+____
+
+\begin{center}
+ \hugetext{PREREQUISITES} 
+ \medskip 
+ \small Setting up for success
+\end{center}
+
+____
+
+[R vs. RStudio]
+
+____
+
+[R packages]
+
+
+## Installing R packages
+
+```{r eval = FALSE}
+install.packages("readr")
+```
+
+\bigskip
+
+\small Use the \textbf{install.packages} function to install an R package to your computer.
+
+## Loading R packages
+
+```{r}
+library("readr")
+```
+
+\bigskip
+
+\small Use the \textbf{library} function to load an R package that is installed on your computer.
+
+____
+
+\tikz[overlay,remember picture] \node[opacity=0.8, at=(current page.center)]{%
+  \includegraphics[width=0.85\paperwidth]{images/nametag}};
+
+\begin{center}
+ \vspace{1in}
+ \hugetext{\inconsolatafont <-} 
+ \medskip 
+ \small Assign an object a name with R's \textbf{gets arrow}
+\end{center}
+
+## Assignment with the gets arrow
+
+You want to read in the "daily_fatalities.csv" file, which is in the "data" subdirectory.
+
+## Assignment with the gets arrow
+
+\small
+
+Assign the filepath of this file to the R object named **fatalities_files**. 
+
+\medskip
+
+Reference that object to read in the data and assign it to the R object 
+named **daily_fatalities**.
+
+```{r message = FALSE}
+fatalities_file <- "data/daily_fatalities.csv"
+daily_fatalities <- read_csv(fatalities_file)
+```
+
+## Hurricane Irma
+
+\begin{center}
+\includegraphics[width = \textwidth]{images/irma_track}
+\end{center}
+
+## Hurricane Irma
+
+\begin{center}
+\includegraphics[width = \textwidth]{images/nsw_irma_warning}
+\end{center}
+
+## Hurricane Irma
+
+\begin{center}
+\includegraphics[width = \textwidth]{images/irma_evac}
+\end{center}
+
+____
+
+\begin{center}
+\includegraphics[width = \textwidth]{images/fars}
+\end{center}
+
+\url{https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars}
+
+## Example data
+
+\small
+
+```{r}
+daily_fatalities
+```
+
+
+____
+
+\begin{center}
+ \hugetext{PLOT} 
+ \medskip 
+ \small R's \textbf{ggplot2} framework for plotting
+\end{center}
+
+____
+
+[Layering for ggplot]
+
+## Spot the differences
+
+## geoms and their aesthetics
+
+## scales
+
+## labels
+
+## themes
+
+____
+
+\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)]{%
+  \includegraphics[width=1\paperwidth]{images/example_code}};
+\color{colorblue}
+\begin{center}
+\hugetext{\montserratfont [Live coding example]}
+\end{center}
+
+____
+
+\begin{center}
+ \hugetext{MAP} 
+ \medskip 
+ \small R's \textbf{sf} framework for mapping
+\end{center}
+
+____
+
+\begin{center}
+ \hugetext{INTERACT} 
+ \medskip 
+ \small R's \textbf{htmlwidgets} framework for interacting
+\end{center}
+
+____
+
+\begin{center}
+ \hugetext{REPORT} 
+ \medskip 
+ \small R's \textbf{RMarkdown} framework for reporting
+\end{center}
+
+## Donald Knuth
+
+\tikz[overlay,remember picture] \node[opacity=0.8, at=(current page.center)]{%
+  \includegraphics[width=0.85\paperwidth]{images/knuth_bi}};
+\color{white}
+\vspace{-0.9in}
+\epigraph{If you think you're a really good programmer... read Art of Computer Programming... 
+You should definitely send me a résumé if you can read the whole thing.''}
+{\textit{Bill Gates} }
+
+## Yihui Xie
+
+\tikz[overlay,remember picture] \node[opacity=0.8, at=(current page.center)]{%
+  \includegraphics[width=0.9\paperwidth]{images/yihui}};
+  
+____
+
+\begin{center}
+ \hugetext{WYSISYG} 
+ \medskip 
+ \small \textbf{W}hat \textbf{Y}ou \textbf{S}ee \textbf{I}s \textbf{W}hat \textbf{Y}ou \textbf{G}et
+\end{center}
+
+____
+
+\small
+
+````markdown
+Text of the report, with Markdown **format markers**.
+
+`r ''````{r}
+number_one <- 1
+
+number_one
+```
+
+More text, \*also\* with Markdown format markers. 
+And a list: 
+
+\- Item 1 
+
+\- Item 2
+
+````
+
+____
+
+\small
+
+Text of the report, with Markdown **format markers**.
+
+```{r}
+number_one <- 1
+number_one
+```
+
+More text, *also* with Markdown format markers. And some items: 
+
+- Item 1
+- Item 2
+
+____
+
+\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)]{%
+  \includegraphics[width=1\paperwidth]{images/example_code}};
+\color{colorblue}
+\begin{center}
+\hugetext{\montserratfont [Live coding example]}
+\end{center}
+
+____
+
+\begin{center}
+ \hugetext{TIDY} 
+ \medskip 
+ \small R's \textbf{tidyverse} framework for tidying
+\end{center}
+
+____
+
+\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)]{%
+  \includegraphics[width=1\paperwidth]{images/example_code}};
+\color{colorblue}
+\begin{center}
+\hugetext{\montserratfont [Live coding example]}
+\end{center}
+
+## Presento
+
+- \begin{center}\largetext{The design is \underline{clean}}\end{center}    \bigskip
+- \begin{center}\largetext{The rules are \underline{simple}}\end{center}   \bigskip
+- \item \begin{center}\largetext{The code is \underline{extensible}}\end{center}
+
+
+## Open Source Fonts
+
+-  \montserratfont This is \textsc{Montserrat}	\bigskip
+-  \notosansfont This is \textsc{Noto Sans}		\bigskip
+-  \latolightfont This is Lato (light)          \bigskip
+-  \inconsolatafont This is inconsolata         \bigskip
+-  \textsc{This is Alegreya Sans small caps}    \bigskip
+
+
+## Color Palette
+
+\begin{center}
+  \crule[colordgray] \crule[colorhgray] \crule[colorblue] \crule[colorgreen] \crule[colororange]
+\end{center}
+
+____
+
+\begin{center}
+ \hugetext{BIG BOLD TEXT} 
+ \medskip 
+ \small but background color does not work
+\end{center}
+
+____
+
+\tikz[overlay,remember picture] \node[opacity=0.8, at=(current page.center)]{%
+  \includegraphics[width=\paperwidth]{images/skeleton}};
+\begin{textblock}{7}(7,2.5)
+  {\color{colorblue}\hugetext{\textbf{RUN!}}}
+\end{textblock}

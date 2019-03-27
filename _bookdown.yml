@@ -1,0 +1,5 @@
+book_filename: "navy_public_health"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
