@@ -1328,7 +1328,7 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \begin{Highlighting}[]
 \KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fitBounds}\NormalTok{(}\DataTypeTok{lng1 =} \DecValTok{-88}\NormalTok{, }
     \DataTypeTok{lng2 =} \DecValTok{-80}\NormalTok{, }\DataTypeTok{lat1 =} \FloatTok{24.5}\NormalTok{, }\DataTypeTok{lat2 =} \FloatTok{31.5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents, }\DataTypeTok{popup =}\NormalTok{ fl_accidents}\OperatorTok{$}\NormalTok{date) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents, }\DataTypeTok{popup =} \OperatorTok{~}\NormalTok{date) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{    }\KeywordTok{addPolylines}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ irma_track, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1343,12 +1343,12 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(htmltools)}
-\NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{popup =} \KeywordTok{paste}\NormalTok{(}\StringTok{"<b>Date:<b>"}\NormalTok{, }
-\NormalTok{    date, }\StringTok{"<br>"}\NormalTok{, }\StringTok{"<b># fatalities:<b>"}\NormalTok{, fatals))}
+\NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{popup =} \KeywordTok{paste}\NormalTok{(}\StringTok{"<b>Date:</b>"}\NormalTok{, }
+\NormalTok{    date, }\StringTok{"<br/>"}\NormalTok{, }\StringTok{"<b># fatalities:</b>"}\NormalTok{, fatals))}
 
 \KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fitBounds}\NormalTok{(}\DataTypeTok{lng1 =} \DecValTok{-88}\NormalTok{, }
     \DataTypeTok{lng2 =} \DecValTok{-80}\NormalTok{, }\DataTypeTok{lat1 =} \FloatTok{24.5}\NormalTok{, }\DataTypeTok{lat2 =} \FloatTok{31.5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents, }\DataTypeTok{popup =}\NormalTok{ fl_accidents}\OperatorTok{$}\NormalTok{popup) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents, }\DataTypeTok{popup =} \OperatorTok{~}\NormalTok{popup) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{    }\KeywordTok{addPolylines}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ irma_track, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
