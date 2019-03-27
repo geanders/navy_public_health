@@ -1306,6 +1306,60 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 
 \includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(purrr)}
+\NormalTok{irma_track <-}\StringTok{ }\KeywordTok{st_read}\NormalTok{(}\StringTok{"data/al112017_best_track"}\NormalTok{, }
+    \DataTypeTok{layer =} \StringTok{"al112017_lin"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Reading layer `al112017_lin' from data source `/Users/georgianaanderson/Documents/r_workshops/navy_public_health/data/al112017_best_track' using driver `ESRI Shapefile'
+## Simple feature collection with 20 features and 3 fields
+## geometry type:  LINESTRING
+## dimension:      XY
+## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 36.8
+## epsg (SRID):    NA
+## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_defs
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fitBounds}\NormalTok{(}\DataTypeTok{lng1 =} \DecValTok{-88}\NormalTok{, }
+    \DataTypeTok{lng2 =} \DecValTok{-80}\NormalTok{, }\DataTypeTok{lat1 =} \FloatTok{24.5}\NormalTok{, }\DataTypeTok{lat2 =} \FloatTok{31.5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents, }\DataTypeTok{popup =}\NormalTok{ fl_accidents}\OperatorTok{$}\NormalTok{date) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{addPolylines}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ irma_track, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: sf layer has inconsistent datum (+proj=longlat +a=6371200 +b=6371200 +no_defs).
+## Need '+proj=longlat +datum=WGS84'
+\end{verbatim}
+
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(htmltools)}
+\NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{popup =} \KeywordTok{paste}\NormalTok{(}\StringTok{"<b>Date:<b>"}\NormalTok{, }
+\NormalTok{    date, }\StringTok{"<br>"}\NormalTok{, }\StringTok{"<b># fatalities:<b>"}\NormalTok{, fatals))}
+
+\KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fitBounds}\NormalTok{(}\DataTypeTok{lng1 =} \DecValTok{-88}\NormalTok{, }
+    \DataTypeTok{lng2 =} \DecValTok{-80}\NormalTok{, }\DataTypeTok{lat1 =} \FloatTok{24.5}\NormalTok{, }\DataTypeTok{lat2 =} \FloatTok{31.5}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents, }\DataTypeTok{popup =}\NormalTok{ fl_accidents}\OperatorTok{$}\NormalTok{popup) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{addPolylines}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ irma_track, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: sf layer has inconsistent datum (+proj=longlat +a=6371200 +b=6371200 +no_defs).
+## Need '+proj=longlat +datum=WGS84'
+\end{verbatim}
+
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
+
 \hypertarget{learn-more-2}{%
 \section{Learn more}\label{learn-more-2}}
 

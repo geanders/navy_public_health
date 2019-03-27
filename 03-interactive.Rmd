@@ -37,4 +37,34 @@ leaflet() %>%
   addMarkers(data = fl_accidents)
 ```
 
+```{r}
+library(purrr)
+irma_track <- st_read("data/al112017_best_track", 
+                      layer = "al112017_lin") 
+
+leaflet() %>% 
+  addTiles() %>%
+  fitBounds(lng1 = -88, lng2 = -80, lat1 = 24.5, lat2 = 31.5) %>% 
+  addMarkers(data = fl_accidents,
+             popup = fl_accidents$date) %>% 
+  addPolylines(data = irma_track, color = "red")
+```
+
+```{r}
+library(htmltools)
+fl_accidents %<>% 
+  mutate(popup = paste("<b>Date:<b>", date, 
+                       "<br>",
+                       "<b># fatalities:<b>", fatals))
+
+leaflet() %>% 
+  addTiles() %>%
+  fitBounds(lng1 = -88, lng2 = -80, lat1 = 24.5, lat2 = 31.5) %>% 
+  addMarkers(data = fl_accidents,
+             popup = fl_accidents$popup) %>% 
+  addPolylines(data = irma_track, color = "red")
+```
+
+
+
 ## Learn more

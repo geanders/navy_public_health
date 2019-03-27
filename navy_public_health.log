@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  27 MAR 2019 13:06
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  27 MAR 2019 14:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1597,60 +1597,112 @@ Overfull \hbox (12.02463pt too wide) in paragraph at lines 1307--1308
  []
 
 
+Overfull \hbox (585.75pt too wide) in paragraph at lines 1325--1325
+[]\TU/lmtt/m/n/10 ## Reading layer `al112017_lin' from data source `/Users/geor
+gianaanderson/Documents/r_workshops/navy_public_health/data/al112017_best_track
+' using driver `ESRI Shapefile'[] 
+ []
+
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 1325--1325
+[]\TU/lmtt/m/n/10 ## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 3
+6.8[] 
+ []
+
+
+Overfull \hbox (18.75pt too wide) in paragraph at lines 1325--1325
+[]\TU/lmtt/m/n/10 ## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_de
+fs[] 
+ []
+
+
+Overfull \hbox (165.75pt too wide) in paragraph at lines 1339--1339
+[]\TU/lmtt/m/n/10 ## Warning: sf layer has inconsistent datum (+proj=longlat +a
+=6371200 +b=6371200 +no_defs).[] 
+ []
+
+File: navy_public_health_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file
+ (type pdf)
+<use navy_public_health_files/figure-latex/unnamed-chunk-23-1.pdf>
+
+Overfull \hbox (12.02463pt too wide) in paragraph at lines 1341--1342
+[][]  
+ []
+
+
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1313.
+This message occurred on input line 1344.
 
 [34]
-Chapter 5.
-[35
+Overfull \hbox (165.75pt too wide) in paragraph at lines 1359--1359
+[]\TU/lmtt/m/n/10 ## Warning: sf layer has inconsistent datum (+proj=longlat +a
+=6371200 +b=6371200 +no_defs).[] 
+ []
 
-] [36
+File: navy_public_health_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file
+ (type pdf)
+<use navy_public_health_files/figure-latex/unnamed-chunk-24-1.pdf>
+
+Overfull \hbox (12.02463pt too wide) in paragraph at lines 1361--1362
+[][]  
+ []
+
+
+Class tufte-book Warning: Proper spacing of small-caps letters has not been set
+ up.
+This message occurred on input line 1367.
+
+[35] [36
+
+]
+Chapter 5.
+[37] [38
 
 ]
 Chapter 6.
 
-LaTeX Warning: Marginpar on page 37 moved.
+LaTeX Warning: Marginpar on page 39 moved.
 
 
-LaTeX Warning: Marginpar on page 37 moved.
+LaTeX Warning: Marginpar on page 39 moved.
 
-[37]
+[39]
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1403.
+This message occurred on input line 1457.
 
-[38]
+[40]
 Chapter 7.
-(./navy_public_health.bbl [39
+(./navy_public_health.bbl [41
 
-] [40
+] [42
 
 ]
 Chapter 8.
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1411.
-[41]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1411.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1465.
+[43]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1465.
 (./navy_public_health.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1411.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1411.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1465.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1465.
 
 Package rerunfilecheck Info: File `navy_public_health.out' has not changed.
 (rerunfilecheck)             Checksum: E8FDA101691C44644E638862A6197405.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1411.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1465.
  ) 
 Here is how much of TeX's memory you used:
- 24457 strings out of 494921
- 455369 string characters out of 6174292
+ 24465 strings out of 494921
+ 455831 string characters out of 6174292
  589753 words of memory out of 5000000
- 28045 multiletter control sequences out of 15000+600000
+ 28051 multiletter control sequences out of 15000+600000
  537891 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  55i,11n,116p,536b,488s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on navy_public_health.pdf (41 pages).
+Output written on navy_public_health.pdf (43 pages).
