@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 2 Plot | Data Visualization in R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 2 Plot | Data Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Plot | Data Visualization in R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Brooke Anderson">
+
+
+<meta name="date" content="2019-03-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="map.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#download-r"><i class="fa fa-check"></i><b>1.1</b> Download R</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-rstudio"><i class="fa fa-check"></i><b>1.2</b> Download RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#install-some-r-packages"><i class="fa fa-check"></i><b>1.3</b> Install some R packages</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#create-an-r-project"><i class="fa fa-check"></i><b>1.4</b> Create an R Project</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#download-example-data"><i class="fa fa-check"></i><b>1.5</b> Download example data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="plot.html"><a href="plot.html"><i class="fa fa-check"></i><b>2</b> Plot</a><ul>
+<li class="chapter" data-level="2.1" data-path="plot.html"><a href="plot.html#plot-elements"><i class="fa fa-check"></i><b>2.1</b> Plot elements</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="plot.html"><a href="plot.html#example-data"><i class="fa fa-check"></i><b>2.1.1</b> Example data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="plot.html"><a href="plot.html#illustrating-plot-elements"><i class="fa fa-check"></i><b>2.1.2</b> Illustrating plot elements</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="plot.html"><a href="plot.html#building-a-plot"><i class="fa fa-check"></i><b>2.2</b> Building a plot</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="plot.html"><a href="plot.html#reading-data"><i class="fa fa-check"></i><b>2.2.1</b> Reading data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="plot.html"><a href="plot.html#plotting-by-layers"><i class="fa fa-check"></i><b>2.2.2</b> Plotting by layers</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="plot.html"><a href="plot.html#saving-plots"><i class="fa fa-check"></i><b>2.3</b> Saving plots</a></li>
+<li class="chapter" data-level="2.4" data-path="plot.html"><a href="plot.html#learn-more"><i class="fa fa-check"></i><b>2.4</b> Learn more</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="map.html"><a href="map.html"><i class="fa fa-check"></i><b>3</b> Map</a><ul>
+<li class="chapter" data-level="3.1" data-path="map.html"><a href="map.html#geographical-data-in-a-tidy-format"><i class="fa fa-check"></i><b>3.1</b> Geographical data in a tidy format</a></li>
+<li class="chapter" data-level="3.2" data-path="map.html"><a href="map.html#basic-mapping"><i class="fa fa-check"></i><b>3.2</b> Basic mapping</a></li>
+<li class="chapter" data-level="3.3" data-path="map.html"><a href="map.html#learn-more-1"><i class="fa fa-check"></i><b>3.3</b> Learn more</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="interact.html"><a href="interact.html"><i class="fa fa-check"></i><b>4</b> Interact</a><ul>
+<li class="chapter" data-level="4.1" data-path="interact.html"><a href="interact.html#dt-datatables"><i class="fa fa-check"></i><b>4.1</b> DT: Datatables</a></li>
+<li class="chapter" data-level="4.2" data-path="interact.html"><a href="interact.html#plotly"><i class="fa fa-check"></i><b>4.2</b> Plotly</a></li>
+<li class="chapter" data-level="4.3" data-path="interact.html"><a href="interact.html#leaflet"><i class="fa fa-check"></i><b>4.3</b> Leaflet</a></li>
+<li class="chapter" data-level="4.4" data-path="interact.html"><a href="interact.html#learn-more-2"><i class="fa fa-check"></i><b>4.4</b> Learn more</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>5</b> Report</a><ul>
+<li class="chapter" data-level="5.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>5.1</b> RMarkdown</a></li>
+<li class="chapter" data-level="5.2" data-path="report.html"><a href="report.html#dashboards"><i class="fa fa-check"></i><b>5.2</b> Dashboards</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>6</b> Tidy</a><ul>
+<li class="chapter" data-level="6.1" data-path="tidy.html"><a href="tidy.html#tidy-format"><i class="fa fa-check"></i><b>6.1</b> Tidy format</a></li>
+<li class="chapter" data-level="6.2" data-path="tidy.html"><a href="tidy.html#tidyverse-tools"><i class="fa fa-check"></i><b>6.2</b> Tidyverse tools</a></li>
+<li class="chapter" data-level="6.3" data-path="tidy.html"><a href="tidy.html#subsetting"><i class="fa fa-check"></i><b>6.3</b> Subsetting</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="tidy.html"><a href="tidy.html#selecting-columns"><i class="fa fa-check"></i><b>6.3.1</b> Selecting columns</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tidy.html"><a href="tidy.html#slicing-rows"><i class="fa fa-check"></i><b>6.3.2</b> Slicing rows</a></li>
+<li class="chapter" data-level="6.3.3" data-path="tidy.html"><a href="tidy.html#filtering-rows"><i class="fa fa-check"></i><b>6.3.3</b> Filtering rows</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="tidy.html"><a href="tidy.html#adding"><i class="fa fa-check"></i><b>6.4</b> Adding</a></li>
+<li class="chapter" data-level="6.5" data-path="tidy.html"><a href="tidy.html#summarizing"><i class="fa fa-check"></i><b>6.5</b> Summarizing</a></li>
+<li class="chapter" data-level="6.6" data-path="tidy.html"><a href="tidy.html#reformatting"><i class="fa fa-check"></i><b>6.6</b> Reformatting</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>7</b> Final Words</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="plot" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Plot</h1>
+<p><span class="newthought">R programming has changed a</span> lot in the past 10 years or so. This
+includes a big
+change in the tools used for visualization. The R package <strong>ggplot2</strong> <span class="citation">(Wickham, Chang, et al. <a href="#ref-R-ggplot2">2018</a>)</span>
+is at the heart of one modern style of R visualizations. I’ll focus on this style
+throughout this workshop, as I think it’s an excellent tool for creating
+attractive and useful visualizations in a way that is both efficient and easy
+to customize (once you get the hang of it).</p>
+<div id="plot-elements" class="section level2">
+<h2><span class="header-section-number">2.1</span> Plot elements</h2>
+<p><span class="newthought"><strong>ggplot2</strong> is based on a</span> <strong>grammar of graphics</strong>. To get the hang
+of it, you’ll need to start thinking of visualizations in terms of separate elements.</p>
+<div id="example-data" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Example data</h3>
+<p>In my own research, I study the health effects of climate-related disasters, including
+heat waves and hurricanes. I noticed that a lot of the sessions at this conference
+focus on public health surveillance, so I thought it might be interesting to combine
+these two ideas for the example data. On September 10, 2017, Hurricane Irma hit Florida,
+and before it did, it triggered evacuations for much of the state. The National Highway
+Traffic Safety Administration (under the US Department of Transportation) tracks all
+the fatal motor vehicle accidents in the US through its Fatality Analysis Reporting
+System (FARS).<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>I downloaded and cleaned some data from this surveillance system. (In a later section,
+I’ll tell you more about how to do this cleaning yourself.) I’ve created a fairly
+simple dataset for us to use here. For each date in the weeks around the hurricane’s
+landfall, it gives the total number of motor vehicle fatalities recorded in the
+state. The dataset also gives the week in the year for each date (the first week in
+January would be “1” for this measure, etc.), as well as the day of the week.
+Table <a href="plot.html#tab:exampledata">2.1</a> shows what this data looks like.</p>
+<table>
+<caption><span id="tab:exampledata">Table 2.1: </span>Number of motor vehicle fatalities in Florida around the date of Hurricane Irma’s Florida landfall on September 10, 2017.</caption>
+<thead>
+<tr class="header">
+<th align="center">Date</th>
+<th align="center">Week of year</th>
+<th align="center">Day of week</th>
+<th align="center">No. of motor vehicle fatalities</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2017-08-27</td>
+<td align="center">35</td>
+<td align="center">Sunday</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">2017-08-28</td>
+<td align="center">35</td>
+<td align="center">Monday</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-08-29</td>
+<td align="center">35</td>
+<td align="center">Tuesday</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">2017-08-30</td>
+<td align="center">35</td>
+<td align="center">Wednesday</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-08-31</td>
+<td align="center">35</td>
+<td align="center">Thursday</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-01</td>
+<td align="center">35</td>
+<td align="center">Friday</td>
+<td align="center">9</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-02</td>
+<td align="center">35</td>
+<td align="center">Saturday</td>
+<td align="center">8</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-03</td>
+<td align="center">36</td>
+<td align="center">Sunday</td>
+<td align="center">15</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-04</td>
+<td align="center">36</td>
+<td align="center">Monday</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-05</td>
+<td align="center">36</td>
+<td align="center">Tuesday</td>
+<td align="center">8</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-06</td>
+<td align="center">36</td>
+<td align="center">Wednesday</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-07</td>
+<td align="center">36</td>
+<td align="center">Thursday</td>
+<td align="center">12</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-08</td>
+<td align="center">36</td>
+<td align="center">Friday</td>
+<td align="center">9</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-09</td>
+<td align="center">36</td>
+<td align="center">Saturday</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-10</td>
+<td align="center">37</td>
+<td align="center">Sunday</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-11</td>
+<td align="center">37</td>
+<td align="center">Monday</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-12</td>
+<td align="center">37</td>
+<td align="center">Tuesday</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-13</td>
+<td align="center">37</td>
+<td align="center">Wednesday</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-14</td>
+<td align="center">37</td>
+<td align="center">Thursday</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-15</td>
+<td align="center">37</td>
+<td align="center">Friday</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-16</td>
+<td align="center">37</td>
+<td align="center">Saturday</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-17</td>
+<td align="center">38</td>
+<td align="center">Sunday</td>
+<td align="center">10</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-18</td>
+<td align="center">38</td>
+<td align="center">Monday</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-19</td>
+<td align="center">38</td>
+<td align="center">Tuesday</td>
+<td align="center">8</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-20</td>
+<td align="center">38</td>
+<td align="center">Wednesday</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-21</td>
+<td align="center">38</td>
+<td align="center">Thursday</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">2017-09-22</td>
+<td align="center">38</td>
+<td align="center">Friday</td>
+<td align="center">9</td>
+</tr>
+<tr class="even">
+<td align="center">2017-09-23</td>
+<td align="center">38</td>
+<td align="center">Saturday</td>
+<td align="center">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="illustrating-plot-elements" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Illustrating plot elements</h3>
+<p>I’ve created a simple plot of this data to use to highlight the different
+elements of a graph (Figure <a href="plot.html#fig:plotelements">2.1</a>). This plot shows the
+number of motor vehicle fatalities
+in Florida per day in the weeks around Hurricane Irma, with the day of the week shown
+with color (since, for some health outcomes, there are patterns by the day
+of week).</p>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="figure"><span id="fig:plotelements"></span>
+<img src="navy_public_health_files/figure-html/plotelements-1.png" alt="Number of motor vehicle fatalities by day in Florida in the weeks surrounding Hurricane Irma on September 10, 2019." width="768" />
+<p class="caption">
+Figure 2.1: Number of motor vehicle fatalities by day in Florida in the weeks surrounding Hurricane Irma on September 10, 2019.
+</p>
+</div>
+<p>Let’s break this plot into some of its key elements:</p>
+<ul>
+<li><strong>data</strong>: The data illustrated with this plot is all from the example data
+shown in Table <a href="plot.html#tab:exampledata">2.1</a>.</li>
+<li><strong>geoms</strong>:<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+The geometric objects used to plot the data are (1) points (in
+different colors, depending on the day of week) and (2) a line (in gray).</li>
+<li><strong>aesthetics</strong>: For both of the geoms (points and the line), the position along the
+x-axis shows (is <strong>mapped to</strong>) the date
+given for an observation in the data. The position along the y-axis is mapped to
+the number of fatalities for that observation. For the points (but not the line),
+the color is mapped to the day of week of the observation. For the line, the color
+is always gray (a <strong>constant aesthetic</strong> for color), rather than color being mapped
+to a value in the data. Other aesthetics—like size, shape, line type and
+transparency—have been left at their default (constant) values.</li>
+<li><strong>coordinate system</strong>: The plot uses a <strong>Cartesian coordinate system</strong>, the most
+common coordinate system you’ll use except when creating maps.</li>
+<li><strong>scales</strong>: The plot uses a default <strong>date scale</strong> for the x-axis. For the y-axis,
+the scale is very similar to a default
+<strong>continuous scale</strong> y-axis, but has been expanded a bit to include 0.
+The <strong>color scale</strong>is more customized. It uses
+a color scale that’s very popular right now called “viridis”, rather than the
+default color scale.</li>
+<li><strong>labels</strong>: This plot uses the axis titles “Date” for the x-axis, “# of fatalities”
+for the y-axis, and “Day of week” for the color scale. In a minute, when you start
+working with the example data, you’ll see that these are changed from the corresponding
+column names in the data, to make the plot easier to understand. In addition,
+the plot has both a title (“Motor vehicle fatalities in Florida”) and a
+subtitle (“Late summer / early fall of 2019”).</li>
+<li><strong>theme</strong>:<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
+This plot uses the default <code>theme_gray</code> theme, with a gray background
+to the main plot area, white gridlines, a Sans Serif font family,
+and a base font size of 11.
+The one customization is that the legend (which here provides the key for
+how color maps to
+day of the week) is shown on the bottom of the plot rather than to the right of
+the plot.</li>
+<li><strong>faceting</strong>: This plot does not take advantage of faceting. Instead, the data
+is plotted on a single background. The next example will show an example
+of faceting based on a characteristic of the data.</li>
+</ul>
+<p>To help the meaning of these elements sink in, Figure <a href="plot.html#fig:plotelements2">2.2</a>
+shows a second example plot, with
+the elements again explained below the plot.</p>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     date</code></pre>
+<div class="figure"><span id="fig:plotelements2"></span>
+<img src="navy_public_health_files/figure-html/plotelements2-1.png" alt="Number of motor vehicle fatalities in Florida by day of the week and week for the weeks surrounding Hurricane Irma's landfall." width="576" />
+<p class="caption">
+Figure 2.2: Number of motor vehicle fatalities in Florida by day of the week and week for the weeks surrounding Hurricane Irma’s landfall.
+</p>
+</div>
+<p>Here’s the breakdown of plot elements for this plot:</p>
+<ul>
+<li><strong>data</strong>: The data illustrated with this plot is the same as for Figure
+<a href="plot.html#fig:plotelements2">2.2</a>, the example data
+shown in Table <a href="plot.html#tab:exampledata">2.1</a>.</li>
+<li><strong>geoms</strong>: The geometric objects used to plot the data are columns.</li>
+<li><strong>aesthetics</strong>: For the column geoms, the x-axis position is mapped to the day
+of the week and the y-axis position is mapped to the number of fatalities. The
+color is mapped to a constant aesthetic, sky blue.</li>
+<li><strong>coordinate system</strong>: The plot uses a <strong>Cartesian coordinate system</strong>.</li>
+<li><strong>scales</strong>: The plot uses a default <strong>discrete scale</strong> for the x-axis and the
+default <strong>continuous scale</strong> for the y-axis.</li>
+<li><strong>labels</strong>: This plot uses the axis titles “Date” for the x-axis, “# of fatalities”
+for the y-axis, and “Day of week” for the color scale. In a minute, when you start
+working with the example data, you’ll see that these are changed from the corresponding
+column names in the data, to make the plot easier to understand. In addition,
+the plot has both a title (“Motor vehicle fatalities in Florida”) and a
+subtitle (“Late summer / early fall of 2019”).</li>
+<li><strong>theme</strong>: This plot uses the <code>theme_classic</code> theme, with a white background
+to the main plot area, no gridlines, a Sans Serif font family,
+and axis lines only on the left and bottom sides of the plot area.</li>
+<li><strong>faceting</strong>: This plot facets by week. This variable was obtained from the “week”
+column in the dataset, although some changes were made to have better labeling of
+the facets (e.g., “Week of August 27” rather than “35”).</li>
+</ul>
+</div>
+</div>
+<div id="building-a-plot" class="section level2">
+<h2><span class="header-section-number">2.2</span> Building a plot</h2>
+<p><span class="newthought">Now that you have</span> and idea of how different elements combine to
+create a plot, I’ll walk you through the steps to “layer” these elements together
+to create these two example plots.</p>
+<div id="reading-data" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Reading data</h3>
+<p>First, you’ll need to bring the example data into your R session. If you followed
+the steps in the “Prerequisites” section, you should have a
+<strong>comma-separated file</strong><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> in a “data” subdirectory of your current working directory. Also, if you
+followed the steps in the “Prerequisites” section, you should have installed
+all the necessary R packages for this example.</p>
+<p>While there are functions in base R that import comma-separated files, I think the
+functions in the <strong>readr</strong> package <span class="citation">(Wickham, Hester, and Francois <a href="#ref-R-readr">2018</a>)</span>, a package in the <strong>tidyverse</strong>,
+has some nicer defaults. To use functions in this package, you first need to load
+it into your R session using the <code>library</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)</code></pre>
+<p>The <code>library</code> function must specify the name of the package you’d like to load (in
+this case, “readr”). If you have forgotten to install the “readr” package before you
+run this function, you’ll get the message:</p>
+<pre><code>Error in library(readr) : there is no package called ‘readr’</code></pre>
+<p>If you get that message, go back and re-read the “Prerequisites” to make sure you’ve
+installed all the required packages.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p>Now that you’ve loaded <code>readr</code>, you can use the package’s <code>read_csv</code> function<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>
+to read in the data. The one argument this function requires is the
+<strong>file path</strong><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>
+to the data file.</p>
+<pre class="sourceCode r"><code class="sourceCode r">daily_fatalities &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/daily_fatalities.csv&quot;</span>)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   date = col_date(format = &quot;&quot;),
+##   week = col_double(),
+##   weekday = col_character(),
+##   fatals = col_double()
+## )</code></pre>
+<p>Don’t be alarmed by the message that’s printed out after you run the function!
+In data frames in R, each columns can have one of several different classes
+(some examples: character: “Florida”, date: 2017-09-10, integer: 17,
+double: 17.0). The <code>read_csv</code> function looks at the values in each column in the
+data and tries to guess what class each column should be, and this message
+tells you what it guessed, so you can check. In this case, the number of
+fatalities will always be a whole number, so the “integer” class would have
+also worked well, but there should be no problem with the column having a
+“double” class for the plotting we’ll be doing, so everything looks fine.</p>
+<p>The previous code used a <strong>gets arrow</strong><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> to save the data you read in to an R object called <code>daily_fatalities</code>.
+Now, anytime you want to use this data, you can reference it with the name
+<code>daily_fatalities</code> instead of needing to read it in again. For example, you
+can print out the start of the data by calling the object name by itself:</p>
+<pre class="sourceCode r"><code class="sourceCode r">daily_fatalities</code></pre>
+<pre><code>## # A tibble: 28 x 4
+##    date        week weekday   fatals
+##    &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 2017-08-27    35 Sunday         4
+##  2 2017-08-28    35 Monday         5
+##  3 2017-08-29    35 Tuesday        6
+##  4 2017-08-30    35 Wednesday      6
+##  5 2017-08-31    35 Thursday       6
+##  6 2017-09-01    35 Friday         9
+##  7 2017-09-02    35 Saturday       8
+##  8 2017-09-03    36 Sunday        15
+##  9 2017-09-04    36 Monday         7
+## 10 2017-09-05    36 Tuesday        8
+## # … with 18 more rows</code></pre>
+<p>By default, <code>read_csv</code> read the data into a structure called a <strong>tibble</strong>,<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> and you
+can see that the top of the print-out notes this. It also gives the dimensions
+(28 rows and 4 columns) and, under each column name, the class of the column.
+When you start plotting this data, you’ll use the dataframe’s object name
+(<code>daily_fatalities</code>) to reference the full dataset and each column name
+(e.g., <code>date</code> for the date of the observations, <code>fatals</code> for the number of
+fatalities observed on that date) to reference specific elements of the data.</p>
+</div>
+<div id="plotting-by-layers" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Plotting by layers</h3>
+<p>To create a data visualization using <code>ggplot2</code>, we’ll add up “layers” for each of
+the plot elements described earlier. In this section, I’ll step through this process.
+First, we’ll create a <strong>ggplot object</strong> using the <code>ggplot</code> call, and then we’ll add
+layers to it with <code>+</code>. To use these functions, you’ll need to load the <code>ggplot2</code>
+package:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre>
+<p>For the first step, create the <code>ggplot</code> object. When you create this object, specify
+the dataframe with the data you’d like to plot using the <code>data</code> parameter:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities)</code></pre>
+<div class="figure"><span id="fig:step1"></span>
+<img src="navy_public_health_files/figure-html/step1-1.png" alt="Step 1 of layering a plot: Creating the ggplot object. At this point, nothing's actually plotted, because we haven't added any geoms yet." width="768" />
+<p class="caption">
+Figure 2.3: Step 1 of layering a plot: Creating the ggplot object. At this point, nothing’s actually plotted, because we haven’t added any geoms yet.
+</p>
+</div>
+<p>Figure <a href="plot.html#fig:step1">2.3</a> shows the output with this single, initial layer. We haven’t added any geoms yet, so the plot isn’t showing anything. Since we’ve specified the
+data, however, we’ll be able to add geoms where we map aesthetics to columns in the
+dataset. Let’s do that next, and add a layer with a line (<code>geom_line</code>) for the number
+of fatalities per day. We’ll use the <code>aes</code> function <em>inside</em> the <code>geom_line</code> call
+to specify that we want the x-axis to show the value in the <code>date</code> column and the
+y-axis to show the value in the <code>fatals</code> column:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals))</code></pre>
+<div class="figure"><span id="fig:step2"></span>
+<img src="navy_public_health_files/figure-html/step2-1.png" alt="Step 2 of layering a plot: Adding a line geom. In this case, the x-axis (x aesthetic) is mapped to the 'date' column in the data, while the y-axis (y aesthetic) is mapped to the 'fatals' column." width="768" />
+<p class="caption">
+Figure 2.4: Step 2 of layering a plot: Adding a line geom. In this case, the x-axis (x aesthetic) is mapped to the ‘date’ column in the data, while the y-axis (y aesthetic) is mapped to the ‘fatals’ column.
+</p>
+</div>
+<p>The result is in Figure <a href="plot.html#fig:step2">2.4</a>. You can see that you now have a line showing
+the number of fatalities per day. Next, we can add a layer on top of the line with a
+point (<code>geom_point</code>) for each date showing the number of fatalities. Two of the
+aesthetics for this geom (x and y) will be the same as for the line. However, we
+also want to map color to day of the week. Since day of the week is in a column
+called <code>weekday</code>, we can specify this aesthetic as <code>color = weekday</code> within the <code>aes</code>
+call. Try running the following code to add this layer:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday))</code></pre>
+<div class="figure"><span id="fig:step3"></span>
+<img src="navy_public_health_files/figure-html/step3-1.png" alt="Step 3 of layering a plot: Adding a point geom. The x and y aesthetics are the same as for the line geom, but now we're also mapping color to the 'weekday' column in the data." width="768" />
+<p class="caption">
+Figure 2.5: Step 3 of layering a plot: Adding a point geom. The x and y aesthetics are the same as for the line geom, but now we’re also mapping color to the ‘weekday’ column in the data.
+</p>
+</div>
+<p>You should get the plot shown in Figure <a href="plot.html#fig:step3">2.5</a>. You may have noticed that
+the set of colors that is used for weekdays is different than in the plot in
+Figure <a href="plot.html#fig:plotelements">2.1</a>. This set of colors is actually specified by the
+“scale” element of the plot, so we’ll change that in a different layer.</p>
+<p>So far, we’ve customized some of the plot aesthetics by mapping them so that their
+values are based on observations in the data. However, sometimes you’ll want
+to change an aesthetic to a <strong>constant</strong>, where the aesthetic changes for the
+aesthetic for all of the observations from the data, but in the same way.</p>
+<p>For example, for this plot, we’d like the line to be dark gray for all observations,
+and we’d like the points to be a little bigger. To specify a <strong>constant aesthetic</strong>,
+move it outside of the <code>aes</code> call. For colors, you can set a constant value to
+one of the many named “R Colors”<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>
+(make sure you put the color name inside parentheses—otherwise, R will think you’re
+refering to an R object). Constant point size values can be specified using numbers,
+where larger numbers will make bigger points and the default value is somewhere
+around 1.<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> Try numbers bigger than 1 (e.g., 1.5, 2) for bigger points and smaller
+values (e.g., 0.8, 0.5) for smaller points.</p>
+<p>The following code will set the line to be dark gray and the points to be a bit larger (result in Figure <a href="plot.html#fig:step4">2.6</a>):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>)</code></pre>
+<div class="figure"><span id="fig:step4"></span>
+<img src="navy_public_health_files/figure-html/step4-1.png" alt="Step 4 of layering a plot: Adding constant aesthetics. In this step, we're making the line dark gray for all observations and the points a bit larger. Note that these aesthetics, since they're constant, are set outside of the 'aes' call. Also, note that thee color is specified inside quotation marks." width="768" />
+<p class="caption">
+Figure 2.6: Step 4 of layering a plot: Adding constant aesthetics. In this step, we’re making the line dark gray for all observations and the points a bit larger. Note that these aesthetics, since they’re constant, are set outside of the ‘aes’ call. Also, note that thee color is specified inside quotation marks.
+</p>
+</div>
+<p>We’re using the default coordinate system for this plot, so we don’t need to add
+a layer for the coordinate system. For plots where you need to change from this
+default coordinate system, you’ll add a layer that starts with <code>coord_</code>. For example,
+in the “Map” section, you’ll see how to use a geographic coordinate system using
+<code>coord_map</code>. If you want to flip your x- and y-axis (there are a few examples where
+this is useful), you can add a layer with <code>coord_flip</code>.</p>
+<p>While we’re also using the default scales for the x aesthetic, we aren’t for
+the y or color aesthetic. The change to the y scale is very minimal: we’re just
+expanding it to include 0. This can be done by adding the layer <code>expand_limits</code>
+with the <code>y</code> parameter set to 0.</p>
+<p>To change the color scale, you need to add a layer to specify
+the alternative color scale. We’ll use a color scale called
+“viridis”. This is good for discrete data (like here, where we’re showing day of
+the week rather than a continuous number), it really shines when you’re plotting
+continuous values. The order of the scale is clear to those who are colorblind, and
+it’s also clear when printed out on a black-and-white printer.</p>
+<p>To change the color scale to use this scale, add a layer with <code>scale_color_viridis_d</code>.
+The “d” here is for “discrete”; if you were using color to show a continuous
+value in the data (e.g., a column with an integer or double class), you’d
+add a layer called <code>scale_color_viridis_c</code> instead. The final result of these
+scale customizations is shown in Figure <a href="plot.html#fig:step5">2.7</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>()</code></pre>
+<div class="figure"><span id="fig:step5"></span>
+<img src="navy_public_health_files/figure-html/step5-1.png" alt="Step 5 of layering a plot: Changing the color scale. This step changes from the default color scale to the 'viridis' color scale." width="768" />
+<p class="caption">
+Figure 2.7: Step 5 of layering a plot: Changing the color scale. This step changes from the default color scale to the ‘viridis’ color scale.
+</p>
+</div>
+<p>The function for this layer has a few options for customization. For example, try
+changing it to <code>scale_color_viridis_d(option = "A")</code> or
+<code>scale_color_viridis_d(direction = -1)</code>. To see all its options, check its
+helpfile with <code>?scale_color_viridis_d</code>.</p>
+<p>Next, we’ll change the scale labels. By default, the label for each scale is the
+name of the column in the data that the aesthetic was mapped to (x: “date”,
+y: “fatals”, color: “weekday”). You can add a <code>labs</code> layer to change these
+to labels that are easier to understand. The other
+labeling we’d like to do is to add a title and subtitle, which we can do with
+a <code>ggtitle</code> layer (the subtitle is added with the <code>sub</code> parameter of this layer).
+The final result of adding these layers is shown in Figure <a href="plot.html#fig:step6">2.8</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Date&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Day of week&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida&quot;</span>,
+          <span class="dt">subtitle =</span> <span class="st">&quot;Late summer / early fall of 2019&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:step6"></span>
+<img src="navy_public_health_files/figure-html/step6-1.png" alt="Step 6 of layering a plot: Customizing labels. The 'labs' layer customizes not only the x and y axis labels, but also the legend title for the color scale. The title and subtitle are added with a 'ggtitle' layer." width="768" />
+<p class="caption">
+Figure 2.8: Step 6 of layering a plot: Customizing labels. The ‘labs’ layer customizes not only the x and y axis labels, but also the legend title for the color scale. The title and subtitle are added with a ‘ggtitle’ layer.
+</p>
+</div>
+<p>The last layer we need to add is a theme layer. While we’re using most of the
+elements from the default theme (<code>theme_gray</code>), we do want to change the position
+of the legend. For a time series plot like this, the change can be helpful, as it
+lets us create a plot that’s much wider than it is tall. You can move the legend
+using the <code>theme</code> layer with an argument specified for <code>legend.position</code>. With
+the <code>theme</code> function, you can customize almost any of the background elements of a
+plot.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>
+However, you’ll usually only want to do that for a few elements—if you want
+to change a lot of elements, there is a set of functions that start <code>theme_</code> that
+will let you change to one of several “themes” that change many elements at once
+(as I’ll show in the next example).
+If you find you’re often using <code>theme</code> to specify lots of elements by hand, you
+can create your own <code>theme_*</code> function (fill in <code>*</code> with the name of your choice!).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Date&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Day of week&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida&quot;</span>,
+          <span class="dt">subtitle =</span> <span class="st">&quot;Late summer / early fall of 2019&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:step7"></span>
+<img src="navy_public_health_files/figure-html/step7-1.png" alt="Step 7 of layering a plot: Customizing the theme. Move the color legend to below the plot." width="768" />
+<p class="caption">
+Figure 2.9: Step 7 of layering a plot: Customizing the theme. Move the color legend to below the plot.
+</p>
+</div>
+<p>As one final detail, if you were looking very closely, you may have noticed that
+the order of the days of week are different in the original plot from our final
+version here. That’s because, by default, discrete character-class values are
+ordered alphabetically. We can change this order, and should, to be the order that
+week days occur. To do this, we need to change the column class to a
+<strong>factor class</strong><a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> and then change the order of that factor’s levels.</p>
+<p>To do this, we’ll need to load a few additional R packages (you’ll also use these
+in the “Tidy” section, which has much more on manipulating datasets). The
+<strong>forcats</strong> package <span class="citation">(Wickham <a href="#ref-R-forcats">2019</a>)</span> has functions for working with factors, including
+a function we can use to reorder the factor levels. The <strong>magrittr</strong> package
+<span class="citation">(Bache and Wickham <a href="#ref-R-magrittr">2014</a>)</span> includes two infix functions we’ll use to make the code
+cleaner: the pipe operator (<code>%&gt;%</code>) and the compound assignment pipe operator (<code>%&lt;&gt;%</code>).
+The <strong>dplyr</strong> package <span class="citation">(Wickham, François, et al. <a href="#ref-R-dplyr">2019</a>)</span> includes a number of simple but powerful functions
+for manipulating tibbles.</p>
+<p>The “Tidy” section will go into detail for how to use all these functions. As a brief
+summary, the <code>mutate</code> function used twice to change the values in the “weekday” column:
+first, to convert the class of the column to a factor (<code>as_factor</code>) and second to
+change the order of those levels (<code>fct_relevel</code>) by hand, to start with Monday and
+go in order through Sunday. The compound assignment pipe operator (<code>%&lt;&gt;%</code>) allows
+us to perform all those operations to columns inside the “daily_fatalities” tibble,
+and then to save the result <em>back to the same R object</em> (overwriting the earlier
+version of the tibble).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;forcats&quot;</span>) 
+<span class="kw">library</span>(<span class="st">&quot;magrittr&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
+
+daily_fatalities <span class="op">%&lt;&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">as_factor</span>(weekday)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">fct_relevel</span>(weekday, 
+                               <span class="st">&quot;Sunday&quot;</span>, <span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, 
+                               <span class="st">&quot;Thursday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, <span class="st">&quot;Saturday&quot;</span>))</code></pre>
+<p>Now when we run the same <code>ggplot</code> code, you can see that the order of the days of
+week in the color legend, and the order the colors are assigned to week day, have
+changed (Figure <a href="plot.html#fig:step8">2.10</a>).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Date&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Day of week&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida&quot;</span>,
+          <span class="dt">subtitle =</span> <span class="st">&quot;Late summer / early fall of 2019&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:step8"></span>
+<img src="navy_public_health_files/figure-html/step8-1.png" alt="Change the order of the days of week from alphabetical to temporal by transforming the data before plotting." width="768" />
+<p class="caption">
+Figure 2.10: Change the order of the days of week from alphabetical to temporal by transforming the data before plotting.
+</p>
+</div>
+<p>The second example plot we can go through much more quickly. There are two
+elements I’d like to point out: the layer for faceting and the layer for the theme.
+The <code>facet_wrap</code> function separates the plot into <strong>small multiples</strong>
+based on the values in a column of the data. By default, all the scales (e.g., x-axis,
+y-axis) will be the same across all the small multiples, allowing for an easier
+comparison across the plots. The other layers in this code should now be somewhat
+familiar to you: the <code>ggplot</code> call initializes a <code>ggplot</code> object with the
+“daily_fatalities” dataset, just like in the last plot, while the <code>geom_col</code> layer
+adds a column geom where the x aesthetic is mapped to the value in the “weekday”
+column and the y aesthetic is mapped to the value in the “fatals” column.</p>
+<div class="figure"><span id="fig:step1a"></span>
+<img src="navy_public_health_files/figure-html/step1a-1.png" alt="Adding a facet layer to a plot. The plot is now faceted by the 'week' column in the dataframe, with all the facets lined up vertically in a single column ('ncol = 1')." width="576" />
+<p class="caption">
+Figure 2.11: Adding a facet layer to a plot. The plot is now faceted by the ‘week’ column in the dataframe, with all the facets lined up vertically in a single column (‘ncol = 1’).
+</p>
+</div>
+<p>To change to the <code>theme_classic</code>, all you need to do is add a <code>theme_classic</code> layer
+(Figure <a href="plot.html#fig:step2a">2.12</a>).</p>
+<div class="figure"><span id="fig:step2a"></span>
+<img src="navy_public_health_files/figure-html/step2a-1.png" alt="Changing the theme. The 'theme_*' family of functions can quickly change many of the background elements of a plot with a single layer call." width="576" />
+<p class="caption">
+Figure 2.12: Changing the theme. The ’theme_*’ family of functions can quickly change many of the background elements of a plot with a single layer call.
+</p>
+</div>
+<p>Most of the rest of the layers for the plot are very similar to the first plot.
+They include changing the <strong>fill</strong><a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>
+of the geom by mapping it to a constant fill
+aesthetic (<code>color = "skyblue"</code> in the <code>geom_col</code> call), customizing the labels with
+a <code>lab</code> layer, and adding a title with <code>ggtitle</code>. The result of adding these layers
+is shown in Figure <a href="plot.html#fig:step3a">2.13</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weekday, <span class="dt">y =</span> fatals), <span class="dt">fill =</span> <span class="st">&quot;skyblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>week, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_classic</span>()  <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida by weekday, 2019&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:step3a"></span>
+<img src="navy_public_health_files/figure-html/step3a-1.png" alt="Customizing the labeling and adding a constant fill aesthetic. Note that the constant fill aesthetic is specified outside the 'aes' call for the geom, and that the color is specified inside quotation marks." width="576" />
+<p class="caption">
+Figure 2.13: Customizing the labeling and adding a constant fill aesthetic. Note that the constant fill aesthetic is specified outside the ‘aes’ call for the geom, and that the color is specified inside quotation marks.
+</p>
+</div>
+<p>As with the first graph, to take the plot to its final stage, you’ll need to
+change the input data a bit. In this case, this step is to create clearer labels for
+the facets. The week number (e.g., 35) won’t mean much to most viewers. A label giving
+the date of the first day in the week (“Week of August 27”) will be more helpful.
+To create these new labels, you can use <code>group_by</code>, <code>mutate</code>, and <code>first</code> functions
+from the <code>dplyr</code> package (which you have already loaded if you’ve worked through
+the examples in order) to create a column called ‘first_day’ with the date of the
+first day in each week. Then you can use <code>mutate</code> (also from <code>dplyr</code>) to create the
+‘week_label’ column from the existing columns of the tibble. This code uses the
+<code>month</code> and <code>day</code> functions from the <code>lubridate</code> package (very useful for
+working with dates) <span class="citation">(<span class="citeproc-not-found" data-reference-id="R-lubridate"><strong>???</strong></span>)</span> to extract the month and day from the ‘first_day’
+dates, and then <code>paste</code> (from base R) pastes these together with “Week of”.
+Finally, the <code>as_factor</code> and <code>fct_reorder</code> calls (both from <code>forcats</code>, which you
+also should have loaded if you’ve followed the examples in order) get this new
+column in the right order, so that the facets show up in temporal order rather
+than alphabetical.</p>
+<p>Once you’ve made these changes to the ‘daily_fatalities’ tibble, you should get the
+final version of the plot when you re-run the plotting code used in the last step,
+getting Figure <a href="plot.html#fig:step4a">2.14</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+
+daily_fatalities <span class="op">%&lt;&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(week) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">first_day =</span> <span class="kw">first</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">week_label =</span> <span class="kw">paste</span>(<span class="st">&quot;Week of&quot;</span>, 
+                            <span class="kw">month</span>(first_day, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>), 
+                            <span class="kw">day</span>(first_day))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">week_label =</span> <span class="kw">as_factor</span>(week_label),
+         <span class="dt">week_label =</span> <span class="kw">fct_reorder</span>(week_label, week, <span class="dt">.fun =</span> min))
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weekday, <span class="dt">y =</span> fatals), <span class="dt">fill =</span> <span class="st">&quot;skyblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>week_label, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida by weekday, 2019&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:step4a"></span>
+<img src="navy_public_health_files/figure-html/step4a-1.png" alt="To create better facet labels, you can first make some changes to the dataset and then facet by the newly created 'week_label' column rather than the 'week' column." width="576" />
+<p class="caption">
+Figure 2.14: To create better facet labels, you can first make some changes to the dataset and then facet by the newly created ‘week_label’ column rather than the ‘week’ column.
+</p>
+</div>
+</div>
+</div>
+<div id="saving-plots" class="section level2">
+<h2><span class="header-section-number">2.3</span> Saving plots</h2>
+<p>You can assign the output of a <code>ggplot</code> call to an R object using the gets arrow
+(<code>&lt;-</code>), just like you can assign data you’ve read in to an R object. If you do this,
+the plot won’t print immediately after you run the code:</p>
+<pre class="sourceCode r"><code class="sourceCode r">irma_fatalities_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weekday, <span class="dt">y =</span> fatals), <span class="dt">fill =</span> <span class="st">&quot;skyblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>week_label, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida by weekday, 2019&quot;</span>)</code></pre>
+<p>However, now you can print the plot anytime you want by calling the object:</p>
+<pre class="sourceCode r"><code class="sourceCode r">irma_fatalities_plot</code></pre>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>To save this plot to a file, you can use the <code>ggsave</code> function. This function can save
+the plot in several different formats (e.g., pdf, jpeg, png, svg). Further, it allows you
+to specify the size you’d like for the height and width of the plot as well as the plot
+resolution.</p>
+<p>The following call will save the <code>irma_fatalities_plot</code> to your working directory,
+which should be the R project directory you’re using for the examples if you followed the
+set-up in “Prerequisites”. It will save the file as a pdf that is 6 inches tall by 5 inches
+wide.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(irma_fatalities_plot, 
+       <span class="dt">filename =</span> <span class="st">&quot;irma_fatalities.pdf&quot;</span>,
+       <span class="dt">device =</span> <span class="st">&quot;pdf&quot;</span>,
+       <span class="dt">height =</span> <span class="dv">6</span>, <span class="dt">width =</span> <span class="dv">5</span>, <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>)</code></pre>
+</div>
+<div id="learn-more" class="section level2">
+<h2><span class="header-section-number">2.4</span> Learn more</h2>
+<p>The <code>ggplot</code> framework has become extremely popular, and there are a lot of excellent
+resources for learning more about how to use it. Many of these are through the website
+<a href="https://bookdown.org">bookdown.org</a>, which hosts a collection of free, author-submitted
+online books, mostly about R programming.</p>
+<p><a href="https://r4ds.had.co.nz/">R for Data Science</a> is a global look at effectively using
+R’s “tidyverse”, including sections on plotting with <code>ggplot2</code>.
+Kiernan Healy’s <a href="https://socviz.co/index.html#preface">Data Visualization: A Practical Introduction</a>
+is a great book on using R for plotting, with extensive examples in R. This book also covers a lot
+of the principles of creating effective and attractive plots—it’s well worth reading.</p>
+<p>If you want to dig deeper into plotting in R using the <code>ggplot</code> framework, you might want to
+take a look at the official <code>ggplot2</code> book,
+<a href="https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/0387981403">ggplot2: Elegant Graphics for Data Analysis</a> and
+at Paul Murrell’s book <a href="https://www.amazon.com/Graphics-Third-Chapman-Hall-CRC/dp/1498789056/ref=sr_1_1?keywords=paul+murrell+r+graphics&amp;qid=1553696167&amp;s=books&amp;sr=1-1-spell">R Graphics</a>, with
+extensive coverage of the grid graphics system that <code>ggplot2</code> builds on.</p>
+<p>Finally, one of the best ways to learn more is to check out RStudio’s “Data Visualization”
+cheatsheet,<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> Once you’ve started to
+get the hang of the basics of plotting in R, download this cheatsheet and work through the
+examples. All of them use datasets that come with R, so you should be able to run them all,
+and you’ll get a good idea of the range of plots <code>ggplot2</code> can be used to create.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-ggplot2">
+<p>Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, and Kara Woo. 2018. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+</div>
+<div id="ref-R-readr">
+<p>Wickham, Hadley, Jim Hester, and Romain Francois. 2018. <em>Readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.</p>
+</div>
+<div id="ref-R-forcats">
+<p>Wickham, Hadley. 2019. <em>Forcats: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats">https://CRAN.R-project.org/package=forcats</a>.</p>
+</div>
+<div id="ref-R-magrittr">
+<p>Bache, Stefan Milton, and Hadley Wickham. 2014. <em>Magrittr: A Forward-Pipe Operator for R</em>. <a href="https://CRAN.R-project.org/package=magrittr">https://CRAN.R-project.org/package=magrittr</a>.</p>
+</div>
+<div id="ref-R-dplyr">
+<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p><strong>Fatality Analysis Reporting System (FARS).</strong> A surveillance system
+for all fatal motor vehicle accidents in the US, maintained by the National Highway
+Traffic Safety Administration. For more, see
+<a href="https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars">the FARS website</a>.<a href="plot.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p><strong>geoms.</strong> The geometric objects (e.g., points, lines, bars, columns,
+polygons, rectangles, text, labels) used to display data for <code>ggplot</code> plots.<a href="plot.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p><strong>theme.</strong> A collection of specifications for the background elements
+of the plot, including the plot background, grid lines, legend position, text size and
+font, margins, and axis ticks.<a href="plot.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p><strong>comma-separated file format.</strong> A flat file format
+(try opening the file in a plain text editor—unlike a binary file format like
+Excel, you should be able to read all the content) where each column entry is
+separated by a comma. This is a common file format for tabular data that can
+be read into and written from most statistical programs (including R, Excel, and
+SAS).<a href="plot.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>There is also a small chance, especially if
+you’re using a computer for which you don’t have superuser privileges, that something
+else is going on. Double-check that you installed the package you’re trying to load,
+and if loading the package still doesn’t work, talk with your IT team about
+installing and loading R packages on your computer. For some company- or
+government-issued computers, the computer might have been set up to restrict
+installing new software, or to save installed software somewhere other than the
+default locations where R searches with <code>library</code>.<a href="plot.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>For
+this and any other R function, you can open a help file in RStudio to give you
+more information about the function, usually including some examples of how to
+use if. Just type <code>?</code> and then the function name—for this example, <code>?read_csv</code>.<a href="plot.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p><strong>file path.</strong> The directions for where to find a file within your
+computer’s directory structure. If the file you want is in your current working
+directory, this will just be the filename of the file. If it’s not, but in a directory
+close-by, you can use a <em>relative pathname</em> to give the directions from the current
+working directory. Since the file you want to read in is in a subdirectory called
+“data” of the current working directory, the filepath here is
+“data/daily_fatalities.csv”.<a href="plot.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p><strong>gets arrow.</strong> The function
+<code>&lt;-</code>, which allows you to save the output from running the code on the right-hand
+side of the arrow to an object with the name on the left of the arrow. This is a
+funny kind of function called an <strong>infix function</strong>, which goes between two
+function arguments instead of putting the arguments inside parentheses. If you
+want to look up the helpfile for an infix function, wrap it in backticks:
+<code>?`&lt;-`</code>.<a href="plot.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p><strong>tibble.</strong>
+A slightly fancier dataframe, which is a tabular data format in R, where there are
+rows and columns, with each column having data with the same class (e.g., character,
+integer, date) and all columns having the same length. Values in the columns should
+“line up” across the rows—for example, in this case, the second value in the
+<code>fatals</code> column should be the number of fatalities for the date given by the second
+value in the <code>date</code> column. Compared to a dataframe, a tibble prints out more nicely
+when you call the object name alone, among some other advantages.<a href="plot.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>See <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">this website</a> for examples and names<a href="plot.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>For
+an in-depth look at aesthetic specifications, see
+<a href="https://cran.r-project.org/web/packages/ggplot2/vignettes/ggplot2-specs.html">the ggplot2 specs vignette</a><a href="plot.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p>See the helpfile for “theme” with <code>?theme</code> for a full listing.<a href="plot.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p><strong>factor class.</strong> An R class for values that take character names,
+but that describe categories, for which you expect values to show up more than once
+in your data. In this data, the day of week is an example, since it is expressed
+as a character variable (“Monday”, “Tuesday”, etc.), but we expect there to be
+multiple observations with, e.g., “Monday”. If you have a varible that you expect
+to be unique (e.g., name of study subjects, unique ID number), the column should
+be in a character, not a factor, class.
+In R, each possible catogory for a factor is called a <strong>level</strong>.
+You can change the order of the levels of a factor, and this will change the
+order they’re shown on a plot.<a href="plot.html#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p><strong>fill aesthetic.</strong> While all geoms have
+a <strong>color aesthetic</strong>, some also have a <strong>fill</strong> aesthetic. These include columns,
+bars, polygons, and points with certain shapes. In these cases, ‘color’ will specify
+the outline of the geom while ‘fill’ will specify the inside. Each geom has a set of
+required aesthetics and a set of possible aesthetics. To find each set for a geom,
+go to its helpfile (e.g., <code>?geom_col</code>) and scroll down to the “Aesthetics” section.<a href="plot.html#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn15"><p><strong>cheatsheet.</strong> A two-sided, one-page sheet crammed with all the main functions
+for a particular topic of coding. RStudio has a large collection available
+<a href="https://www.rstudio.com/resources/cheatsheets/">here</a>, including cheatsheets for cleaning
+data, working with factors and strings, and a range of other topics. This webpage also includes
+“contributed” cheatsheets, developed by people outside of RStudio.<a href="plot.html#fnref15" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="map.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["navy_public_health.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

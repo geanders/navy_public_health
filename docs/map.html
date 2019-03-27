@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 3 Map | Data Visualization in R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 3 Map | Data Visualization in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Map | Data Visualization in R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Brooke Anderson">
+
+
+<meta name="date" content="2019-03-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="plot.html">
+<link rel="next" href="interact.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Visualization in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#download-r"><i class="fa fa-check"></i><b>1.1</b> Download R</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#download-rstudio"><i class="fa fa-check"></i><b>1.2</b> Download RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#install-some-r-packages"><i class="fa fa-check"></i><b>1.3</b> Install some R packages</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#create-an-r-project"><i class="fa fa-check"></i><b>1.4</b> Create an R Project</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#download-example-data"><i class="fa fa-check"></i><b>1.5</b> Download example data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="plot.html"><a href="plot.html"><i class="fa fa-check"></i><b>2</b> Plot</a><ul>
+<li class="chapter" data-level="2.1" data-path="plot.html"><a href="plot.html#plot-elements"><i class="fa fa-check"></i><b>2.1</b> Plot elements</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="plot.html"><a href="plot.html#example-data"><i class="fa fa-check"></i><b>2.1.1</b> Example data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="plot.html"><a href="plot.html#illustrating-plot-elements"><i class="fa fa-check"></i><b>2.1.2</b> Illustrating plot elements</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="plot.html"><a href="plot.html#building-a-plot"><i class="fa fa-check"></i><b>2.2</b> Building a plot</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="plot.html"><a href="plot.html#reading-data"><i class="fa fa-check"></i><b>2.2.1</b> Reading data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="plot.html"><a href="plot.html#plotting-by-layers"><i class="fa fa-check"></i><b>2.2.2</b> Plotting by layers</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="plot.html"><a href="plot.html#saving-plots"><i class="fa fa-check"></i><b>2.3</b> Saving plots</a></li>
+<li class="chapter" data-level="2.4" data-path="plot.html"><a href="plot.html#learn-more"><i class="fa fa-check"></i><b>2.4</b> Learn more</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="map.html"><a href="map.html"><i class="fa fa-check"></i><b>3</b> Map</a><ul>
+<li class="chapter" data-level="3.1" data-path="map.html"><a href="map.html#geographical-data-in-a-tidy-format"><i class="fa fa-check"></i><b>3.1</b> Geographical data in a tidy format</a></li>
+<li class="chapter" data-level="3.2" data-path="map.html"><a href="map.html#basic-mapping"><i class="fa fa-check"></i><b>3.2</b> Basic mapping</a></li>
+<li class="chapter" data-level="3.3" data-path="map.html"><a href="map.html#learn-more-1"><i class="fa fa-check"></i><b>3.3</b> Learn more</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="interact.html"><a href="interact.html"><i class="fa fa-check"></i><b>4</b> Interact</a><ul>
+<li class="chapter" data-level="4.1" data-path="interact.html"><a href="interact.html#dt-datatables"><i class="fa fa-check"></i><b>4.1</b> DT: Datatables</a></li>
+<li class="chapter" data-level="4.2" data-path="interact.html"><a href="interact.html#plotly"><i class="fa fa-check"></i><b>4.2</b> Plotly</a></li>
+<li class="chapter" data-level="4.3" data-path="interact.html"><a href="interact.html#leaflet"><i class="fa fa-check"></i><b>4.3</b> Leaflet</a></li>
+<li class="chapter" data-level="4.4" data-path="interact.html"><a href="interact.html#learn-more-2"><i class="fa fa-check"></i><b>4.4</b> Learn more</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>5</b> Report</a><ul>
+<li class="chapter" data-level="5.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>5.1</b> RMarkdown</a></li>
+<li class="chapter" data-level="5.2" data-path="report.html"><a href="report.html#dashboards"><i class="fa fa-check"></i><b>5.2</b> Dashboards</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>6</b> Tidy</a><ul>
+<li class="chapter" data-level="6.1" data-path="tidy.html"><a href="tidy.html#tidy-format"><i class="fa fa-check"></i><b>6.1</b> Tidy format</a></li>
+<li class="chapter" data-level="6.2" data-path="tidy.html"><a href="tidy.html#tidyverse-tools"><i class="fa fa-check"></i><b>6.2</b> Tidyverse tools</a></li>
+<li class="chapter" data-level="6.3" data-path="tidy.html"><a href="tidy.html#subsetting"><i class="fa fa-check"></i><b>6.3</b> Subsetting</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="tidy.html"><a href="tidy.html#selecting-columns"><i class="fa fa-check"></i><b>6.3.1</b> Selecting columns</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tidy.html"><a href="tidy.html#slicing-rows"><i class="fa fa-check"></i><b>6.3.2</b> Slicing rows</a></li>
+<li class="chapter" data-level="6.3.3" data-path="tidy.html"><a href="tidy.html#filtering-rows"><i class="fa fa-check"></i><b>6.3.3</b> Filtering rows</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="tidy.html"><a href="tidy.html#adding"><i class="fa fa-check"></i><b>6.4</b> Adding</a></li>
+<li class="chapter" data-level="6.5" data-path="tidy.html"><a href="tidy.html#summarizing"><i class="fa fa-check"></i><b>6.5</b> Summarizing</a></li>
+<li class="chapter" data-level="6.6" data-path="tidy.html"><a href="tidy.html#reformatting"><i class="fa fa-check"></i><b>6.6</b> Reformatting</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>7</b> Final Words</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Visualization in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="map" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Map</h1>
+<p><span class="newthought">R has had tools for mapping spatial</span> data for a long time, but some of these
+tools, but they could take a while to learn if you were just used to basic plotting
+in R. Recently, some packages have been developed for mapping spatial data that fit within
+the <code>ggplot</code> framework, so they allow you to take what you’ve learned about creating non-geographical
+plots and apply them to create maps.</p>
+<p>The <code>sf</code> package <span class="citation">(Pebesma <a href="#ref-R-sf">2019</a>)</span> is a fantastic new(-ish) package for mapping in R. The “Tidy” section
+of this handout describes the “tidy” data framework used as an input for <code>ggplot</code> code. The
+“tidy” data framework is also convenient for cleaning, merging, and manipulating data
+before plotting or modeling it. The <code>sf</code> package allows you to read in and work with geographical
+data in a tidy format. It turns out that this is very powerful, as you can learn how to do a
+few things well (plotting [see the “Plot” section] and working with data [see the “Tidy” section]),
+and then apply these tools in the same way, whether you’re working with geographical or
+non-geographical data.</p>
+<div id="geographical-data-in-a-tidy-format" class="section level2">
+<h2><span class="header-section-number">3.1</span> Geographical data in a tidy format</h2>
+<p>The <code>sf</code> package allows you to create a dataframe object with one special characteristic: a
+special <strong>list column</strong><a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>
+called “geometry” that contains the geometrical data needed to draw
+an observation. For example, if you have a dataset of motor vehicle accidents, where each
+row gives the data for an accident, the <code>geometry</code> column might include the latitude and
+longitude for the location of the accident. As another example, if you have a data set of
+the total number of motor vehicle fatalities in a year in each county in a state, the
+<code>geometry</code> column might have all the latitude and longitude points to form the
+boundary of each county.</p>
+<p>These special dataframes are given a class called <strong>sf</strong><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
+<p>There are several ways for you to create this special type of dataframe. We’ll create a few
+to use in the later mapping examples. First, if you have a regular dataframe, you can
+convert it into an <code>sf</code> object, specifying which parts of the dataframe include geographical
+information.</p>
+<p>If you followed all the set-up instructions in the “Prerequisites”, you should have downloaded a
+dataset called “fl_accidents.csv” and saved it in the “data” subdirectory of the R Project directory
+for the examples. You can use <code>readr</code> to read it in. If you print out the start of it, you’ll see
+that it’s got observations (rows) of fatal motor vehicle accidents. These accidents all occurred in
+Florida within a week of Hurricane Irma’s landfall on September 10, 2017. The columns give
+the county code (<code>fips</code>), date (<code>date</code>), location (<code>latitude</code> and <code>longitud</code>), and the number of
+fatalities (<code>fatals</code>).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+fl_accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/fl_accidents.csv&quot;</span>)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   fips = col_double(),
+##   date = col_date(format = &quot;&quot;),
+##   latitude = col_double(),
+##   longitud = col_double(),
+##   fatals = col_double()
+## )</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents</code></pre>
+<pre><code>## # A tibble: 37 x 5
+##     fips date       latitude longitud fatals
+##    &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+##  1 12031 2017-09-08     30.2    -81.5      1
+##  2 12095 2017-09-07     28.5    -81.4      1
+##  3 12097 2017-09-08     28.3    -81.3      1
+##  4 12095 2017-09-07     28.6    -81.2      1
+##  5 12031 2017-09-08     30.2    -81.8      1
+##  6 12033 2017-09-07     30.6    -87.4      2
+##  7 12023 2017-09-10     30.1    -82.7      1
+##  8 12075 2017-09-08     29.6    -82.9      1
+##  9 12045 2017-09-09     30.1    -85.3      2
+## 10 12031 2017-09-12     30.4    -81.8      1
+## # … with 27 more rows</code></pre>
+<p>Even though this data has geographical information in it (latitude and longitude), it’s currently
+just a regular dataframe. To convert it to an <code>sf</code> class object, you can use the <code>st_as_sf</code> function,<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>
+specifying the columns with the geogrphical coordinates using the <code>coords</code> parameter.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)</code></pre>
+<pre><code>## Linking to GEOS 3.6.1, GDAL 2.1.3, PROJ 4.9.3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents <span class="op">%&lt;&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;longitud&quot;</span>, <span class="st">&quot;latitude&quot;</span>))</code></pre>
+<p>Now, when you print out <code>fl_accidents</code>, you’ll see some extra information at the top of the print
+out, including the objects <strong>bounding box</strong> (<code>bbox</code>) and <strong>projection</strong> (<code>epsg</code>, <code>proj4string</code>)
+(which we currently haven’t set).</p>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents</code></pre>
+<pre><code>## Simple feature collection with 37 features and 3 fields
+## geometry type:  POINT
+## dimension:      XY
+## bbox:           xmin: -87.3797 ymin: 25.6876 xmax: -80.32332 ymax: 30.65894
+## epsg (SRID):    NA
+## proj4string:    NA
+## # A tibble: 37 x 4
+##     fips date       fatals             geometry
+##    &lt;dbl&gt; &lt;date&gt;      &lt;dbl&gt;              &lt;POINT&gt;
+##  1 12031 2017-09-08      1   (-81.5407 30.2474)
+##  2 12095 2017-09-07      1 (-81.41927 28.51796)
+##  3 12097 2017-09-08      1 (-81.34221 28.26149)
+##  4 12095 2017-09-07      1 (-81.18188 28.57327)
+##  5 12031 2017-09-08      1 (-81.84294 30.22846)
+##  6 12033 2017-09-07      2  (-87.3797 30.56341)
+##  7 12023 2017-09-10      1 (-82.71024 30.13608)
+##  8 12075 2017-09-08      1 (-82.87318 29.56196)
+##  9 12045 2017-09-09      2 (-85.25815 30.06198)
+## 10 12031 2017-09-12      1 (-81.76086 30.37913)
+## # … with 27 more rows</code></pre>
+<p>A second way to create an <code>sf</code> object in R is to read in data from a geographic data file, like
+a <strong>shapefile</strong><a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>
+If you followed the “Prerequisites”, you should have downloaded a file called
+“al112017_best_track.zip”. This is a zipped file that includes shapefiles for the track of
+Hurricane Irma from the National Hurricane Center ([website]).</p>
+<p>First, you’ll need to unzip this file to “unpack” it as a directory of files. On many
+computers, you can do this by double-clicking on the zipped file. However, you can also
+unzip files from R. Just run:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unzip</span>(<span class="st">&quot;data/al112017_best_track.zip&quot;</span>, 
+      <span class="dt">exdir =</span> <span class="st">&quot;data/al112017_best_track&quot;</span>)</code></pre>
+<p>Once the file is unzipped, if you look at the “al112017_best_track” directory created,
+you will see that it contains a collection of files starting with one of several roots
+(e.g., “al112017_lin”) and with one of several suffixes (e.g., “.dbf”, “.prj”, “.shx”).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="st">&quot;data/al112017_best_track/&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;al112017_lin.dbf&quot;           &quot;al112017_lin.prj&quot;          
+##  [3] &quot;al112017_lin.shp&quot;           &quot;al112017_lin.shp.xml&quot;      
+##  [5] &quot;al112017_lin.shx&quot;           &quot;al112017_pts.dbf&quot;          
+##  [7] &quot;al112017_pts.prj&quot;           &quot;al112017_pts.shp&quot;          
+##  [9] &quot;al112017_pts.shp.xml&quot;       &quot;al112017_pts.shx&quot;          
+## [11] &quot;al112017_radii.dbf&quot;         &quot;al112017_radii.prj&quot;        
+## [13] &quot;al112017_radii.shp&quot;         &quot;al112017_radii.shp.xml&quot;    
+## [15] &quot;al112017_radii.shx&quot;         &quot;al112017_windswath.dbf&quot;    
+## [17] &quot;al112017_windswath.prj&quot;     &quot;al112017_windswath.shp&quot;    
+## [19] &quot;al112017_windswath.shp.xml&quot; &quot;al112017_windswath.shx&quot;</code></pre>
+<p>Each set of files with the same root provides a “layer” of the shapefile, giving a set
+of geographic information. For example, the “al112017_lin.<em>" files provides the
+line of the hurricane’s track, while the "al112017_windswarth.</em>” layer provides windswaths
+(how severe the wind was in certain locations surrounding the storm track).</p>
+<p>You can read in any of these layers into R as an <code>sf</code> object using <code>irma_tracks</code> and specifying
+the layer you’d like from the directory with the <code>layer</code> parameter (put the root of the filenames
+for the layer you want). For example, to read in a line with the track of irma, you can run:</p>
+<pre class="sourceCode r"><code class="sourceCode r">irma_tracks &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;data/al112017_best_track/&quot;</span>,
+                       <span class="dt">layer =</span> <span class="st">&quot;al112017_lin&quot;</span>)</code></pre>
+<pre><code>## Reading layer `al112017_lin&#39; from data source `/Users/georgianaanderson/Documents/r_workshops/navy_public_health/data/al112017_best_track&#39; using driver `ESRI Shapefile&#39;
+## Simple feature collection with 20 features and 3 fields
+## geometry type:  LINESTRING
+## dimension:      XY
+## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 36.8
+## epsg (SRID):    NA
+## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_defs</code></pre>
+<p>If you print out <code>irma_tracks</code>, you can see that it looks like a dataframe, but with extra
+geographic information (bounding box, projection, etc.) as well as a special column for
+geometry, which gives the latitude and longitude …</p>
+<pre class="sourceCode r"><code class="sourceCode r">irma_tracks</code></pre>
+<pre><code>## Simple feature collection with 20 features and 3 fields
+## geometry type:  LINESTRING
+## dimension:      XY
+## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 36.8
+## epsg (SRID):    NA
+## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_defs
+## First 10 features:
+##    STORMNUM           STORMTYPE SS                       geometry
+## 1        11 Tropical Depression  0 LINESTRING (-26.9 16.1, -28...
+## 2        11      Tropical Storm  0 LINESTRING (-28.3 16.2, -29...
+## 3        11          Hurricane1  1 LINESTRING (-32.5 16.4, -33...
+## 4        11          Hurricane2  2 LINESTRING (-34.2 17.1, -35...
+## 5        11          Hurricane3  3 LINESTRING (-35.1 17.5, -36...
+## 6        11          Hurricane2  2 LINESTRING (-42.6 18.9, -44...
+## 7        11          Hurricane3  3 LINESTRING (-47.9 17.9, -49...
+## 8        11          Hurricane4  4 LINESTRING (-53.9 16.7, -55...
+## 9        11          Hurricane5  5 LINESTRING (-57.8 16.7, -59...
+## 10       11          Hurricane4  4 LINESTRING (-73 21.5, -73.2...</code></pre>
+</div>
+<div id="basic-mapping" class="section level2">
+<h2><span class="header-section-number">3.2</span> Basic mapping</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+<span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_accidents)</code></pre>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="learn-more-1" class="section level2">
+<h2><span class="header-section-number">3.3</span> Learn more</h2>
+<p>The <code>sf</code> package is rapidly developing, and so it is worthwhile to seek out the latest
+help guides and tutorials to learn more about the system, particularly if you are doing
+this a while after the spring 2019 workshop.</p>
+<p>The package authors have created
+<a href="https://cran.r-project.org/web/packages/sf/vignettes/sf1.html">a website with more on the package</a>.
+They also have a book called <a href="https://geocompr.robinlovelace.net/">Geocomputation with R</a>, which
+is currently available online and will be available in print sometime in 2019.</p>
+<p>Both these sources go in depth to describe the <code>sf</code> package and how to use it. If you want
+other examples of using the package, many people have recently written blog posts with examples
+of using it, so it’s worth googling something like “blog post map r sf”.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-sf">
+<p>Pebesma, Edzer. 2019. <em>Sf: Simple Features for R</em>. <a href="https://CRAN.R-project.org/package=sf">https://CRAN.R-project.org/package=sf</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="16">
+<li id="fn16"><p><strong>list column</strong><a href="map.html#fnref16" class="footnote-back">↩</a></p></li>
+<li id="fn17"><p><strong>sf.</strong> Short for “simple features”,
+the name of both an R package and the object class created and used by the data. This class
+includes a special column called “geometry” for geographic information about each observation.
+Objects with this class can be used for mapping spatial data, but also can be manipulated
+using tidyverse tools very similarly to tibbles.<a href="map.html#fnref17" class="footnote-back">↩</a></p></li>
+<li id="fn18"><p>
+Most of the functions in the <code>st</code> package start with <code>st_</code>. Since R studio allows <strong>tab completion</strong>,
+this makes it very easy to look up a function in the package whose name you might have forgotten.
+Just try typing <code>st_</code> and then the Tab key in your R console—you should get a pop-up with a list of
+suggestions for possible function names.<a href="map.html#fnref18" class="footnote-back">↩</a></p></li>
+<li id="fn19"><p>Here, the
+compound pipe operator, <code>%&lt;&gt;%</code>, applies the function to <code>fl_accidents</code> and then overwrites the
+<code>fl_accidents</code> with the modified version, updating the object so you’re ready to use it for later
+code.<a href="map.html#fnref19" class="footnote-back">↩</a></p></li>
+<li id="fn20"><p><strong>shapefile.</strong> …<a href="map.html#fnref20" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="plot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="interact.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-mapping.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["navy_public_health.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

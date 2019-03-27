@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="2.2 Building a plot | Data Visualization in R" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+<meta name="github-repo" content="rstudio/bookdown-demo" />
+
+<meta name="author" content="Brooke Anderson" />
+
+<meta name="date" content="2019-03-28" />
+
+
+<meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+
+<title>2.2 Building a plot | Data Visualization in R</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#prerequisites"><span class="toc-section-number">1</span> Prerequisites</a><ul>
+<li><a href="1-1-download-r.html#download-r"><span class="toc-section-number">1.1</span> Download R</a></li>
+<li><a href="1-2-download-rstudio.html#download-rstudio"><span class="toc-section-number">1.2</span> Download RStudio</a></li>
+<li><a href="1-3-install-some-r-packages.html#install-some-r-packages"><span class="toc-section-number">1.3</span> Install some R packages</a></li>
+<li><a href="1-4-create-an-r-project.html#create-an-r-project"><span class="toc-section-number">1.4</span> Create an R Project</a></li>
+<li><a href="1-5-download-example-data.html#download-example-data"><span class="toc-section-number">1.5</span> Download example data</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-plot.html#plot"><span class="toc-section-number">2</span> Plot</a><ul>
+<li class="has-sub"><a href="2-1-plot-elements.html#plot-elements"><span class="toc-section-number">2.1</span> Plot elements</a><ul>
+<li><a href="2-1-plot-elements.html#example-data"><span class="toc-section-number">2.1.1</span> Example data</a></li>
+<li><a href="2-1-plot-elements.html#illustrating-plot-elements"><span class="toc-section-number">2.1.2</span> Illustrating plot elements</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-2-building-a-plot.html#building-a-plot"><span class="toc-section-number">2.2</span> Building a plot</a><ul>
+<li><a href="2-2-building-a-plot.html#reading-data"><span class="toc-section-number">2.2.1</span> Reading data</a></li>
+<li><a href="2-2-building-a-plot.html#plotting-by-layers"><span class="toc-section-number">2.2.2</span> Plotting by layers</a></li>
+</ul></li>
+<li><a href="2-3-saving-plots.html#saving-plots"><span class="toc-section-number">2.3</span> Saving plots</a></li>
+<li><a href="2-4-learn-more.html#learn-more"><span class="toc-section-number">2.4</span> Learn more</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-map.html#map"><span class="toc-section-number">3</span> Map</a><ul>
+<li><a href="3-1-geographical-data-in-a-tidy-format.html#geographical-data-in-a-tidy-format"><span class="toc-section-number">3.1</span> Geographical data in a tidy format</a></li>
+<li><a href="3-2-basic-mapping.html#basic-mapping"><span class="toc-section-number">3.2</span> Basic mapping</a></li>
+<li><a href="3-3-learn-more-1.html#learn-more-1"><span class="toc-section-number">3.3</span> Learn more</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-interact.html#interact"><span class="toc-section-number">4</span> Interact</a><ul>
+<li><a href="4-1-dt-datatables.html#dt-datatables"><span class="toc-section-number">4.1</span> DT: Datatables</a></li>
+<li><a href="4-2-plotly.html#plotly"><span class="toc-section-number">4.2</span> Plotly</a></li>
+<li><a href="4-3-leaflet.html#leaflet"><span class="toc-section-number">4.3</span> Leaflet</a></li>
+<li><a href="4-4-learn-more-2.html#learn-more-2"><span class="toc-section-number">4.4</span> Learn more</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-report.html#report"><span class="toc-section-number">5</span> Report</a><ul>
+<li><a href="5-1-rmarkdown.html#rmarkdown"><span class="toc-section-number">5.1</span> RMarkdown</a></li>
+<li><a href="5-2-dashboards.html#dashboards"><span class="toc-section-number">5.2</span> Dashboards</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-tidy.html#tidy"><span class="toc-section-number">6</span> Tidy</a><ul>
+<li><a href="6-1-tidy-format.html#tidy-format"><span class="toc-section-number">6.1</span> Tidy format</a></li>
+<li><a href="6-2-tidyverse-tools.html#tidyverse-tools"><span class="toc-section-number">6.2</span> Tidyverse tools</a></li>
+<li class="has-sub"><a href="6-3-subsetting.html#subsetting"><span class="toc-section-number">6.3</span> Subsetting</a><ul>
+<li><a href="6-3-subsetting.html#selecting-columns"><span class="toc-section-number">6.3.1</span> Selecting columns</a></li>
+<li><a href="6-3-subsetting.html#slicing-rows"><span class="toc-section-number">6.3.2</span> Slicing rows</a></li>
+<li><a href="6-3-subsetting.html#filtering-rows"><span class="toc-section-number">6.3.3</span> Filtering rows</a></li>
+</ul></li>
+<li><a href="6-4-adding.html#adding"><span class="toc-section-number">6.4</span> Adding</a></li>
+<li><a href="6-5-summarizing.html#summarizing"><span class="toc-section-number">6.5</span> Summarizing</a></li>
+<li><a href="6-6-reformatting.html#reformatting"><span class="toc-section-number">6.6</span> Reformatting</a></li>
+</ul></li>
+<li><a href="7-final-words.html#final-words"><span class="toc-section-number">7</span> Final Words</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="building-a-plot" class="section level2">
+<h2><span class="header-section-number">2.2</span> Building a plot</h2>
+<p><span class="newthought">Now that you have</span> and idea of how different elements combine to
+create a plot, I’ll walk you through the steps to “layer” these elements together
+to create these two example plots.</p>
+<div id="reading-data" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Reading data</h3>
+<p>First, you’ll need to bring the example data into your R session. If you followed
+the steps in the “Prerequisites” section, you should have a
+<strong>comma-separated file</strong><label for="tufte-sn-4" class="margin-toggle sidenote-number">4</label><input type="checkbox" id="tufte-sn-4" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">4</span> <strong>comma-separated file format.</strong> A flat file format
+(try opening the file in a plain text editor—unlike a binary file format like
+Excel, you should be able to read all the content) where each column entry is
+separated by a comma. This is a common file format for tabular data that can
+be read into and written from most statistical programs (including R, Excel, and
+SAS).</span> in a “data” subdirectory of your current working directory. Also, if you
+followed the steps in the “Prerequisites” section, you should have installed
+all the necessary R packages for this example.</p>
+<p>While there are functions in base R that import comma-separated files, I think the
+functions in the <strong>readr</strong> package <span class="citation">(Wickham, Hester, and Francois <label for="tufte-mn-2" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-2" class="margin-toggle">2018<span class="marginnote">Wickham, Hadley, Jim Hester, and Romain Francois. 2018. <em>Readr: Read Rectangular Text Data</em>. <a href="https://CRAN.R-project.org/package=readr">https://CRAN.R-project.org/package=readr</a>.</span>)</span>, a package in the <strong>tidyverse</strong>,
+has some nicer defaults. To use functions in this package, you first need to load
+it into your R session using the <code>library</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)</code></pre>
+<p>The <code>library</code> function must specify the name of the package you’d like to load (in
+this case, “readr”). If you have forgotten to install the “readr” package before you
+run this function, you’ll get the message:</p>
+<pre><code>Error in library(readr) : there is no package called ‘readr’</code></pre>
+<p>If you get that message, go back and re-read the “Prerequisites” to make sure you’ve
+installed all the required packages.<label for="tufte-sn-5" class="margin-toggle sidenote-number">5</label><input type="checkbox" id="tufte-sn-5" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">5</span> There is also a small chance, especially if
+you’re using a computer for which you don’t have superuser privileges, that something
+else is going on. Double-check that you installed the package you’re trying to load,
+and if loading the package still doesn’t work, talk with your IT team about
+installing and loading R packages on your computer. For some company- or
+government-issued computers, the computer might have been set up to restrict
+installing new software, or to save installed software somewhere other than the
+default locations where R searches with <code>library</code>.</span></p>
+<p>Now that you’ve loaded <code>readr</code>, you can use the package’s <code>read_csv</code> function<label for="tufte-sn-6" class="margin-toggle sidenote-number">6</label><input type="checkbox" id="tufte-sn-6" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">6</span> For
+this and any other R function, you can open a help file in RStudio to give you
+more information about the function, usually including some examples of how to
+use if. Just type <code>?</code> and then the function name—for this example, <code>?read_csv</code>.</span>
+to read in the data. The one argument this function requires is the
+<strong>file path</strong><label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> <strong>file path.</strong> The directions for where to find a file within your
+computer’s directory structure. If the file you want is in your current working
+directory, this will just be the filename of the file. If it’s not, but in a directory
+close-by, you can use a <em>relative pathname</em> to give the directions from the current
+working directory. Since the file you want to read in is in a subdirectory called
+“data” of the current working directory, the filepath here is
+“data/daily_fatalities.csv”.</span>
+to the data file.</p>
+<pre class="sourceCode r"><code class="sourceCode r">daily_fatalities &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/daily_fatalities.csv&quot;</span>)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   date = col_date(format = &quot;&quot;),
+##   week = col_double(),
+##   weekday = col_character(),
+##   fatals = col_double()
+## )</code></pre>
+<p>Don’t be alarmed by the message that’s printed out after you run the function!
+In data frames in R, each columns can have one of several different classes
+(some examples: character: “Florida”, date: 2017-09-10, integer: 17,
+double: 17.0). The <code>read_csv</code> function looks at the values in each column in the
+data and tries to guess what class each column should be, and this message
+tells you what it guessed, so you can check. In this case, the number of
+fatalities will always be a whole number, so the “integer” class would have
+also worked well, but there should be no problem with the column having a
+“double” class for the plotting we’ll be doing, so everything looks fine.</p>
+<p>The previous code used a <strong>gets arrow</strong><label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> <strong>gets arrow.</strong> The function
+<code>&lt;-</code>, which allows you to save the output from running the code on the right-hand
+side of the arrow to an object with the name on the left of the arrow. This is a
+funny kind of function called an <strong>infix function</strong>, which goes between two
+function arguments instead of putting the arguments inside parentheses. If you
+want to look up the helpfile for an infix function, wrap it in backticks:
+<code>?`&lt;-`</code>.</span> to save the data you read in to an R object called <code>daily_fatalities</code>.
+Now, anytime you want to use this data, you can reference it with the name
+<code>daily_fatalities</code> instead of needing to read it in again. For example, you
+can print out the start of the data by calling the object name by itself:</p>
+<pre class="sourceCode r"><code class="sourceCode r">daily_fatalities</code></pre>
+<pre><code>## # A tibble: 28 x 4
+##    date        week weekday   fatals
+##    &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1 2017-08-27    35 Sunday         4
+##  2 2017-08-28    35 Monday         5
+##  3 2017-08-29    35 Tuesday        6
+##  4 2017-08-30    35 Wednesday      6
+##  5 2017-08-31    35 Thursday       6
+##  6 2017-09-01    35 Friday         9
+##  7 2017-09-02    35 Saturday       8
+##  8 2017-09-03    36 Sunday        15
+##  9 2017-09-04    36 Monday         7
+## 10 2017-09-05    36 Tuesday        8
+## # … with 18 more rows</code></pre>
+<p>By default, <code>read_csv</code> read the data into a structure called a <strong>tibble</strong>,<label for="tufte-sn-9" class="margin-toggle sidenote-number">9</label><input type="checkbox" id="tufte-sn-9" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">9</span> <strong>tibble.</strong>
+A slightly fancier dataframe, which is a tabular data format in R, where there are
+rows and columns, with each column having data with the same class (e.g., character,
+integer, date) and all columns having the same length. Values in the columns should
+“line up” across the rows—for example, in this case, the second value in the
+<code>fatals</code> column should be the number of fatalities for the date given by the second
+value in the <code>date</code> column. Compared to a dataframe, a tibble prints out more nicely
+when you call the object name alone, among some other advantages.</span> and you
+can see that the top of the print-out notes this. It also gives the dimensions
+(28 rows and 4 columns) and, under each column name, the class of the column.
+When you start plotting this data, you’ll use the dataframe’s object name
+(<code>daily_fatalities</code>) to reference the full dataset and each column name
+(e.g., <code>date</code> for the date of the observations, <code>fatals</code> for the number of
+fatalities observed on that date) to reference specific elements of the data.</p>
+</div>
+<div id="plotting-by-layers" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Plotting by layers</h3>
+<p>To create a data visualization using <code>ggplot2</code>, we’ll add up “layers” for each of
+the plot elements described earlier. In this section, I’ll step through this process.
+First, we’ll create a <strong>ggplot object</strong> using the <code>ggplot</code> call, and then we’ll add
+layers to it with <code>+</code>. To use these functions, you’ll need to load the <code>ggplot2</code>
+package:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre>
+<p>For the first step, create the <code>ggplot</code> object. When you create this object, specify
+the dataframe with the data you’d like to plot using the <code>data</code> parameter:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities)</code></pre>
+<div class="figure fullwidth"><span id="fig:step1"></span>
+<img src="navy_public_health_files/figure-html/step1-1.png" alt="Step 1 of layering a plot: Creating the ggplot object. At this point, nothing's actually plotted, because we haven't added any geoms yet." width="768"  />
+<p class="caption marginnote shownote">
+Figure 2.3: Step 1 of layering a plot: Creating the ggplot object. At this point, nothing’s actually plotted, because we haven’t added any geoms yet.
+</p>
+</div>
+<p>Figure <a href="2-2-building-a-plot.html#fig:step1">2.3</a> shows the output with this single, initial layer. We haven’t added any geoms yet, so the plot isn’t showing anything. Since we’ve specified the
+data, however, we’ll be able to add geoms where we map aesthetics to columns in the
+dataset. Let’s do that next, and add a layer with a line (<code>geom_line</code>) for the number
+of fatalities per day. We’ll use the <code>aes</code> function <em>inside</em> the <code>geom_line</code> call
+to specify that we want the x-axis to show the value in the <code>date</code> column and the
+y-axis to show the value in the <code>fatals</code> column:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals))</code></pre>
+<div class="figure fullwidth"><span id="fig:step2"></span>
+<img src="navy_public_health_files/figure-html/step2-1.png" alt="Step 2 of layering a plot: Adding a line geom. In this case, the x-axis (x aesthetic) is mapped to the 'date' column in the data, while the y-axis (y aesthetic) is mapped to the 'fatals' column." width="768"  />
+<p class="caption marginnote shownote">
+Figure 2.4: Step 2 of layering a plot: Adding a line geom. In this case, the x-axis (x aesthetic) is mapped to the ‘date’ column in the data, while the y-axis (y aesthetic) is mapped to the ‘fatals’ column.
+</p>
+</div>
+<p>The result is in Figure <a href="2-2-building-a-plot.html#fig:step2">2.4</a>. You can see that you now have a line showing
+the number of fatalities per day. Next, we can add a layer on top of the line with a
+point (<code>geom_point</code>) for each date showing the number of fatalities. Two of the
+aesthetics for this geom (x and y) will be the same as for the line. However, we
+also want to map color to day of the week. Since day of the week is in a column
+called <code>weekday</code>, we can specify this aesthetic as <code>color = weekday</code> within the <code>aes</code>
+call. Try running the following code to add this layer:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday))</code></pre>
+<div class="figure fullwidth"><span id="fig:step3"></span>
+<img src="navy_public_health_files/figure-html/step3-1.png" alt="Step 3 of layering a plot: Adding a point geom. The x and y aesthetics are the same as for the line geom, but now we're also mapping color to the 'weekday' column in the data." width="768"  />
+<p class="caption marginnote shownote">
+Figure 2.5: Step 3 of layering a plot: Adding a point geom. The x and y aesthetics are the same as for the line geom, but now we’re also mapping color to the ‘weekday’ column in the data.
+</p>
+</div>
+<p>You should get the plot shown in Figure <a href="2-2-building-a-plot.html#fig:step3">2.5</a>. You may have noticed that
+the set of colors that is used for weekdays is different than in the plot in
+Figure <a href="2-1-plot-elements.html#fig:plotelements">2.1</a>. This set of colors is actually specified by the
+“scale” element of the plot, so we’ll change that in a different layer.</p>
+<p>So far, we’ve customized some of the plot aesthetics by mapping them so that their
+values are based on observations in the data. However, sometimes you’ll want
+to change an aesthetic to a <strong>constant</strong>, where the aesthetic changes for the
+aesthetic for all of the observations from the data, but in the same way.</p>
+<p>For example, for this plot, we’d like the line to be dark gray for all observations,
+and we’d like the points to be a little bigger. To specify a <strong>constant aesthetic</strong>,
+move it outside of the <code>aes</code> call. For colors, you can set a constant value to
+one of the many named “R Colors”<label for="tufte-sn-10" class="margin-toggle sidenote-number">10</label><input type="checkbox" id="tufte-sn-10" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">10</span> See <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">this website</a> for examples and names</span>
+(make sure you put the color name inside parentheses—otherwise, R will think you’re
+refering to an R object). Constant point size values can be specified using numbers,
+where larger numbers will make bigger points and the default value is somewhere
+around 1.<label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> For
+an in-depth look at aesthetic specifications, see
+<a href="https://cran.r-project.org/web/packages/ggplot2/vignettes/ggplot2-specs.html">the ggplot2 specs vignette</a></span> Try numbers bigger than 1 (e.g., 1.5, 2) for bigger points and smaller
+values (e.g., 0.8, 0.5) for smaller points.</p>
+<p>The following code will set the line to be dark gray and the points to be a bit larger (result in Figure <a href="2-2-building-a-plot.html#fig:step4">2.6</a>):</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>)</code></pre>
+<div class="figure fullwidth"><span id="fig:step4"></span>
+<img src="navy_public_health_files/figure-html/step4-1.png" alt="Step 4 of layering a plot: Adding constant aesthetics. In this step, we're making the line dark gray for all observations and the points a bit larger. Note that these aesthetics, since they're constant, are set outside of the 'aes' call. Also, note that thee color is specified inside quotation marks." width="768"  />
+<p class="caption marginnote shownote">
+Figure 2.6: Step 4 of layering a plot: Adding constant aesthetics. In this step, we’re making the line dark gray for all observations and the points a bit larger. Note that these aesthetics, since they’re constant, are set outside of the ‘aes’ call. Also, note that thee color is specified inside quotation marks.
+</p>
+</div>
+<p>We’re using the default coordinate system for this plot, so we don’t need to add
+a layer for the coordinate system. For plots where you need to change from this
+default coordinate system, you’ll add a layer that starts with <code>coord_</code>. For example,
+in the “Map” section, you’ll see how to use a geographic coordinate system using
+<code>coord_map</code>. If you want to flip your x- and y-axis (there are a few examples where
+this is useful), you can add a layer with <code>coord_flip</code>.</p>
+<p>While we’re also using the default scales for the x aesthetic, we aren’t for
+the y or color aesthetic. The change to the y scale is very minimal: we’re just
+expanding it to include 0. This can be done by adding the layer <code>expand_limits</code>
+with the <code>y</code> parameter set to 0.</p>
+<p>To change the color scale, you need to add a layer to specify
+the alternative color scale. We’ll use a color scale called
+“viridis”. This is good for discrete data (like here, where we’re showing day of
+the week rather than a continuous number), it really shines when you’re plotting
+continuous values. The order of the scale is clear to those who are colorblind, and
+it’s also clear when printed out on a black-and-white printer.</p>
+<p>To change the color scale to use this scale, add a layer with <code>scale_color_viridis_d</code>.
+The “d” here is for “discrete”; if you were using color to show a continuous
+value in the data (e.g., a column with an integer or double class), you’d
+add a layer called <code>scale_color_viridis_c</code> instead. The final result of these
+scale customizations is shown in Figure <a href="2-2-building-a-plot.html#fig:step5">2.7</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>()</code></pre>
+<div class="figure fullwidth"><span id="fig:step5"></span>
+<img src="navy_public_health_files/figure-html/step5-1.png" alt="Step 5 of layering a plot: Changing the color scale. This step changes from the default color scale to the 'viridis' color scale." width="768"  />
+<p class="caption marginnote shownote">
+Figure 2.7: Step 5 of layering a plot: Changing the color scale. This step changes from the default color scale to the ‘viridis’ color scale.
+</p>
+</div>
+<p>The function for this layer has a few options for customization. For example, try
+changing it to <code>scale_color_viridis_d(option = "A")</code> or
+<code>scale_color_viridis_d(direction = -1)</code>. To see all its options, check its
+helpfile with <code>?scale_color_viridis_d</code>.</p>
+<p>Next, we’ll change the scale labels. By default, the label for each scale is the
+name of the column in the data that the aesthetic was mapped to (x: “date”,
+y: “fatals”, color: “weekday”). You can add a <code>labs</code> layer to change these
+to labels that are easier to understand. The other
+labeling we’d like to do is to add a title and subtitle, which we can do with
+a <code>ggtitle</code> layer (the subtitle is added with the <code>sub</code> parameter of this layer).
+The final result of adding these layers is shown in Figure <a href="2-2-building-a-plot.html#fig:step6">2.8</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Date&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Day of week&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida&quot;</span>,
+          <span class="dt">subtitle =</span> <span class="st">&quot;Late summer / early fall of 2019&quot;</span>)</code></pre>
+<div class="figure fullwidth"><span id="fig:step6"></span>
+<img src="navy_public_health_files/figure-html/step6-1.png" alt="Step 6 of layering a plot: Customizing labels. The 'labs' layer customizes not only the x and y axis labels, but also the legend title for the color scale. The title and subtitle are added with a 'ggtitle' layer." width="768"  />
+<p class="caption marginnote shownote">
+Figure 2.8: Step 6 of layering a plot: Customizing labels. The ‘labs’ layer customizes not only the x and y axis labels, but also the legend title for the color scale. The title and subtitle are added with a ‘ggtitle’ layer.
+</p>
+</div>
+<p>The last layer we need to add is a theme layer. While we’re using most of the
+elements from the default theme (<code>theme_gray</code>), we do want to change the position
+of the legend. For a time series plot like this, the change can be helpful, as it
+lets us create a plot that’s much wider than it is tall. You can move the legend
+using the <code>theme</code> layer with an argument specified for <code>legend.position</code>. With
+the <code>theme</code> function, you can customize almost any of the background elements of a
+plot.<label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> See the helpfile for “theme” with <code>?theme</code> for a full listing.</span>
+However, you’ll usually only want to do that for a few elements—if you want
+to change a lot of elements, there is a set of functions that start <code>theme_</code> that
+will let you change to one of several “themes” that change many elements at once
+(as I’ll show in the next example).
+If you find you’re often using <code>theme</code> to specify lots of elements by hand, you
+can create your own <code>theme_*</code> function (fill in <code>*</code> with the name of your choice!).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Date&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Day of week&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida&quot;</span>,
+          <span class="dt">subtitle =</span> <span class="st">&quot;Late summer / early fall of 2019&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre>
+<div class="figure fullwidth"><span id="fig:step7"></span>
+<img src="navy_public_health_files/figure-html/step7-1.png" alt="Step 7 of layering a plot: Customizing the theme. Move the color legend to below the plot." width="768"  />
+<p class="caption marginnote shownote">
+Figure 2.9: Step 7 of layering a plot: Customizing the theme. Move the color legend to below the plot.
+</p>
+</div>
+<p>As one final detail, if you were looking very closely, you may have noticed that
+the order of the days of week are different in the original plot from our final
+version here. That’s because, by default, discrete character-class values are
+ordered alphabetically. We can change this order, and should, to be the order that
+week days occur. To do this, we need to change the column class to a
+<strong>factor class</strong><label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> <strong>factor class.</strong> An R class for values that take character names,
+but that describe categories, for which you expect values to show up more than once
+in your data. In this data, the day of week is an example, since it is expressed
+as a character variable (“Monday”, “Tuesday”, etc.), but we expect there to be
+multiple observations with, e.g., “Monday”. If you have a varible that you expect
+to be unique (e.g., name of study subjects, unique ID number), the column should
+be in a character, not a factor, class.
+In R, each possible catogory for a factor is called a <strong>level</strong>.
+You can change the order of the levels of a factor, and this will change the
+order they’re shown on a plot.</span> and then change the order of that factor’s levels.</p>
+<p>To do this, we’ll need to load a few additional R packages (you’ll also use these
+in the “Tidy” section, which has much more on manipulating datasets). The
+<strong>forcats</strong> package <span class="citation">(Wickham <label for="tufte-mn-3" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-3" class="margin-toggle">2019<span class="marginnote">Wickham, Hadley. 2019. <em>Forcats: Tools for Working with Categorical Variables (Factors)</em>. <a href="https://CRAN.R-project.org/package=forcats">https://CRAN.R-project.org/package=forcats</a>.</span>)</span> has functions for working with factors, including
+a function we can use to reorder the factor levels. The <strong>magrittr</strong> package
+<span class="citation">(Bache and Wickham <label for="tufte-mn-4" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle">2014<span class="marginnote">Bache, Stefan Milton, and Hadley Wickham. 2014. <em>Magrittr: A Forward-Pipe Operator for R</em>. <a href="https://CRAN.R-project.org/package=magrittr">https://CRAN.R-project.org/package=magrittr</a>.</span>)</span> includes two infix functions we’ll use to make the code
+cleaner: the pipe operator (<code>%&gt;%</code>) and the compound assignment pipe operator (<code>%&lt;&gt;%</code>).
+The <strong>dplyr</strong> package <span class="citation">(Wickham, François, et al. <label for="tufte-mn-5" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle">2019<span class="marginnote">Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</span>)</span> includes a number of simple but powerful functions
+for manipulating tibbles.</p>
+<p>The “Tidy” section will go into detail for how to use all these functions. As a brief
+summary, the <code>mutate</code> function used twice to change the values in the “weekday” column:
+first, to convert the class of the column to a factor (<code>as_factor</code>) and second to
+change the order of those levels (<code>fct_relevel</code>) by hand, to start with Monday and
+go in order through Sunday. The compound assignment pipe operator (<code>%&lt;&gt;%</code>) allows
+us to perform all those operations to columns inside the “daily_fatalities” tibble,
+and then to save the result <em>back to the same R object</em> (overwriting the earlier
+version of the tibble).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;forcats&quot;</span>) 
+<span class="kw">library</span>(<span class="st">&quot;magrittr&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
+
+daily_fatalities <span class="op">%&lt;&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">as_factor</span>(weekday)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">fct_relevel</span>(weekday, 
+                               <span class="st">&quot;Sunday&quot;</span>, <span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, 
+                               <span class="st">&quot;Thursday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, <span class="st">&quot;Saturday&quot;</span>))</code></pre>
+<p>Now when we run the same <code>ggplot</code> code, you can see that the order of the days of
+week in the color legend, and the order the colors are assigned to week day, have
+changed (Figure <a href="2-2-building-a-plot.html#fig:step8">2.10</a>).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals), <span class="dt">color =</span> <span class="st">&quot;darkgray&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> fatals, <span class="dt">color =</span> weekday), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">expand_limits</span>(<span class="dt">y =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Date&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Day of week&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida&quot;</span>,
+          <span class="dt">subtitle =</span> <span class="st">&quot;Late summer / early fall of 2019&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre>
+<div class="figure fullwidth"><span id="fig:step8"></span>
+<img src="navy_public_health_files/figure-html/step8-1.png" alt="Change the order of the days of week from alphabetical to temporal by transforming the data before plotting." width="768"  />
+<p class="caption marginnote shownote">
+Figure 2.10: Change the order of the days of week from alphabetical to temporal by transforming the data before plotting.
+</p>
+</div>
+<p>The second example plot we can go through much more quickly. There are two
+elements I’d like to point out: the layer for faceting and the layer for the theme.
+The <code>facet_wrap</code> function separates the plot into <strong>small multiples</strong>
+based on the values in a column of the data. By default, all the scales (e.g., x-axis,
+y-axis) will be the same across all the small multiples, allowing for an easier
+comparison across the plots. The other layers in this code should now be somewhat
+familiar to you: the <code>ggplot</code> call initializes a <code>ggplot</code> object with the
+“daily_fatalities” dataset, just like in the last plot, while the <code>geom_col</code> layer
+adds a column geom where the x aesthetic is mapped to the value in the “weekday”
+column and the y aesthetic is mapped to the value in the “fatals” column.</p>
+<div class="figure"><span id="fig:step1a"></span>
+<p class="caption marginnote shownote">
+Figure 2.11: Adding a facet layer to a plot. The plot is now faceted by the ‘week’ column in the dataframe, with all the facets lined up vertically in a single column (‘ncol = 1’).
+</p>
+<img src="navy_public_health_files/figure-html/step1a-1.png" alt="Adding a facet layer to a plot. The plot is now faceted by the 'week' column in the dataframe, with all the facets lined up vertically in a single column ('ncol = 1')." width="576"  />
+</div>
+<p>To change to the <code>theme_classic</code>, all you need to do is add a <code>theme_classic</code> layer
+(Figure <a href="2-2-building-a-plot.html#fig:step2a">2.12</a>).</p>
+<div class="figure"><span id="fig:step2a"></span>
+<p class="caption marginnote shownote">
+Figure 2.12: Changing the theme. The ’theme_*’ family of functions can quickly change many of the background elements of a plot with a single layer call.
+</p>
+<img src="navy_public_health_files/figure-html/step2a-1.png" alt="Changing the theme. The 'theme_*' family of functions can quickly change many of the background elements of a plot with a single layer call." width="576"  />
+</div>
+<p>Most of the rest of the layers for the plot are very similar to the first plot.
+They include changing the <strong>fill</strong><label for="tufte-sn-14" class="margin-toggle sidenote-number">14</label><input type="checkbox" id="tufte-sn-14" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">14</span> <strong>fill aesthetic.</strong> While all geoms have
+a <strong>color aesthetic</strong>, some also have a <strong>fill</strong> aesthetic. These include columns,
+bars, polygons, and points with certain shapes. In these cases, ‘color’ will specify
+the outline of the geom while ‘fill’ will specify the inside. Each geom has a set of
+required aesthetics and a set of possible aesthetics. To find each set for a geom,
+go to its helpfile (e.g., <code>?geom_col</code>) and scroll down to the “Aesthetics” section.</span>
+of the geom by mapping it to a constant fill
+aesthetic (<code>color = "skyblue"</code> in the <code>geom_col</code> call), customizing the labels with
+a <code>lab</code> layer, and adding a title with <code>ggtitle</code>. The result of adding these layers
+is shown in Figure <a href="2-2-building-a-plot.html#fig:step3a">2.13</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weekday, <span class="dt">y =</span> fatals), <span class="dt">fill =</span> <span class="st">&quot;skyblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>week, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_classic</span>()  <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida by weekday, 2019&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:step3a"></span>
+<p class="caption marginnote shownote">
+Figure 2.13: Customizing the labeling and adding a constant fill aesthetic. Note that the constant fill aesthetic is specified outside the ‘aes’ call for the geom, and that the color is specified inside quotation marks.
+</p>
+<img src="navy_public_health_files/figure-html/step3a-1.png" alt="Customizing the labeling and adding a constant fill aesthetic. Note that the constant fill aesthetic is specified outside the 'aes' call for the geom, and that the color is specified inside quotation marks." width="576"  />
+</div>
+<p>As with the first graph, to take the plot to its final stage, you’ll need to
+change the input data a bit. In this case, this step is to create clearer labels for
+the facets. The week number (e.g., 35) won’t mean much to most viewers. A label giving
+the date of the first day in the week (“Week of August 27”) will be more helpful.
+To create these new labels, you can use <code>group_by</code>, <code>mutate</code>, and <code>first</code> functions
+from the <code>dplyr</code> package (which you have already loaded if you’ve worked through
+the examples in order) to create a column called ‘first_day’ with the date of the
+first day in each week. Then you can use <code>mutate</code> (also from <code>dplyr</code>) to create the
+‘week_label’ column from the existing columns of the tibble. This code uses the
+<code>month</code> and <code>day</code> functions from the <code>lubridate</code> package (very useful for
+working with dates) <span class="citation">(Spinu, Grolemund, and Wickham <label for="tufte-mn-6" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle">2018<span class="marginnote">Spinu, Vitalie, Garrett Grolemund, and Hadley Wickham. 2018. <em>Lubridate: Make Dealing with Dates a Little Easier</em>. <a href="https://CRAN.R-project.org/package=lubridate">https://CRAN.R-project.org/package=lubridate</a>.</span>)</span> to extract the month and day from the ‘first_day’
+dates, and then <code>paste</code> (from base R) pastes these together with “Week of”.
+Finally, the <code>as_factor</code> and <code>fct_reorder</code> calls (both from <code>forcats</code>, which you
+also should have loaded if you’ve followed the examples in order) get this new
+column in the right order, so that the facets show up in temporal order rather
+than alphabetical.</p>
+<p>Once you’ve made these changes to the ‘daily_fatalities’ tibble, you should get the
+final version of the plot when you re-run the plotting code used in the last step,
+getting Figure <a href="2-2-building-a-plot.html#fig:step4a">2.14</a>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+
+daily_fatalities <span class="op">%&lt;&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(week) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">first_day =</span> <span class="kw">first</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">week_label =</span> <span class="kw">paste</span>(<span class="st">&quot;Week of&quot;</span>, 
+                            <span class="kw">month</span>(first_day, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>), 
+                            <span class="kw">day</span>(first_day))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">week_label =</span> <span class="kw">as_factor</span>(week_label),
+         <span class="dt">week_label =</span> <span class="kw">fct_reorder</span>(week_label, week, <span class="dt">.fun =</span> min))
+
+<span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weekday, <span class="dt">y =</span> fatals), <span class="dt">fill =</span> <span class="st">&quot;skyblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>week_label, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;# of fatalities&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Motor vehicle fatalities in Florida by weekday, 2019&quot;</span>)</code></pre>
+<div class="figure"><span id="fig:step4a"></span>
+<p class="caption marginnote shownote">
+Figure 2.14: To create better facet labels, you can first make some changes to the dataset and then facet by the newly created ‘week_label’ column rather than the ‘week’ column.
+</p>
+<img src="navy_public_health_files/figure-html/step4a-1.png" alt="To create better facet labels, you can first make some changes to the dataset and then facet by the newly created 'week_label' column rather than the 'week' column." width="576"  />
+</div>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="2-1-plot-elements.html"><button class="btn btn-default">Previous</button></a>
+<a href="2-3-saving-plots.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>
