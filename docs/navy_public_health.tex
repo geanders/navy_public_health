@@ -1257,39 +1257,96 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \hypertarget{interact}{%
 \chapter{Interact}\label{interact}}
 
+For a few years now, you could use Javascript to create interactive plots to include on
+websites. These plots respond to actions from your mouse. When you scroll over a point,
+for example, some information about the point might show up, or when you click on a marker
+on a map, you might get a pop-up box with some information.
+
+More recently, R packages have been developed that allow you to create these interactive
+visualizations directly from R. Many of these packages were developed by members of the
+R Studio team in a collection of packages called \texttt{htmlwidgets} \citep{R-htmlwidgets}. Once you've
+mastered how to plot in R with \texttt{ggplot2} and how to map with \texttt{sf}, some of these packages
+are almost embarrasingly easy to use to create really fantastic data visualizations.
+
+You can use these interactive visualizations on your own computer to explore your
+data. You can also include them in webpages and post them for others to see. In the
+``Report'' section, I'll talk more about how you can create reports using R to share or post as
+webpages. While you're developing a visualization, you'll be able to check it out in
+the ``Viewer'' pane in R Studio, just like you can see plots in the ``Plots'' pane.
+
 \hypertarget{dt-datatables}{%
 \section{DT: Datatables}\label{dt-datatables}}
+
+One of the easiest interactive visualizations to create in R is an interactive datatable.
+You can scroll down to see one example. Explore this table a little bit. You'll
+see that you can click the numbers at the bottom right of the table to page through all
+the data in the table. You can use the arrows beside the column names to rearrange
+the rows based on the values they have in a column. With the search box in the top right,
+you can try searching for specific elements in the data.\footnote{As an example, try searching for
+  ``2017-09-10'' in the search box to get the accidents that occurred on the day of Hurricane
+  Irma's Florida landfall, September 10, 2017.}
+
+You can build this table using the \texttt{DT} package in the \texttt{htmlwidgets} family of packages.
+First, you need to read in the data you'd like to print. We're using one of the datasets
+from the ``Plot'' section, so you can read it in the same way you did in the previous section
+(if you already have \texttt{readr} and \texttt{magrittr} loaded from working on a previous section,
+you can skip those lines):
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readr)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(magrittr)}
+
 \NormalTok{fl_accidents <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/fl_accidents.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+Now, to print this dataframe as an interactive data table, just run the data frame through
+the \texttt{datatable} function.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(DT)}
-\KeywordTok{datatable}\NormalTok{(fl_accidents)}
+\NormalTok{fl_accidents }\OperatorTok{%>%}\StringTok{ }\KeywordTok{datatable}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-20-1}
+\includegraphics{navy_public_health_files/figure-latex/dt_example-1}
+
+In your R Studio session, the interactive table should show up
+in the ``Viewer'' pane. If you want to see it in a separate window, click on the ``Zoom'' button,
+and it will open the table in a separate window that you can rescale.
+
+You can do a lot of customizations through the \texttt{datatable} call. For example, you can
+add a caption to the table, change the appearance using the \texttt{class} parameter, and
+use clearer names for the columns. Try the next call to see an example of how these
+changes can change the table's appearance:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{datatable}\NormalTok{(fl_accidents, }\DataTypeTok{class =} \StringTok{"compact"}\NormalTok{, }\DataTypeTok{caption =} \StringTok{"Fatal motor vehicle accidents in Florida the week of Hurricane Irma"}\NormalTok{, }
+\KeywordTok{datatable}\NormalTok{(fl_accidents, }\DataTypeTok{class =} \StringTok{"compact"}\NormalTok{, }\DataTypeTok{caption =} \StringTok{"Example of an interactive data table. Each observation (row) is the information for one of the fatal motor vehicle accidents in Florida the week of Hurricane Irma's landfall, with columns for the county where the accident occurred, the date of the accident, and the number of fatalities."}\NormalTok{, }
     \DataTypeTok{colnames =} \KeywordTok{c}\NormalTok{(}\StringTok{"County FIPS"}\NormalTok{, }\StringTok{"Date"}\NormalTok{, }\StringTok{"Latitude"}\NormalTok{, }
         \StringTok{"Longitude"}\NormalTok{, }\StringTok{"# fatalities"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-21-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-20-1}
+
+To get more details on all the options available, see the helpfile for \texttt{datatable} (run \texttt{?datatable}) or read through the \href{}{online tutorial} for the package.
 
 \hypertarget{plotly}{%
 \section{Plotly}\label{plotly}}
+
+One of the easiest ways to make a \texttt{ggplot} plot interactive is with the \texttt{plotly} package.
+If you went through the ``Prerequisites'', you should have installed that package to your
+computer. This package has a function, \texttt{ggplotly}, that allows you to make a \texttt{ggplot}
+plot interactive with a single line of code.
+
+For example, try it out with the Florida motor vehicle fatality time series from the ``Plot''
+section.\footnote{To run this code, you should make sure you've run the code in the ``Plot'' section
+  in your current R session. If the ``Environment'' pane of your RStudio session includes
+  ``daily\_fatalities'' in its list, you should be okay.} First, save the plot to an object
+called \texttt{fatality\_plot} using the gets arrow:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1301,11 +1358,23 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \StringTok{    }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Motor vehicle fatalities in Florida"}\NormalTok{, }
         \DataTypeTok{subtitle =} \StringTok{"Late summer / early fall of 2019"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
 \StringTok{    }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+As a reminder, when you assign a plot object a name, it won't print out, but you can print
+it out anytime you want by calling the name you assigned it (Figure \ref{fig:plotly1}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{fatality_plot}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
+\begin{figure*}
+\includegraphics{navy_public_health_files/figure-latex/plotly1-1} \end{figure*}
+
+To use plotly to make this plot interactive, all you need to do is run this \texttt{ggplot} object
+through the \texttt{plotly} function. You can use the \textbf{pipe operator} (\texttt{\%\textgreater{}\%}) to do that:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1315,22 +1384,33 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \end{Shaded}
 
 \begin{figure*}
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1} \end{figure*}
+\includegraphics{navy_public_health_files/figure-latex/plotly2-1} \end{figure*}
+
+Try scrolling over Figure \ref{fig:plotly2}: when you scroll over a point, a pop-up should
+appear with some information about the plot. You should also have some buttons on the top
+right of the plot that allow you to zoom in and out, to download the figure as an image
+file (png), and to do a few other things.
+
+This is just the tip of the iceburg for what you can do in terms of making interactive plots
+in R. I show one more example of a package for creating interactive plots (\texttt{leaflet}, for
+creating interactive maps), and the I'll give you a lot of resources at the end of this
+section for where you can find out more about how to make interactive plots using R.
 
 \hypertarget{leaflet}{%
 \section{Leaflet}\label{leaflet}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(magrittr)}
 \KeywordTok{library}\NormalTok{(leaflet)}
+\KeywordTok{library}\NormalTok{(sf)}
+
 \NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(}\DataTypeTok{coords =} \KeywordTok{c}\NormalTok{(}\StringTok{"longitud"}\NormalTok{, }
     \StringTok{"latitude"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_sf}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1359,7 +1439,7 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-25-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1374,10 +1454,33 @@ of using it, so it's worth googling something like ``blog post map r sf''.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-26-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
 
 \hypertarget{learn-more-2}{%
 \section{Learn more}\label{learn-more-2}}
+
+Many of the packages for these types of interactive graphics were developed by people
+at R Studio, and they have \href{https://www.htmlwidgets.org/}{an excellent website}
+with more information about the
+\texttt{htmlwidgets} family. This website links through to tutorials for each package, including
+\texttt{DT}, \texttt{plotly}, and \texttt{leaflet}, with lots of examples and the code behind them.
+This website also has a \href{http://gallery.htmlwidgets.org/}{gallery}, with great examples.
+
+Lots of people are using \texttt{htmlwidgets} to create interesting visualizations through R,
+and they will often blog about what they did. If you want more examples of how to
+create visualizations with a certain package (e.g., \texttt{leaflet}), it's worth googling
+something like ``blog post R leaflet example''.\footnote{Some of the \texttt{htmlwidgets} R packages
+  have the same name as the Javascript library they're associated with, so be sure to
+  include ``R'' in your Google search, so you'll find examples in the right programming
+  language.}
+
+Once you've worked some with the \texttt{htmlwidgets} packages, you should also check out
+\href{https://shiny.rstudio.com/}{Shiny}. Shiny allows you to create much more complex
+interactive graphics in R---actual
+web applications, where the R code to create the visualization is re-run when the user
+interacts with elements of the visualization. To get an idea of the things you can
+create with Shiny, you should check out the \href{https://shiny.rstudio.com/gallery/}{Shiny gallery}
+and \href{https://www.showmeshiny.com/}{Show Me Shiny}.
 
 \hypertarget{report}{%
 \chapter{Report}\label{report}}

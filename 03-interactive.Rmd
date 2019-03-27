@@ -1,29 +1,86 @@
 # Interact
 
+For a few years now, you could use Javascript to create interactive plots to include on 
+websites. These plots respond to actions from your mouse. When you scroll over a point, 
+for example, some information about the point might show up, or when you click on a marker
+on a map, you might get a pop-up box with some information. 
+
+More recently, R packages have been developed that allow you to create these interactive
+visualizations directly from R. Many of these packages were developed by members of the 
+R Studio team in a collection of packages called `htmlwidgets` [@R-htmlwidgets]. Once you've
+mastered how to plot in R with `ggplot2` and how to map with `sf`, some of these packages
+are almost embarrasingly easy to use to create really fantastic data visualizations. 
+
+You can use these interactive visualizations on your own computer to explore your 
+data. You can also include them in webpages and post them for others to see. In the
+"Report" section, I'll talk more about how you can create reports using R to share or post as
+webpages. While you're developing a visualization, you'll be able to check it out in 
+the "Viewer" pane in R Studio, just like you can see plots in the "Plots" pane. 
+
 ## DT: Datatables
+
+One of the easiest interactive visualizations to create in R is an interactive datatable. 
+You can scroll down to see one example. Explore this table a little bit. You'll 
+see that you can click the numbers at the bottom right of the table to page through all 
+the data in the table. You can use the arrows beside the column names to rearrange
+the rows based on the values they have in a column. With the search box in the top right, 
+you can try searching for specific elements in the data.^[As an example, try searching for
+"2017-09-10" in the search box to get the accidents that occurred on the day of Hurricane
+Irma's Florida landfall, September 10, 2017.]
+
+You can build this table using the `DT` package in the `htmlwidgets` family of packages. 
+First, you need to read in the data you'd like to print. We're using one of the datasets
+from the "Plot" section, so you can read it in the same way you did in the previous section
+(if you already have `readr` and `magrittr` loaded from working on a previous section,
+you can skip those lines):
 
 ```{r message = FALSE}
 library(readr)
-library(dplyr)
-library(sf)
+library(magrittr)
+
 fl_accidents <- read_csv("data/fl_accidents.csv") 
 ```
 
-```{r}
+Now, to print this dataframe as an interactive data table, just run the data frame through
+the `datatable` function. 
+
+```{r dt_example, caption = "Example of an interactive data table. Each observation (row) is the information for one of the fatal motor vehicle accidents in Florida the week of Hurricane Irma's landfall, with columns for the county where the accident occurred, the date of the accident, and the number of fatalities."}
 library(DT)
-datatable(fl_accidents)
+fl_accidents %>% 
+  datatable()
 ```
 
+In your R Studio session, the interactive table should show up 
+in the "Viewer" pane. If you want to see it in a separate window, click on the "Zoom" button, 
+and it will open the table in a separate window that you can rescale. 
+
+You can do a lot of customizations through the `datatable` call. For example, you can 
+add a caption to the table, change the appearance using the `class` parameter, and 
+use clearer names for the columns. Try the next call to see an example of how these
+changes can change the table's appearance:
 
 ```{r}
 datatable(fl_accidents, 
           class = "compact", 
-          caption = "Fatal motor vehicle accidents in Florida the week of Hurricane Irma",
+          caption = "Example of an interactive data table. Each observation (row) is the information for one of the fatal motor vehicle accidents in Florida the week of Hurricane Irma's landfall, with columns for the county where the accident occurred, the date of the accident, and the number of fatalities.",
           colnames = c("County FIPS", "Date",
                        "Latitude", "Longitude", "# fatalities"))
 ```
 
+To get more details on all the options available, see the helpfile for `datatable` (run `?datatable`) or read through the [online tutorial]() for the package.
+
 ## Plotly
+
+One of the easiest ways to make a `ggplot` plot interactive is with the `plotly` package. 
+If you went through the "Prerequisites", you should have installed that package to your 
+computer. This package has a function, `ggplotly`, that allows you to make a `ggplot`
+plot interactive with a single line of code. 
+
+For example, try it out with the Florida motor vehicle fatality time series from the "Plot" 
+section.^[To run this code, you should make sure you've run the code in the "Plot" section
+in your current R session. If the "Environment" pane of your RStudio session includes 
+"daily_fatalities" in its list, you should be okay.] First, save the plot to an object
+called `fatality_plot` using the gets arrow:
 
 ```{r}
 fatality_plot <- ggplot(data = daily_fatalities) + 
@@ -35,21 +92,40 @@ fatality_plot <- ggplot(data = daily_fatalities) +
   ggtitle("Motor vehicle fatalities in Florida",
           subtitle = "Late summer / early fall of 2019") +
   theme(legend.position = "bottom")
+```
+
+As a reminder, when you assign a plot object a name, it won't print out, but you can print
+it out anytime you want by calling the name you assigned it (Figure \@ref(fig:plotly1)).
+
+```{r plotly1, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3, caption = "Example of printing out a ggplot object by calling its assigned name."}
 fatality_plot
 ```
 
-```{r message = FALSE, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3}
+To use plotly to make this plot interactive, all you need to do is run this `ggplot` object
+through the `plotly` function. You can use the **pipe operator** (`%>%`) to do that: 
+
+```{r plotly2, message = FALSE, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3}
 library(plotly)
 fatality_plot %>% 
   ggplotly()
 ```
 
+Try scrolling over Figure \@ref(fig:plotly2): when you scroll over a point, a pop-up should
+appear with some information about the plot. You should also have some buttons on the top 
+right of the plot that allow you to zoom in and out, to download the figure as an image 
+file (png), and to do a few other things. 
+
+This is just the tip of the iceburg for what you can do in terms of making interactive plots
+in R. I show one more example of a package for creating interactive plots (`leaflet`, for 
+creating interactive maps), and the I'll give you a lot of resources at the end of this 
+section for where you can find out more about how to make interactive plots using R. 
 
 ## Leaflet
 
 ```{r}
-library(magrittr)
 library(leaflet)
+library(sf)
+
 fl_accidents %<>% 
   st_as_sf(coords = c("longitud", "latitude")) %>% 
   st_sf(crs = 4326)
@@ -88,3 +164,26 @@ leaflet() %>%
 
 
 ## Learn more
+
+Many of the packages for these types of interactive graphics were developed by people
+at R Studio, and they have [an excellent website](https://www.htmlwidgets.org/) 
+with more information about the 
+`htmlwidgets` family. This website links through to tutorials for each package, including
+`DT`, `plotly`, and `leaflet`, with lots of examples and the code behind them. 
+This website also has a [gallery](http://gallery.htmlwidgets.org/), with great examples.
+
+Lots of people are using `htmlwidgets` to create interesting visualizations through R, 
+and they will often blog about what they did. If you want more examples of how to 
+create visualizations with a certain package (e.g., `leaflet`), it's worth googling
+something like "blog post R leaflet example".^[Some of the `htmlwidgets` R packages 
+have the same name as the Javascript library they're associated with, so be sure to 
+include "R" in your Google search, so you'll find examples in the right programming
+language.]
+
+Once you've worked some with the `htmlwidgets` packages, you should also check out
+[Shiny](https://shiny.rstudio.com/). Shiny allows you to create much more complex 
+interactive graphics in R---actual
+web applications, where the R code to create the visualization is re-run when the user
+interacts with elements of the visualization. To get an idea of the things you can 
+create with Shiny, you should check out the [Shiny gallery](https://shiny.rstudio.com/gallery/)
+and [Show Me Shiny](https://www.showmeshiny.com/).
