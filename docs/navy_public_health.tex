@@ -1279,7 +1279,9 @@ the ``Viewer'' pane in R Studio, just like you can see plots in the ``Plots'' pa
 \section{DT: Datatables}\label{dt-datatables}}
 
 One of the easiest interactive visualizations to create in R is an interactive datatable,
-which you can create using the \texttt{DT} package.
+which you can create using the \texttt{DT} package \citep{R-DT}.
+If you went through the ``Prerequisites'', you should have installed that package to your
+computer.
 You can scroll down to see one example. Explore this table a little bit. You'll
 see that you can click the numbers at the bottom right of the table to page through all
 the data in the table. You can use the arrows beside the column names to rearrange
@@ -1322,7 +1324,8 @@ in the ``Viewer'' pane. If you want to see it in a separate window, click on the
 and it will open the table in a separate window that you can rescale.
 
 You can do a lot of customization through the \texttt{datatable} call. For example, you can
-add a caption to the table, change the appearance using the \texttt{class} parameter, and
+add a caption to the table, change the appearance using the \texttt{class} parameter, change the
+table width, and
 use clearer names for the columns. Try the following example code to see an example of how these
 changes can change the table's appearance:
 
@@ -1330,7 +1333,7 @@ changes can change the table's appearance:
 \begin{Highlighting}[]
 \KeywordTok{datatable}\NormalTok{(fl_accidents, }\DataTypeTok{class =} \StringTok{"compact"}\NormalTok{, }\DataTypeTok{caption =} \StringTok{"Example of an interactive data table. Each observation (row) is the information for one of the fatal motor vehicle accidents in Florida the week of Hurricane Irma's landfall, with columns for the county where the accident occurred, the date of the accident, and the number of fatalities."}\NormalTok{, }
     \DataTypeTok{colnames =} \KeywordTok{c}\NormalTok{(}\StringTok{"County FIPS"}\NormalTok{, }\StringTok{"Date"}\NormalTok{, }\StringTok{"Latitude"}\NormalTok{, }
-        \StringTok{"Longitude"}\NormalTok{, }\StringTok{"# fatalities"}\NormalTok{), }\DataTypeTok{width =} \DecValTok{500}\NormalTok{)}
+        \StringTok{"Longitude"}\NormalTok{, }\StringTok{"# fatalities"}\NormalTok{), }\DataTypeTok{width =} \DecValTok{800}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1341,7 +1344,7 @@ To get more details on all the options available, see the helpfile for \texttt{d
 \hypertarget{plotly}{%
 \section{Plotly}\label{plotly}}
 
-One of the easiest ways to make a \texttt{ggplot} plot interactive is with the \texttt{plotly} package.
+One of the easiest ways to make a \texttt{ggplot} plot interactive is with the \texttt{plotly} package \citep{R-plotly}.
 If you went through the ``Prerequisites'', you should have installed that package to your
 computer. This package has a function, \texttt{ggplotly}, that allows you to make a \texttt{ggplot}
 plot interactive with a single line of code.
@@ -1349,7 +1352,8 @@ plot interactive with a single line of code.
 For example, try it out with the Florida motor vehicle fatality time series from the ``Plot''
 section.\footnote{To run this code, you should make sure you've run the code in the ``Plot'' section
   in your current R session. If the ``Environment'' pane of your RStudio session includes
-  ``daily\_fatalities'' in its list, you should be okay.} First, save the plot to an object
+  ``daily\_fatalities'' in its list, you should be okay. The code itself should look familiar from
+  the ``Plot'' section.} First, save the plot to an object
 called \texttt{fatality\_plot} using the gets arrow:
 
 \begin{Shaded}
@@ -1377,8 +1381,9 @@ it out anytime you want by calling the name you assigned it (Figure \ref{fig:plo
 \begin{figure*}
 \includegraphics{navy_public_health_files/figure-latex/plotly1-1} \end{figure*}
 
-To use plotly to make this plot interactive, all you need to do is run this \texttt{ggplot} object
-through the \texttt{plotly} function. You can use the \textbf{pipe operator} (\texttt{\%\textgreater{}\%}) to do that:
+To use plotly to make this plot interactive, all you need to do is load the \texttt{plotly} package and
+run this \texttt{ggplot} object
+through its \texttt{ggplotly} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1403,22 +1408,52 @@ section for where you can find out more about how to make interactive plots usin
 \hypertarget{leaflet}{%
 \section{Leaflet}\label{leaflet}}
 
+One of my favorite packages for interactive plotting in R is the \texttt{leaflet} package \citep{R-leaflet}.
+This package allows you to create interactive maps very similar to the maps you see on Google maps.
+As the background, it pulls in tiles from a collection of tiles at different zoom levels, allowing
+you to zoom in and out and pan around the resulting map.
+
+You can create a \texttt{leaflet} map using data that's in an \texttt{sf} class, which we covered in the ``Map''
+section. For example, you can use the following code to read in the data, convert it to an \texttt{sf}
+object by specifying the columns with geographical information, and set projection information
+using the \texttt{st\_sf} function:
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(leaflet)}
 \KeywordTok{library}\NormalTok{(sf)}
 
 \NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(}\DataTypeTok{coords =} \KeywordTok{c}\NormalTok{(}\StringTok{"longitud"}\NormalTok{, }
     \StringTok{"latitude"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_sf}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now you can create the map with the data. The code should look similar to \texttt{ggplot2} code for
+plotting, although notice that it uses a pipe operator (\texttt{\%\textgreater{}\%}) rather than a plus sign (\texttt{+}) to
+add on the layers. The \texttt{leaflet} call creates a leaflet object, and the \texttt{addTiles} function adds in
+the background tiles.\footnote{In this example, we're using the default background tiles. You can pick from
+  a variety of styles for background tiles, however. See the online documentation for \texttt{leaflet},
+  listed later in this section, for more.} You can add markers showing the location of each accident
+using the \texttt{addMarkers} call, specifying the dataset to use with the \texttt{data} parameter:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(leaflet)}
 \KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1}
+
+The result is an interactive map, with a marker at the location of each accident. Try using the
+plus and minus buttons to zoom in and out, and click on the map to pan around the map.
+
+There is a lot you can do to make the map more interesting. For example, you can add another layer
+to the map with the track of Hurricane Irma. You can read that track in from a shapefile using
+\texttt{st\_read}, as described in the ``Map'' section, transforming the projection to map the projection
+of the accident data using \texttt{st\_transform}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(purrr)}
 \NormalTok{irma_track <-}\StringTok{ }\KeywordTok{st_read}\NormalTok{(}\StringTok{"data/al112017_best_track"}\NormalTok{, }
     \DataTypeTok{layer =} \StringTok{"al112017_lin"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_transform}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \end{Highlighting}
@@ -1434,6 +1469,14 @@ section for where you can find out more about how to make interactive plots usin
 ## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_defs
 \end{verbatim}
 
+This spatial object is a type known as a ``polyline'', so you can add it to the \texttt{leaflet} map with a
+layer called with \texttt{addPolylines}. In this example, I've made the line red with the option
+\texttt{color\ =\ "red"}. The \texttt{leaflet} plot will automatically zoom to fit the data you're plotting---since
+the hurricane started in the tropics and went past Florida, its range is much larger than Florida.
+To have the \texttt{leaflet} plot still open zoomed in to Florida, you can use the \texttt{fitBounds} call to
+specify the opening view of the map. Finally, with the call \texttt{popup\ =\ \textasciitilde{}\ date}, we're specifying that
+the each marker should show the date of the accident when you click on it.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{fitBounds}\NormalTok{(}\DataTypeTok{lng1 =} \DecValTok{-88}\NormalTok{, }
@@ -1443,11 +1486,22 @@ section for where you can find out more about how to make interactive plots usin
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-25-1}
+
+The ``pop-ups'' for the markers can be developed to be pretty fancy. You can use \texttt{paste} to paste
+together elements from the data with other words to create nice labels. You can also format these, using
+HTML formating.\footnote{With HTML formatting, you use special tags to specify formatting like bold font
+  or weblinks. For example, to write ``\textbf{bold} is in bold'' with HTML, you would write
+  ``\texttt{\textless{}b\textgreater{}bold\textless{}b\textgreater{}\ is\ in\ bold}''.}
+
+Try this out in the following code. After you run this, the \texttt{leaflet} map should have pop-ups that
+give both the date and the number of the fatalities, on separate lines (the \texttt{\textless{}br\textgreater{}} creates a line
+break). First, add a column to \texttt{fl\_accidents} called \texttt{popup}, with the full (HTML formatted) text
+you want to include in the labels. Then, in the \texttt{addMarkers} call, specify that this column should
+be used for the pop-up with \texttt{popup\ =\ \textasciitilde{}\ popup}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(htmltools)}
 \NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{popup =} \KeywordTok{paste}\NormalTok{(}\StringTok{"<b>Date:</b>"}\NormalTok{, }
 \NormalTok{    date, }\StringTok{"<br/>"}\NormalTok{, }\StringTok{"<b># fatalities:</b>"}\NormalTok{, fatals))}
 
@@ -1458,7 +1512,11 @@ section for where you can find out more about how to make interactive plots usin
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-26-1}
+
+The \texttt{leaflet} package has extensive \href{https://rstudio.github.io/leaflet/}{online documentation}.
+Browse through the sections of this online documentation to get a lot more ideas of how you can
+create and customize interesting interactive maps with R.
 
 \hypertarget{learn-more-2}{%
 \section{Learn more}\label{learn-more-2}}

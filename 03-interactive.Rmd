@@ -132,23 +132,62 @@ section for where you can find out more about how to make interactive plots usin
 
 ## Leaflet
 
+One of my favorite packages for interactive plotting in R is the `leaflet` package [@R-leaflet].
+This package allows you to create interactive maps very similar to the maps you see on Google maps. 
+As the background, it pulls in tiles from a collection of tiles at different zoom levels, allowing 
+you to zoom in and out and pan around the resulting map. 
+
+You can create a `leaflet` map using data that's in an `sf` class, which we covered in the "Map"
+section. For example, you can use the following code to read in the data, convert it to an `sf` 
+object by specifying the columns with geographical information, and set projection information 
+using the `st_sf` function:
+
 ```{r}
-library(leaflet)
 library(sf)
 
 fl_accidents %<>% 
   st_as_sf(coords = c("longitud", "latitude")) %>% 
   st_sf(crs = 4326)
+```
+
+Now you can create the map with the data. The code should look similar to `ggplot2` code for 
+plotting, although notice that it uses a pipe operator (`%>%`) rather than a plus sign (`+`) to 
+add on the layers. The `leaflet` call creates a leaflet object, and the `addTiles` function adds in
+the background tiles.^[In this example, we're using the default background tiles. You can pick from 
+a variety of styles for background tiles, however. See the online documentation for `leaflet`, 
+listed later in this section, for more.] You can add markers showing the location of each accident
+using the `addMarkers` call, specifying the dataset to use with the `data` parameter:
+
+```{r}
+library(leaflet)
 leaflet() %>% 
   addTiles() %>% 
   addMarkers(data = fl_accidents)
 ```
 
+The result is an interactive map, with a marker at the location of each accident. Try using the 
+plus and minus buttons to zoom in and out, and click on the map to pan around the map. 
+
+There is a lot you can do to make the map more interesting. For example, you can add another layer
+to the map with the track of Hurricane Irma. You can read that track in from a shapefile using
+`st_read`, as described in the "Map" section, transforming the projection to map the projection
+of the accident data using `st_transform`. 
+
 ```{r}
-library(purrr)
 irma_track <- st_read("data/al112017_best_track", 
                       layer = "al112017_lin") %>% 
   st_transform(crs = 4326)
+```
+
+This spatial object is a type known as a "polyline", so you can add it to the `leaflet` map with a 
+layer called with `addPolylines`. In this example, I've made the line red with the option
+`color = "red"`. The `leaflet` plot will automatically zoom to fit the data you're plotting---since 
+the hurricane started in the tropics and went past Florida, its range is much larger than Florida. 
+To have the `leaflet` plot still open zoomed in to Florida, you can use the `fitBounds` call to 
+specify the opening view of the map. Finally, with the call `popup = ~ date`, we're specifying that
+the each marker should show the date of the accident when you click on it. 
+
+```{r}
 leaflet() %>% 
   addTiles() %>%
   fitBounds(lng1 = -88, lng2 = -80, lat1 = 24.5, lat2 = 31.5) %>% 
@@ -157,8 +196,19 @@ leaflet() %>%
   addPolylines(data = irma_track, color = "red")
 ```
 
+The "pop-ups" for the markers can be developed to be pretty fancy. You can use `paste` to paste 
+together elements from the data with other words to create nice labels. You can also format these, using
+HTML formating.^[With HTML formatting, you use special tags to specify formatting like bold font
+or weblinks. For example, to write "**bold** is in bold" with HTML, you would write 
+"`<b>bold<b> is in bold`".]
+
+Try this out in the following code. After you run this, the `leaflet` map should have pop-ups that
+give both the date and the number of the fatalities, on separate lines (the `<br>` creates a line
+break). First, add a column to `fl_accidents` called `popup`, with the full (HTML formatted) text 
+you want to include in the labels. Then, in the `addMarkers` call, specify that this column should
+be used for the pop-up with `popup = ~ popup`.
+
 ```{r}
-library(htmltools)
 fl_accidents %<>% 
   mutate(popup = paste("<b>Date:</b>", date, 
                        "<br/>",
@@ -172,6 +222,9 @@ leaflet() %>%
   addPolylines(data = irma_track, color = "red")
 ```
 
+The `leaflet` package has extensive [online documentation](https://rstudio.github.io/leaflet/). 
+Browse through the sections of this online documentation to get a lot more ideas of how you can
+create and customize interesting interactive maps with R.
 
 ## Learn more
 
