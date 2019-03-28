@@ -150,29 +150,87 @@ To try out these examples, you need some set-up:
 \item
   Install some R packages
 \item
-  Create an R Project for the examples
-\item
-  Download the example data and save it in the R Project
+  Download example R Project
 \end{enumerate}
 
 This section will walk you through each step, explaining both \emph{how} and
 \emph{why} to do the step. Click on the \textbf{Next} button (or navigate using the
 links at the top of the page) to continue.
 
-\hypertarget{download-r}{%
-\section{Download R}\label{download-r}}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Download R
+\end{enumerate}
 
-\hypertarget{download-rstudio}{%
-\section{Download RStudio}\label{download-rstudio}}
+R is free and open-source software. You can download a copy for just about any
+operating system at the {]}Comprehensive R Archive Network (CRAN){]} (\url{https://cran.r-project.org/}).
+Look for the links on this page to ``Download for \ldots{}'' and your operating system.\footnote{If your computer has restrictions on what you can download, you may need to take to your
+  system administrator or IT team to discuss whether you can download and install R and, if
+  so, how. In that case, you may also need to talk with them about a strategy for installing
+  R packages, as well.}
 
-\hypertarget{install-some-r-packages}{%
-\section{Install some R packages}\label{install-some-r-packages}}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Download RStudio
+\end{enumerate}
 
-\hypertarget{create-an-r-project}{%
-\section{Create an R Project}\label{create-an-r-project}}
+You do not have to have RStudio\footnote{In this section, I'm referring to RStudio, the software. It is
+  produced by a company that is also called ``RStudio''. RStudio, the company, includes a team of some
+  of the best and most prolific R programmers currently contributing packages to extend R. A lot of
+  the packages covered in this booklet were created and are maintained by members of the RStudio team.}
+to run R, but it makes the experience much nicer. I also
+think it's much easier to learn R when using RStudio to run it rather than using R by itself.
 
-\hypertarget{download-example-data}{%
-\section{Download example data}\label{download-example-data}}
+RStudio is an \textbf{Integrated Development Environment (IDE)}\footnote{\textbf{Integrated Development
+  Environment (IDE).} A program that provides a helpful interface for developing code, often
+  geared to a specific programming language. It typically includes tools and a visual
+  set-up for the programmer's convenience.}
+You should download it after you have downloaded R. You can download it
+\href{https://www.rstudio.com/products/rstudio/\#Desktop}{here}. You want the Desktop, open source
+edition. Download this and install it on your computer as you would any other software package
+from a website.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Install some R packages
+\end{enumerate}
+
+When you downloaded the R software from CRAN, you downloaded what's called \textbf{base R}. This
+is the ``engine'' to run the heart of R, plus a few key extension packages. There are now
+several thousand packages available for R. These packages extend the core functionality of
+R, and we'll be using a lot of these extra packages in this booklet.
+
+When you need to use an R package that did not come with base R (most of them), you will first
+need to \textbf{install} it to your computer. This can be done from R with the \texttt{install.packages}
+function. This installs a package from an online repository to your computer, saving the code
+in a special location that R can find. Since this function is downloading code from online,
+your computer needs to have an internet connection when you run \texttt{install.packages}, or you'll
+get an error.
+
+This booklet uses a number of R packages beyond base R. To install all the packages that you'll
+need, run the following code in your version of R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Download example R Project
+\end{enumerate}
 
 \hypertarget{plot}{%
 \chapter{Plot}\label{plot}}
@@ -916,7 +974,7 @@ However, now you can print the plot anytime you want by calling the object:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-9-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-10-1}
 
 To save this plot to a file, you can use the \texttt{ggsave} function. This function can save
 the plot in several different formats (e.g., pdf, jpeg, png, svg). Further, it allows you
@@ -1248,7 +1306,7 @@ you might end up with a map that's ``stretched'' out in either the x- or y-direc
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-20-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-21-1}
 
 You can add other \texttt{sf} layers to this map, to add points for the location of each fatal accident
 and a line for the track of Hurricane Irma. Since the track for Irma began much further south than
@@ -1267,7 +1325,7 @@ default size.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-21-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
 
 You can do anything to this map that you would to a regular \texttt{ggplot} object. For example, instead of
 using color to show the date of an accident, you could use faceting to add a small map of each date
@@ -1289,7 +1347,7 @@ changing the background color and taking out the axis ticks and labels.
 \end{Shaded}
 
 \begin{figure*}
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1} \end{figure*}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1} \end{figure*}
 
 \hypertarget{learn-more-1}{%
 \section{Learn more}\label{learn-more-1}}
@@ -1305,7 +1363,8 @@ is currently available online and will be available in print sometime in 2019.
 
 Both these sources go in depth to describe the \texttt{sf} package and how to use it. If you want
 other examples of using the package, many people have recently written blog posts with examples
-of using it, so it's worth googling something like ``blog post map r sf''.
+of using it, so it's worth googling something like ``blog post map r sf''. Finally, some of the
+\texttt{ggplot} references listed in the ``Plot'' section's ``Learn More'' include sections on mapping.
 
 \hypertarget{interact}{%
 \chapter{Interact}\label{interact}}
@@ -1390,7 +1449,7 @@ changes can change the table's appearance:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-25-1}
 
 To get more details on all the options available, see the helpfile for \texttt{datatable} (run \texttt{?datatable}) or read through the \href{}{online tutorial} for the package.
 
@@ -1495,7 +1554,7 @@ using the \texttt{addMarkers} call, specifying the dataset to use with the \text
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-27-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-28-1}
 
 The result is an interactive map, with a marker at the location of each accident. Try using the
 plus and minus buttons to zoom in and out, and click on the map to pan around the map.
@@ -1539,7 +1598,7 @@ the each marker should show the date of the accident when you click on it.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-29-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-30-1}
 
 The ``pop-ups'' for the markers can be developed to be pretty fancy. You can use \texttt{paste} to paste
 together elements from the data with other words to create nice labels. You can also format these, using
@@ -1565,7 +1624,7 @@ be used for the pop-up with \texttt{popup\ =\ \textasciitilde{}\ popup}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-30-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-31-1}
 
 The \texttt{leaflet} package has extensive \href{https://rstudio.github.io/leaflet/}{online documentation}.
 Browse through the sections of this online documentation to get a lot more ideas of how you can

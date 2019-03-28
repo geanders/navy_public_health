@@ -126,13 +126,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <div id="TOC">
 <ul>
-<li class="has-sub"><a href="index.html#prerequisites"><span class="toc-section-number">1</span> Prerequisites</a><ul>
-<li><a href="1-1-download-r.html#download-r"><span class="toc-section-number">1.1</span> Download R</a></li>
-<li><a href="1-2-download-rstudio.html#download-rstudio"><span class="toc-section-number">1.2</span> Download RStudio</a></li>
-<li><a href="1-3-install-some-r-packages.html#install-some-r-packages"><span class="toc-section-number">1.3</span> Install some R packages</a></li>
-<li><a href="1-4-create-an-r-project.html#create-an-r-project"><span class="toc-section-number">1.4</span> Create an R Project</a></li>
-<li><a href="1-5-download-example-data.html#download-example-data"><span class="toc-section-number">1.5</span> Download example data</a></li>
-</ul></li>
+<li><a href="index.html#prerequisites"><span class="toc-section-number">1</span> Prerequisites</a></li>
 <li class="has-sub"><a href="2-plot.html#plot"><span class="toc-section-number">2</span> Plot</a><ul>
 <li class="has-sub"><a href="2-1-plot-elements.html#plot-elements"><span class="toc-section-number">2.1</span> Plot elements</a><ul>
 <li><a href="2-1-plot-elements.html#example-data"><span class="toc-section-number">2.1.1</span> Example data</a></li>
@@ -197,15 +191,61 @@ health researchers and practitioners.</p>
 <li>Download R</li>
 <li>Download RStudio</li>
 <li>Install some R packages</li>
-<li>Create an R Project for the examples</li>
-<li>Download the example data and save it in the R Project</li>
+<li>Download example R Project</li>
 </ol>
 <p>This section will walk you through each step, explaining both <em>how</em> and
 <em>why</em> to do the step. Click on the <strong>Next</strong> button (or navigate using the
-links at the top of the page) to continue.</p> 
+links at the top of the page) to continue.</p>
+<ol style="list-style-type: decimal">
+<li>Download R</li>
+</ol>
+<p>R is free and open-source software. You can download a copy for just about any
+operating system at the ]Comprehensive R Archive Network (CRAN)] (<a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>).
+Look for the links on this page to “Download for …” and your operating system.<label for="tufte-sn-1" class="margin-toggle sidenote-number">1</label><input type="checkbox" id="tufte-sn-1" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">1</span> 
+If your computer has restrictions on what you can download, you may need to take to your
+system administrator or IT team to discuss whether you can download and install R and, if
+so, how. In that case, you may also need to talk with them about a strategy for installing
+R packages, as well.</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Download RStudio</li>
+</ol>
+<p>You do not have to have RStudio<label for="tufte-sn-2" class="margin-toggle sidenote-number">2</label><input type="checkbox" id="tufte-sn-2" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">2</span> In this section, I’m referring to RStudio, the software. It is
+produced by a company that is also called “RStudio”. RStudio, the company, includes a team of some
+of the best and most prolific R programmers currently contributing packages to extend R. A lot of
+the packages covered in this booklet were created and are maintained by members of the RStudio team.</span>
+to run R, but it makes the experience much nicer. I also
+think it’s much easier to learn R when using RStudio to run it rather than using R by itself.</p>
+<p>RStudio is an <strong>Integrated Development Environment (IDE)</strong><label for="tufte-sn-3" class="margin-toggle sidenote-number">3</label><input type="checkbox" id="tufte-sn-3" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">3</span> <strong>Integrated Development
+Environment (IDE).</strong> A program that provides a helpful interface for developing code, often
+geared to a specific programming language. It typically includes tools and a visual
+set-up for the programmer’s convenience.</span>
+You should download it after you have downloaded R. You can download it
+<a href="https://www.rstudio.com/products/rstudio/#Desktop">here</a>. You want the Desktop, open source
+edition. Download this and install it on your computer as you would any other software package
+from a website.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Install some R packages</li>
+</ol>
+<p>When you downloaded the R software from CRAN, you downloaded what’s called <strong>base R</strong>. This
+is the “engine” to run the heart of R, plus a few key extension packages. There are now
+several thousand packages available for R. These packages extend the core functionality of
+R, and we’ll be using a lot of these extra packages in this booklet.</p>
+<p>When you need to use an R package that did not come with base R (most of them), you will first
+need to <strong>install</strong> it to your computer. This can be done from R with the <code>install.packages</code>
+function. This installs a package from an online repository to your computer, saving the code
+in a special location that R can find. Since this function is downloading code from online,
+your computer needs to have an internet connection when you run <code>install.packages</code>, or you’ll
+get an error.</p>
+<p>This booklet uses a number of R packages beyond base R. To install all the packages that you’ll
+need, run the following code in your version of R:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>()</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Download example R Project</li>
+</ol>
+
 </div>
 <p style="text-align: center;">
-<a href="1-1-download-r.html"><button class="btn btn-default">Next</button></a>
+<a href="2-plot.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>

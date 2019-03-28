@@ -126,13 +126,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <div id="TOC">
 <ul>
-<li class="has-sub"><a href="index.html#prerequisites"><span class="toc-section-number">1</span> Prerequisites</a><ul>
-<li><a href="1-1-download-r.html#download-r"><span class="toc-section-number">1.1</span> Download R</a></li>
-<li><a href="1-2-download-rstudio.html#download-rstudio"><span class="toc-section-number">1.2</span> Download RStudio</a></li>
-<li><a href="1-3-install-some-r-packages.html#install-some-r-packages"><span class="toc-section-number">1.3</span> Install some R packages</a></li>
-<li><a href="1-4-create-an-r-project.html#create-an-r-project"><span class="toc-section-number">1.4</span> Create an R Project</a></li>
-<li><a href="1-5-download-example-data.html#download-example-data"><span class="toc-section-number">1.5</span> Download example data</a></li>
-</ul></li>
+<li><a href="index.html#prerequisites"><span class="toc-section-number">1</span> Prerequisites</a></li>
 <li class="has-sub"><a href="2-plot.html#plot"><span class="toc-section-number">2</span> Plot</a><ul>
 <li class="has-sub"><a href="2-1-plot-elements.html#plot-elements"><span class="toc-section-number">2.1</span> Plot elements</a><ul>
 <li><a href="2-1-plot-elements.html#example-data"><span class="toc-section-number">2.1.1</span> Example data</a></li>
@@ -183,7 +177,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.2</span> Basic mapping</h2>
 <p>If you don’t have <code>ggplot2</code> still loaded from the exercises in the “Plot” section, you’ll need to
 load it. Then, you can create a <code>ggplot</code> object and add an <code>sf</code> layer to it with <code>geom_sf</code>, specifying
-the <code>sf</code> data set to plot.<label for="tufte-sn-21" class="margin-toggle sidenote-number">21</label><input type="checkbox" id="tufte-sn-21" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">21</span> If you are
+the <code>sf</code> data set to plot.<label for="tufte-sn-24" class="margin-toggle sidenote-number">24</label><input type="checkbox" id="tufte-sn-24" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">24</span> If you are
 running this on a Mac, there’s a chance that you might get an error message about “polygon
 edge not found.” There seems to be a bug that’s still being resolved involving the default graphics
 driver on Macs with this package. If you get this error message, try fixing it by adding the
@@ -195,7 +189,7 @@ you might end up with a map that’s “stretched” out in either the x- or y-d
 <span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_counties) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">coord_sf</span>()</code></pre>
-<p><img src="navy_public_health_files/figure-html/unnamed-chunk-20-1.png" width="672"  /></p>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-21-1.png" width="672"  /></p>
 <p>You can add other <code>sf</code> layers to this map, to add points for the location of each fatal accident
 and a line for the track of Hurricane Irma. Since the track for Irma began much further south than
 Florida and continues north of Florida, you’ll need to set <code>xlim</code> and <code>ylim</code> in the <code>coord_sf</code> call
@@ -208,7 +202,7 @@ default size.</p>
 <span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_accidents, <span class="kw">aes</span>(<span class="dt">color =</span> date)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> irma_tracks, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">88</span>, <span class="dv">-80</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">24.5</span>, <span class="fl">31.5</span>)) </code></pre>
-<p><img src="navy_public_health_files/figure-html/unnamed-chunk-21-1.png" width="672"  /></p>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-22-1.png" width="672"  /></p>
 <p>You can do anything to this map that you would to a regular <code>ggplot</code> object. For example, instead of
 using color to show the date of an accident, you could use faceting to add a small map of each date
 using <code>facet_wrap</code>. This example code also adds some elements for the plot’s theme, including
@@ -225,7 +219,7 @@ changing the background color and taking out the axis ticks and labels.</p>
         <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.grid =</span> <span class="kw">element_line</span>(<span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="fl">0.8</span>))</code></pre>
 <div class="figure fullwidth">
-<img src="navy_public_health_files/figure-html/unnamed-chunk-22-1.png" alt=" " width="672"  />
+<img src="navy_public_health_files/figure-html/unnamed-chunk-23-1.png" alt=" " width="672"  />
 <p class="caption marginnote shownote">
 </p>
 </div>
