@@ -216,7 +216,10 @@ to customize (once you get the hang of it).</p>
 <div id="plot-elements" class="section level2">
 <h2><span class="header-section-number">2.1</span> Plot elements</h2>
 <p><span class="newthought"><strong>ggplot2</strong> is based on a</span> <strong>grammar of graphics</strong>. To get the hang
-of it, you’ll need to start thinking of visualizations in terms of separate elements.</p>
+of it, you’ll need to start thinking of visualizations in terms of separate elements.
+This section will set up some example data and then walk through examples of some of
+the elements of plots. Once you understand these, you can layer them together with
+<code>ggplot</code> code to obtain really nice visualizations.</p>
 <div id="example-data" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Example data</h3>
 <p>In my own research, I study the health effects of climate-related disasters, including
@@ -228,8 +231,8 @@ Traffic Safety Administration (under the US Department of Transportation) tracks
 the fatal motor vehicle accidents in the US through its Fatality Analysis Reporting
 System (FARS).<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
 <p>I downloaded and cleaned some data from this surveillance system. (In a later section,
-I’ll tell you more about how to do this cleaning yourself.) I’ve created a fairly
-simple dataset for us to use here. For each date in the weeks around the hurricane’s
+I’ll tell you more about how to do this cleaning.) I’ve created a fairly
+simple dataset for us to start with. For each date in the weeks around the hurricane’s
 landfall, it gives the total number of motor vehicle fatalities recorded in the
 state. The dataset also gives the week in the year for each date (the first week in
 January would be “1” for this measure, etc.), as well as the day of the week.
@@ -529,7 +532,7 @@ to create these two example plots.</p>
 <h3><span class="header-section-number">2.2.1</span> Reading data</h3>
 <p>First, you’ll need to bring the example data into your R session. If you followed
 the steps in the “Prerequisites” section, you should have a
-<strong>comma-separated file</strong><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> in a “data” subdirectory of your current working directory. Also, if you
+<strong>comma-separated file</strong><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> in a “data” subdirectory of the R Project you downloaded. Also, if you
 followed the steps in the “Prerequisites” section, you should have installed
 all the necessary R packages for this example.</p>
 <p>While there are functions in base R that import comma-separated files, I think the
@@ -583,7 +586,7 @@ can print out the start of the data by calling the object name by itself:</p>
 ##  9 2017-09-04    36 Monday         7
 ## 10 2017-09-05    36 Tuesday        8
 ## # … with 18 more rows</code></pre>
-<p>By default, <code>read_csv</code> read the data into a structure called a <strong>tibble</strong>,<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> and you
+<p>By default, <code>read_csv</code> reads the data into a structure called a <strong>tibble</strong>,<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> and you
 can see that the top of the print-out notes this. It also gives the dimensions
 (28 rows and 4 columns) and, under each column name, the class of the column.
 When you start plotting this data, you’ll use the dataframe’s object name
@@ -764,8 +767,9 @@ a function we can use to reorder the factor levels. The <strong>magrittr</strong
 cleaner: the pipe operator (<code>%&gt;%</code>) and the compound assignment pipe operator (<code>%&lt;&gt;%</code>).
 The <strong>dplyr</strong> package <span class="citation">(Wickham, François, et al. <a href="#ref-R-dplyr">2019</a>)</span> includes a number of simple but powerful functions
 for manipulating tibbles.</p>
-<p>The “Tidy” section will go into detail for how to use all these functions. As a brief
-summary, the <code>mutate</code> function used twice to change the values in the “weekday” column:
+<p>The resources listed in the “Learn More” part of the Tidy" section go into detail for how
+to use all these functions. Briefly, the <code>mutate</code> function used twice to change the
+values in the “weekday” column:
 first, to convert the class of the column to a factor (<code>as_factor</code>) and second to
 change the order of those levels (<code>fct_relevel</code>) by hand, to start with Monday and
 go in order through Sunday. The compound assignment pipe operator (<code>%&lt;&gt;%</code>) allows

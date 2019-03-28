@@ -12,6 +12,9 @@ to customize (once you get the hang of it).
 
 `r newthought("**ggplot2** is based on a")` **grammar of graphics**. To get the hang
 of it, you'll need to start thinking of visualizations in terms of separate elements. 
+This section will set up some example data and then walk through examples of some of
+the elements of plots. Once you understand these, you can layer them together with 
+`ggplot` code to obtain really nice visualizations.
 
 ### Example data
 
@@ -28,8 +31,8 @@ Traffic Safety Administration. For more, see
 [the FARS website](https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars).]
 
 I downloaded and cleaned some data from this surveillance system. (In a later section,
-I'll tell you more about how to do this cleaning yourself.) I've created a fairly 
-simple dataset for us to use here. For each date in the weeks around the hurricane's
+I'll tell you more about how to do this cleaning.) I've created a fairly 
+simple dataset for us to start with. For each date in the weeks around the hurricane's
 landfall, it gives the total number of motor vehicle fatalities recorded in the 
 state. The dataset also gives the week in the year for each date (the first week in
 January would be "1" for this measure, etc.), as well as the day of the week. 
@@ -184,7 +187,7 @@ the steps in the "Prerequisites" section, you should have a
 Excel, you should be able to read all the content) where each column entry is
 separated by a comma. This is a common file format for tabular data that can
 be read into and written from most statistical programs (including R, Excel, and
-SAS).] in a "data" subdirectory of your current working directory. Also, if you
+SAS).] in a "data" subdirectory of the R Project you downloaded. Also, if you
 followed the steps in the "Prerequisites" section, you should have installed
 all the necessary R packages for this example.
 
@@ -258,7 +261,7 @@ can print out the start of the data by calling the object name by itself:
 daily_fatalities
 ```
 
-By default, `read_csv` read the data into a structure called a **tibble**,^[**tibble.**
+By default, `read_csv` reads the data into a structure called a **tibble**,^[**tibble.**
 A slightly fancier dataframe, which is a tabular data format in R, where there are
 rows and columns, with each column having data with the same class (e.g., character,
 integer, date) and all columns having the same length. Values in the columns should
@@ -456,8 +459,9 @@ cleaner: the pipe operator (`%>%`) and the compound assignment pipe operator (`%
 The **dplyr** package [@R-dplyr] includes a number of simple but powerful functions
 for manipulating tibbles. 
 
-The "Tidy" section will go into detail for how to use all these functions. As a brief
-summary, the `mutate` function used twice to change the values in the "weekday" column: 
+The resources listed in the "Learn More" part of the Tidy" section go into detail for how 
+to use all these functions. Briefly, the `mutate` function used twice to change the 
+values in the "weekday" column: 
 first, to convert the class of the column to a factor (`as_factor`) and second to 
 change the order of those levels (`fct_relevel`) by hand, to start with Monday and 
 go in order through Sunday. The compound assignment pipe operator (`%<>%`) allows

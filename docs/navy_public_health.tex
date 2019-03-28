@@ -154,8 +154,7 @@ To try out these examples, you need some set-up:
   Download example R Project
 \end{enumerate}
 
-This section will walk you through each step, explaining both \emph{how} and
-\emph{why} to do the step.
+This section will walk you through each step.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -220,7 +219,10 @@ need, run the following code in your version of R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{()}
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"readr"}\NormalTok{, }\StringTok{"ggplot2"}\NormalTok{, }\StringTok{"forcats"}\NormalTok{, }
+    \StringTok{"magrittr"}\NormalTok{, }\StringTok{"dplyr"}\NormalTok{, }\StringTok{"lubridate"}\NormalTok{, }\StringTok{"sf"}\NormalTok{, }\StringTok{"tigris"}\NormalTok{, }
+    \StringTok{"DT"}\NormalTok{, }\StringTok{"plotly"}\NormalTok{, }\StringTok{"leaflet"}\NormalTok{, }\StringTok{"flexdashboard"}\NormalTok{, }
+    \StringTok{"tidyr"}\NormalTok{, }\StringTok{"stringr"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -277,6 +279,9 @@ to customize (once you get the hang of it).
 
 \newthought{**ggplot2** is based on a} \textbf{grammar of graphics}. To get the hang
 of it, you'll need to start thinking of visualizations in terms of separate elements.
+This section will set up some example data and then walk through examples of some of
+the elements of plots. Once you understand these, you can layer them together with
+\texttt{ggplot} code to obtain really nice visualizations.
 
 \hypertarget{example-data}{%
 \subsection{Example data}\label{example-data}}
@@ -294,8 +299,8 @@ System (FARS).\footnote{\textbf{Fatality Analysis Reporting System (FARS).} A su
   \href{https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars}{the FARS website}.}
 
 I downloaded and cleaned some data from this surveillance system. (In a later section,
-I'll tell you more about how to do this cleaning yourself.) I've created a fairly
-simple dataset for us to use here. For each date in the weeks around the hurricane's
+I'll tell you more about how to do this cleaning.) I've created a fairly
+simple dataset for us to start with. For each date in the weeks around the hurricane's
 landfall, it gives the total number of motor vehicle fatalities recorded in the
 state. The dataset also gives the week in the year for each date (the first week in
 January would be ``1'' for this measure, etc.), as well as the day of the week.
@@ -498,7 +503,7 @@ the steps in the ``Prerequisites'' section, you should have a
   Excel, you should be able to read all the content) where each column entry is
   separated by a comma. This is a common file format for tabular data that can
   be read into and written from most statistical programs (including R, Excel, and
-  SAS).} in a ``data'' subdirectory of your current working directory. Also, if you
+  SAS).} in a ``data'' subdirectory of the R Project you downloaded. Also, if you
 followed the steps in the ``Prerequisites'' section, you should have installed
 all the necessary R packages for this example.
 
@@ -605,7 +610,7 @@ can print out the start of the data by calling the object name by itself:
 ## # ... with 18 more rows
 \end{verbatim}
 
-By default, \texttt{read\_csv} read the data into a structure called a \textbf{tibble},\footnote{\textbf{tibble.}
+By default, \texttt{read\_csv} reads the data into a structure called a \textbf{tibble},\footnote{\textbf{tibble.}
   A slightly fancier dataframe, which is a tabular data format in R, where there are
   rows and columns, with each column having data with the same class (e.g., character,
   integer, date) and all columns having the same length. Values in the columns should
@@ -845,8 +850,9 @@ cleaner: the pipe operator (\texttt{\%\textgreater{}\%}) and the compound assign
 The \textbf{dplyr} package \citep{R-dplyr} includes a number of simple but powerful functions
 for manipulating tibbles.
 
-The ``Tidy'' section will go into detail for how to use all these functions. As a brief
-summary, the \texttt{mutate} function used twice to change the values in the ``weekday'' column:
+The resources listed in the ``Learn More'' part of the Tidy" section go into detail for how
+to use all these functions. Briefly, the \texttt{mutate} function used twice to change the
+values in the ``weekday'' column:
 first, to convert the class of the column to a factor (\texttt{as\_factor}) and second to
 change the order of those levels (\texttt{fct\_relevel}) by hand, to start with Monday and
 go in order through Sunday. The compound assignment pipe operator (\texttt{\%\textless{}\textgreater{}\%}) allows

@@ -188,8 +188,7 @@ workshop by <a href="https://github.com/geanders/navy_public_health/raw/master/_
 <li>Install some R packages</li>
 <li>Download example R Project</li>
 </ol>
-<p>This section will walk you through each step, explaining both <em>how</em> and
-<em>why</em> to do the step.</p>
+<p>This section will walk you through each step.</p>
 <ol style="list-style-type: decimal">
 <li>Download R</li>
 </ol>
@@ -232,7 +231,10 @@ your computer needs to have an internet connection when you run <code>install.pa
 get an error.</p>
 <p>This booklet uses a number of R packages beyond base R. To install all the packages that you’ll
 need, run the following code in your version of R:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>()</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;readr&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;forcats&quot;</span>, <span class="st">&quot;magrittr&quot;</span>, 
+                   <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;lubridate&quot;</span>, <span class="st">&quot;sf&quot;</span>, <span class="st">&quot;tigris&quot;</span>,
+                   <span class="st">&quot;DT&quot;</span>, <span class="st">&quot;plotly&quot;</span>, <span class="st">&quot;leaflet&quot;</span>, <span class="st">&quot;flexdashboard&quot;</span>, 
+                   <span class="st">&quot;tidyr&quot;</span>, <span class="st">&quot;stringr&quot;</span>))</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Download example R Project</li>
 </ol>

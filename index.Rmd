@@ -42,8 +42,7 @@ To try out these examples, you need some set-up:
 3. Install some R packages
 4. Download example R Project
 
-This section will walk you through each step, explaining both *how* and 
-*why* to do the step. 
+This section will walk you through each step. 
 
 1. Download R 
 
@@ -91,7 +90,10 @@ This booklet uses a number of R packages beyond base R. To install all the packa
 need, run the following code in your version of R: 
 
 ```{r eval = FALSE}
-install.packages()
+install.packages(c("readr", "ggplot2", "forcats", "magrittr", 
+                   "dplyr", "lubridate", "sf", "tigris",
+                   "DT", "plotly", "leaflet", "flexdashboard", 
+                   "tidyr", "stringr"))
 ```
 
 4. Download example R Project

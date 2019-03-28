@@ -168,6 +168,8 @@ knitr::include_graphics("images/smith_island_cake")
 mapped to characteristics of the data or given constant values.
 \item {\color{colorblue}\textbf{coordinate system}} Grid system defining how the data in the plot
 are layed out; often a Cartesian coordinate system
+\item {\color{colorblue}\textbf{scales}} Rules defining how aesthetics from the data are mapped
+to characteristics of the geoms
 \item {\color{colorblue}\textbf{labels}} Names of axes and other scales, as well as plot titles
 \item {\color{colorblue}\textbf{themes}} Background elements of the plot
 \end{itemize}

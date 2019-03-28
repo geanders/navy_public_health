@@ -170,7 +170,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="plot-elements" class="section level2">
 <h2><span class="header-section-number">2.1</span> Plot elements</h2>
 <p><span class="newthought"><strong>ggplot2</strong> is based on a</span> <strong>grammar of graphics</strong>. To get the hang
-of it, you’ll need to start thinking of visualizations in terms of separate elements.</p>
+of it, you’ll need to start thinking of visualizations in terms of separate elements.
+This section will set up some example data and then walk through examples of some of
+the elements of plots. Once you understand these, you can layer them together with
+<code>ggplot</code> code to obtain really nice visualizations.</p>
 <div id="example-data" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Example data</h3>
 <p>In my own research, I study the health effects of climate-related disasters, including
@@ -185,8 +188,8 @@ for all fatal motor vehicle accidents in the US, maintained by the National High
 Traffic Safety Administration. For more, see
 <a href="https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars">the FARS website</a>.</span></p>
 <p>I downloaded and cleaned some data from this surveillance system. (In a later section,
-I’ll tell you more about how to do this cleaning yourself.) I’ve created a fairly
-simple dataset for us to use here. For each date in the weeks around the hurricane’s
+I’ll tell you more about how to do this cleaning.) I’ve created a fairly
+simple dataset for us to start with. For each date in the weeks around the hurricane’s
 landfall, it gives the total number of motor vehicle fatalities recorded in the
 state. The dataset also gives the week in the year for each date (the first week in
 January would be “1” for this measure, etc.), as well as the day of the week.

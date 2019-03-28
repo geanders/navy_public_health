@@ -181,7 +181,7 @@ the steps in the “Prerequisites” section, you should have a
 Excel, you should be able to read all the content) where each column entry is
 separated by a comma. This is a common file format for tabular data that can
 be read into and written from most statistical programs (including R, Excel, and
-SAS).</span> in a “data” subdirectory of your current working directory. Also, if you
+SAS).</span> in a “data” subdirectory of the R Project you downloaded. Also, if you
 followed the steps in the “Prerequisites” section, you should have installed
 all the necessary R packages for this example.</p>
 <p>While there are functions in base R that import comma-separated files, I think the
@@ -257,7 +257,7 @@ can print out the start of the data by calling the object name by itself:</p>
 ##  9 2017-09-04    36 Monday         7
 ## 10 2017-09-05    36 Tuesday        8
 ## # … with 18 more rows</code></pre>
-<p>By default, <code>read_csv</code> read the data into a structure called a <strong>tibble</strong>,<label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> <strong>tibble.</strong>
+<p>By default, <code>read_csv</code> reads the data into a structure called a <strong>tibble</strong>,<label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> <strong>tibble.</strong>
 A slightly fancier dataframe, which is a tabular data format in R, where there are
 rows and columns, with each column having data with the same class (e.g., character,
 integer, date) and all columns having the same length. Values in the columns should
@@ -456,8 +456,9 @@ a function we can use to reorder the factor levels. The <strong>magrittr</strong
 cleaner: the pipe operator (<code>%&gt;%</code>) and the compound assignment pipe operator (<code>%&lt;&gt;%</code>).
 The <strong>dplyr</strong> package <span class="citation">(Wickham, François, et al. <label for="tufte-mn-5" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle">2019<span class="marginnote">Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2019. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</span>)</span> includes a number of simple but powerful functions
 for manipulating tibbles.</p>
-<p>The “Tidy” section will go into detail for how to use all these functions. As a brief
-summary, the <code>mutate</code> function used twice to change the values in the “weekday” column:
+<p>The resources listed in the “Learn More” part of the Tidy" section go into detail for how
+to use all these functions. Briefly, the <code>mutate</code> function used twice to change the
+values in the “weekday” column:
 first, to convert the class of the column to a factor (<code>as_factor</code>) and second to
 change the order of those levels (<code>fct_relevel</code>) by hand, to start with Monday and
 go in order through Sunday. The compound assignment pipe operator (<code>%&lt;&gt;%</code>) allows
