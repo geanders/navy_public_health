@@ -114,7 +114,7 @@ To use plotly to make this plot interactive, all you need to do is load the `plo
 run this `ggplot` object
 through its `ggplotly` function: 
 
-```{r plotly2, message = FALSE, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3}
+```{r plotly2, message = FALSE, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3, fig.cap = "Example of an interactive plot created with 'plotly'. Try scrolling over the points and playing around with the buttons in the top right."}
 library("plotly")
 fatality_plot %>% 
   ggplotly()

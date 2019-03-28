@@ -256,7 +256,8 @@ look like once you've downloaded and opened it, as well as opened the ``plot.R''
 project's ``R'' subdirectory.
 
 \begin{figure*}
-\includegraphics[width=38.64in]{images/example_repo} \end{figure*}
+\includegraphics[width=38.64in]{images/example_repo} \caption[What the example R Project for this booklet should look like once you've downloaded and opened it, as well as opened the 'plot.R' file in the project's 'R' subdirectory]{What the example R Project for this booklet should look like once you've downloaded and opened it, as well as opened the 'plot.R' file in the project's 'R' subdirectory.}\label{fig:examplerepo}
+\end{figure*}
 
 \hypertarget{plot}{%
 \chapter{Plot}\label{plot}}
@@ -1517,7 +1518,8 @@ it out anytime you want by calling the name you assigned it (Figure \ref{fig:plo
 \end{Shaded}
 
 \begin{figure*}
-\includegraphics{navy_public_health_files/figure-latex/plotly1-1} \end{figure*}
+\includegraphics{navy_public_health_files/figure-latex/plotly1-1} \caption[Example of printing out a ggplot object by calling its assigned name]{Example of printing out a ggplot object by calling its assigned name.}\label{fig:plotly1}
+\end{figure*}
 
 To use plotly to make this plot interactive, all you need to do is load the \texttt{plotly} package and
 run this \texttt{ggplot} object
@@ -1531,7 +1533,8 @@ through its \texttt{ggplotly} function:
 \end{Shaded}
 
 \begin{figure*}
-\includegraphics{navy_public_health_files/figure-latex/plotly2-1} \end{figure*}
+\includegraphics{navy_public_health_files/figure-latex/plotly2-1} \caption[Example of an interactive plot created with 'plotly']{Example of an interactive plot created with 'plotly'. Try scrolling over the points and playing around with the buttons in the top right.}\label{fig:plotly2}
+\end{figure*}
 
 Try scrolling over Figure \ref{fig:plotly2}: when you scroll over a point, a pop-up should
 appear with some information about the plot. You should also have some buttons on the top
@@ -1772,10 +1775,55 @@ structures with the blocks.
 \hypertarget{reformatting}{%
 \section{Reformatting}\label{reformatting}}
 
+\hypertarget{learn-more-3}{%
+\section{Learn more}\label{learn-more-3}}
+
+To learn more about working with data using tidyverse tools, one of the best sources is the
+book \href{https://r4ds.had.co.nz/}{R for Data Science} mentioned in an earlier ``Learn more'' section.
+This book is available
+for a very reasonable price in paperback as well as free online through bookdown.org. One
+of its coauthors (Hadley Wickham) is the creator of the tidyverse and many of its packages.
+
+The tidyverse is a very popular tool now for working with data in R. If you nose around the
+internet a bit, you should be able to find a lot of example blog posts using tidyverse tools.
+Try a Google search to find some examples in a topic area that interests you (e.g., your
+favorite sport, a research topic).
+
+RStudio has several cheatsheets (see ``Learn more'' in the ``Plot'' section) related to creating
+and working with tidy data. These include cheatsheets for working with dates (with the
+\texttt{lubridate} package), factors (the \texttt{forcats} package), and strings (the \texttt{stringr} package). You
+can find them all \href{https://www.rstudio.com/resources/cheatsheets/}{here}. As with plotting, you
+will learn a lot very quickly by working through the examples on those cheatsheets, and then
+keeping them handy as you try to apply R to explore your own data.
+
 \hypertarget{final-words}{%
 \chapter{Final Words}\label{final-words}}
 
-We have finished a nice book.
+This booklet, and the associated conference workshop, are only able to give you a taste of R.
+If you'd like to learn more, try out some of the resources listed in the ``Learn more'' sections.
+R is free, all its extension packages are free, and there are lots of excellent free or affordable
+resources for learning R programming.
+
+Hopefully this booklet has been a helpful example of how you can use R for data visualization.
+Mastering R coding is something anyone can do, but it does take practice and experimentation.
+As you learn R, remember that you're not going to break anything by playing around with the
+code---if something doesn't work, don't be afraid to change things in the code.
+
+I hear concerns every now and then from people who are used to proprietary software about
+the fact that open source software, since it isn't created and sold by a company, doesn't have
+the same level of support as proprietary tools. I think this is quite a misperception.
+One of the best parts of R is its wonderful and welcoming international community. There
+are very active groups discussing R on Twitter (\#rstats) and
+\href{https://stackoverflow.com/}{StackOverflow}, a site for
+posting and answering programming questions. Active mailing lists exist for both R users and
+R developers. R developers have always provided documentation for their packages, but the
+development of new reporting tools like RMarkdown have allowed them to create documentation that
+is even more user-friendly and accessible, and they often provide extensive tutorials to learn
+how to use their packages. For companies that are interested in using R but require
+extensive support, there are companies like RStudio that can provide enterprise-level support.
+None of these concerns are real barriers to using R rather than a proprietary software program.
+
+I hope you will continue exploring R for your own data analysis projects and join the R community!
 
 \bibliography{book.bib,packages.bib}
 

@@ -1,3 +1,28 @@
 # Final Words
 
-We have finished a nice book.
+This booklet, and the associated conference workshop, are only able to give you a taste of R. 
+If you'd like to learn more, try out some of the resources listed in the "Learn more" sections. 
+R is free, all its extension packages are free, and there are lots of excellent free or affordable
+resources for learning R programming. 
+
+Hopefully this booklet has been a helpful example of how you can use R for data visualization.
+Mastering R coding is something anyone can do, but it does take practice and experimentation. 
+As you learn R, remember that you're not going to break anything by playing around with the
+code---if something doesn't work, don't be afraid to change things in the code. 
+
+I hear concerns every now and then from people who are used to proprietary software about
+the fact that open source software, since it isn't created and sold by a company, doesn't have
+the same level of support as proprietary tools. I think this is quite a misperception.
+One of the best parts of R is its wonderful and welcoming international community. There 
+are very active groups discussing R on Twitter (#rstats) and 
+[StackOverflow](https://stackoverflow.com/), a site for 
+posting and answering programming questions. Active mailing lists exist for both R users and
+R developers. R developers have always provided documentation for their packages, but the
+development of new reporting tools like RMarkdown have allowed them to create documentation that
+is even more user-friendly and accessible, and they often provide extensive tutorials to learn 
+how to use their packages. For companies that are interested in using R but require
+extensive support, there are companies like RStudio that can provide enterprise-level support. 
+None of these concerns are real barriers to using R rather than a proprietary software program.
+
+I hope you will continue exploring R for your own data analysis projects and join the R community!
+
