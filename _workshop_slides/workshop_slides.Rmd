@@ -490,7 +490,7 @@ knitr::include_graphics("images/legos")
 
 ## Pipe operator
 
-```{r echo = FALSE, fig.align = "center", out.height = "0.9\\textheight"}
+```{r echo = FALSE, fig.align = "center", out.height = "0.85\\textheight"}
 knitr::include_graphics("images/magrittr")
 ```
 
