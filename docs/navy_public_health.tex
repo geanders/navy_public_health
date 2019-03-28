@@ -1019,22 +1019,6 @@ fatalities (\texttt{fatals}).
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(readr)}
 \NormalTok{fl_accidents <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/fl_accidents.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Parsed with column specification:
-## cols(
-##   fips = col_double(),
-##   date = col_date(format = ""),
-##   latitude = col_double(),
-##   longitud = col_double(),
-##   fatals = col_double()
-## )
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{fl_accidents}
 \end{Highlighting}
 \end{Shaded}
@@ -1070,7 +1054,7 @@ specifying the columns with the geogrphical coordinates using the \texttt{coords
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(sf)}
 \NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(}\DataTypeTok{coords =} \KeywordTok{c}\NormalTok{(}\StringTok{"longitud"}\NormalTok{, }
-    \StringTok{"latitude"}\NormalTok{))}
+    \StringTok{"latitude"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_sf}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1089,8 +1073,8 @@ out, including the objects \textbf{bounding box} (\texttt{bbox}) and \textbf{pro
 ## geometry type:  POINT
 ## dimension:      XY
 ## bbox:           xmin: -87.3797 ymin: 25.6876 xmax: -80.32332 ymax: 30.65894
-## epsg (SRID):    NA
-## proj4string:    NA
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
 ## # A tibble: 37 x 4
 ##     fips date       fatals
 ##    <dbl> <date>      <dbl>
@@ -1105,7 +1089,7 @@ out, including the objects \textbf{bounding box} (\texttt{bbox}) and \textbf{pro
 ##  9 12045 2017-09-09      2
 ## 10 12031 2017-09-12      1
 ## # ... with 27 more rows, and 1 more
-## #   variable: geometry <POINT>
+## #   variable: geometry <POINT [°]>
 \end{verbatim}
 
 A second way to create an \texttt{sf} object in R is to read in data from a geographic data file, like
@@ -1169,7 +1153,7 @@ for the layer you want). For example, to read in a line with the track of irma, 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{irma_tracks <-}\StringTok{ }\KeywordTok{st_read}\NormalTok{(}\StringTok{"data/al112017_best_track/"}\NormalTok{, }
-    \DataTypeTok{layer =} \StringTok{"al112017_lin"}\NormalTok{)}
+    \DataTypeTok{layer =} \StringTok{"al112017_lin"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_transform}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1198,8 +1182,8 @@ geometry, which gives the latitude and longitude \ldots{}
 ## geometry type:  LINESTRING
 ## dimension:      XY
 ## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 36.8
-## epsg (SRID):    NA
-## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_defs
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
 ## First 10 features:
 ##    STORMNUM           STORMTYPE SS
 ## 1        11 Tropical Depression  0
@@ -1225,18 +1209,87 @@ geometry, which gives the latitude and longitude \ldots{}
 ## 10 LINESTRING (-73 21.5, -73.2...
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tigris)}
+\NormalTok{fl_counties <-}\StringTok{ }\KeywordTok{counties}\NormalTok{(}\DataTypeTok{state =} \StringTok{"FL"}\NormalTok{, }\DataTypeTok{cb =} \OtherTok{TRUE}\NormalTok{, }
+    \DataTypeTok{class =} \StringTok{"sf"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If, for any reason, you're not able to get the above code to work, I pulled and saved this data
+with the example data, and you can load it with the following code if you followed all the
+directions in the ``Prerequisites'':
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{load}\NormalTok{(}\StringTok{"data/fl_counties.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{basic-mapping}{%
 \section{Basic mapping}\label{basic-mapping}}
+
+If you don't have \texttt{ggplot2} still loaded from the exercises in the ``Plot'' section, you'll need to
+load it. Then, you can create a \texttt{ggplot} object and add an \texttt{sf} layer to it with \texttt{geom\_sf}, specifying
+the \texttt{sf} data set to plot.\footnote{If you are
+  running this on a Mac, there's a chance that you might get an error message about ``polygon
+  edge not found.'' There seems to be a bug that's still being resolved involving the default graphics
+  driver on Macs with this package. If you get this error message, try fixing it by adding the
+  following layer to the \texttt{ggplot} code: \texttt{+\ theme(axis.text\ =\ element\_blank(),\ axis.ticks\ =\ element\_blank()}}
+Add a coordinate layer (\texttt{coord\_sf}) appropriate for a map (otherwise,
+you might end up with a map that's ``stretched'' out in either the x- or y-direction):
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(ggplot2)}
 
-\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents)}
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_counties) }\OperatorTok{+}\StringTok{ }\KeywordTok{coord_sf}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-18-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-20-1}
+
+You can add other \texttt{sf} layers to this map, to add points for the location of each fatal accident
+and a line for the track of Hurricane Irma. Since the track for Irma began much further south than
+Florida and continues north of Florida, you'll need to set \texttt{xlim} and \texttt{ylim} in the \texttt{coord\_sf} call
+to ensure that the map is zoomed to show Florida. You can map aesthetics to values in the data, or
+to constant values, just like with a regular \texttt{ggplot} object. In this example, the color of each
+point is mapped to its date, while the track of Irma is shown in red and a bit larger than the
+default size.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_counties) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents, }
+    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ date)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ irma_tracks, }
+    \DataTypeTok{color =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{size =} \FloatTok{1.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{coord_sf}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{88}\NormalTok{, }
+    \DecValTok{-80}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\FloatTok{24.5}\NormalTok{, }\FloatTok{31.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-21-1}
+
+You can do anything to this map that you would to a regular \texttt{ggplot} object. For example, instead of
+using color to show the date of an accident, you could use faceting to add a small map of each date
+using \texttt{facet\_wrap}. This example code also adds some elements for the plot's theme, including
+changing the background color and taking out the axis ticks and labels.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_counties, }\DataTypeTok{fill =} \StringTok{"antiquewhite"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents, }\DataTypeTok{color =} \StringTok{"darkcyan"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ irma_tracks, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{coord_sf}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{88}\NormalTok{, }\DecValTok{-80}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\FloatTok{24.5}\NormalTok{, }
+        \FloatTok{31.5}\NormalTok{)) }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{date, }\DataTypeTok{ncol =} \DecValTok{4}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{    }\KeywordTok{theme_bw}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"aliceblue"}\NormalTok{), }
+    \DataTypeTok{axis.ticks =} \KeywordTok{element_blank}\NormalTok{(), }\DataTypeTok{axis.text =} \KeywordTok{element_blank}\NormalTok{(), }
+    \DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{color =} \StringTok{"white"}\NormalTok{, }
+        \DataTypeTok{size =} \FloatTok{0.8}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure*}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1} \end{figure*}
 
 \hypertarget{learn-more-1}{%
 \section{Learn more}\label{learn-more-1}}
@@ -1337,7 +1390,7 @@ changes can change the table's appearance:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-20-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
 
 To get more details on all the options available, see the helpfile for \texttt{datatable} (run \texttt{?datatable}) or read through the \href{}{online tutorial} for the package.
 
@@ -1442,7 +1495,7 @@ using the \texttt{addMarkers} call, specifying the dataset to use with the \text
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-27-1}
 
 The result is an interactive map, with a marker at the location of each accident. Try using the
 plus and minus buttons to zoom in and out, and click on the map to pan around the map.
@@ -1486,7 +1539,7 @@ the each marker should show the date of the accident when you click on it.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-25-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-29-1}
 
 The ``pop-ups'' for the markers can be developed to be pretty fancy. You can use \texttt{paste} to paste
 together elements from the data with other words to create nice labels. You can also format these, using
@@ -1512,7 +1565,7 @@ be used for the pop-up with \texttt{popup\ =\ \textasciitilde{}\ popup}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-26-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-30-1}
 
 The \texttt{leaflet} package has extensive \href{https://rstudio.github.io/leaflet/}{online documentation}.
 Browse through the sections of this online documentation to get a lot more ideas of how you can

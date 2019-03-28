@@ -255,16 +255,8 @@ Florida within a week of Hurricane Irma’s landfall on September 10, 2017. The 
 the county code (<code>fips</code>), date (<code>date</code>), location (<code>latitude</code> and <code>longitud</code>), and the number of
 fatalities (<code>fatals</code>).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
-fl_accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/fl_accidents.csv&quot;</span>)</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   fips = col_double(),
-##   date = col_date(format = &quot;&quot;),
-##   latitude = col_double(),
-##   longitud = col_double(),
-##   fatals = col_double()
-## )</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">fl_accidents</code></pre>
+fl_accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/fl_accidents.csv&quot;</span>)
+fl_accidents</code></pre>
 <pre><code>## # A tibble: 37 x 5
 ##     fips date       latitude longitud fatals
 ##    &lt;dbl&gt; &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
@@ -285,7 +277,8 @@ specifying the columns with the geogrphical coordinates using the <code>coords</
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)</code></pre>
 <pre><code>## Linking to GEOS 3.6.1, GDAL 2.1.3, PROJ 4.9.3</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">fl_accidents <span class="op">%&lt;&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;longitud&quot;</span>, <span class="st">&quot;latitude&quot;</span>))</code></pre>
+<span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;longitud&quot;</span>, <span class="st">&quot;latitude&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">st_sf</span>(<span class="dt">crs =</span> <span class="dv">4326</span>)</code></pre>
 <p>Now, when you print out <code>fl_accidents</code>, you’ll see some extra information at the top of the print
 out, including the objects <strong>bounding box</strong> (<code>bbox</code>) and <strong>projection</strong> (<code>epsg</code>, <code>proj4string</code>)
 (which we currently haven’t set).</p>
@@ -294,11 +287,11 @@ out, including the objects <strong>bounding box</strong> (<code>bbox</code>) and
 ## geometry type:  POINT
 ## dimension:      XY
 ## bbox:           xmin: -87.3797 ymin: 25.6876 xmax: -80.32332 ymax: 30.65894
-## epsg (SRID):    NA
-## proj4string:    NA
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
 ## # A tibble: 37 x 4
 ##     fips date       fatals             geometry
-##    &lt;dbl&gt; &lt;date&gt;      &lt;dbl&gt;              &lt;POINT&gt;
+##    &lt;dbl&gt; &lt;date&gt;      &lt;dbl&gt;          &lt;POINT [°]&gt;
 ##  1 12031 2017-09-08      1   (-81.5407 30.2474)
 ##  2 12095 2017-09-07      1 (-81.41927 28.51796)
 ##  3 12097 2017-09-08      1 (-81.34221 28.26149)
@@ -342,7 +335,8 @@ line of the hurricane’s track, while the "al112017_windswarth.</em>” layer p
 the layer you’d like from the directory with the <code>layer</code> parameter (put the root of the filenames
 for the layer you want). For example, to read in a line with the track of irma, you can run:</p>
 <pre class="sourceCode r"><code class="sourceCode r">irma_tracks &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;data/al112017_best_track/&quot;</span>,
-                       <span class="dt">layer =</span> <span class="st">&quot;al112017_lin&quot;</span>)</code></pre>
+                       <span class="dt">layer =</span> <span class="st">&quot;al112017_lin&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">st_transform</span>(<span class="dt">crs =</span> <span class="dv">4326</span>)</code></pre>
 <pre><code>## Reading layer `al112017_lin&#39; from data source `/Users/georgianaanderson/Documents/r_workshops/navy_public_health/data/al112017_best_track&#39; using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 20 features and 3 fields
 ## geometry type:  LINESTRING
@@ -358,8 +352,8 @@ geometry, which gives the latitude and longitude …</p>
 ## geometry type:  LINESTRING
 ## dimension:      XY
 ## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 36.8
-## epsg (SRID):    NA
-## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_defs
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
 ## First 10 features:
 ##    STORMNUM           STORMTYPE SS                       geometry
 ## 1        11 Tropical Depression  0 LINESTRING (-26.9 16.1, -28...
@@ -372,14 +366,55 @@ geometry, which gives the latitude and longitude …</p>
 ## 8        11          Hurricane4  4 LINESTRING (-53.9 16.7, -55...
 ## 9        11          Hurricane5  5 LINESTRING (-57.8 16.7, -59...
 ## 10       11          Hurricane4  4 LINESTRING (-73 21.5, -73.2...</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tigris)
+fl_counties &lt;-<span class="st"> </span><span class="kw">counties</span>(<span class="dt">state =</span> <span class="st">&quot;FL&quot;</span>, <span class="dt">cb =</span> <span class="ot">TRUE</span>, <span class="dt">class =</span> <span class="st">&quot;sf&quot;</span>)</code></pre>
+<p>If, for any reason, you’re not able to get the above code to work, I pulled and saved this data
+with the example data, and you can load it with the following code if you followed all the
+directions in the “Prerequisites”:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/fl_counties.RData&quot;</span>)</code></pre>
 </div>
 <div id="basic-mapping" class="section level2">
 <h2><span class="header-section-number">3.2</span> Basic mapping</h2>
+<p>If you don’t have <code>ggplot2</code> still loaded from the exercises in the “Plot” section, you’ll need to
+load it. Then, you can create a <code>ggplot</code> object and add an <code>sf</code> layer to it with <code>geom_sf</code>, specifying
+the <code>sf</code> data set to plot.<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>
+Add a coordinate layer (<code>coord_sf</code>) appropriate for a map (otherwise,
+you might end up with a map that’s “stretched” out in either the x- or y-direction):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
 <span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_accidents)</code></pre>
-<p><img src="navy_public_health_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_counties) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_sf</span>()</code></pre>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>You can add other <code>sf</code> layers to this map, to add points for the location of each fatal accident
+and a line for the track of Hurricane Irma. Since the track for Irma began much further south than
+Florida and continues north of Florida, you’ll need to set <code>xlim</code> and <code>ylim</code> in the <code>coord_sf</code> call
+to ensure that the map is zoomed to show Florida. You can map aesthetics to values in the data, or
+to constant values, just like with a regular <code>ggplot</code> object. In this example, the color of each
+point is mapped to its date, while the track of Irma is shown in red and a bit larger than the
+default size.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_counties) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_accidents, <span class="kw">aes</span>(<span class="dt">color =</span> date)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> irma_tracks, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">88</span>, <span class="dv">-80</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">24.5</span>, <span class="fl">31.5</span>)) </code></pre>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>You can do anything to this map that you would to a regular <code>ggplot</code> object. For example, instead of
+using color to show the date of an accident, you could use faceting to add a small map of each date
+using <code>facet_wrap</code>. This example code also adds some elements for the plot’s theme, including
+changing the background color and taking out the axis ticks and labels.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_counties, <span class="dt">fill =</span> <span class="st">&quot;antiquewhite&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_accidents, <span class="dt">color =</span> <span class="st">&quot;darkcyan&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> irma_tracks, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">88</span>, <span class="dv">-80</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">24.5</span>, <span class="fl">31.5</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>date, <span class="dt">ncol =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;aliceblue&quot;</span>),
+        <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.grid =</span> <span class="kw">element_line</span>(<span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="fl">0.8</span>))</code></pre>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
 <div id="learn-more-1" class="section level2">
 <h2><span class="header-section-number">3.3</span> Learn more</h2>
@@ -421,6 +456,11 @@ compound pipe operator, <code>%&lt;&gt;%</code>, applies the function to <code>f
 <code>fl_accidents</code> with the modified version, updating the object so you’re ready to use it for later
 code.<a href="map.html#fnref19" class="footnote-back">↩</a></p></li>
 <li id="fn20"><p><strong>shapefile.</strong> …<a href="map.html#fnref20" class="footnote-back">↩</a></p></li>
+<li id="fn21"><p>If you are
+running this on a Mac, there’s a chance that you might get an error message about “polygon
+edge not found.” There seems to be a bug that’s still being resolved involving the default graphics
+driver on Macs with this package. If you get this error message, try fixing it by adding the
+following layer to the <code>ggplot</code> code: <code>+ theme(axis.text = element_blank(), axis.ticks = element_blank()</code><a href="map.html#fnref21" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
