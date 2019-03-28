@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="has-sub"><a href="5-report.html#report"><span class="toc-section-number">5</span> Report</a><ul>
 <li><a href="5-1-rmarkdown.html#rmarkdown"><span class="toc-section-number">5.1</span> RMarkdown</a></li>
 <li><a href="5-2-dashboards.html#dashboards"><span class="toc-section-number">5.2</span> Dashboards</a></li>
+<li><a href="5-3-learn-more-3.html#learn-more-3"><span class="toc-section-number">5.3</span> Learn more</a></li>
 </ul></li>
 <li class="has-sub"><a href="6-tidy.html#tidy"><span class="toc-section-number">6</span> Tidy</a><ul>
 <li><a href="6-1-tidy-format.html#tidy-format"><span class="toc-section-number">6.1</span> Tidy format</a></li>
@@ -165,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="6-4-adding.html#adding"><span class="toc-section-number">6.4</span> Adding</a></li>
 <li><a href="6-5-summarizing.html#summarizing"><span class="toc-section-number">6.5</span> Summarizing</a></li>
 <li><a href="6-6-reformatting.html#reformatting"><span class="toc-section-number">6.6</span> Reformatting</a></li>
-<li><a href="6-7-learn-more-3.html#learn-more-3"><span class="toc-section-number">6.7</span> Learn more</a></li>
+<li><a href="6-7-learn-more-4.html#learn-more-4"><span class="toc-section-number">6.7</span> Learn more</a></li>
 </ul></li>
 <li><a href="7-final-words.html#final-words"><span class="toc-section-number">7</span> Final Words</a></li>
 </ul>
@@ -176,10 +177,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <div id="reformatting" class="section level2">
 <h2><span class="header-section-number">6.6</span> Reformatting</h2>
+<p>There are two functions from the <code>tidyr</code> package (another member of the tidyverse) that you can use to change between wide and long data: <code>gather</code> and <code>spread</code>. Here is a description of these two functions:</p>
+<ul>
+<li><code>gather</code>: Take several columns and gather them into two columns, one with the former column names, and one with the former cell values.</li>
+<li><code>spread</code>: Take two columns and spread them into multiple columns. Column names for the new columns will come from one of the two original columns, while cell values will come from the other of the original columns.</li>
+</ul>
+<p>The following examples are from <code>tidyr</code> help files and show the effects of gathering and spreading a dataset.</p>
+<p>Here is some simulated wide data:</p>
+<pre class="sourceCode r"><code class="sourceCode r">wide_stocks[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, ]</code></pre>
+<pre><code>##         time        X          Y          Z
+## 1 2009-01-01 1.356955 -1.4220383 -1.9378520
+## 2 2009-01-02 1.258732 -2.3284751 -0.4195935
+## 3 2009-01-03 1.102894  0.4697818  6.1476633</code></pre>
+<p>In the <code>wide_stocks</code> dataset, there are separate columns for three different stocks (<code>X</code>, <code>Y</code>, and <code>Z</code>). Each cell gives the value for a certain stock on a certain day. This data isn’t “tidy”, because the identify of the stock (<code>X</code>, <code>Y</code>, or <code>Z</code>) is a variable, and you’ll probably want to include it as a variable in modeling.</p>
+<pre class="sourceCode r"><code class="sourceCode r">wide_stocks[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, ]</code></pre>
+<pre><code>##         time        X          Y          Z
+## 1 2009-01-01 1.356955 -1.4220383 -1.9378520
+## 2 2009-01-02 1.258732 -2.3284751 -0.4195935
+## 3 2009-01-03 1.102894  0.4697818  6.1476633</code></pre>
+<p>If you want to convert the dataframe to have all stock values in a single column, you can use <code>gather</code> to convert wide data to long data:</p>
+<pre class="sourceCode r"><code class="sourceCode r">long_stocks &lt;-<span class="st"> </span><span class="kw">gather</span>(wide_stocks, <span class="dt">key =</span> stock,
+                      <span class="dt">value =</span> price, <span class="op">-</span>time)
+long_stocks[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]</code></pre>
+<pre><code>##         time stock     price
+## 1 2009-01-01     X  1.356955
+## 2 2009-01-02     X  1.258732
+## 3 2009-01-03     X  1.102894
+## 4 2009-01-04     X  1.063256
+## 5 2009-01-05     X -1.484242</code></pre>
+<p>In this “long” dataframe, there is now one column that gives the identify of the stock (<code>stock</code>) and another column that gives the price of that stock that day (<code>price</code>):</p>
+<pre class="sourceCode r"><code class="sourceCode r">long_stocks[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]</code></pre>
+<pre><code>##         time stock     price
+## 1 2009-01-01     X  1.356955
+## 2 2009-01-02     X  1.258732
+## 3 2009-01-03     X  1.102894
+## 4 2009-01-04     X  1.063256
+## 5 2009-01-05     X -1.484242</code></pre>
+<p>The format for a <code>gather</code> call is:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## Generic code</span>
+new_df &lt;-<span class="st"> </span><span class="kw">gather</span>(old_df,
+                 <span class="dt">key =</span> [name of column with old column names],
+                 <span class="dt">value =</span> [name of column with cell values],
+                 <span class="op">-</span><span class="st"> </span>[name of <span class="kw">column</span>(s) you want to 
+                    exclude from gather])</code></pre>
+<p>Notice how easy it is, now that the data is gathered, to use <code>stock</code> for aesthetics of faceting in a <code>ggplot2</code> call:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(long_stocks, <span class="kw">aes</span>(<span class="dt">x =</span> time, <span class="dt">y =</span> price)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>stock)</code></pre>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-42-1.png" width="672"  /></p>
+<p>If you have data in a “long” format and would like to spread it out, you can use <code>spread</code> to do that:</p>
+<pre class="sourceCode r"><code class="sourceCode r">stocks &lt;-<span class="st"> </span><span class="kw">spread</span>(long_stocks, <span class="dt">key =</span> stock, <span class="dt">value =</span> price)
+stocks[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ]</code></pre>
+<pre><code>##         time         X          Y          Z
+## 1 2009-01-01  1.356955 -1.4220383 -1.9378520
+## 2 2009-01-02  1.258732 -2.3284751 -0.4195935
+## 3 2009-01-03  1.102894  0.4697818  6.1476633
+## 4 2009-01-04  1.063256  2.7205359 -0.7516471
+## 5 2009-01-05 -1.484242  2.0730321  0.6993561</code></pre>
+<p>Notice that this reverses the action of <code>gather</code>.</p>
+<p>“Spread” data is typically not tidy, so you often won’t want to use <code>spread</code> when you are preparing data for analysis. However, <code>spread</code> can be very helpful in creating clean tables for final reports and presentations.</p>
+<p>For example, if you wanted to create a table with means and standard deviations for each of the three stocks, you could use <code>spread</code> to rearrange the final summary to create an attractive table.</p>
+<pre class="sourceCode r"><code class="sourceCode r"> long_stocks <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(stock) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">N =</span> <span class="kw">n</span>(), <span class="dt">mean =</span> <span class="kw">mean</span>(price), <span class="dt">sd =</span> <span class="kw">sd</span>(price))</code></pre>
+<pre><code>## # A tibble: 3 x 4
+##   stock     N  mean    sd
+##   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 X        10 0.212  1.10
+## 2 Y        10 0.465  2.16
+## 3 Z        10 2.06   3.90</code></pre>
+<p>Three important notes:</p>
+<ul>
+<li>Everything is gathered into one of two columns – one column with the old column names, and one column with the old cell values</li>
+<li>With the <code>key</code> and <code>value</code> arguments, you are just providing column names for the two columns that everything’s gathered into.</li>
+<li>If there is a column you don’t want to gather (<code>date</code> in the example), use <code>-</code> to exclude it in the <code>gather</code> call.</li>
+</ul>
+<p>The following examples are from <code>tidyr</code> help files and show the effects of gathering and spreading a dataset.</p>
 </div>
 <p style="text-align: center;">
 <a href="6-5-summarizing.html"><button class="btn btn-default">Previous</button></a>
-<a href="6-7-learn-more-3.html"><button class="btn btn-default">Next</button></a>
+<a href="6-7-learn-more-4.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>

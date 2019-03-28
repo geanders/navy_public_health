@@ -314,6 +314,40 @@ ____
  \small R's \textbf{htmlwidgets} framework for interacting
 \end{center}
 
+## Interactive graphics
+
+```{r echo = FALSE, out.width = "\\textwidth", fig.align = "center"}
+knitr::include_graphics("images/google_maps.png")
+```
+
+## JavaScript
+
+```{r echo = FALSE, out.height = "0.8\\textheight", fig.align = "center"}
+knitr::include_graphics("images/javascript")
+```
+
+____
+
+\center
+
+\huge htmlwidgets
+
+\small
+\url{https://www.htmlwidgets.org/}
+
+## `leaflet` map
+
+
+
+____
+
+\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)]{%
+  \includegraphics[width=1\paperwidth]{images/example_code}};
+\color{colorblue}
+\begin{center}
+\hugetext{\montserratfont [Live coding example]}
+\end{center}
+
 ## "Kirk Moment"
 
 ```{r echo = FALSE, out.height = "0.7\\textheight", fig.align = "center"}
@@ -444,6 +478,40 @@ Why are Legos such a great toy?
 knitr::include_graphics("images/legos")
 ```
 
+## Tidyverse---Small functions that play well together
+
+\begin{itemize}
+\item \textbf{select} some columns \medskip
+\item \textbf{slice} to certain rows, or \textbf{filter} to rows that meet certain conditions \medskip
+\item \textbf{mutate} existing columns to create new ones or change the old ones in place \medskip
+\item \textbf{unite} separate columns into one \medskip
+\item \textbf{summarize} the data, maybe after you \textbf{group\_by} certain characteristics
+\end{itemize}
+
+## Pipe operator
+
+```{r echo = FALSE, fig.align = "center", out.height = "0.9\\textheight"}
+knitr::include_graphics("images/magrittr")
+```
+
+
+## Cleaning data with the tidyverse
+
+\footnotesize
+
+```{r eval = FALSE}
+fl_accidents %>% 
+  rename_all(.funs = str_to_lower) %>% 
+  select(state, county, day, month, year, latitude, longitud, fatals) %>% 
+  filter(state == 12) %>% 
+  mutate(county = str_pad(county, width = 3, pad = "0")) %>% 
+  unite(col = fips, c(state, county), sep = "") %>% 
+  unite(col = date, c(month, day, year), sep = "-") %>% 
+  mutate(date = mdy(date)) %>% 
+  filter(date >= mdy("9-7-2017") & date <= mdy("9-13-2017"))
+```
+
+
 ____
 
 \tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)]{%
@@ -458,7 +526,7 @@ ____
 
 \includegraphics[width = \textwidth]{images/CRAN_package_10000}
 
-## Homework?!
+## Homework!!
 
 \begin{center}
 \url{goo.gl/7fPYUx}

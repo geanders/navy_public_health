@@ -155,8 +155,7 @@ To try out these examples, you need some set-up:
 \end{enumerate}
 
 This section will walk you through each step, explaining both \emph{how} and
-\emph{why} to do the step. Click on the \textbf{Next} button (or navigate using the
-links at the top of the page) to continue.
+\emph{why} to do the step.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -258,6 +257,9 @@ project's ``R'' subdirectory.
 \begin{figure*}
 \includegraphics[width=38.64in]{images/example_repo} \caption[What the example R Project for this booklet should look like once you've downloaded and opened it, as well as opened the 'plot.R' file in the project's 'R' subdirectory]{What the example R Project for this booklet should look like once you've downloaded and opened it, as well as opened the 'plot.R' file in the project's 'R' subdirectory.}\label{fig:examplerepo}
 \end{figure*}
+
+Click on the \textbf{Next} button (or navigate using the
+links at the top of the page) to continue.
 
 \hypertarget{plot}{%
 \chapter{Plot}\label{plot}}
@@ -1396,7 +1398,7 @@ of using it, so it's worth googling something like ``blog post map r sf''. Final
 \hypertarget{interact}{%
 \chapter{Interact}\label{interact}}
 
-\texttt{\textbackslash{}r\ newthought("For\ a\ few\ years\ now,\ you")} have been able to use Javascript to create
+\newthought{For a few years now, you} have been able to use Javascript to create
 interactive plots to include on
 websites. These plots respond to actions from your mouse. When you scroll over a point,
 for example, some information about the point might show up, or when you click on a marker
@@ -1688,11 +1690,110 @@ and \href{https://www.showmeshiny.com/}{Show Me Shiny}.
 \hypertarget{report}{%
 \chapter{Report}\label{report}}
 
+\textbf{Literate programming}, an idea developed by Donald Knuth, mixes code that can be executed with regular text. The files you create can then be rendered, to run any embedded code. The final output will have results from your code and the regular text.
+
+The \texttt{knitr} package can be used for literate programming in R. In essence, \texttt{knitr} allows you to write an R Markdown file that can be rendered into a pdf, Word, or HTML document.
+
 \hypertarget{rmarkdown}{%
 \section{RMarkdown}\label{rmarkdown}}
 
+Here are the basics of opening and rendering an R Markdown file in RStudio:
+
+\begin{itemize}
+\tightlist
+\item
+  To open a new R Markdown file, go to ``File'' -\textgreater{} ``New File'' -\textgreater{} ``RMarkdown\ldots{}'' -\textgreater{} for now, chose a ``Document'' in ``HTML'' format.
+\item
+  This will open a new R Markdown file in RStudio. The file extension for R Markdown files is ``.Rmd''.
+\item
+  The new file comes with some example code and text. You can run the file as-is to try out the example. You will ultimately delete this example code and text and replace it with your own.
+\item
+  Once you ``knit'' the R Markdown file, R will render an HTML file with the output. This is automatically saved in the same directory where you saved your .Rmd file.
+\item
+  Write everything besides R code using Markdown syntax.
+\end{itemize}
+
+To include R code in an RMarkdown document, you need to separate off the code chunk using the following syntax:
+
+\begin{verbatim}
+```{r}
+my_vec <- 1:10
+```
+\end{verbatim}
+
+This syntax tells R how to find the start and end of pieces of R code when the file is rendered. R will walk through, find each piece of R code, run it and create output (printed output or figures, for example), and then pass the file along to another program to complete rendering (e.g., Tex for pdf files).
+
+R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand what markup languages like Markdown are and how they work.
+
+In Word and other word processing programs you have used, you can add formatting using buttons and keyboard shortcuts (e.g., ``Ctrl-B'' for bold). The file saves the words you type. It also saves the formatting, but you see the final output, rather than the formatting markup, when you edit the file (WYSIWYG -- what you see is what you get).
+
+In markup languages, on the other hand, you markup the document directly to show what formatting the final version should have (e.g., you type \texttt{**bold**} in the file to end up with a document with \textbf{bold}).
+
+Examples of markup languages include:
+
+\begin{itemize}
+\tightlist
+\item
+  HTML (HyperText Markup Language)
+\item
+  LaTex
+\item
+  Markdown (a ``lightweight'' markup language)
+\end{itemize}
+
+To write a file in Markdown, you'll need to learn the conventions for creating formatting. This table shows what you would need to write in a flat file for some common formatting choices:
+
+\begin{tabular}{l|l|l}
+\hline
+Code & Rendering & Explanation\\
+\hline
+`**text**` & **text** & boldface\\
+\hline
+`*text*` & *text* & italicized\\
+\hline
+`[text](www.google.com)` & [text](www.google.com) & hyperlink\\
+\hline
+`\# text` &  & first-level header\\
+\hline
+`\#\# text` &  & second-level header\\
+\hline
+\end{tabular}
+
+Some other simple things you can do in Markdown include:
+
+\begin{itemize}
+\tightlist
+\item
+  Lists (ordered or bulleted)
+\item
+  Equations
+\item
+  Tables
+\item
+  Figures from file
+\item
+  Block quotes
+\item
+  Superscripts
+\end{itemize}
+
 \hypertarget{dashboards}{%
 \section{Dashboards}\label{dashboards}}
+
+\hypertarget{learn-more-3}{%
+\section{Learn more}\label{learn-more-3}}
+
+For more Markdown conventions, see \href{https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf}{RStudio's R Markdown Reference Guide} (link also available through ``Help'' in RStudio).
+
+If you'd like to find out more, here are two good how-to books on reproducible research in R are:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Reproducible Research with R and RStudio}, Christopher Gandrud
+\item
+  \emph{Dynamic Documents with R and knitr}, Yihui Xie
+\end{itemize}
 
 \hypertarget{tidy}{%
 \chapter{Tidy}\label{tidy}}
@@ -1708,18 +1809,6 @@ format, to make it easier for you to get started with plotting. However,
 to leverage the power of \textbf{ggplot2} for real datasets, you have to know
 how to get them into this tidy format. This section will explain this format,
 as well as how you can clean real datasets to convert them into this format.
-
-\hypertarget{tidy-format}{%
-\section{Tidy format}\label{tidy-format}}
-
-\newthought{When you hear the term} ``tidy data'', you might just think of a ``clean''
-dataset---one where unneeded columns have been removed, for example, and
-perhaps that's in a nice \textbf{rectangular format}.\footnote{\textbf{rectangular format.} A data format
-  where each column has data in the same class (e.g., date, number) and is the
-  same length. (Think of the format of data in a table of a paper, or in a clean
-  Excel spreadsheet.}
-
-{[}More about tidy data{]}
 
 \hypertarget{tidyverse-tools}{%
 \section{Tidyverse tools}\label{tidyverse-tools}}
@@ -1737,13 +1826,11 @@ be further from the truth. With a collection of tools available through the
 you can write clean and compact code to clean even very large and
 messy datasets.
 
-This collection of tools follows the principle that hard problems can be best solved
-by small tools that can be combined together, very much in-line with the \textbf{Unix
-philosophy}.
-
 The tidyverse works as well as it does because, for many parts of it, it requires
 a common input and output, and those input and output specifications are
-identical (the tidy data format).
+identical (the tidy data format).\footnote{There are some clear specifications for this
+  format. I'm not going to go into them here, but several of the references given
+  in the ``Learn More'' section go into depth in describing and defining this format.}
 If you want to get a better idea of this concept, and why it's so powerful,
 think of some of the
 classic toys, like Legos (train sets and Lincoln logs also
@@ -1754,35 +1841,227 @@ means that the blocks can be joined together in an extraordinary number of
 different combinations, and that you can imagine and then make very complex
 structures with the blocks.
 
-\hypertarget{subsetting}{%
-\section{Subsetting}\label{subsetting}}
+The functions in the tidyverse work this way. For the major data cleaning functions,
+they all take the same format of input (a tidy tibble) and they all output that
+same format of input. Just like you can build Legos on top of each other in different
+orders and patterns to create lots of different structures, this framework of
+small tools that work on the same type of input and produce the same type of output
+allow you to string together lots of small, simple calls to do some very complex things.
 
-\hypertarget{selecting-columns}{%
-\subsection{Selecting columns}\label{selecting-columns}}
+To work with data with tidyverse tools, we'll use two main ideas.
+The first is that we'll use many small tools that each do one thing well and that
+can be combined in lots of configurations to achieve complex tasks. The second is
+that we'll string these small functions togther using a special operator
+called the ``pipe operator''.
 
-\hypertarget{slicing-rows}{%
-\subsection{Slicing rows}\label{slicing-rows}}
+The main functions in the tidyverse (sometimes called ``verbs'') all do simple things.
+For example, there are functions to \texttt{select} certain columns, \texttt{slice} to specific
+rows, \texttt{filter} to a set of rows that match some criterion, \texttt{mutate} existing columns
+to create new columns or change existing ones in place, and \texttt{summarize} a dataframe,
+possibly one that you \texttt{group\_by} certain characteristics of the data (e.g., a summary
+of mean height \textbf{grouped by} gender).
 
-\hypertarget{filtering-rows}{%
-\subsection{Filtering rows}\label{filtering-rows}}
+The second main idea for this data cleaning approach is that we'll use a
+\textbf{pipe operator} (\texttt{\%\textgreater{}\%}). This operator lets you input a tidy dataset as the first
+argument of a function. In practice, this allows you to string together a ``pipeline'' of
+data cleaning calls that is very clean and compact.
 
-\hypertarget{adding}{%
-\section{Adding}\label{adding}}
+\hypertarget{tidying-example}{%
+\section{Tidying example}\label{tidying-example}}
 
-\hypertarget{summarizing}{%
-\section{Summarizing}\label{summarizing}}
+We've been using an example dataset with fatal motor vehicle accidents. I downloaded the raw
+data from the \href{https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars}{Fatality Analysis Reporting System (FARS)}, and the
+original download was a large zipped file, with separate files for variables about the
+accident, the people involved, etc.
 
-\hypertarget{reformatting}{%
-\section{Reformatting}\label{reformatting}}
+In this short booklet, I won't be able to teach you all the tools you can use to tidy
+a dataset in R, but I can quickly walk you through an example to show you how powerful these
+tools can be, and how clean and efficient the final code is. R's power for data analytics
+comes in part from these wonderful tools for working with data, and in a typical data analysis
+project, I'll use these tools extensive to create different summaries and views of the data
+as I work. You will definitely want to learn these tools if you're serious about using R,
+so I've provided several places to go to master them in the ``Learn more'' section.
 
-\hypertarget{learn-more-3}{%
-\section{Learn more}\label{learn-more-3}}
+For the rest of the section, we'll look at cleaning up data from the Federal Accident
+Reporting System, the source of the example data we've used in other sections.
+If you completed the set-up in the ``Prerequisites'', you should be able to load this
+data using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(}\StringTok{"readr"}\NormalTok{)}
+\NormalTok{fl_accidents <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/accident.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+As a reminder, to print out some information about this data, call the object's name:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fl_accidents}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 34,247 x 52
+##    STATE ST_CASE VE_TOTAL VE_FORMS PVH_INVL
+##    <dbl>   <dbl>    <dbl>    <dbl>    <dbl>
+##  1     1   10001        1        1        0
+##  2     1   10002        1        1        0
+##  3     1   10003        3        3        0
+##  4     1   10004        1        1        0
+##  5     1   10005        1        1        0
+##  6     1   10006        2        2        0
+##  7     1   10007        2        2        0
+##  8     1   10008        1        1        0
+##  9     1   10009        1        1        0
+## 10     1   10010        1        1        0
+## # ... with 34,237 more rows, and 47 more
+## #   variables: PEDS <dbl>, PERNOTMVIT <dbl>,
+## #   PERMVIT <dbl>, PERSONS <dbl>,
+## #   COUNTY <dbl>, CITY <dbl>, DAY <dbl>,
+## #   MONTH <dbl>, YEAR <dbl>, DAY_WEEK <dbl>,
+## #   HOUR <dbl>, MINUTE <dbl>, NHS <dbl>,
+## #   RUR_URB <dbl>, FUNC_SYS <dbl>,
+## #   RD_OWNER <dbl>, ROUTE <dbl>,
+## #   TWAY_ID <chr>, TWAY_ID2 <chr>,
+## #   MILEPT <dbl>, LATITUDE <dbl>,
+## #   LONGITUD <dbl>, SP_JUR <dbl>,
+## #   HARM_EV <dbl>, MAN_COLL <dbl>,
+## #   RELJCT1 <dbl>, RELJCT2 <dbl>,
+## #   TYP_INT <dbl>, WRK_ZONE <dbl>,
+## #   REL_ROAD <dbl>, LGT_COND <dbl>,
+## #   WEATHER1 <dbl>, WEATHER2 <dbl>,
+## #   WEATHER <dbl>, SCH_BUS <dbl>,
+## #   RAIL <chr>, NOT_HOUR <dbl>,
+## #   NOT_MIN <dbl>, ARR_HOUR <dbl>,
+## #   ARR_MIN <dbl>, HOSP_HR <dbl>,
+## #   HOSP_MN <dbl>, CF1 <dbl>, CF2 <dbl>,
+## #   CF3 <dbl>, FATALS <dbl>, DRUNK_DR <dbl>
+\end{verbatim}
+
+This is a large dataset, with over 50 columns and over 34,000 rows. It records details about all of
+the fatal motor vehicle accidents in the US in 2017 (at least, that were reported to this database).
+Currently it inclues all states, although we're planning to limit it to Florida.
+In this section, you'll work through cleaning up this data, as you might if you were starting
+from this raw data and needed to create summaries and plots similar to those in other sections of
+this booklet.
+
+The following piece of code is all the code you need to transform this dataset into the
+\texttt{fl\_accidents} dataset we've used in earlier examples.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(magrittr)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(tidyr)}
+\KeywordTok{library}\NormalTok{(stringr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\NormalTok{fl_accidents }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename_all}\NormalTok{(}\DataTypeTok{.funs =}\NormalTok{ str_to_lower) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(state, county, day, month, year, latitude, }
+\NormalTok{        longitud, fatals) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ }
+\StringTok{    }\DecValTok{12}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{county =} \KeywordTok{str_pad}\NormalTok{(county, }\DataTypeTok{width =} \DecValTok{3}\NormalTok{, }
+    \DataTypeTok{pad =} \StringTok{"0"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unite}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ fips, }\KeywordTok{c}\NormalTok{(state, }
+\NormalTok{    county), }\DataTypeTok{sep =} \StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unite}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ date, }\KeywordTok{c}\NormalTok{(month, }
+\NormalTok{    day, year), }\DataTypeTok{sep =} \StringTok{"-"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{date =} \KeywordTok{mdy}\NormalTok{(date)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(date }\OperatorTok{>=}\StringTok{ }\KeywordTok{mdy}\NormalTok{(}\StringTok{"9-7-2017"}\NormalTok{) }\OperatorTok{&}\StringTok{ }\NormalTok{date }\OperatorTok{<=}\StringTok{ }\KeywordTok{mdy}\NormalTok{(}\StringTok{"9-13-2017"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 37 x 5
+##    fips  date       latitude longitud fatals
+##    <chr> <date>        <dbl>    <dbl>  <dbl>
+##  1 12031 2017-09-08     30.2    -81.5      1
+##  2 12095 2017-09-07     28.5    -81.4      1
+##  3 12097 2017-09-08     28.3    -81.3      1
+##  4 12095 2017-09-07     28.6    -81.2      1
+##  5 12031 2017-09-08     30.2    -81.8      1
+##  6 12033 2017-09-07     30.6    -87.4      2
+##  7 12023 2017-09-10     30.1    -82.7      1
+##  8 12075 2017-09-08     29.6    -82.9      1
+##  9 12045 2017-09-09     30.1    -85.3      2
+## 10 12031 2017-09-12     30.4    -81.8      1
+## # ... with 27 more rows
+\end{verbatim}
+
+This function takes the large
+original dataset. It first \emph{renames} all the columns---they were in all capital letters,
+which are a pain to type in your code, so we're using a function from the \texttt{stringr} package
+to change them all to lowercase. We're then \emph{selecting} just the columns we want to work with
+for the plot, using their column names to pick them (\texttt{state}, \texttt{county}, etc.). We're then
+\emph{filtering} to just the observations in Florida (where the state FIPS code is 12).
+Counties have five digit FIPS codes that are useful to use when merging different datasets,
+including merging in geographic data, and the dataset at this stage has the state part of the
+FIPS code and the county part in different columns. The county part is currently in a numeric
+class, which I need to ``pad'' with 0s at the beginning if it's currently fewer than three digits.
+We'll \emph{mutate} the county FIPs code to pad it with 0s, using another function from the
+\texttt{stringr} package. We'll then \emph{unite} the state and county FIPS columns to create a single
+column with the 5-digit FIPS code. Next, we want to convert the date information into
+a ``Date'' class, which will let us work with these values more easily. We'll \emph{unite}
+all the columns with date information (\texttt{month}, \texttt{day}, \texttt{year}) into a single column, and
+then we'll use a function from the \texttt{lubridate} package to \emph{mutate} this column to have
+a date class. Finally, we'll \emph{filter} to just the observations with a date within a week of
+Hurricane Irma's landfall on September 10, 2017.
+
+At this stage, don't worry if you don't know which functions you should use to clean up a
+new dataset, just try to get a feel for how this tidyverse framework is allowing you to
+clean up the dataframe with lots of small, interoperable tools. In the example code,
+try highlighting and running different portions of the code and check out the output
+at each step along the way. This will help you get a better idea for how this process works.
+
+Becoming familiar with these tools so you can use them yourself takes some time, but is well
+work the effort. In the ``Learn more'' section, I've got some tips on where you can go to
+develop those skills.
+
+Finally, the code above is cleaning the data, but not overwriting the original \texttt{fl\_accidents}
+object---instead, it's printing out the result, but not saving it for you to use later. To
+use the cleaned data, you'll need to overwrite the original R object. You can do that in
+two ways. First, you can use the gets arrow to assign the output to the same R object name:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fl_accidents <-}\StringTok{ }\NormalTok{fl_accidents }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename_all}\NormalTok{(}\DataTypeTok{.funs =}\NormalTok{ str_to_lower) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(state, county, day, month, year, latitude, }
+\NormalTok{        longitud, fatals) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ }
+\StringTok{    }\DecValTok{12}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{county =} \KeywordTok{str_pad}\NormalTok{(county, }\DataTypeTok{width =} \DecValTok{3}\NormalTok{, }
+    \DataTypeTok{pad =} \StringTok{"0"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unite}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ fips, }\KeywordTok{c}\NormalTok{(state, }
+\NormalTok{    county), }\DataTypeTok{sep =} \StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unite}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ date, }\KeywordTok{c}\NormalTok{(month, }
+\NormalTok{    day, year), }\DataTypeTok{sep =} \StringTok{"-"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{date =} \KeywordTok{mdy}\NormalTok{(date)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(date }\OperatorTok{>=}\StringTok{ }\KeywordTok{mdy}\NormalTok{(}\StringTok{"9-7-2017"}\NormalTok{) }\OperatorTok{&}\StringTok{ }\NormalTok{date }\OperatorTok{<=}\StringTok{ }\KeywordTok{mdy}\NormalTok{(}\StringTok{"9-13-2017"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+If you want to be even more compact, you can use something called the \textbf{compound pipe operator}
+(\texttt{\%\textless{}\textgreater{}\%}). This inputs an R object and then, when it's done running all the code, overwrites that
+R object with the output. You can think of it as combining the \texttt{\textless{}-} and \texttt{\%\textgreater{}\%} operators. Here's
+how you would use it to save the cleaned version of the data to the \texttt{fl\_accidents} object name:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{rename_all}\NormalTok{(}\DataTypeTok{.funs =}\NormalTok{ str_to_lower) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(state, county, day, month, year, latitude, }
+\NormalTok{        longitud, fatals) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(state }\OperatorTok{==}\StringTok{ }
+\StringTok{    }\DecValTok{12}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{county =} \KeywordTok{str_pad}\NormalTok{(county, }\DataTypeTok{width =} \DecValTok{3}\NormalTok{, }
+    \DataTypeTok{pad =} \StringTok{"0"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unite}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ fips, }\KeywordTok{c}\NormalTok{(state, }
+\NormalTok{    county), }\DataTypeTok{sep =} \StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unite}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ date, }\KeywordTok{c}\NormalTok{(month, }
+\NormalTok{    day, year), }\DataTypeTok{sep =} \StringTok{"-"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{date =} \KeywordTok{mdy}\NormalTok{(date)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(date }\OperatorTok{>=}\StringTok{ }\KeywordTok{mdy}\NormalTok{(}\StringTok{"9-7-2017"}\NormalTok{) }\OperatorTok{&}\StringTok{ }\NormalTok{date }\OperatorTok{<=}\StringTok{ }\KeywordTok{mdy}\NormalTok{(}\StringTok{"9-13-2017"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{learn-more-4}{%
+\section{Learn more}\label{learn-more-4}}
 
 To learn more about working with data using tidyverse tools, one of the best sources is the
 book \href{https://r4ds.had.co.nz/}{R for Data Science} mentioned in an earlier ``Learn more'' section.
 This book is available
 for a very reasonable price in paperback as well as free online through bookdown.org. One
 of its coauthors (Hadley Wickham) is the creator of the tidyverse and many of its packages.
+It includes a full description of the ``tidy data'' format, as well as lots of instruction on
+using tidyverse tools to work with datasets to convert them to, or work with them once they're
+in, this format.
 
 The tidyverse is a very popular tool now for working with data in R. If you nose around the
 internet a bit, you should be able to find a lot of example blog posts using tidyverse tools.

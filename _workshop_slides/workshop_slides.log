@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  28 MAR 2019 02:28
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  28 MAR 2019 10:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1846,79 +1846,111 @@ Overfull \vbox (6.15703pt too high) detected at line 530
 ] [30
 
 ]
-File: images/maze-minecraft.png Graphic file (type bmp)
-<images/maze-minecraft.png>
+File: images/google_maps.png Graphic file (type bmp)
+<images/google_maps.png>
 [31
 
-] [32
+]
+File: images/javascript.png Graphic file (type bmp)
+<images/javascript.png>
+[32
 
 ]
-File: images/knuth_bi.jpg Graphic file (type bmp)
-<images/knuth_bi.jpg>
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 573.
+(Font)              <12> on input line 566.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 573.
+(Font)              <8> on input line 566.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 573.
+(Font)              <6> on input line 566.
 [33
 
-]
-File: images/yihui.jpg Graphic file (type bmp)
-<images/yihui.jpg>
-[34
-
-] [35
-
-]
-\openout4 = `workshop_slides.vrb'.
-
-(./workshop_slides.vrb) [36
-
-]
-\openout4 = `workshop_slides.vrb'.
-
-(./workshop_slides.vrb) [37
+] [34
 
 ]
 File: images/example_code.png Graphic file (type bmp)
 <images/example_code.png>
+[35
+
+]
+File: images/maze-minecraft.png Graphic file (type bmp)
+<images/maze-minecraft.png>
+[36
+
+] [37
+
+]
+File: images/knuth_bi.jpg Graphic file (type bmp)
+<images/knuth_bi.jpg>
 [38
 
 ]
-File: images/workshop_booklet.png Graphic file (type bmp)
-<images/workshop_booklet.png>
+File: images/yihui.jpg Graphic file (type bmp)
+<images/yihui.jpg>
 [39
 
 ] [40
 
 ]
+\openout4 = `workshop_slides.vrb'.
+
+(./workshop_slides.vrb) [41
+
+]
+\openout4 = `workshop_slides.vrb'.
+
+(./workshop_slides.vrb) [42
+
+]
+File: images/example_code.png Graphic file (type bmp)
+<images/example_code.png>
+[43
+
+]
+File: images/workshop_booklet.png Graphic file (type bmp)
+<images/workshop_booklet.png>
+[44
+
+] [45
+
+]
 File: images/tidy-1.png Graphic file (type bmp)
 <images/tidy-1.png>
-[41
+[46
 
-] [42
+] [47
 
 ]
 File: images/legos.jpg Graphic file (type bmp)
 <images/legos.jpg>
 
-Overfull \vbox (7.84782pt too high) detected at line 717
+Overfull \vbox (7.84782pt too high) detected at line 760
  []
 
-[43
+[48
+
+] [49
+
+]
+File: images/magrittr.png Graphic file (type bmp)
+<images/magrittr.png>
+[50
+
+]
+\openout4 = `workshop_slides.vrb'.
+
+(./workshop_slides.vrb) [51
 
 ]
 File: images/example_code.png Graphic file (type bmp)
 <images/example_code.png>
-[44
+[52
 
 ]
 File: images/CRAN_package_10000.png Graphic file (type bmp)
 <images/CRAN_package_10000.png>
-[45
+[53
 
-] [46
+] [54
 
 ]
 \tf@nav=\write7
@@ -1930,11 +1962,11 @@ File: images/CRAN_package_10000.png Graphic file (type bmp)
 \tf@snm=\write9
 \openout9 = `workshop_slides.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 747.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 747.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 831.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 831.
 (./workshop_slides.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 747.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 747.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 831.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 831.
 Package rerunfilecheck Info: File `workshop_slides.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
 
@@ -1942,12 +1974,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 36709 strings out of 494921
- 743835 string characters out of 6174292
- 815644 words of memory out of 5000000
- 39950 multiletter control sequences out of 15000+600000
- 540988 words of font info for 109 fonts, out of 8000000 for 9000
+ 36778 strings out of 494921
+ 745314 string characters out of 6174292
+ 816410 words of memory out of 5000000
+ 40013 multiletter control sequences out of 15000+600000
+ 540996 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  50i,15n,80p,802b,807s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on workshop_slides.pdf (46 pages).
+Output written on workshop_slides.pdf (54 pages).

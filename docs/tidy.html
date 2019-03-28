@@ -176,19 +176,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>5</b> Report</a><ul>
 <li class="chapter" data-level="5.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>5.1</b> RMarkdown</a></li>
 <li class="chapter" data-level="5.2" data-path="report.html"><a href="report.html#dashboards"><i class="fa fa-check"></i><b>5.2</b> Dashboards</a></li>
+<li class="chapter" data-level="5.3" data-path="report.html"><a href="report.html#learn-more-3"><i class="fa fa-check"></i><b>5.3</b> Learn more</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>6</b> Tidy</a><ul>
-<li class="chapter" data-level="6.1" data-path="tidy.html"><a href="tidy.html#tidy-format"><i class="fa fa-check"></i><b>6.1</b> Tidy format</a></li>
-<li class="chapter" data-level="6.2" data-path="tidy.html"><a href="tidy.html#tidyverse-tools"><i class="fa fa-check"></i><b>6.2</b> Tidyverse tools</a></li>
-<li class="chapter" data-level="6.3" data-path="tidy.html"><a href="tidy.html#subsetting"><i class="fa fa-check"></i><b>6.3</b> Subsetting</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="tidy.html"><a href="tidy.html#selecting-columns"><i class="fa fa-check"></i><b>6.3.1</b> Selecting columns</a></li>
-<li class="chapter" data-level="6.3.2" data-path="tidy.html"><a href="tidy.html#slicing-rows"><i class="fa fa-check"></i><b>6.3.2</b> Slicing rows</a></li>
-<li class="chapter" data-level="6.3.3" data-path="tidy.html"><a href="tidy.html#filtering-rows"><i class="fa fa-check"></i><b>6.3.3</b> Filtering rows</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="tidy.html"><a href="tidy.html#adding"><i class="fa fa-check"></i><b>6.4</b> Adding</a></li>
-<li class="chapter" data-level="6.5" data-path="tidy.html"><a href="tidy.html#summarizing"><i class="fa fa-check"></i><b>6.5</b> Summarizing</a></li>
-<li class="chapter" data-level="6.6" data-path="tidy.html"><a href="tidy.html#reformatting"><i class="fa fa-check"></i><b>6.6</b> Reformatting</a></li>
-<li class="chapter" data-level="6.7" data-path="tidy.html"><a href="tidy.html#learn-more-3"><i class="fa fa-check"></i><b>6.7</b> Learn more</a></li>
+<li class="chapter" data-level="6.1" data-path="tidy.html"><a href="tidy.html#tidyverse-tools"><i class="fa fa-check"></i><b>6.1</b> Tidyverse tools</a></li>
+<li class="chapter" data-level="6.2" data-path="tidy.html"><a href="tidy.html#tidying-example"><i class="fa fa-check"></i><b>6.2</b> Tidying example</a></li>
+<li class="chapter" data-level="6.3" data-path="tidy.html"><a href="tidy.html#learn-more-4"><i class="fa fa-check"></i><b>6.3</b> Learn more</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>7</b> Final Words</a></li>
 <li class="divider"></li>
@@ -223,29 +216,19 @@ format, to make it easier for you to get started with plotting. However,
 to leverage the power of <strong>ggplot2</strong> for real datasets, you have to know
 how to get them into this tidy format. This section will explain this format,
 as well as how you can clean real datasets to convert them into this format.</p>
-<div id="tidy-format" class="section level2">
-<h2><span class="header-section-number">6.1</span> Tidy format</h2>
-<p><span class="newthought">When you hear the term</span> “tidy data”, you might just think of a “clean”
-dataset—one where unneeded columns have been removed, for example, and
-perhaps that’s in a nice <strong>rectangular format</strong>.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a></p>
-<p>[More about tidy data]</p>
-</div>
 <div id="tidyverse-tools" class="section level2">
-<h2><span class="header-section-number">6.2</span> Tidyverse tools</h2>
+<h2><span class="header-section-number">6.1</span> Tidyverse tools</h2>
 <p><span class="newthought">As an epidemiologist,</span> I meet many people who learned SAS as students
 and continue
 to use it. A common misperception is that R is good for visualizations, but bad for
 cleaning data. While in the past this might have been (somewhat) valid, now it couldn’t
 be further from the truth. With a collection of tools available through the
-<strong>tidyverse</strong>,<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>
+<strong>tidyverse</strong>,<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>
 you can write clean and compact code to clean even very large and
 messy datasets.</p>
-<p>This collection of tools follows the principle that hard problems can be best solved
-by small tools that can be combined together, very much in-line with the <strong>Unix
-philosophy</strong>.</p>
 <p>The tidyverse works as well as it does because, for many parts of it, it requires
 a common input and output, and those input and output specifications are
-identical (the tidy data format).
+identical (the tidy data format).<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>
 If you want to get a better idea of this concept, and why it’s so powerful,
 think of some of the
 classic toys, like Legos (train sets and Lincoln logs also
@@ -255,35 +238,178 @@ what’s at the top (“output”) of each Lego block. This common input and out
 means that the blocks can be joined together in an extraordinary number of
 different combinations, and that you can imagine and then make very complex
 structures with the blocks.</p>
+<p>The functions in the tidyverse work this way. For the major data cleaning functions,
+they all take the same format of input (a tidy tibble) and they all output that
+same format of input. Just like you can build Legos on top of each other in different
+orders and patterns to create lots of different structures, this framework of
+small tools that work on the same type of input and produce the same type of output
+allow you to string together lots of small, simple calls to do some very complex things.</p>
+<p>To work with data with tidyverse tools, we’ll use two main ideas.
+The first is that we’ll use many small tools that each do one thing well and that
+can be combined in lots of configurations to achieve complex tasks. The second is
+that we’ll string these small functions togther using a special operator
+called the “pipe operator”.</p>
+<p>The main functions in the tidyverse (sometimes called “verbs”) all do simple things.
+For example, there are functions to <code>select</code> certain columns, <code>slice</code> to specific
+rows, <code>filter</code> to a set of rows that match some criterion, <code>mutate</code> existing columns
+to create new columns or change existing ones in place, and <code>summarize</code> a dataframe,
+possibly one that you <code>group_by</code> certain characteristics of the data (e.g., a summary
+of mean height <strong>grouped by</strong> gender).</p>
+<p>The second main idea for this data cleaning approach is that we’ll use a
+<strong>pipe operator</strong> (<code>%&gt;%</code>). This operator lets you input a tidy dataset as the first
+argument of a function. In practice, this allows you to string together a “pipeline” of
+data cleaning calls that is very clean and compact.</p>
 </div>
-<div id="subsetting" class="section level2">
-<h2><span class="header-section-number">6.3</span> Subsetting</h2>
-<div id="selecting-columns" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> Selecting columns</h3>
+<div id="tidying-example" class="section level2">
+<h2><span class="header-section-number">6.2</span> Tidying example</h2>
+<p>We’ve been using an example dataset with fatal motor vehicle accidents. I downloaded the raw
+data from the <a href="https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars">Fatality Analysis Reporting System (FARS)</a>, and the
+original download was a large zipped file, with separate files for variables about the
+accident, the people involved, etc.</p>
+<p>In this short booklet, I won’t be able to teach you all the tools you can use to tidy
+a dataset in R, but I can quickly walk you through an example to show you how powerful these
+tools can be, and how clean and efficient the final code is. R’s power for data analytics
+comes in part from these wonderful tools for working with data, and in a typical data analysis
+project, I’ll use these tools extensive to create different summaries and views of the data
+as I work. You will definitely want to learn these tools if you’re serious about using R,
+so I’ve provided several places to go to master them in the “Learn more” section.</p>
+<p>For the rest of the section, we’ll look at cleaning up data from the Federal Accident
+Reporting System, the source of the example data we’ve used in other sections.
+If you completed the set-up in the “Prerequisites”, you should be able to load this
+data using:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
+fl_accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/accident.csv&quot;</span>)</code></pre>
+<p>As a reminder, to print out some information about this data, call the object’s name:</p>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents</code></pre>
+<pre><code>## # A tibble: 34,247 x 52
+##    STATE ST_CASE VE_TOTAL VE_FORMS PVH_INVL  PEDS PERNOTMVIT PERMVIT
+##    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1   10001        1        1        0     0          0       1
+##  2     1   10002        1        1        0     0          0       1
+##  3     1   10003        3        3        0     0          0       3
+##  4     1   10004        1        1        0     0          0       1
+##  5     1   10005        1        1        0     0          0       2
+##  6     1   10006        2        2        0     0          0       4
+##  7     1   10007        2        2        0     0          0       2
+##  8     1   10008        1        1        0     0          0       1
+##  9     1   10009        1        1        0     0          0       1
+## 10     1   10010        1        1        0     1          1       1
+## # … with 34,237 more rows, and 44 more variables: PERSONS &lt;dbl&gt;,
+## #   COUNTY &lt;dbl&gt;, CITY &lt;dbl&gt;, DAY &lt;dbl&gt;, MONTH &lt;dbl&gt;, YEAR &lt;dbl&gt;,
+## #   DAY_WEEK &lt;dbl&gt;, HOUR &lt;dbl&gt;, MINUTE &lt;dbl&gt;, NHS &lt;dbl&gt;, RUR_URB &lt;dbl&gt;,
+## #   FUNC_SYS &lt;dbl&gt;, RD_OWNER &lt;dbl&gt;, ROUTE &lt;dbl&gt;, TWAY_ID &lt;chr&gt;,
+## #   TWAY_ID2 &lt;chr&gt;, MILEPT &lt;dbl&gt;, LATITUDE &lt;dbl&gt;, LONGITUD &lt;dbl&gt;,
+## #   SP_JUR &lt;dbl&gt;, HARM_EV &lt;dbl&gt;, MAN_COLL &lt;dbl&gt;, RELJCT1 &lt;dbl&gt;,
+## #   RELJCT2 &lt;dbl&gt;, TYP_INT &lt;dbl&gt;, WRK_ZONE &lt;dbl&gt;, REL_ROAD &lt;dbl&gt;,
+## #   LGT_COND &lt;dbl&gt;, WEATHER1 &lt;dbl&gt;, WEATHER2 &lt;dbl&gt;, WEATHER &lt;dbl&gt;,
+## #   SCH_BUS &lt;dbl&gt;, RAIL &lt;chr&gt;, NOT_HOUR &lt;dbl&gt;, NOT_MIN &lt;dbl&gt;,
+## #   ARR_HOUR &lt;dbl&gt;, ARR_MIN &lt;dbl&gt;, HOSP_HR &lt;dbl&gt;, HOSP_MN &lt;dbl&gt;,
+## #   CF1 &lt;dbl&gt;, CF2 &lt;dbl&gt;, CF3 &lt;dbl&gt;, FATALS &lt;dbl&gt;, DRUNK_DR &lt;dbl&gt;</code></pre>
+<p>This is a large dataset, with over 50 columns and over 34,000 rows. It records details about all of
+the fatal motor vehicle accidents in the US in 2017 (at least, that were reported to this database).
+Currently it inclues all states, although we’re planning to limit it to Florida.
+In this section, you’ll work through cleaning up this data, as you might if you were starting
+from this raw data and needed to create summaries and plots similar to those in other sections of
+this booklet.</p>
+<p>The following piece of code is all the code you need to transform this dataset into the
+<code>fl_accidents</code> dataset we’ve used in earlier examples.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(tidyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;tidyr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:magrittr&#39;:
+## 
+##     extract</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
+<span class="kw">library</span>(lubridate)
+
+fl_accidents <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename_all</span>(<span class="dt">.funs =</span> str_to_lower) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(state, county, day, month, year, latitude, longitud, fatals) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> </span><span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">county =</span> <span class="kw">str_pad</span>(county, <span class="dt">width =</span> <span class="dv">3</span>, <span class="dt">pad =</span> <span class="st">&quot;0&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> fips, <span class="kw">c</span>(state, county), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> date, <span class="kw">c</span>(month, day, year), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">mdy</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-7-2017&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>date <span class="op">&lt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-13-2017&quot;</span>))</code></pre>
+<pre><code>## # A tibble: 37 x 5
+##    fips  date       latitude longitud fatals
+##    &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+##  1 12031 2017-09-08     30.2    -81.5      1
+##  2 12095 2017-09-07     28.5    -81.4      1
+##  3 12097 2017-09-08     28.3    -81.3      1
+##  4 12095 2017-09-07     28.6    -81.2      1
+##  5 12031 2017-09-08     30.2    -81.8      1
+##  6 12033 2017-09-07     30.6    -87.4      2
+##  7 12023 2017-09-10     30.1    -82.7      1
+##  8 12075 2017-09-08     29.6    -82.9      1
+##  9 12045 2017-09-09     30.1    -85.3      2
+## 10 12031 2017-09-12     30.4    -81.8      1
+## # … with 27 more rows</code></pre>
+<p>This function takes the large
+original dataset. It first <em>renames</em> all the columns—they were in all capital letters,
+which are a pain to type in your code, so we’re using a function from the <code>stringr</code> package
+to change them all to lowercase. We’re then <em>selecting</em> just the columns we want to work with
+for the plot, using their column names to pick them (<code>state</code>, <code>county</code>, etc.). We’re then
+<em>filtering</em> to just the observations in Florida (where the state FIPS code is 12).
+Counties have five digit FIPS codes that are useful to use when merging different datasets,
+including merging in geographic data, and the dataset at this stage has the state part of the
+FIPS code and the county part in different columns. The county part is currently in a numeric
+class, which I need to “pad” with 0s at the beginning if it’s currently fewer than three digits.
+We’ll <em>mutate</em> the county FIPs code to pad it with 0s, using another function from the
+<code>stringr</code> package. We’ll then <em>unite</em> the state and county FIPS columns to create a single
+column with the 5-digit FIPS code. Next, we want to convert the date information into
+a “Date” class, which will let us work with these values more easily. We’ll <em>unite</em>
+all the columns with date information (<code>month</code>, <code>day</code>, <code>year</code>) into a single column, and
+then we’ll use a function from the <code>lubridate</code> package to <em>mutate</em> this column to have
+a date class. Finally, we’ll <em>filter</em> to just the observations with a date within a week of
+Hurricane Irma’s landfall on September 10, 2017.</p>
+<p>At this stage, don’t worry if you don’t know which functions you should use to clean up a
+new dataset, just try to get a feel for how this tidyverse framework is allowing you to
+clean up the dataframe with lots of small, interoperable tools. In the example code,
+try highlighting and running different portions of the code and check out the output
+at each step along the way. This will help you get a better idea for how this process works.</p>
+<p>Becoming familiar with these tools so you can use them yourself takes some time, but is well
+work the effort. In the “Learn more” section, I’ve got some tips on where you can go to
+develop those skills.</p>
+<p>Finally, the code above is cleaning the data, but not overwriting the original <code>fl_accidents</code>
+object—instead, it’s printing out the result, but not saving it for you to use later. To
+use the cleaned data, you’ll need to overwrite the original R object. You can do that in
+two ways. First, you can use the gets arrow to assign the output to the same R object name:</p>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents &lt;-<span class="st"> </span>fl_accidents <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename_all</span>(<span class="dt">.funs =</span> str_to_lower) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(state, county, day, month, year, latitude, longitud, fatals) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> </span><span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">county =</span> <span class="kw">str_pad</span>(county, <span class="dt">width =</span> <span class="dv">3</span>, <span class="dt">pad =</span> <span class="st">&quot;0&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> fips, <span class="kw">c</span>(state, county), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> date, <span class="kw">c</span>(month, day, year), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">mdy</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-7-2017&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>date <span class="op">&lt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-13-2017&quot;</span>))</code></pre>
+<p>If you want to be even more compact, you can use something called the <strong>compound pipe operator</strong>
+(<code>%&lt;&gt;%</code>). This inputs an R object and then, when it’s done running all the code, overwrites that
+R object with the output. You can think of it as combining the <code>&lt;-</code> and <code>%&gt;%</code> operators. Here’s
+how you would use it to save the cleaned version of the data to the <code>fl_accidents</code> object name:</p>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents <span class="op">%&lt;&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename_all</span>(<span class="dt">.funs =</span> str_to_lower) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(state, county, day, month, year, latitude, longitud, fatals) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> </span><span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">county =</span> <span class="kw">str_pad</span>(county, <span class="dt">width =</span> <span class="dv">3</span>, <span class="dt">pad =</span> <span class="st">&quot;0&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> fips, <span class="kw">c</span>(state, county), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> date, <span class="kw">c</span>(month, day, year), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">mdy</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-7-2017&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>date <span class="op">&lt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-13-2017&quot;</span>))</code></pre>
 </div>
-<div id="slicing-rows" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Slicing rows</h3>
-</div>
-<div id="filtering-rows" class="section level3">
-<h3><span class="header-section-number">6.3.3</span> Filtering rows</h3>
-</div>
-</div>
-<div id="adding" class="section level2">
-<h2><span class="header-section-number">6.4</span> Adding</h2>
-</div>
-<div id="summarizing" class="section level2">
-<h2><span class="header-section-number">6.5</span> Summarizing</h2>
-</div>
-<div id="reformatting" class="section level2">
-<h2><span class="header-section-number">6.6</span> Reformatting</h2>
-</div>
-<div id="learn-more-3" class="section level2">
-<h2><span class="header-section-number">6.7</span> Learn more</h2>
+<div id="learn-more-4" class="section level2">
+<h2><span class="header-section-number">6.3</span> Learn more</h2>
 <p>To learn more about working with data using tidyverse tools, one of the best sources is the
 book <a href="https://r4ds.had.co.nz/">R for Data Science</a> mentioned in an earlier “Learn more” section.
 This book is available
 for a very reasonable price in paperback as well as free online through bookdown.org. One
-of its coauthors (Hadley Wickham) is the creator of the tidyverse and many of its packages.</p>
+of its coauthors (Hadley Wickham) is the creator of the tidyverse and many of its packages.
+It includes a full description of the “tidy data” format, as well as lots of instruction on
+using tidyverse tools to work with datasets to convert them to, or work with them once they’re
+in, this format.</p>
 <p>The tidyverse is a very popular tool now for working with data in R. If you nose around the
 internet a bit, you should be able to find a lot of example blog posts using tidyverse tools.
 Try a Google search to find some examples in a topic area that interests you (e.g., your
@@ -300,15 +426,14 @@ keeping them handy as you try to apply R to explore your own data.</p>
 <div class="footnotes">
 <hr />
 <ol start="31">
-<li id="fn31"><p><strong>rectangular format.</strong> A data format
-where each column has data in the same class (e.g., date, number) and is the
-same length. (Think of the format of data in a table of a paper, or in a clean
-Excel spreadsheet.<a href="tidy.html#fnref31" class="footnote-back">↩</a></p></li>
-<li id="fn32"><p><strong>tidyverse.</strong> A collection of packages to work with data in a
+<li id="fn31"><p><strong>tidyverse.</strong> A collection of packages to work with data in a
 “tidy” format, or to convert it to that format if needed. Many of these packages
 are developed and maintained by people at RStudio. If you run <code>library("tidyverse")</code>,
 you can load the core tidyverse packages in your R session. This way, you avoid
-having to load them one by one.<a href="tidy.html#fnref32" class="footnote-back">↩</a></p></li>
+having to load them one by one.<a href="tidy.html#fnref31" class="footnote-back">↩</a></p></li>
+<li id="fn32"><p>There are some clear specifications for this
+format. I’m not going to go into them here, but several of the references given
+in the “Learn More” section go into depth in describing and defining this format.<a href="tidy.html#fnref32" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

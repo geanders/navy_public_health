@@ -176,19 +176,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>5</b> Report</a><ul>
 <li class="chapter" data-level="5.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>5.1</b> RMarkdown</a></li>
 <li class="chapter" data-level="5.2" data-path="report.html"><a href="report.html#dashboards"><i class="fa fa-check"></i><b>5.2</b> Dashboards</a></li>
+<li class="chapter" data-level="5.3" data-path="report.html"><a href="report.html#learn-more-3"><i class="fa fa-check"></i><b>5.3</b> Learn more</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>6</b> Tidy</a><ul>
-<li class="chapter" data-level="6.1" data-path="tidy.html"><a href="tidy.html#tidy-format"><i class="fa fa-check"></i><b>6.1</b> Tidy format</a></li>
-<li class="chapter" data-level="6.2" data-path="tidy.html"><a href="tidy.html#tidyverse-tools"><i class="fa fa-check"></i><b>6.2</b> Tidyverse tools</a></li>
-<li class="chapter" data-level="6.3" data-path="tidy.html"><a href="tidy.html#subsetting"><i class="fa fa-check"></i><b>6.3</b> Subsetting</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="tidy.html"><a href="tidy.html#selecting-columns"><i class="fa fa-check"></i><b>6.3.1</b> Selecting columns</a></li>
-<li class="chapter" data-level="6.3.2" data-path="tidy.html"><a href="tidy.html#slicing-rows"><i class="fa fa-check"></i><b>6.3.2</b> Slicing rows</a></li>
-<li class="chapter" data-level="6.3.3" data-path="tidy.html"><a href="tidy.html#filtering-rows"><i class="fa fa-check"></i><b>6.3.3</b> Filtering rows</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="tidy.html"><a href="tidy.html#adding"><i class="fa fa-check"></i><b>6.4</b> Adding</a></li>
-<li class="chapter" data-level="6.5" data-path="tidy.html"><a href="tidy.html#summarizing"><i class="fa fa-check"></i><b>6.5</b> Summarizing</a></li>
-<li class="chapter" data-level="6.6" data-path="tidy.html"><a href="tidy.html#reformatting"><i class="fa fa-check"></i><b>6.6</b> Reformatting</a></li>
-<li class="chapter" data-level="6.7" data-path="tidy.html"><a href="tidy.html#learn-more-3"><i class="fa fa-check"></i><b>6.7</b> Learn more</a></li>
+<li class="chapter" data-level="6.1" data-path="tidy.html"><a href="tidy.html#tidyverse-tools"><i class="fa fa-check"></i><b>6.1</b> Tidyverse tools</a></li>
+<li class="chapter" data-level="6.2" data-path="tidy.html"><a href="tidy.html#tidying-example"><i class="fa fa-check"></i><b>6.2</b> Tidying example</a></li>
+<li class="chapter" data-level="6.3" data-path="tidy.html"><a href="tidy.html#learn-more-4"><i class="fa fa-check"></i><b>6.3</b> Learn more</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>7</b> Final Words</a></li>
 <li class="divider"></li>
@@ -213,11 +206,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="report" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Report</h1>
+<p><strong>Literate programming</strong>, an idea developed by Donald Knuth, mixes code that can be executed with regular text. The files you create can then be rendered, to run any embedded code. The final output will have results from your code and the regular text.</p>
+<p>The <code>knitr</code> package can be used for literate programming in R. In essence, <code>knitr</code> allows you to write an R Markdown file that can be rendered into a pdf, Word, or HTML document.</p>
 <div id="rmarkdown" class="section level2">
 <h2><span class="header-section-number">5.1</span> RMarkdown</h2>
+<p>Here are the basics of opening and rendering an R Markdown file in RStudio:</p>
+<ul>
+<li>To open a new R Markdown file, go to “File” -&gt; “New File” -&gt; “RMarkdown…” -&gt; for now, chose a “Document” in “HTML” format.</li>
+<li>This will open a new R Markdown file in RStudio. The file extension for R Markdown files is “.Rmd”.</li>
+<li>The new file comes with some example code and text. You can run the file as-is to try out the example. You will ultimately delete this example code and text and replace it with your own.</li>
+<li>Once you “knit” the R Markdown file, R will render an HTML file with the output. This is automatically saved in the same directory where you saved your .Rmd file.</li>
+<li>Write everything besides R code using Markdown syntax.</li>
+</ul>
+<p>To include R code in an RMarkdown document, you need to separate off the code chunk using the following syntax:</p>
+<pre><code>```{r}
+my_vec &lt;- 1:10
+```</code></pre>
+<p>This syntax tells R how to find the start and end of pieces of R code when the file is rendered. R will walk through, find each piece of R code, run it and create output (printed output or figures, for example), and then pass the file along to another program to complete rendering (e.g., Tex for pdf files).</p>
+<p>R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand what markup languages like Markdown are and how they work.</p>
+<p>In Word and other word processing programs you have used, you can add formatting using buttons and keyboard shortcuts (e.g., “Ctrl-B” for bold). The file saves the words you type. It also saves the formatting, but you see the final output, rather than the formatting markup, when you edit the file (WYSIWYG – what you see is what you get).</p>
+<p>In markup languages, on the other hand, you markup the document directly to show what formatting the final version should have (e.g., you type <code>**bold**</code> in the file to end up with a document with <strong>bold</strong>).</p>
+<p>Examples of markup languages include:</p>
+<ul>
+<li>HTML (HyperText Markup Language)</li>
+<li>LaTex</li>
+<li>Markdown (a “lightweight” markup language)</li>
+</ul>
+<p>To write a file in Markdown, you’ll need to learn the conventions for creating formatting. This table shows what you would need to write in a flat file for some common formatting choices:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Rendering</th>
+<th align="left">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>**text**</code></td>
+<td align="left"><strong>text</strong></td>
+<td align="left">boldface</td>
+</tr>
+<tr class="even">
+<td align="left"><code>*text*</code></td>
+<td align="left"><em>text</em></td>
+<td align="left">italicized</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[text](www.google.com)</code></td>
+<td align="left"><a href="www.google.com">text</a></td>
+<td align="left">hyperlink</td>
+</tr>
+<tr class="even">
+<td align="left"><code># text</code></td>
+<td align="left"></td>
+<td align="left">first-level header</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>## text</code></td>
+<td align="left"></td>
+<td align="left">second-level header</td>
+</tr>
+</tbody>
+</table>
+<p>Some other simple things you can do in Markdown include:</p>
+<ul>
+<li>Lists (ordered or bulleted)</li>
+<li>Equations</li>
+<li>Tables</li>
+<li>Figures from file</li>
+<li>Block quotes</li>
+<li>Superscripts</li>
+</ul>
 </div>
 <div id="dashboards" class="section level2">
 <h2><span class="header-section-number">5.2</span> Dashboards</h2>
+</div>
+<div id="learn-more-3" class="section level2">
+<h2><span class="header-section-number">5.3</span> Learn more</h2>
+<p>For more Markdown conventions, see <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">RStudio’s R Markdown Reference Guide</a> (link also available through “Help” in RStudio).</p>
+<p>If you’d like to find out more, here are two good how-to books on reproducible research in R are:</p>
+<ul>
+<li><em>Reproducible Research with R and RStudio</em>, Christopher Gandrud</li>
+<li><em>Dynamic Documents with R and knitr</em>, Yihui Xie</li>
+</ul>
 
 </div>
 </div>

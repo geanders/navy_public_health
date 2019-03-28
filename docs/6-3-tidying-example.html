@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="6.3 Tidying example | Data Visualization in R" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+<meta name="github-repo" content="rstudio/bookdown-demo" />
+
+<meta name="author" content="Brooke Anderson" />
+
+<meta name="date" content="2019-03-28" />
+
+
+<meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+
+<title>6.3 Tidying example | Data Visualization in R</title>
+
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/envisioned.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/jquery-1.12.4/jquery.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.5/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#prerequisites"><span class="toc-section-number">1</span> Prerequisites</a></li>
+<li class="has-sub"><a href="2-plot.html#plot"><span class="toc-section-number">2</span> Plot</a><ul>
+<li class="has-sub"><a href="2-1-plot-elements.html#plot-elements"><span class="toc-section-number">2.1</span> Plot elements</a><ul>
+<li><a href="2-1-plot-elements.html#example-data"><span class="toc-section-number">2.1.1</span> Example data</a></li>
+<li><a href="2-1-plot-elements.html#illustrating-plot-elements"><span class="toc-section-number">2.1.2</span> Illustrating plot elements</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-2-building-a-plot.html#building-a-plot"><span class="toc-section-number">2.2</span> Building a plot</a><ul>
+<li><a href="2-2-building-a-plot.html#reading-data"><span class="toc-section-number">2.2.1</span> Reading data</a></li>
+<li><a href="2-2-building-a-plot.html#plotting-by-layers"><span class="toc-section-number">2.2.2</span> Plotting by layers</a></li>
+</ul></li>
+<li><a href="2-3-saving-plots.html#saving-plots"><span class="toc-section-number">2.3</span> Saving plots</a></li>
+<li><a href="2-4-learn-more.html#learn-more"><span class="toc-section-number">2.4</span> Learn more</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-map.html#map"><span class="toc-section-number">3</span> Map</a><ul>
+<li><a href="3-1-geographical-data-in-a-tidy-format.html#geographical-data-in-a-tidy-format"><span class="toc-section-number">3.1</span> Geographical data in a tidy format</a></li>
+<li><a href="3-2-basic-mapping.html#basic-mapping"><span class="toc-section-number">3.2</span> Basic mapping</a></li>
+<li><a href="3-3-learn-more-1.html#learn-more-1"><span class="toc-section-number">3.3</span> Learn more</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-interact.html#interact"><span class="toc-section-number">4</span> Interact</a><ul>
+<li><a href="4-1-dt-datatables.html#dt-datatables"><span class="toc-section-number">4.1</span> DT: Datatables</a></li>
+<li><a href="4-2-plotly.html#plotly"><span class="toc-section-number">4.2</span> Plotly</a></li>
+<li><a href="4-3-leaflet.html#leaflet"><span class="toc-section-number">4.3</span> Leaflet</a></li>
+<li><a href="4-4-learn-more-2.html#learn-more-2"><span class="toc-section-number">4.4</span> Learn more</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-report.html#report"><span class="toc-section-number">5</span> Report</a><ul>
+<li><a href="5-1-rmarkdown.html#rmarkdown"><span class="toc-section-number">5.1</span> RMarkdown</a></li>
+<li><a href="5-2-dashboards.html#dashboards"><span class="toc-section-number">5.2</span> Dashboards</a></li>
+<li><a href="5-3-learn-more-3.html#learn-more-3"><span class="toc-section-number">5.3</span> Learn more</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-tidy.html#tidy"><span class="toc-section-number">6</span> Tidy</a><ul>
+<li><a href="6-1-tidy-format.html#tidy-format"><span class="toc-section-number">6.1</span> Tidy format</a></li>
+<li><a href="6-2-tidyverse-tools.html#tidyverse-tools"><span class="toc-section-number">6.2</span> Tidyverse tools</a></li>
+<li><a href="6-3-tidying-example.html#tidying-example"><span class="toc-section-number">6.3</span> Tidying example</a></li>
+<li><a href="6-4-learn-more-4.html#learn-more-4"><span class="toc-section-number">6.4</span> Learn more</a></li>
+</ul></li>
+<li><a href="7-final-words.html#final-words"><span class="toc-section-number">7</span> Final Words</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="tidying-example" class="section level2">
+<h2><span class="header-section-number">6.3</span> Tidying example</h2>
+<p>We’ve been using an example dataset with fatal motor vehicle accidents. I downloaded the raw
+data from the <a href="https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars">Fatality Analysis Reporting System (FARS)</a>, and the
+original download was a large zipped file, with separate files for variables about the
+accident, the people involved, etc.</p>
+<p>In this short booklet, I won’t be able to teach you all the tools you can use to tidy
+a dataset in R, but I can quickly walk you through an example to show you how powerful these
+tools can be, and how clean and efficient the final code is. R’s power for data analytics
+comes in part from these wonderful tools for working with data, and in a typical data analysis
+project, I’ll use these tools extensive to create different summaries and views of the data
+as I work. You will definitely want to learn these tools if you’re serious about using R,
+so I’ve provided several places to go to master them in the “Learn more” section.</p>
+<p>For the rest of the section, we’ll look at cleaning up data from the Federal Accident
+Reporting System, the source of the example data we’ve used in other sections.
+If you completed the set-up in the “Prerequisites”, you should be able to load this
+data using:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
+fl_accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/accident.csv&quot;</span>)</code></pre>
+<p>As a reminder, to print out some information about this data, call the object’s name:</p>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents</code></pre>
+<pre><code>## # A tibble: 34,247 x 52
+##    STATE ST_CASE VE_TOTAL VE_FORMS PVH_INVL  PEDS PERNOTMVIT PERMVIT
+##    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1   10001        1        1        0     0          0       1
+##  2     1   10002        1        1        0     0          0       1
+##  3     1   10003        3        3        0     0          0       3
+##  4     1   10004        1        1        0     0          0       1
+##  5     1   10005        1        1        0     0          0       2
+##  6     1   10006        2        2        0     0          0       4
+##  7     1   10007        2        2        0     0          0       2
+##  8     1   10008        1        1        0     0          0       1
+##  9     1   10009        1        1        0     0          0       1
+## 10     1   10010        1        1        0     1          1       1
+## # … with 34,237 more rows, and 44 more variables: PERSONS &lt;dbl&gt;,
+## #   COUNTY &lt;dbl&gt;, CITY &lt;dbl&gt;, DAY &lt;dbl&gt;, MONTH &lt;dbl&gt;, YEAR &lt;dbl&gt;,
+## #   DAY_WEEK &lt;dbl&gt;, HOUR &lt;dbl&gt;, MINUTE &lt;dbl&gt;, NHS &lt;dbl&gt;, RUR_URB &lt;dbl&gt;,
+## #   FUNC_SYS &lt;dbl&gt;, RD_OWNER &lt;dbl&gt;, ROUTE &lt;dbl&gt;, TWAY_ID &lt;chr&gt;,
+## #   TWAY_ID2 &lt;chr&gt;, MILEPT &lt;dbl&gt;, LATITUDE &lt;dbl&gt;, LONGITUD &lt;dbl&gt;,
+## #   SP_JUR &lt;dbl&gt;, HARM_EV &lt;dbl&gt;, MAN_COLL &lt;dbl&gt;, RELJCT1 &lt;dbl&gt;,
+## #   RELJCT2 &lt;dbl&gt;, TYP_INT &lt;dbl&gt;, WRK_ZONE &lt;dbl&gt;, REL_ROAD &lt;dbl&gt;,
+## #   LGT_COND &lt;dbl&gt;, WEATHER1 &lt;dbl&gt;, WEATHER2 &lt;dbl&gt;, WEATHER &lt;dbl&gt;,
+## #   SCH_BUS &lt;dbl&gt;, RAIL &lt;chr&gt;, NOT_HOUR &lt;dbl&gt;, NOT_MIN &lt;dbl&gt;,
+## #   ARR_HOUR &lt;dbl&gt;, ARR_MIN &lt;dbl&gt;, HOSP_HR &lt;dbl&gt;, HOSP_MN &lt;dbl&gt;,
+## #   CF1 &lt;dbl&gt;, CF2 &lt;dbl&gt;, CF3 &lt;dbl&gt;, FATALS &lt;dbl&gt;, DRUNK_DR &lt;dbl&gt;</code></pre>
+<p>This is a large dataset, with over 50 columns and over 34,000 rows. It records details about all of
+the fatal motor vehicle accidents in the US in 2017 (at least, that were reported to this database).
+Currently it inclues all states, although we’re planning to limit it to Florida.
+In this section, you’ll work through cleaning up this data, as you might if you were starting
+from this raw data and needed to create summaries and plots similar to those in other sections of
+this booklet.</p>
+<p>The following piece of code is all the code you need to transform this dataset into the
+<code>fl_accidents</code> dataset we’ve used in earlier examples.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(stringr)
+<span class="kw">library</span>(lubridate)
+
+fl_accidents <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename_all</span>(<span class="dt">.funs =</span> str_to_lower) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(state, county, day, month, year, latitude, longitud, fatals) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> </span><span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">county =</span> <span class="kw">str_pad</span>(county, <span class="dt">width =</span> <span class="dv">3</span>, <span class="dt">pad =</span> <span class="st">&quot;0&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> fips, <span class="kw">c</span>(state, county), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> date, <span class="kw">c</span>(month, day, year), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">mdy</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-7-2017&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>date <span class="op">&lt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-13-2017&quot;</span>))</code></pre>
+<pre><code>## # A tibble: 37 x 5
+##    fips  date       latitude longitud fatals
+##    &lt;chr&gt; &lt;date&gt;        &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+##  1 12031 2017-09-08     30.2    -81.5      1
+##  2 12095 2017-09-07     28.5    -81.4      1
+##  3 12097 2017-09-08     28.3    -81.3      1
+##  4 12095 2017-09-07     28.6    -81.2      1
+##  5 12031 2017-09-08     30.2    -81.8      1
+##  6 12033 2017-09-07     30.6    -87.4      2
+##  7 12023 2017-09-10     30.1    -82.7      1
+##  8 12075 2017-09-08     29.6    -82.9      1
+##  9 12045 2017-09-09     30.1    -85.3      2
+## 10 12031 2017-09-12     30.4    -81.8      1
+## # … with 27 more rows</code></pre>
+<p>This function takes the large
+original dataset. It first <em>renames</em> all the columns—they were in all capital letters,
+which are a pain to type in your code, so we’re using a function from the <code>stringr</code> package
+to change them all to lowercase. We’re then <em>selecting</em> just the columns we want to work with
+for the plot, using their column names to pick them (<code>state</code>, <code>county</code>, etc.). We’re then
+<em>filtering</em> to just the observations in Florida (where the state FIPS code is 12).
+Counties have five digit FIPS codes that are useful to use when merging different datasets,
+including merging in geographic data, and the dataset at this stage has the state part of the
+FIPS code and the county part in different columns. The county part is currently in a numeric
+class, which I need to “pad” with 0s at the beginning if it’s currently fewer than three digits.
+We’ll <em>mutate</em> the county FIPs code to pad it with 0s, using another function from the
+<code>stringr</code> package. We’ll then <em>unite</em> the state and county FIPS columns to create a single
+column with the 5-digit FIPS code. Next, we want to convert the date information into
+a “Date” class, which will let us work with these values more easily. We’ll <em>unite</em>
+all the columns with date information (<code>month</code>, <code>day</code>, <code>year</code>) into a single column, and
+then we’ll use a function from the <code>lubridate</code> package to <em>mutate</em> this column to have
+a date class. Finally, we’ll <em>filter</em> to just the observations with a date within a week of
+Hurricane Irma’s landfall on September 10, 2017.</p>
+<p>At this stage, don’t worry if you don’t know which functions you should use to clean up a
+new dataset, just try to get a feel for how this tidyverse framework is allowing you to
+clean up the dataframe with lots of small, interoperable tools. In the example code,
+try highlighting and running different portions of the code and check out the output
+at each step along the way. This will help you get a better idea for how this process works.</p>
+<p>Becoming familiar with these tools so you can use them yourself takes some time, but is well
+work the effort. In the “Learn more” section, I’ve got some tips on where you can go to
+develop those skills.</p>
+<p>Finally, the code above is cleaning the data, but not overwriting the original <code>fl_accidents</code>
+object—instead, it’s printing out the result, but not saving it for you to use later. To
+use the cleaned data, you’ll need to overwrite the original R object. You can do that in
+two ways. First, you can use the gets arrow to assign the output to the same R object name:</p>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents &lt;-<span class="st"> </span>fl_accidents <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename_all</span>(<span class="dt">.funs =</span> str_to_lower) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(state, county, day, month, year, latitude, longitud, fatals) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> </span><span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">county =</span> <span class="kw">str_pad</span>(county, <span class="dt">width =</span> <span class="dv">3</span>, <span class="dt">pad =</span> <span class="st">&quot;0&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> fips, <span class="kw">c</span>(state, county), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> date, <span class="kw">c</span>(month, day, year), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">mdy</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-7-2017&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>date <span class="op">&lt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-13-2017&quot;</span>))</code></pre>
+<p>If you want to be even more compact, you can use something called the <strong>compound pipe operator</strong>
+(<code>%&lt;&gt;%</code>). This inputs an R object and then, when it’s done running all the code, overwrites that
+R object with the output. You can think of it as combining the <code>&lt;-</code> and <code>%&gt;%</code> operators. Here’s
+how you would use it to save the cleaned version of the data to the <code>fl_accidents</code> object name:</p>
+<pre class="sourceCode r"><code class="sourceCode r">fl_accidents <span class="op">%&lt;&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename_all</span>(<span class="dt">.funs =</span> str_to_lower) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(state, county, day, month, year, latitude, longitud, fatals) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(state <span class="op">==</span><span class="st"> </span><span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">county =</span> <span class="kw">str_pad</span>(county, <span class="dt">width =</span> <span class="dv">3</span>, <span class="dt">pad =</span> <span class="st">&quot;0&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> fips, <span class="kw">c</span>(state, county), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="dt">col =</span> date, <span class="kw">c</span>(month, day, year), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">mdy</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(date <span class="op">&gt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-7-2017&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>date <span class="op">&lt;=</span><span class="st"> </span><span class="kw">mdy</span>(<span class="st">&quot;9-13-2017&quot;</span>))</code></pre>
+</div>
+<p style="text-align: center;">
+<a href="6-2-tidyverse-tools.html"><button class="btn btn-default">Previous</button></a>
+<a href="6-4-learn-more-4.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="has-sub"><a href="5-report.html#report"><span class="toc-section-number">5</span> Report</a><ul>
 <li><a href="5-1-rmarkdown.html#rmarkdown"><span class="toc-section-number">5.1</span> RMarkdown</a></li>
 <li><a href="5-2-dashboards.html#dashboards"><span class="toc-section-number">5.2</span> Dashboards</a></li>
+<li><a href="5-3-learn-more-3.html#learn-more-3"><span class="toc-section-number">5.3</span> Learn more</a></li>
 </ul></li>
 <li class="has-sub"><a href="6-tidy.html#tidy"><span class="toc-section-number">6</span> Tidy</a><ul>
 <li><a href="6-1-tidy-format.html#tidy-format"><span class="toc-section-number">6.1</span> Tidy format</a></li>
@@ -165,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="6-4-adding.html#adding"><span class="toc-section-number">6.4</span> Adding</a></li>
 <li><a href="6-5-summarizing.html#summarizing"><span class="toc-section-number">6.5</span> Summarizing</a></li>
 <li><a href="6-6-reformatting.html#reformatting"><span class="toc-section-number">6.6</span> Reformatting</a></li>
-<li><a href="6-7-learn-more-3.html#learn-more-3"><span class="toc-section-number">6.7</span> Learn more</a></li>
+<li><a href="6-7-learn-more-4.html#learn-more-4"><span class="toc-section-number">6.7</span> Learn more</a></li>
 </ul></li>
 <li><a href="7-final-words.html#final-words"><span class="toc-section-number">7</span> Final Words</a></li>
 </ul>
@@ -176,8 +177,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <div id="subsetting" class="section level2">
 <h2><span class="header-section-number">6.3</span> Subsetting</h2>
+<p>For the rest of the section, we’ll look at cleaning up data from the Federal Accident
+Reporting System, the source of the example data we’ve used in other sections.
+If you completed the set-up in the “Prerequisites”, you should be able to load this
+data using:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
+accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/accident.csv&quot;</span>)</code></pre>
+<p>To print out some information about this data, call the object’s name:</p>
+<pre class="sourceCode r"><code class="sourceCode r">accidents</code></pre>
+<pre><code>## # A tibble: 34,247 x 52
+##    STATE ST_CASE VE_TOTAL VE_FORMS PVH_INVL  PEDS PERNOTMVIT PERMVIT
+##    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1   10001        1        1        0     0          0       1
+##  2     1   10002        1        1        0     0          0       1
+##  3     1   10003        3        3        0     0          0       3
+##  4     1   10004        1        1        0     0          0       1
+##  5     1   10005        1        1        0     0          0       2
+##  6     1   10006        2        2        0     0          0       4
+##  7     1   10007        2        2        0     0          0       2
+##  8     1   10008        1        1        0     0          0       1
+##  9     1   10009        1        1        0     0          0       1
+## 10     1   10010        1        1        0     1          1       1
+## # … with 34,237 more rows, and 44 more variables: PERSONS &lt;dbl&gt;,
+## #   COUNTY &lt;dbl&gt;, CITY &lt;dbl&gt;, DAY &lt;dbl&gt;, MONTH &lt;dbl&gt;, YEAR &lt;dbl&gt;,
+## #   DAY_WEEK &lt;dbl&gt;, HOUR &lt;dbl&gt;, MINUTE &lt;dbl&gt;, NHS &lt;dbl&gt;, RUR_URB &lt;dbl&gt;,
+## #   FUNC_SYS &lt;dbl&gt;, RD_OWNER &lt;dbl&gt;, ROUTE &lt;dbl&gt;, TWAY_ID &lt;chr&gt;,
+## #   TWAY_ID2 &lt;chr&gt;, MILEPT &lt;dbl&gt;, LATITUDE &lt;dbl&gt;, LONGITUD &lt;dbl&gt;,
+## #   SP_JUR &lt;dbl&gt;, HARM_EV &lt;dbl&gt;, MAN_COLL &lt;dbl&gt;, RELJCT1 &lt;dbl&gt;,
+## #   RELJCT2 &lt;dbl&gt;, TYP_INT &lt;dbl&gt;, WRK_ZONE &lt;dbl&gt;, REL_ROAD &lt;dbl&gt;,
+## #   LGT_COND &lt;dbl&gt;, WEATHER1 &lt;dbl&gt;, WEATHER2 &lt;dbl&gt;, WEATHER &lt;dbl&gt;,
+## #   SCH_BUS &lt;dbl&gt;, RAIL &lt;chr&gt;, NOT_HOUR &lt;dbl&gt;, NOT_MIN &lt;dbl&gt;,
+## #   ARR_HOUR &lt;dbl&gt;, ARR_MIN &lt;dbl&gt;, HOSP_HR &lt;dbl&gt;, HOSP_MN &lt;dbl&gt;,
+## #   CF1 &lt;dbl&gt;, CF2 &lt;dbl&gt;, CF3 &lt;dbl&gt;, FATALS &lt;dbl&gt;, DRUNK_DR &lt;dbl&gt;</code></pre>
+<p>This is a large dataset, with over 50 columns and over 34,000 rows. It records details about all of
+the fatal motor vehicle accidents in the US in 2017 (at least, that were reported to this database).
+In this section, you’ll work through cleaning up this data, as you might if you were starting
+from this raw data and needed to create summaries and plots similar to those in other sections of
+this booklet.</p>
 <div id="selecting-columns" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Selecting columns</h3>
+<p>The first step in making this data more manageable is to remove all the columns we don’t need. There
+are currently over 50 columns, so it will be much easier to work with an R object with fewer
+columns. Since you’re just reading in, but not changing, the raw data file, you can get rid of
+columns in the dataframe without losing the information in the raw data.</p>
+<p>The <code>select</code> function from the <code>dplyr</code> package allows you to clean up a data frame by selecting
+some of the columns of an existing dataframe and deleting the rest.</p>
+<pre class="sourceCode r"><code class="sourceCode r">accidents <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>()</code></pre>
+<pre><code>## # A tibble: 34,247 x 0</code></pre>
 </div>
 <div id="slicing-rows" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Slicing rows</h3>

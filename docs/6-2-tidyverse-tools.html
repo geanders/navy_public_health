@@ -153,19 +153,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="has-sub"><a href="5-report.html#report"><span class="toc-section-number">5</span> Report</a><ul>
 <li><a href="5-1-rmarkdown.html#rmarkdown"><span class="toc-section-number">5.1</span> RMarkdown</a></li>
 <li><a href="5-2-dashboards.html#dashboards"><span class="toc-section-number">5.2</span> Dashboards</a></li>
+<li><a href="5-3-learn-more-3.html#learn-more-3"><span class="toc-section-number">5.3</span> Learn more</a></li>
 </ul></li>
 <li class="has-sub"><a href="6-tidy.html#tidy"><span class="toc-section-number">6</span> Tidy</a><ul>
 <li><a href="6-1-tidy-format.html#tidy-format"><span class="toc-section-number">6.1</span> Tidy format</a></li>
 <li><a href="6-2-tidyverse-tools.html#tidyverse-tools"><span class="toc-section-number">6.2</span> Tidyverse tools</a></li>
-<li class="has-sub"><a href="6-3-subsetting.html#subsetting"><span class="toc-section-number">6.3</span> Subsetting</a><ul>
-<li><a href="6-3-subsetting.html#selecting-columns"><span class="toc-section-number">6.3.1</span> Selecting columns</a></li>
-<li><a href="6-3-subsetting.html#slicing-rows"><span class="toc-section-number">6.3.2</span> Slicing rows</a></li>
-<li><a href="6-3-subsetting.html#filtering-rows"><span class="toc-section-number">6.3.3</span> Filtering rows</a></li>
-</ul></li>
-<li><a href="6-4-adding.html#adding"><span class="toc-section-number">6.4</span> Adding</a></li>
-<li><a href="6-5-summarizing.html#summarizing"><span class="toc-section-number">6.5</span> Summarizing</a></li>
-<li><a href="6-6-reformatting.html#reformatting"><span class="toc-section-number">6.6</span> Reformatting</a></li>
-<li><a href="6-7-learn-more-3.html#learn-more-3"><span class="toc-section-number">6.7</span> Learn more</a></li>
+<li><a href="6-3-tidying-example.html#tidying-example"><span class="toc-section-number">6.3</span> Tidying example</a></li>
+<li><a href="6-4-learn-more-4.html#learn-more-4"><span class="toc-section-number">6.4</span> Learn more</a></li>
 </ul></li>
 <li><a href="7-final-words.html#final-words"><span class="toc-section-number">7</span> Final Words</a></li>
 </ul>
@@ -203,10 +197,31 @@ what’s at the top (“output”) of each Lego block. This common input and out
 means that the blocks can be joined together in an extraordinary number of
 different combinations, and that you can imagine and then make very complex
 structures with the blocks.</p>
+<p>The functions in the tidyverse work this way. For the major data cleaning functions,
+they all take the same format of input (a tidy tibble) and they all output that
+same format of input. Just like you can build Legos on top of each other in different
+orders and patterns to create lots of different structures, this framework of
+small tools that work on the same type of input and produce the same type of output
+allow you to string together lots of small, simple calls to do some very complex things.</p>
+<p>To work with data with tidyverse tools, we’ll use two main ideas.
+The first is that we’ll use many small tools that each do one thing well and that
+can be combined in lots of configurations to achieve complex tasks. The second is
+that we’ll string these small functions togther using a special operator
+called the “pipe operator”.</p>
+<p>The main functions in the tidyverse (sometimes called “verbs”) all do simple things.
+For example, there are functions to <code>select</code> certain columns, <code>slice</code> to specific
+rows, <code>filter</code> to a set of rows that match some criterion, <code>mutate</code> existing columns
+to create new columns or change existing ones in place, and <code>summarize</code> a dataframe,
+possibly one that you <code>group_by</code> certain characteristics of the data (e.g., a summary
+of mean height <strong>grouped by</strong> gender).</p>
+<p>The second main idea for this data cleaning approach is that we’ll use a
+<strong>pipe operator</strong> (<code>%&gt;%</code>). This operator lets you input a tidy dataset as the first
+argument of a function. In practice, this allows you to string together a “pipeline” of
+data cleaning calls that is very clean and compact.</p>
 </div>
 <p style="text-align: center;">
 <a href="6-1-tidy-format.html"><button class="btn btn-default">Previous</button></a>
-<a href="6-3-subsetting.html"><button class="btn btn-default">Next</button></a>
+<a href="6-3-tidying-example.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>

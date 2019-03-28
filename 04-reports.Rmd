@@ -1,8 +1,79 @@
 # Report
 
+**Literate programming**, an idea developed by Donald Knuth, mixes code that can be executed with regular text. The files you create can then be rendered, to run any embedded code. The final output will have results from your code and the regular text. 
+
+The `knitr` package can be used for literate programming in R. In essence, `knitr` allows you to write an R Markdown file that can be rendered into a pdf, Word, or HTML document.
+
 ## RMarkdown
+
+Here are the basics of opening and rendering an R Markdown file in RStudio:
+
+- To open a new R Markdown file, go to "File" -> "New File" -> "RMarkdown..." -> for now, chose a "Document" in "HTML" format.
+- This will open a new R Markdown file in RStudio. The file extension for R Markdown files is ".Rmd". 
+- The new file comes with some example code and text. You can run the file as-is to try out the example. You will ultimately delete this example code and text and replace it with your own.
+- Once you "knit" the R Markdown file, R will render an HTML file with the output. This is automatically saved in the same directory where you saved your .Rmd file.
+- Write everything besides R code using Markdown syntax.
+
+To include R code in an RMarkdown document, you need to separate off the code chunk using the following syntax:
+
+    `r ''````{r}
+    my_vec <- 1:10
+    ```
+    
+This syntax tells R how to find the start and end of pieces of R code when the file is rendered. R will walk through, find each piece of R code, run it and create output (printed output or figures, for example), and then pass the file along to another program to complete rendering (e.g., Tex for pdf files).
+
+R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand what markup languages like Markdown are and how they work. 
+
+In Word and other word processing programs you have used, you can add formatting using buttons and keyboard shortcuts (e.g., "Ctrl-B" for bold). The file saves the words you type. It also saves the formatting, but you see the final output, rather than the formatting markup, when you edit the file (WYSIWYG -- what you see is what you get). 
+
+In markup languages, on the other hand, you markup the document directly to show what formatting the final version should have (e.g., you type `**bold**` in the file to end up with a document with **bold**).
+
+Examples of markup languages include:
+
+- HTML (HyperText Markup Language)
+- LaTex
+- Markdown (a "lightweight" markup language)
+
+To write a file in Markdown, you'll need to learn the conventions for creating formatting. This table shows what you would need to write in a flat file for some common formatting choices:
+
+```{r echo = FALSE}
+markdown_format <- data.frame(Code = c("`**text**`",
+                                       "`*text*`",
+                                       "`[text](www.google.com)`", 
+                                       "`# text`", 
+                                       "`## text`"),
+                              Rendering = c("**text**",
+                                            "*text*",
+                                            "[text](www.google.com)",
+                                            "",
+                                            ""),
+                              Explanation = c("boldface",
+                                              "italicized",
+                                              "hyperlink",
+                                              "first-level header",
+                                              "second-level header"))
+knitr::kable(markdown_format)
+```
+
+Some other simple things you can do in Markdown include:
+
+- Lists (ordered or bulleted)
+- Equations
+- Tables
+- Figures from file
+- Block quotes
+- Superscripts
+
+
+
 
 ## Dashboards
 
+## Learn more
 
+For more Markdown conventions, see [RStudio's R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) (link also available through "Help" in RStudio). 
 
+If you'd like to find out more, here are two good how-to books on reproducible research in R are:
+
+- *Reproducible Research with R and RStudio*, Christopher Gandrud
+- *Dynamic Documents with R and knitr*, Yihui Xie

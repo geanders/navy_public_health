@@ -9,19 +9,10 @@ data in a what's called a "tidy" format.
 In the previous section, I used an example dataset that was already in this
 format, to make it easier for you to get started with plotting. However, 
 to leverage the power of **ggplot2** for real datasets, you have to know 
-how to get them into this tidy format. This section will explain this format,
-as well as how you can clean real datasets to convert them into this format. 
-
-## Tidy format
-
-`r newthought("When you hear the term")` "tidy data", you might just think of a "clean" 
-dataset---one where unneeded columns have been removed, for example, and
-perhaps that's in a nice **rectangular format**.^[**rectangular format.** A data format 
-where each column has data in the same class (e.g., date, number) and is the 
-same length. (Think of the format of data in a table of a paper, or in a clean 
-Excel spreadsheet.]
-
-[More about tidy data]
+how to get them into this tidy format. This section will explain introduce
+you to how you can clean real datasets to convert them into this format
+using tidyverse tools, as well as provide some resources for you to use
+to develop your skills in "tidying" data. 
 
 ## Tidyverse tools
 
@@ -38,13 +29,11 @@ having to load them one by one.]
 you can write clean and compact code to clean even very large and 
 messy datasets.
 
-This collection of tools follows the principle that hard problems can be best solved
-by small tools that can be combined together, very much in-line with the **Unix
-philosophy**. 
-
 The tidyverse works as well as it does because, for many parts of it, it requires
 a common input and output, and those input and output specifications are 
-identical (the tidy data format).
+identical (the tidy data format).^[There are some clear specifications for this
+format. I'm not going to go into them here, but several of the references given
+in the "Learn More" section go into depth in describing and defining this format.]
 If you want to get a better idea of this concept, and why it's so powerful, 
 think of some of the
 classic toys, like Legos (train sets and Lincoln logs also
@@ -55,21 +44,153 @@ means that the blocks can be joined together in an extraordinary number of
 different combinations, and that you can imagine and then make very complex 
 structures with the blocks. 
 
+The functions in the tidyverse work this way. For the major data cleaning functions, 
+they all take the same format of input (a tidy tibble) and they all output that 
+same format of input. Just like you can build Legos on top of each other in different
+orders and patterns to create lots of different structures, this framework of 
+small tools that work on the same type of input and produce the same type of output
+allow you to string together lots of small, simple calls to do some very complex things.
 
+To work with data with tidyverse tools, we'll use two main ideas.
+The first is that we'll use many small tools that each do one thing well and that 
+can be combined in lots of configurations to achieve complex tasks. The second is
+that we'll string these small functions togther using a special operator
+called the "pipe operator".
 
-## Subsetting
+The main functions in the tidyverse (sometimes called "verbs") all do simple things. 
+For example, there are functions to `select` certain columns, `slice` to specific 
+rows, `filter` to a set of rows that match some criterion, `mutate` existing columns
+to create new columns or change existing ones in place, and `summarize` a dataframe, 
+possibly one that you `group_by` certain characteristics of the data (e.g., a summary
+of mean height **grouped by** gender).
 
-### Selecting columns
+The second main idea for this data cleaning approach is that we'll use a 
+**pipe operator** (`%>%`). This operator lets you input a tidy dataset as the first 
+argument of a function. In practice, this allows you to string together a "pipeline" of
+data cleaning calls that is very clean and compact. 
 
-### Slicing rows
+## Tidying example
 
-### Filtering rows
+We've been using an example dataset with fatal motor vehicle accidents. I downloaded the raw 
+data from the [Fatality Analysis Reporting System (FARS)](https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars), and the
+original download was a large zipped file, with separate files for variables about the 
+accident, the people involved, etc. 
 
-## Adding 
+In this short booklet, I won't be able to teach you all the tools you can use to tidy 
+a dataset in R, but I can quickly walk you through an example to show you how powerful these
+tools can be, and how clean and efficient the final code is. R's power for data analytics
+comes in part from these wonderful tools for working with data, and in a typical data analysis
+project, I'll use these tools extensive to create different summaries and views of the data
+as I work. You will definitely want to learn these tools if you're serious about using R, 
+so I've provided several places to go to master them in the "Learn more" section. 
 
-## Summarizing
+For the rest of the section, we'll look at cleaning up data from the Federal Accident
+Reporting System, the source of the example data we've used in other sections. 
+If you completed the set-up in the "Prerequisites", you should be able to load this 
+data using: 
 
-## Reformatting
+```{r message = FALSE}
+library("readr")
+fl_accidents <- read_csv("data/accident.csv")
+```
+
+As a reminder, to print out some information about this data, call the object's name: 
+
+```{r}
+fl_accidents
+```
+
+This is a large dataset, with over 50 columns and over 34,000 rows. It records details about all of 
+the fatal motor vehicle accidents in the US in 2017 (at least, that were reported to this database).
+Currently it inclues all states, although we're planning to limit it to Florida. 
+In this section, you'll work through cleaning up this data, as you might if you were starting
+from this raw data and needed to create summaries and plots similar to those in other sections of
+this booklet. 
+
+The following piece of code is all the code you need to transform this dataset into the
+`fl_accidents` dataset we've used in earlier examples. 
+
+```{r}
+library(magrittr)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(lubridate)
+
+fl_accidents %>% 
+  rename_all(.funs = str_to_lower) %>% 
+  select(state, county, day, month, year, latitude, longitud, fatals) %>% 
+  filter(state == 12) %>% 
+  mutate(county = str_pad(county, width = 3, pad = "0")) %>% 
+  unite(col = fips, c(state, county), sep = "") %>% 
+  unite(col = date, c(month, day, year), sep = "-") %>% 
+  mutate(date = mdy(date)) %>% 
+  filter(date >= mdy("9-7-2017") & date <= mdy("9-13-2017"))
+```
+
+This function takes the large
+original dataset. It first *renames* all the columns---they were in all capital letters, 
+which are a pain to type in your code, so we're using a function from the `stringr` package
+to change them all to lowercase. We're then *selecting* just the columns we want to work with
+for the plot, using their column names to pick them (`state`, `county`, etc.). We're then
+*filtering* to just the observations in Florida (where the state FIPS code is 12). 
+Counties have five digit FIPS codes that are useful to use when merging different datasets, 
+including merging in geographic data, and the dataset at this stage has the state part of the
+FIPS code and the county part in different columns. The county part is currently in a numeric 
+class, which I need to "pad" with 0s at the beginning if it's currently fewer than three digits. 
+We'll *mutate* the county FIPs code to pad it with 0s, using another function from the 
+`stringr` package. We'll then *unite* the state and county FIPS columns to create a single 
+column with the 5-digit FIPS code. Next, we want to convert the date information into 
+a "Date" class, which will let us work with these values more easily. We'll *unite*
+all the columns with date information (`month`, `day`, `year`) into a single column, and
+then we'll use a function from the `lubridate` package to *mutate* this column to have 
+a date class. Finally, we'll *filter* to just the observations with a date within a week of 
+Hurricane Irma's landfall on September 10, 2017.
+
+At this stage, don't worry if you don't know which functions you should use to clean up a 
+new dataset, just try to get a feel for how this tidyverse framework is allowing you to 
+clean up the dataframe with lots of small, interoperable tools. In the example code, 
+try highlighting and running different portions of the code and check out the output 
+at each step along the way. This will help you get a better idea for how this process works. 
+
+Becoming familiar with these tools so you can use them yourself takes some time, but is well
+work the effort. In the "Learn more" section, I've got some tips on where you can go to 
+develop those skills. 
+
+Finally, the code above is cleaning the data, but not overwriting the original `fl_accidents`
+object---instead, it's printing out the result, but not saving it for you to use later. To 
+use the cleaned data, you'll need to overwrite the original R object. You can do that in 
+two ways. First, you can use the gets arrow to assign the output to the same R object name: 
+
+```{r eval = FALSE}
+fl_accidents <- fl_accidents %>% 
+  rename_all(.funs = str_to_lower) %>% 
+  select(state, county, day, month, year, latitude, longitud, fatals) %>% 
+  filter(state == 12) %>% 
+  mutate(county = str_pad(county, width = 3, pad = "0")) %>% 
+  unite(col = fips, c(state, county), sep = "") %>% 
+  unite(col = date, c(month, day, year), sep = "-") %>% 
+  mutate(date = mdy(date)) %>% 
+  filter(date >= mdy("9-7-2017") & date <= mdy("9-13-2017"))
+```
+
+If you want to be even more compact, you can use something called the **compound pipe operator**
+(`%<>%`). This inputs an R object and then, when it's done running all the code, overwrites that
+R object with the output. You can think of it as combining the `<-` and `%>%` operators. Here's 
+how you would use it to save the cleaned version of the data to the `fl_accidents` object name:
+
+```{r}
+fl_accidents %<>% 
+  rename_all(.funs = str_to_lower) %>% 
+  select(state, county, day, month, year, latitude, longitud, fatals) %>% 
+  filter(state == 12) %>% 
+  mutate(county = str_pad(county, width = 3, pad = "0")) %>% 
+  unite(col = fips, c(state, county), sep = "") %>% 
+  unite(col = date, c(month, day, year), sep = "-") %>% 
+  mutate(date = mdy(date)) %>% 
+  filter(date >= mdy("9-7-2017") & date <= mdy("9-13-2017"))
+```
+
 
 ## Learn more
 
@@ -78,6 +199,9 @@ book [R for Data Science](https://r4ds.had.co.nz/) mentioned in an earlier "Lear
 This book is available
 for a very reasonable price in paperback as well as free online through bookdown.org. One
 of its coauthors (Hadley Wickham) is the creator of the tidyverse and many of its packages.
+It includes a full description of the "tidy data" format, as well as lots of instruction on 
+using tidyverse tools to work with datasets to convert them to, or work with them once they're
+in, this format.
 
 The tidyverse is a very popular tool now for working with data in R. If you nose around the 
 internet a bit, you should be able to find a lot of example blog posts using tidyverse tools. 
