@@ -32,7 +32,8 @@ library(knitr)
 because you 
 won't be able to learn how to program unless you try it out. I've picked 
 example data that I hope will be interesting to Navy and Marine Corp public
-health researchers and practitioners. 
+health researchers and practitioners. You can download the slides from the
+workshop by [clicking here](https://github.com/geanders/navy_public_health/raw/master/_workshop_slides/workshop_slides.pdf).
 
 To try out these examples, you need some set-up: 
 
