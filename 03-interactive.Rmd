@@ -106,7 +106,7 @@ fatality_plot <- ggplot(data = daily_fatalities) +
 As a reminder, when you assign a plot object a name, it won't print out, but you can print
 it out anytime you want by calling the name you assigned it (Figure \@ref(fig:plotly1)).
 
-```{r plotly1, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3, caption = "Example of printing out a ggplot object by calling its assigned name."}
+```{r plotly1, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3, fig.cap = "Example of printing out a ggplot object by calling its assigned name."}
 fatality_plot
 ```
 

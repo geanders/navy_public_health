@@ -119,7 +119,7 @@ load all required packages. Figure \@ref(fig:examplerepo) shows what this packag
 look like once you've downloaded and opened it, as well as opened the "plot.R" file in the 
 project's "R" subdirectory.
 
-```{r examplerepo, fig.fullwidth = TRUE, echo = FALSE, caption = "What the example R Project for this booklet should look like once you've downloaded and opened it, as well as opened the 'plot.R' file in the project's 'R' subdirectory."}
+```{r examplerepo, fig.fullwidth = TRUE, echo = FALSE, fig.cap = "What the example R Project for this booklet should look like once you've downloaded and opened it, as well as opened the 'plot.R' file in the project's 'R' subdirectory."}
 knitr::include_graphics("images/example_repo.png")
 ```
 
