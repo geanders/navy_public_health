@@ -41,8 +41,7 @@ from the "Plot" section, so you can read it in the same way you did in the previ
 you can skip those lines):
 
 ```{r message = FALSE}
-library(readr)
-library(magrittr)
+library("readr")
 
 fl_accidents <- read_csv("data/fl_accidents.csv") 
 ```
@@ -51,7 +50,8 @@ Now, to print this dataframe as an interactive data table, just run the data fra
 the `datatable` function. 
 
 ```{r dt_example, fig.fullwidth = FALSE}
-library(DT)
+library("magrittr")
+library("DT")
 fl_accidents %>% 
   datatable()
 ```
@@ -115,7 +115,7 @@ run this `ggplot` object
 through its `ggplotly` function: 
 
 ```{r plotly2, message = FALSE, fig.fullwidth = TRUE, fig.width = 8, fig.height = 3}
-library(plotly)
+library("plotly")
 fatality_plot %>% 
   ggplotly()
 ```
@@ -143,7 +143,7 @@ object by specifying the columns with geographical information, and set projecti
 using the `st_sf` function:
 
 ```{r}
-library(sf)
+library("sf")
 
 fl_accidents %<>% 
   st_as_sf(coords = c("longitud", "latitude")) %>% 
@@ -159,7 +159,7 @@ listed later in this section, for more.] You can add markers showing the locatio
 using the `addMarkers` call, specifying the dataset to use with the `data` parameter:
 
 ```{r}
-library(leaflet)
+library("leaflet")
 leaflet() %>% 
   addTiles() %>% 
   addMarkers(data = fl_accidents)

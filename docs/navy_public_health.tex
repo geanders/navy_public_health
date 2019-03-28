@@ -136,7 +136,8 @@
 because you
 won't be able to learn how to program unless you try it out. I've picked
 example data that I hope will be interesting to Navy and Marine Corp public
-health researchers and practitioners.
+health researchers and practitioners. You can download the slides from the
+workshop by \href{https://github.com/geanders/navy_public_health/raw/master/_workshop_slides/workshop_slides.pdf}{clicking here}.
 
 To try out these examples, you need some set-up:
 
@@ -231,6 +232,31 @@ need, run the following code in your version of R:
 \item
   Download example R Project
 \end{enumerate}
+
+I've created a repository on \textbf{GitHub}\footnote{\textbf{GitHub.} An online platform for directories tracked with
+  the version control software \texttt{git}. It has become a very popular place for coders to post code
+  from their projects, especially for open-source projects like R packages. You may need to get
+  a GitHub account to be able to clone this example directory. Even if not, it's not a bad idea to
+  get an account if you work a lot with data and open-source code.} You can find this example
+repository by \href{https://github.com/geanders/navy_public_health_examples}{clicking here}. On the
+page takes you to, click on the ``Clone or download'' button and then select ``Download ZIP''.
+
+This will download a single zipped file to your computer. When you unzip the file, it will be a
+special type of directory, an R Project directory. To open the R Project and start on the
+examples, open RStudio, then go to ``File'' -\textgreater{} ``Open Project''. A pop-up window will open to let you
+navigate through your files and find an R Project to open. Navigate to the directory you
+downloaded, which should be called ``navy\_public\_health\_examples'' and doubleclick on the file
+in this directory called ``navy\_public\_health\_examples.Rproj''.
+
+This will open the project. In the ``Files'' pane of RStudio, you should see some subdirectories for
+``R'' and ``data''. These have the example R code and data, respectively, for you to try the examples
+in this booklet. The code in each of the R files should run independently, including the code to
+load all required packages. Figure \ref{fig:examplerepo} shows what this package should
+look like once you've downloaded and opened it, as well as opened the ``plot.R'' file in the
+project's ``R'' subdirectory.
+
+\begin{figure*}
+\includegraphics[width=38.64in]{images/example_repo} \end{figure*}
 
 \hypertarget{plot}{%
 \chapter{Plot}\label{plot}}
@@ -602,7 +628,7 @@ package:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -929,7 +955,7 @@ getting Figure \ref{fig:step4a}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"lubridate"}\NormalTok{)}
 
 \NormalTok{daily_fatalities }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(week) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{first_day =} \KeywordTok{first}\NormalTok{(date)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{    }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{week_label =} \KeywordTok{paste}\NormalTok{(}\StringTok{"Week of"}\NormalTok{, }
@@ -1075,7 +1101,7 @@ fatalities (\texttt{fatals}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"readr"}\NormalTok{)}
 \NormalTok{fl_accidents <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/fl_accidents.csv"}\NormalTok{)}
 \NormalTok{fl_accidents}
 \end{Highlighting}
@@ -1110,7 +1136,7 @@ specifying the columns with the geogrphical coordinates using the \texttt{coords
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"sf"}\NormalTok{)}
 \NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(}\DataTypeTok{coords =} \KeywordTok{c}\NormalTok{(}\StringTok{"longitud"}\NormalTok{, }
     \StringTok{"latitude"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_sf}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
 \end{Highlighting}
@@ -1300,7 +1326,7 @@ you might end up with a map that's ``stretched'' out in either the x- or y-direc
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
 
 \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_counties) }\OperatorTok{+}\StringTok{ }\KeywordTok{coord_sf}\NormalTok{()}
 \end{Highlighting}
@@ -1412,8 +1438,7 @@ you can skip those lines):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(readr)}
-\KeywordTok{library}\NormalTok{(magrittr)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"readr"}\NormalTok{)}
 
 \NormalTok{fl_accidents <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data/fl_accidents.csv"}\NormalTok{)}
 \end{Highlighting}
@@ -1424,7 +1449,8 @@ the \texttt{datatable} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(DT)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"magrittr"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"DT"}\NormalTok{)}
 \NormalTok{fl_accidents }\OperatorTok{%>%}\StringTok{ }\KeywordTok{datatable}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1499,7 +1525,7 @@ through its \texttt{ggplotly} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"plotly"}\NormalTok{)}
 \NormalTok{fatality_plot }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplotly}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1532,7 +1558,7 @@ using the \texttt{st\_sf} function:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"sf"}\NormalTok{)}
 
 \NormalTok{fl_accidents }\OperatorTok{%<>%}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(}\DataTypeTok{coords =} \KeywordTok{c}\NormalTok{(}\StringTok{"longitud"}\NormalTok{, }
     \StringTok{"latitude"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_sf}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}
@@ -1549,7 +1575,7 @@ using the \texttt{addMarkers} call, specifying the dataset to use with the \text
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(leaflet)}
+\KeywordTok{library}\NormalTok{(}\StringTok{"leaflet"}\NormalTok{)}
 \KeywordTok{leaflet}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addTiles}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{addMarkers}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ fl_accidents)}
 \end{Highlighting}
 \end{Shaded}

@@ -282,7 +282,7 @@ layers to it with `+`. To use these functions, you'll need to load the `ggplot2`
 package: 
 
 ```{r}
-library(ggplot2)
+library("ggplot2")
 ```
 
 For the first step, create the `ggplot` object. When you create this object, specify 
@@ -563,7 +563,7 @@ final version of the plot when you re-run the plotting code used in the last ste
 getting Figure \@ref(fig:step4a).
 
 ```{r step4a, fig.width = 6, fig.height = 8, fig.cap = "To create better facet labels, you can first make some changes to the dataset and then facet by the newly created 'week_label' column rather than the 'week' column."}
-library(lubridate)
+library("lubridate")
 
 daily_fatalities %<>% 
   group_by(week) %>% 

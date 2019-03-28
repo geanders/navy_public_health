@@ -177,14 +177,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.2</span> Basic mapping</h2>
 <p>If you don’t have <code>ggplot2</code> still loaded from the exercises in the “Plot” section, you’ll need to
 load it. Then, you can create a <code>ggplot</code> object and add an <code>sf</code> layer to it with <code>geom_sf</code>, specifying
-the <code>sf</code> data set to plot.<label for="tufte-sn-24" class="margin-toggle sidenote-number">24</label><input type="checkbox" id="tufte-sn-24" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">24</span> If you are
+the <code>sf</code> data set to plot.<label for="tufte-sn-25" class="margin-toggle sidenote-number">25</label><input type="checkbox" id="tufte-sn-25" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">25</span> If you are
 running this on a Mac, there’s a chance that you might get an error message about “polygon
 edge not found.” There seems to be a bug that’s still being resolved involving the default graphics
 driver on Macs with this package. If you get this error message, try fixing it by adding the
 following layer to the <code>ggplot</code> code: <code>+ theme(axis.text = element_blank(), axis.ticks = element_blank()</code></span>
 Add a coordinate layer (<code>coord_sf</code>) appropriate for a map (otherwise,
 you might end up with a map that’s “stretched” out in either the x- or y-direction):</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)
 
 <span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_counties) <span class="op">+</span><span class="st"> </span>

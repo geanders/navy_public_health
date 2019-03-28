@@ -95,9 +95,33 @@ need, run the following code in your version of R:
 install.packages()
 ```
 
-
 4. Download example R Project
 
+I've created a repository on **GitHub**^[**GitHub.** An online platform for directories tracked with 
+the version control software `git`. It has become a very popular place for coders to post code 
+from their projects, especially for open-source projects like R packages. You may need to get 
+a GitHub account to be able to clone this example directory. Even if not, it's not a bad idea to
+get an account if you work a lot with data and open-source code.] You can find this example
+repository by [clicking here](https://github.com/geanders/navy_public_health_examples). On the
+page takes you to, click on the "Clone or download" button and then select "Download ZIP". 
+
+This will download a single zipped file to your computer. When you unzip the file, it will be a
+special type of directory, an R Project directory. To open the R Project and start on the 
+examples, open RStudio, then go to "File" -> "Open Project". A pop-up window will open to let you 
+navigate through your files and find an R Project to open. Navigate to the directory you 
+downloaded, which should be called "navy_public_health_examples" and doubleclick on the file 
+in this directory called "navy_public_health_examples.Rproj". 
+
+This will open the project. In the "Files" pane of RStudio, you should see some subdirectories for
+"R" and "data". These have the example R code and data, respectively, for you to try the examples
+in this booklet. The code in each of the R files should run independently, including the code to 
+load all required packages. Figure \@ref(fig:examplerepo) shows what this package should 
+look like once you've downloaded and opened it, as well as opened the "plot.R" file in the 
+project's "R" subdirectory.
+
+```{r examplerepo, fig.fullwidth = TRUE, echo = FALSE, caption = "What the example R Project for this booklet should look like once you've downloaded and opened it, as well as opened the 'plot.R' file in the project's 'R' subdirectory."}
+knitr::include_graphics("images/example_repo.png")
+```
 
 
 

@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="geographical-data-in-a-tidy-format" class="section level2">
 <h2><span class="header-section-number">3.1</span> Geographical data in a tidy format</h2>
 <p>The <code>sf</code> package allows you to create a dataframe object with one special characteristic: a
-special <strong>list column</strong><label for="tufte-sn-19" class="margin-toggle sidenote-number">19</label><input type="checkbox" id="tufte-sn-19" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">19</span> <strong>list column</strong></span>
+special <strong>list column</strong><label for="tufte-sn-20" class="margin-toggle sidenote-number">20</label><input type="checkbox" id="tufte-sn-20" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">20</span> <strong>list column</strong></span>
 called “geometry” that contains the geometrical data needed to draw
 an observation. For example, if you have a dataset of motor vehicle accidents, where each
 row gives the data for an accident, the <code>geometry</code> column might include the latitude and
@@ -184,7 +184,7 @@ longitude for the location of the accident. As another example, if you have a da
 the total number of motor vehicle fatalities in a year in each county in a state, the
 <code>geometry</code> column might have all the latitude and longitude points to form the
 boundary of each county.</p>
-<p>These special dataframes are given a class called <strong>sf</strong><label for="tufte-sn-20" class="margin-toggle sidenote-number">20</label><input type="checkbox" id="tufte-sn-20" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">20</span> <strong>sf.</strong> Short for “simple features”,
+<p>These special dataframes are given a class called <strong>sf</strong><label for="tufte-sn-21" class="margin-toggle sidenote-number">21</label><input type="checkbox" id="tufte-sn-21" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">21</span> <strong>sf.</strong> Short for “simple features”,
 the name of both an R package and the object class created and used by the data. This class
 includes a special column called “geometry” for geographic information about each observation.
 Objects with this class can be used for mapping spatial data, but also can be manipulated
@@ -200,7 +200,7 @@ that it’s got observations (rows) of fatal motor vehicle accidents. These acci
 Florida within a week of Hurricane Irma’s landfall on September 10, 2017. The columns give
 the county code (<code>fips</code>), date (<code>date</code>), location (<code>latitude</code> and <code>longitud</code>), and the number of
 fatalities (<code>fatals</code>).</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
 fl_accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/fl_accidents.csv&quot;</span>)
 fl_accidents</code></pre>
 <pre><code>## # A tibble: 37 x 5
@@ -218,16 +218,16 @@ fl_accidents</code></pre>
 ## 10 12031 2017-09-12     30.4    -81.8      1
 ## # … with 27 more rows</code></pre>
 <p>Even though this data has geographical information in it (latitude and longitude), it’s currently
-just a regular dataframe. To convert it to an <code>sf</code> class object, you can use the <code>st_as_sf</code> function,<label for="tufte-sn-21" class="margin-toggle sidenote-number">21</label><input type="checkbox" id="tufte-sn-21" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">21</span> 
+just a regular dataframe. To convert it to an <code>sf</code> class object, you can use the <code>st_as_sf</code> function,<label for="tufte-sn-22" class="margin-toggle sidenote-number">22</label><input type="checkbox" id="tufte-sn-22" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">22</span> 
 Most of the functions in the <code>st</code> package start with <code>st_</code>. Since R studio allows <strong>tab completion</strong>,
 this makes it very easy to look up a function in the package whose name you might have forgotten.
 Just try typing <code>st_</code> and then the Tab key in your R console—you should get a pop-up with a list of
 suggestions for possible function names.</span>
-specifying the columns with the geogrphical coordinates using the <code>coords</code> parameter.<label for="tufte-sn-22" class="margin-toggle sidenote-number">22</label><input type="checkbox" id="tufte-sn-22" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">22</span> Here, the
+specifying the columns with the geogrphical coordinates using the <code>coords</code> parameter.<label for="tufte-sn-23" class="margin-toggle sidenote-number">23</label><input type="checkbox" id="tufte-sn-23" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">23</span> Here, the
 compound pipe operator, <code>%&lt;&gt;%</code>, applies the function to <code>fl_accidents</code> and then overwrites the
 <code>fl_accidents</code> with the modified version, updating the object so you’re ready to use it for later
 code.</span></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;sf&quot;</span>)
 fl_accidents <span class="op">%&lt;&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;longitud&quot;</span>, <span class="st">&quot;latitude&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">st_sf</span>(<span class="dt">crs =</span> <span class="dv">4326</span>)</code></pre>
@@ -256,7 +256,7 @@ out, including the objects <strong>bounding box</strong> (<code>bbox</code>) and
 ## 10 12031 2017-09-12      1 (-81.76086 30.37913)
 ## # … with 27 more rows</code></pre>
 <p>A second way to create an <code>sf</code> object in R is to read in data from a geographic data file, like
-a <strong>shapefile</strong><label for="tufte-sn-23" class="margin-toggle sidenote-number">23</label><input type="checkbox" id="tufte-sn-23" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">23</span> <strong>shapefile.</strong> …</span>
+a <strong>shapefile</strong><label for="tufte-sn-24" class="margin-toggle sidenote-number">24</label><input type="checkbox" id="tufte-sn-24" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">24</span> <strong>shapefile.</strong> …</span>
 If you followed the “Prerequisites”, you should have downloaded a file called
 “al112017_best_track.zip”. This is a zipped file that includes shapefiles for the track of
 Hurricane Irma from the National Hurricane Center ([website]).</p>

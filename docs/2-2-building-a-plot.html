@@ -182,7 +182,7 @@ to create these two example plots.</p>
 <h3><span class="header-section-number">2.2.1</span> Reading data</h3>
 <p>First, you’ll need to bring the example data into your R session. If you followed
 the steps in the “Prerequisites” section, you should have a
-<strong>comma-separated file</strong><label for="tufte-sn-7" class="margin-toggle sidenote-number">7</label><input type="checkbox" id="tufte-sn-7" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">7</span> <strong>comma-separated file format.</strong> A flat file format
+<strong>comma-separated file</strong><label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> <strong>comma-separated file format.</strong> A flat file format
 (try opening the file in a plain text editor—unlike a binary file format like
 Excel, you should be able to read all the content) where each column entry is
 separated by a comma. This is a common file format for tabular data that can
@@ -200,7 +200,7 @@ this case, “readr”). If you have forgotten to install the “readr” packag
 run this function, you’ll get the message:</p>
 <pre><code>Error in library(readr) : there is no package called ‘readr’</code></pre>
 <p>If you get that message, go back and re-read the “Prerequisites” to make sure you’ve
-installed all the required packages.<label for="tufte-sn-8" class="margin-toggle sidenote-number">8</label><input type="checkbox" id="tufte-sn-8" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">8</span> There is also a small chance, especially if
+installed all the required packages.<label for="tufte-sn-9" class="margin-toggle sidenote-number">9</label><input type="checkbox" id="tufte-sn-9" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">9</span> There is also a small chance, especially if
 you’re using a computer for which you don’t have superuser privileges, that something
 else is going on. Double-check that you installed the package you’re trying to load,
 and if loading the package still doesn’t work, talk with your IT team about
@@ -208,12 +208,12 @@ installing and loading R packages on your computer. For some company- or
 government-issued computers, the computer might have been set up to restrict
 installing new software, or to save installed software somewhere other than the
 default locations where R searches with <code>library</code>.</span></p>
-<p>Now that you’ve loaded <code>readr</code>, you can use the package’s <code>read_csv</code> function<label for="tufte-sn-9" class="margin-toggle sidenote-number">9</label><input type="checkbox" id="tufte-sn-9" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">9</span> For
+<p>Now that you’ve loaded <code>readr</code>, you can use the package’s <code>read_csv</code> function<label for="tufte-sn-10" class="margin-toggle sidenote-number">10</label><input type="checkbox" id="tufte-sn-10" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">10</span> For
 this and any other R function, you can open a help file in RStudio to give you
 more information about the function, usually including some examples of how to
 use if. Just type <code>?</code> and then the function name—for this example, <code>?read_csv</code>.</span>
 to read in the data. The one argument this function requires is the
-<strong>file path</strong><label for="tufte-sn-10" class="margin-toggle sidenote-number">10</label><input type="checkbox" id="tufte-sn-10" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">10</span> <strong>file path.</strong> The directions for where to find a file within your
+<strong>file path</strong><label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> <strong>file path.</strong> The directions for where to find a file within your
 computer’s directory structure. If the file you want is in your current working
 directory, this will just be the filename of the file. If it’s not, but in a directory
 close-by, you can use a <em>relative pathname</em> to give the directions from the current
@@ -238,7 +238,7 @@ tells you what it guessed, so you can check. In this case, the number of
 fatalities will always be a whole number, so the “integer” class would have
 also worked well, but there should be no problem with the column having a
 “double” class for the plotting we’ll be doing, so everything looks fine.</p>
-<p>The previous code used a <strong>gets arrow</strong><label for="tufte-sn-11" class="margin-toggle sidenote-number">11</label><input type="checkbox" id="tufte-sn-11" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">11</span> <strong>gets arrow.</strong> The function
+<p>The previous code used a <strong>gets arrow</strong><label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> <strong>gets arrow.</strong> The function
 <code>&lt;-</code>, which allows you to save the output from running the code on the right-hand
 side of the arrow to an object with the name on the left of the arrow. This is a
 funny kind of function called an <strong>infix function</strong>, which goes between two
@@ -263,7 +263,7 @@ can print out the start of the data by calling the object name by itself:</p>
 ##  9 2017-09-04    36 Monday         7
 ## 10 2017-09-05    36 Tuesday        8
 ## # … with 18 more rows</code></pre>
-<p>By default, <code>read_csv</code> read the data into a structure called a <strong>tibble</strong>,<label for="tufte-sn-12" class="margin-toggle sidenote-number">12</label><input type="checkbox" id="tufte-sn-12" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">12</span> <strong>tibble.</strong>
+<p>By default, <code>read_csv</code> read the data into a structure called a <strong>tibble</strong>,<label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> <strong>tibble.</strong>
 A slightly fancier dataframe, which is a tabular data format in R, where there are
 rows and columns, with each column having data with the same class (e.g., character,
 integer, date) and all columns having the same length. Values in the columns should
@@ -285,7 +285,7 @@ the plot elements described earlier. In this section, I’ll step through this p
 First, we’ll create a <strong>ggplot object</strong> using the <code>ggplot</code> call, and then we’ll add
 layers to it with <code>+</code>. To use these functions, you’ll need to load the <code>ggplot2</code>
 package:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</code></pre>
 <p>For the first step, create the <code>ggplot</code> object. When you create this object, specify
 the dataframe with the data you’d like to plot using the <code>data</code> parameter:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> daily_fatalities)</code></pre>
@@ -336,11 +336,11 @@ aesthetic for all of the observations from the data, but in the same way.</p>
 <p>For example, for this plot, we’d like the line to be dark gray for all observations,
 and we’d like the points to be a little bigger. To specify a <strong>constant aesthetic</strong>,
 move it outside of the <code>aes</code> call. For colors, you can set a constant value to
-one of the many named “R Colors”<label for="tufte-sn-13" class="margin-toggle sidenote-number">13</label><input type="checkbox" id="tufte-sn-13" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">13</span> See <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">this website</a> for examples and names</span>
+one of the many named “R Colors”<label for="tufte-sn-14" class="margin-toggle sidenote-number">14</label><input type="checkbox" id="tufte-sn-14" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">14</span> See <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">this website</a> for examples and names</span>
 (make sure you put the color name inside parentheses—otherwise, R will think you’re
 refering to an R object). Constant point size values can be specified using numbers,
 where larger numbers will make bigger points and the default value is somewhere
-around 1.<label for="tufte-sn-14" class="margin-toggle sidenote-number">14</label><input type="checkbox" id="tufte-sn-14" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">14</span> For
+around 1.<label for="tufte-sn-15" class="margin-toggle sidenote-number">15</label><input type="checkbox" id="tufte-sn-15" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">15</span> For
 an in-depth look at aesthetic specifications, see
 <a href="https://cran.r-project.org/web/packages/ggplot2/vignettes/ggplot2-specs.html">the ggplot2 specs vignette</a></span> Try numbers bigger than 1 (e.g., 1.5, 2) for bigger points and smaller
 values (e.g., 0.8, 0.5) for smaller points.</p>
@@ -417,7 +417,7 @@ of the legend. For a time series plot like this, the change can be helpful, as i
 lets us create a plot that’s much wider than it is tall. You can move the legend
 using the <code>theme</code> layer with an argument specified for <code>legend.position</code>. With
 the <code>theme</code> function, you can customize almost any of the background elements of a
-plot.<label for="tufte-sn-15" class="margin-toggle sidenote-number">15</label><input type="checkbox" id="tufte-sn-15" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">15</span> See the helpfile for “theme” with <code>?theme</code> for a full listing.</span>
+plot.<label for="tufte-sn-16" class="margin-toggle sidenote-number">16</label><input type="checkbox" id="tufte-sn-16" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">16</span> See the helpfile for “theme” with <code>?theme</code> for a full listing.</span>
 However, you’ll usually only want to do that for a few elements—if you want
 to change a lot of elements, there is a set of functions that start <code>theme_</code> that
 will let you change to one of several “themes” that change many elements at once
@@ -444,7 +444,7 @@ the order of the days of week are different in the original plot from our final
 version here. That’s because, by default, discrete character-class values are
 ordered alphabetically. We can change this order, and should, to be the order that
 week days occur. To do this, we need to change the column class to a
-<strong>factor class</strong><label for="tufte-sn-16" class="margin-toggle sidenote-number">16</label><input type="checkbox" id="tufte-sn-16" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">16</span> <strong>factor class.</strong> An R class for values that take character names,
+<strong>factor class</strong><label for="tufte-sn-17" class="margin-toggle sidenote-number">17</label><input type="checkbox" id="tufte-sn-17" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">17</span> <strong>factor class.</strong> An R class for values that take character names,
 but that describe categories, for which you expect values to show up more than once
 in your data. In this data, the day of week is an example, since it is expressed
 as a character variable (“Monday”, “Tuesday”, etc.), but we expect there to be
@@ -522,7 +522,7 @@ Figure 2.12: Changing the theme. The ’theme_*’ family of functions can quick
 <img src="navy_public_health_files/figure-html/step2a-1.png" alt="Changing the theme. The 'theme_*' family of functions can quickly change many of the background elements of a plot with a single layer call." width="576"  />
 </div>
 <p>Most of the rest of the layers for the plot are very similar to the first plot.
-They include changing the <strong>fill</strong><label for="tufte-sn-17" class="margin-toggle sidenote-number">17</label><input type="checkbox" id="tufte-sn-17" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">17</span> <strong>fill aesthetic.</strong> While all geoms have
+They include changing the <strong>fill</strong><label for="tufte-sn-18" class="margin-toggle sidenote-number">18</label><input type="checkbox" id="tufte-sn-18" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">18</span> <strong>fill aesthetic.</strong> While all geoms have
 a <strong>color aesthetic</strong>, some also have a <strong>fill</strong> aesthetic. These include columns,
 bars, polygons, and points with certain shapes. In these cases, ‘color’ will specify
 the outline of the geom while ‘fill’ will specify the inside. Each geom has a set of
@@ -563,7 +563,7 @@ than alphabetical.</p>
 <p>Once you’ve made these changes to the ‘daily_fatalities’ tibble, you should get the
 final version of the plot when you re-run the plotting code used in the last step,
 getting Figure <a href="2-2-building-a-plot.html#fig:step4a">2.14</a>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;lubridate&quot;</span>)
 
 daily_fatalities <span class="op">%&lt;&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(week) <span class="op">%&gt;%</span><span class="st"> </span>

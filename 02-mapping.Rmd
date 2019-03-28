@@ -47,7 +47,7 @@ the county code (`fips`), date (`date`), location (`latitude` and `longitud`), a
 fatalities (`fatals`). 
 
 ```{r message = FALSE}
-library(readr)
+library("readr")
 fl_accidents <- read_csv("data/fl_accidents.csv")
 fl_accidents
 ```
@@ -64,7 +64,7 @@ compound pipe operator, `%<>%`, applies the function to `fl_accidents` and then 
 code.]
 
 ```{r}
-library(sf)
+library("sf")
 fl_accidents %<>% 
   st_as_sf(coords = c("longitud", "latitude")) %>% 
   st_sf(crs = 4326)
@@ -153,7 +153,7 @@ Add a coordinate layer (`coord_sf`) appropriate for a map (otherwise,
 you might end up with a map that's "stretched" out in either the x- or y-direction):
 
 ```{r}
-library(ggplot2)
+library("ggplot2")
 
 ggplot() + 
   geom_sf(data = fl_counties) + 
