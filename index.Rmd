@@ -43,8 +43,7 @@ To try out these examples, you need some set-up:
 4. Download example R Project
 
 This section will walk you through each step, explaining both *how* and 
-*why* to do the step. Click on the **Next** button (or navigate using the
-links at the top of the page) to continue.
+*why* to do the step. 
 
 1. Download R 
 
@@ -123,7 +122,8 @@ project's "R" subdirectory.
 knitr::include_graphics("images/example_repo.png")
 ```
 
-
+Click on the **Next** button (or navigate using the
+links at the top of the page) to continue.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

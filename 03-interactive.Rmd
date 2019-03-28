@@ -1,6 +1,6 @@
 # Interact
 
-`\r newthought("For a few years now, you")` have been able to use Javascript to create 
+`r newthought("For a few years now, you")` have been able to use Javascript to create 
 interactive plots to include on 
 websites. These plots respond to actions from your mouse. When you scroll over a point, 
 for example, some information about the point might show up, or when you click on a marker

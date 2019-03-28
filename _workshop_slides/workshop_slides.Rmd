@@ -7,6 +7,7 @@ date: \today
 header-includes:
    - \usepackage{epigraph}
    - \setlength{\epigraphwidth}{0.4\textwidth}
+   - \def\inserttotalframenumber{100}
 output: binb::presento
 ---
 
@@ -21,7 +22,7 @@ knitr::opts_knit$set(root.dir = "..")
 - UNDERSTAND what R can do for visualizations \bigskip
 - KNOW what to do next to learn more
 
-## "Homework"
+## Homework?!
 
 \begin{center}
 \url{goo.gl/7fPYUx}
@@ -44,14 +45,17 @@ ____
  \small Setting up for success
 \end{center}
 
-____
+## R packages
 
-[R vs. RStudio]
+```{r echo = FALSE, fig.align = "center", out.width = "0.7\\textwidth"}
+knitr::include_graphics("images/BrioBasicSet.jpg")
+```
 
-____
+## R packages
 
-[R packages]
-
+```{r echo = FALSE, fig.align = "center", out.width = "\\textwidth"}
+knitr::include_graphics("images/BrioFancySet.jpg")
+```
 
 ## Installing R packages
 
@@ -148,19 +152,70 @@ ____
  \small R's \textbf{ggplot2} framework for plotting
 \end{center}
 
-____
+## `ggplot2`: Think layers
 
-[Layering for ggplot]
+```{r echo = FALSE}
+knitr::include_graphics("images/smith_island_cake")
+```
+
+## Plot elements
+
+\small
+
+\begin{itemize}
+\item {\color{colorblue}\textbf{data}} Observations shown with the plot
+\item {\color{colorblue}\textbf{geoms}} Geometric objects showing the data on the plot, with aesthetics
+mapped to characteristics of the data or given constant values.
+\item {\color{colorblue}\textbf{coordinate system}} Grid system defining how the data in the plot
+are layed out; often a Cartesian coordinate system
+\item {\color{colorblue}\textbf{labels}} Names of axes and other scales, as well as plot titles
+\item {\color{colorblue}\textbf{themes}} Background elements of the plot
+\end{itemize}
 
 ## Spot the differences
 
-## geoms and their aesthetics
+```{r echo = FALSE, message = FALSE}
+library(magrittr)
+library(readr)
+library(ggplot2)
+library(forcats)
+library(dplyr)
+library(gridExtra)
+library(cowplot)
 
-## scales
+daily_fatalities <- read_csv("data/daily_fatalities.csv")
 
-## labels
+daily_fatalities %<>% 
+  mutate(weekday = fct_relevel(weekday,
+                               "Sunday", "Monday", "Tuesday", 
+                               "Wednesday", "Thursday", "Friday", "Saturday"))
 
-## themes
+a <- ggplot(data = daily_fatalities) + 
+  geom_line(aes(x = date, y = fatals),
+            color = "darkgray") + 
+  geom_point(aes(x = date, y = fatals, color = weekday),
+             size = 2)
+
+b <- ggplot(data = daily_fatalities) + 
+  geom_line(aes(x = date, y = fatals),
+            color = "darkgray") + 
+  geom_point(aes(x = date, y = fatals, color = weekday),
+             size = 2) + 
+  scale_color_viridis_d() + 
+  expand_limits(y = 0) +
+  labs(x = "Date", y = "# of fatalities", color = "Day of week") + 
+  theme(legend.position = "bottom") + 
+  ggtitle("Motor vehicle fatalities in Florida",
+          subtitle = "Late summer / early fall of 2019")
+
+plot_grid(
+  a, NULL, b,
+  ncol = 1,
+  rel_heights = c(1, 0.05, 1),
+  labels = c("A", "", "B")
+)
+```
+
 
 ____
 
@@ -170,6 +225,12 @@ ____
 \begin{center}
 \hugetext{\montserratfont [Live coding example]}
 \end{center}
+
+## "Kirk Moment"
+
+```{r echo = FALSE, out.height = "0.8\\textheight", fig.align = "center"}
+knitr::include_graphics("images/raincomparison.pdf")
+```
 
 ____
 
@@ -181,11 +242,86 @@ ____
 
 ____
 
+\huge
+\center
+
+sf: simple features
+
+## `sf` class
+
+\footnotesize
+
+```{r echo = FALSE, message = FALSE}
+library("readr")
+library("sf")
+library("magrittr")
+
+fl_accidents <- read_csv("data/fl_accidents.csv")
+
+fl_accidents %<>% 
+  st_as_sf(coords = c("longitud", "latitude")) %>% 
+  st_sf(crs = 4326)
+
+fl_accidents
+```
+
+
+## Open Data APIs
+
+```{r eval = FALSE}
+library(tigris)
+fl_counties <- counties(state = "FL",
+                        class = "sf")
+```
+```{r echo = FALSE}
+load("data/fl_counties.RData")
+```
+
+```{r echo = FALSE, out.height = "0.5\\textheight", fig.align = "center", fig.width = 4}
+ggplot() + 
+  geom_sf(data = fl_counties, 
+          aes(fill = ALAND)) + 
+  theme_bw() + 
+  scale_fill_viridis_c(name = "Land area", label = scales::scientific) + 
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank())
+```
+
+____
+
+\tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)]{%
+  \includegraphics[width=1\paperwidth]{images/example_code}};
+\color{colorblue}
+\begin{center}
+\hugetext{\montserratfont [Live coding example]}
+\end{center}
+
+## "Kirk Moment"
+
+```{r echo = FALSE, fig.align = "center", out.height = "0.4\\textheight"}
+knitr::include_graphics("images/ok_headline")
+```
+
+```{r echo = FALSE, fig.align = "center", out.height = "0.4\\textheight"}
+knitr::include_graphics("images/ok_case")
+```
+
+____
+
 \begin{center}
  \hugetext{INTERACT} 
  \medskip 
  \small R's \textbf{htmlwidgets} framework for interacting
 \end{center}
+
+## "Kirk Moment"
+
+```{r echo = FALSE, out.height = "0.7\\textheight", fig.align = "center"}
+knitr::include_graphics("images/maze-minecraft.png")
+```
+
+\center
+\url{https://github.com/ropenscilabs/miner}
 
 ____
 
@@ -231,7 +367,7 @@ number_one <- 1
 number_one
 ```
 
-More text, \*also\* with Markdown format markers. 
+More text, *also* with Markdown format markers. 
 And a list: 
 
 \- Item 1 
@@ -265,6 +401,13 @@ ____
 \hugetext{\montserratfont [Live coding example]}
 \end{center}
 
+## "Kirk Moment"
+
+```{r echo = FALSE}
+knitr::include_graphics("images/workshop_booklet")
+```
+
+
 ____
 
 \begin{center}
@@ -272,6 +415,34 @@ ____
  \medskip 
  \small R's \textbf{tidyverse} framework for tidying
 \end{center}
+
+## "Tidy" data
+
+```{r echo = FALSE, fig.align = "center"}
+knitr::include_graphics("images/tidy-1")
+```
+
+\footnotesize 
+Source: [*R for Data Science*](https://r4ds.had.co.nz/), Grolemund and Wickham
+
+## Untidy data example
+
+\footnotesize
+
+```{r echo = FALSE}
+data(VADeaths)
+knitr::kable(VADeaths)
+```
+
+____
+
+\center
+\small
+Why are Legos such a great toy?
+
+```{r echo = FALSE, fig.align = "center", out.width = "0.9\\textwidth"}
+knitr::include_graphics("images/legos")
+```
 
 ____
 
@@ -282,40 +453,14 @@ ____
 \hugetext{\montserratfont [Live coding example]}
 \end{center}
 
-## Presento
 
-- \begin{center}\largetext{The design is \underline{clean}}\end{center}    \bigskip
-- \begin{center}\largetext{The rules are \underline{simple}}\end{center}   \bigskip
-- \item \begin{center}\largetext{The code is \underline{extensible}}\end{center}
+## "Kirk Moment"
 
+\includegraphics[width = \textwidth]{images/CRAN_package_10000}
 
-## Open Source Fonts
-
--  \montserratfont This is \textsc{Montserrat}	\bigskip
--  \notosansfont This is \textsc{Noto Sans}		\bigskip
--  \latolightfont This is Lato (light)          \bigskip
--  \inconsolatafont This is inconsolata         \bigskip
--  \textsc{This is Alegreya Sans small caps}    \bigskip
-
-
-## Color Palette
+## Homework?!
 
 \begin{center}
-  \crule[colordgray] \crule[colorhgray] \crule[colorblue] \crule[colorgreen] \crule[colororange]
+\url{goo.gl/7fPYUx}
 \end{center}
 
-____
-
-\begin{center}
- \hugetext{BIG BOLD TEXT} 
- \medskip 
- \small but background color does not work
-\end{center}
-
-____
-
-\tikz[overlay,remember picture] \node[opacity=0.8, at=(current page.center)]{%
-  \includegraphics[width=\paperwidth]{images/skeleton}};
-\begin{textblock}{7}(7,2.5)
-  {\color{colorblue}\hugetext{\textbf{RUN!}}}
-\end{textblock}
