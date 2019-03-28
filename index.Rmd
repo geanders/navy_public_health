@@ -39,22 +39,63 @@ To try out these examples, you need some set-up:
 1. Download R
 2. Download RStudio
 3. Install some R packages
-4. Create an R Project for the examples
-5. Download the example data and save it in the R Project
+4. Download example R Project
 
 This section will walk you through each step, explaining both *how* and 
 *why* to do the step. Click on the **Next** button (or navigate using the
 links at the top of the page) to continue.
 
-## Download R
+1. Download R 
 
-## Download RStudio
+R is free and open-source software. You can download a copy for just about any 
+operating system at the ]Comprehensive R Archive Network (CRAN)] (https://cran.r-project.org/).
+Look for the links on this page to "Download for ..." and your operating system.^[
+If your computer has restrictions on what you can download, you may need to take to your
+system administrator or IT team to discuss whether you can download and install R and, if 
+so, how. In that case, you may also need to talk with them about a strategy for installing
+R packages, as well.] 
 
-## Install some R packages
+2. Download RStudio
 
-## Create an R Project
+You do not have to have RStudio^[In this section, I'm referring to RStudio, the software. It is 
+produced by a company that is also called "RStudio". RStudio, the company, includes a team of some
+of the best and most prolific R programmers currently contributing packages to extend R. A lot of 
+the packages covered in this booklet were created and are maintained by members of the RStudio team.]
+to run R, but it makes the experience much nicer. I also 
+think it's much easier to learn R when using RStudio to run it rather than using R by itself. 
 
-## Download example data
+RStudio is an **Integrated Development Environment (IDE)**^[**Integrated Development 
+Environment (IDE).** A program that provides a helpful interface for developing code, often 
+geared to a specific programming language. It typically includes tools and a visual 
+set-up for the programmer's convenience.] 
+You should download it after you have downloaded R. You can download it
+[here](https://www.rstudio.com/products/rstudio/#Desktop). You want the Desktop, open source 
+edition. Download this and install it on your computer as you would any other software package
+from a website. 
+
+3. Install some R packages
+
+When you downloaded the R software from CRAN, you downloaded what's called **base R**. This 
+is the "engine" to run the heart of R, plus a few key extension packages. There are now
+several thousand packages available for R. These packages extend the core functionality of 
+R, and we'll be using a lot of these extra packages in this booklet. 
+
+When you need to use an R package that did not come with base R (most of them), you will first
+need to **install** it to your computer. This can be done from R with the `install.packages` 
+function. This installs a package from an online repository to your computer, saving the code
+in a special location that R can find. Since this function is downloading code from online, 
+your computer needs to have an internet connection when you run `install.packages`, or you'll
+get an error. 
+
+This booklet uses a number of R packages beyond base R. To install all the packages that you'll
+need, run the following code in your version of R: 
+
+```{r eval = FALSE}
+install.packages()
+```
+
+
+4. Download example R Project
 
 
 
