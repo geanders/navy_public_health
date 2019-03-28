@@ -206,33 +206,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="report" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Report</h1>
-<p><strong>Literate programming</strong>, an idea developed by Donald Knuth, mixes code that can be executed with regular text. The files you create can then be rendered, to run any embedded code. The final output will have results from your code and the regular text.</p>
-<p>The <code>knitr</code> package can be used for literate programming in R. In essence, <code>knitr</code> allows you to write an R Markdown file that can be rendered into a pdf, Word, or HTML document.</p>
+<p><strong>Literate programming</strong>, an idea developed by Donald Knuth, mixes code that can be executed with
+regular text. The files you create can then be rendered, to run any embedded code. The final output
+will have results from your code and the regular text.</p>
+<p>R has a collection of packages that extend these ideas of literate programming, allowing you to
+create reports that interweave R code, the results from that code, and text. This collection
+include the packages <code>knitr</code> and <code>rmarkdown</code>. I believe both are automatically installed to your
+computer when you install RStudio.</p>
+<p>This section will walk you through some of the basics of creating two types of reports using
+RMarkdown: a basic RMarkdown report and a dashboard. The R project directory you downloaded in
+the “Prerequisites” section includes example files for both in its “reports” subdirectory.</p>
 <div id="rmarkdown" class="section level2">
 <h2><span class="header-section-number">5.1</span> RMarkdown</h2>
+<p>The RMarkdown framework makes it very easy to create nice reports from R code in RStudio.</p>
 <p>Here are the basics of opening and rendering an R Markdown file in RStudio:</p>
 <ul>
-<li>To open a new R Markdown file, go to “File” -&gt; “New File” -&gt; “RMarkdown…” -&gt; for now, chose a “Document” in “HTML” format.</li>
+<li>To open a new R Markdown file, go to “File” -&gt; “New File” -&gt; “RMarkdown…”. In the
+box that pops up, chose a “Document” in “HTML” format.</li>
 <li>This will open a new R Markdown file in RStudio. The file extension for R Markdown files is “.Rmd”.</li>
-<li>The new file comes with some example code and text. You can run the file as-is to try out the example. You will ultimately delete this example code and text and replace it with your own.</li>
-<li>Once you “knit” the R Markdown file, R will render an HTML file with the output. This is automatically saved in the same directory where you saved your .Rmd file.</li>
-<li>Write everything besides R code using Markdown syntax.</li>
+<li>The new file comes with some example code and text. You can run the file as-is to try out the example.
+You will ultimately delete this example code and text and replace it with your own.</li>
+<li>Once you “knit” the R Markdown file, R will render an HTML file with the output. This is automatically
+saved in the same directory where you saved your .Rmd file.</li>
+<li>Write everything besides R code using Markdown syntax (explained below).</li>
 </ul>
-<p>To include R code in an RMarkdown document, you need to separate off the code chunk using the following syntax:</p>
+<p>To include R code in an RMarkdown document, you need to separate off the code chunk using the
+following syntax (here, the code assigns the numbers one to 10 to the object <code>my_vec</code>):</p>
 <pre><code>```{r}
 my_vec &lt;- 1:10
 ```</code></pre>
-<p>This syntax tells R how to find the start and end of pieces of R code when the file is rendered. R will walk through, find each piece of R code, run it and create output (printed output or figures, for example), and then pass the file along to another program to complete rendering (e.g., Tex for pdf files).</p>
-<p>R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand what markup languages like Markdown are and how they work.</p>
-<p>In Word and other word processing programs you have used, you can add formatting using buttons and keyboard shortcuts (e.g., “Ctrl-B” for bold). The file saves the words you type. It also saves the formatting, but you see the final output, rather than the formatting markup, when you edit the file (WYSIWYG – what you see is what you get).</p>
-<p>In markup languages, on the other hand, you markup the document directly to show what formatting the final version should have (e.g., you type <code>**bold**</code> in the file to end up with a document with <strong>bold</strong>).</p>
-<p>Examples of markup languages include:</p>
-<ul>
-<li>HTML (HyperText Markup Language)</li>
-<li>LaTex</li>
-<li>Markdown (a “lightweight” markup language)</li>
-</ul>
-<p>To write a file in Markdown, you’ll need to learn the conventions for creating formatting. This table shows what you would need to write in a flat file for some common formatting choices:</p>
+<p>This syntax might look unusual, but it tells R how to find the start and end of pieces of R code
+when the file is processed by R. R will walk through, find each piece of R code inside these
+special sections, run it and create
+output (printed output or figures, for example). R will ignore anything not in one of these
+sections, including the text of the report.
+The output from this R processing will then pass into another program to complete
+rendering (e.g., a LaTeX engine for pdf files).</p>
+<p>R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand
+what markup languages like Markdown are and how they work.</p>
+<p>In Word and other word processing programs you have used, you can add formatting using buttons and
+keyboard shortcuts (e.g., “Ctrl-B” for bold). The file saves the words you type. It also saves the
+formatting, but you see the final output, rather than the formatting markup, when you edit the file
+(WYSIWYG – what you see is what you get).</p>
+<p>In markup languages,<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a> on the other hand, you markup the
+document directly to show what formatting the
+final version should have (e.g., you type <code>**bold**</code> in the file to end up with a document with
+<strong>bold</strong>).</p>
+<p>To write a file in Markdown, you’ll need to learn the conventions for creating formatting. This table
+shows the markup for some common formatting choices:</p>
 <table>
 <thead>
 <tr class="header">
@@ -278,20 +299,70 @@ my_vec &lt;- 1:10
 <li>Block quotes</li>
 <li>Superscripts</li>
 </ul>
+<p>See the resources listed in “Learn More” for links to some helpful resources for learning
+RMarkdown, including more of these Markdown formatting mark-ups.</p>
 </div>
 <div id="dashboards" class="section level2">
 <h2><span class="header-section-number">5.2</span> Dashboards</h2>
+<p>In RStudio, you can also now create a “dashboard” using RMarkdown. A dashboard might be
+a good choice if you need to summarize or show a lot of information on a single webpage
+in a way that everything can be viewed in one window. Figure <a href="report.html#fig:dashboardexample">5.1</a>
+gives an example dashboard (although this is just a screenshot—if posted online, the
+leaflet map in this
+would be interactive).</p>
+<div class="figure"><span id="fig:dashboardexample"></span>
+<img src="images/flexdashboard_example.png" alt="Example of a dashboard created with RMarkdown." width="1433" />
+<p class="caption">
+Figure 5.1: Example of a dashboard created with RMarkdown.
+</p>
+</div>
+<p>To create a dashboard, you’ll need to have the <code>flexdashboard</code> package <span class="citation">(Iannone, Allaire, and Borges <a href="#ref-R-flexdashboard">2018</a>)</span>
+installed. If you have this package installed, you can create a dashboard by opening your
+RStudio session and selecting “File” -&gt; “New File” -&gt; “RMarkdown”. In the box that pops
+up, go to the “From Template” tab and select “Flexdashboard”.</p>
+<p>The R Project with examples for this workshop includes an example file for creating
+a dashboard in the “reports” subdirectory’s “flexdashboard_example.Rmd” file.<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>
+Open this
+file and try creating the dashboard using the “Knit” button. You can get an idea for how
+the code converts to elements of the dashboard by changing some of the code in the
+RMarkdown file.</p>
+<p>The <code>flexdashboard</code> package is extensively documented through <a href="https://rmarkdown.rstudio.com/flexdashboard/">its website</a>, where you can find many examples of
+how to create dashboards with RMarkdown.</p>
 </div>
 <div id="learn-more-3" class="section level2">
 <h2><span class="header-section-number">5.3</span> Learn more</h2>
-<p>For more Markdown conventions, see <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">RStudio’s R Markdown Reference Guide</a> (link also available through “Help” in RStudio).</p>
-<p>If you’d like to find out more, here are two good how-to books on reproducible research in R are:</p>
-<ul>
-<li><em>Reproducible Research with R and RStudio</em>, Christopher Gandrud</li>
-<li><em>Dynamic Documents with R and knitr</em>, Yihui Xie</li>
-</ul>
+<p>For more Markdown conventions, see <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">RStudio’s R Markdown Reference Guide</a> (link also available through “Help” in RStudio). There are several great books on <code>knitr</code> and RMarkdown now;
+<a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> is particularly
+good, and includes the creater of <code>knitr</code> and <code>rmarkdown</code> as a coauthor.</p>
+<p>For more on creating dashboards using RMarkdown, see <a href="https://rmarkdown.rstudio.com/flexdashboard/"><code>flexdashboard</code> package’s website</a>, which includes many examples
+of code and output for these dashboards.</p>
+<p>You can post the output of an RMarkdown file for free (note that it will be public) through
+<a href="http://www.rpubs.com/">RPubs</a>. This is also a great site for exploring reports others have
+created using RMarkdown.
+For more on posting your own files to RPubs, <a href="http://www.rpubs.com/about/getting-started">see here</a>.</p>
+<p>A collection of books published with R using RMarkdown is available through
+<a href="https://bookdown.org/">bookdown.org</a>. You can also use RMarkdown to create your own website
+with a blog using the <code>blogdown</code> package, which is explained in
+<a href="https://bookdown.org/yihui/blogdown/">blogdown: Creating Websites with R Markdown</a>.</p>
 
 </div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-flexdashboard">
+<p>Iannone, Richard, JJ Allaire, and Barbara Borges. 2018. <em>Flexdashboard: R Markdown Format for Flexible Dashboards</em>. <a href="https://CRAN.R-project.org/package=flexdashboard">https://CRAN.R-project.org/package=flexdashboard</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="30">
+<li id="fn30"><p>Examples include HTML, LaTeX, and Markdown<a href="report.html#fnref30" class="footnote-back">↩</a></p></li>
+<li id="fn31"><p>You might
+notice that there are some other files in this subdirectory that start with “flexdashboard_example”.
+These are the files that are written out when you knit the RMarkdown file. You should never
+change these by hand, but these include the files you’ll want to share or post online as
+the output of the RMarkdown file (e.g., “flexdashboard_example.html”).<a href="report.html#fnref31" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

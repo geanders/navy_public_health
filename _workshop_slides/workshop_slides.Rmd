@@ -337,7 +337,9 @@ ____
 
 ## `leaflet` map
 
-
+```{r echo = FALSE, out.height = "0.8\\textheight", fig.align = "center"}
+knitr::include_graphics("images/leaflet_example")
+```
 
 ____
 
@@ -426,6 +428,12 @@ More text, *also* with Markdown format markers. And some items:
 - Item 1
 - Item 2
 
+## Flexdashboard
+
+```{r echo = FALSE, out.height = "\\textheight"}
+knitr::include_graphics("images/flexdashboard_example")
+```
+
 ____
 
 \tikz[overlay,remember picture] \node[opacity=0.2, at=(current page.center)]{%
@@ -478,7 +486,7 @@ Why are Legos such a great toy?
 knitr::include_graphics("images/legos")
 ```
 
-## Tidyverse---Small functions that play well together
+## Tidyverse: Small functions that play well together
 
 \begin{itemize}
 \item \textbf{select} some columns \medskip
@@ -502,7 +510,8 @@ knitr::include_graphics("images/magrittr")
 ```{r eval = FALSE}
 fl_accidents %>% 
   rename_all(.funs = str_to_lower) %>% 
-  select(state, county, day, month, year, latitude, longitud, fatals) %>% 
+  select(state, county, day, month, year,
+         latitude, longitud, fatals) %>% 
   filter(state == 12) %>% 
   mutate(county = str_pad(county, width = 3, pad = "0")) %>% 
   unite(col = fips, c(state, county), sep = "") %>% 

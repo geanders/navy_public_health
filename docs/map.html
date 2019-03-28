@@ -207,22 +207,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="map" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Map</h1>
 <p><span class="newthought">R has had tools for mapping spatial</span> data for a long time, but some of these
-tools, but they could take a while to learn if you were just used to basic plotting
+tools could take a while to learn if you were just used to basic plotting
 in R. Recently, some packages have been developed for mapping spatial data that fit within
 the <code>ggplot</code> framework, so they allow you to take what you’ve learned about creating non-geographical
 plots and apply them to create maps.</p>
 <p>The <code>sf</code> package <span class="citation">(Pebesma <a href="#ref-R-sf">2019</a>)</span> is a fantastic new(-ish) package for mapping in R. The “Tidy” section
-of this handout describes the “tidy” data framework used as an input for <code>ggplot</code> code. The
+of this handout describes how the tidyverse framework is based on a “tidy” data format. The
 “tidy” data framework is also convenient for cleaning, merging, and manipulating data
 before plotting or modeling it. The <code>sf</code> package allows you to read in and work with geographical
 data in a tidy format. It turns out that this is very powerful, as you can learn how to do a
-few things well (plotting [see the “Plot” section] and working with data [see the “Tidy” section]),
+few things well (plotting [see the “Plot” section] and working with data [see the “Tidy” section
+and its “Learn More” references]),
 and then apply these tools in the same way, whether you’re working with geographical or
 non-geographical data.</p>
 <div id="geographical-data-in-a-tidy-format" class="section level2">
 <h2><span class="header-section-number">3.1</span> Geographical data in a tidy format</h2>
 <p>The <code>sf</code> package allows you to create a dataframe object with one special characteristic: a
-special <strong>list column</strong><a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>
+special column
 called “geometry” that contains the geometrical data needed to draw
 an observation. For example, if you have a dataset of motor vehicle accidents, where each
 row gives the data for an accident, the <code>geometry</code> column might include the latitude and
@@ -230,13 +231,14 @@ longitude for the location of the accident. As another example, if you have a da
 the total number of motor vehicle fatalities in a year in each county in a state, the
 <code>geometry</code> column might have all the latitude and longitude points to form the
 boundary of each county.</p>
-<p>These special dataframes are given a class called <strong>sf</strong><a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></p>
-<p>There are several ways for you to create this special type of dataframe. We’ll create a few
-to use in the later mapping examples. First, if you have a regular dataframe, you can
+<p>These special dataframes are given a class called <strong>sf</strong><a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>
+There are several ways for you to create this special type of dataframe. We’ll create a few
+to use in the later mapping examples to demonstrate some of the ways to get an <code>sf</code> object.</p>
+<p>First, if you have a regular dataframe, you can
 convert it into an <code>sf</code> object, specifying which parts of the dataframe include geographical
-information.</p>
-<p>If you followed all the set-up instructions in the “Prerequisites”, you should have downloaded a
-dataset called “fl_accidents.csv” and saved it in the “data” subdirectory of the R Project directory
+information.
+If you followed all the set-up instructions in the “Prerequisites”, you should have downloaded a
+dataset called “fl_accidents.csv” and in the “data” subdirectory of the R Project directory
 for the examples. You can use <code>readr</code> to read it in. If you print out the start of it, you’ll see
 that it’s got observations (rows) of fatal motor vehicle accidents. These accidents all occurred in
 Florida within a week of Hurricane Irma’s landfall on September 10, 2017. The columns give
@@ -260,16 +262,17 @@ fl_accidents</code></pre>
 ## 10 12031 2017-09-12     30.4    -81.8      1
 ## # … with 27 more rows</code></pre>
 <p>Even though this data has geographical information in it (latitude and longitude), it’s currently
-just a regular dataframe. To convert it to an <code>sf</code> class object, you can use the <code>st_as_sf</code> function,<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>
-specifying the columns with the geogrphical coordinates using the <code>coords</code> parameter.<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></p>
+just a regular dataframe. To convert it to an <code>sf</code> class object, you can use the <code>st_as_sf</code> function,<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>
+specifying the columns with the geogrphical coordinates using the <code>coords</code> parameter.<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> We also want to go ahead and set the projection to something reasonable for latitude-longitude
+data; the “4326” code is a good pick. That can be set with the <code>st_sf</code> function (for a lot more
+on map projections, see the resources in “Learn More”).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;sf&quot;</span>)</code></pre>
 <pre><code>## Linking to GEOS 3.6.1, GDAL 2.1.3, PROJ 4.9.3</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">fl_accidents <span class="op">%&lt;&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;longitud&quot;</span>, <span class="st">&quot;latitude&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">st_sf</span>(<span class="dt">crs =</span> <span class="dv">4326</span>)</code></pre>
-<p>Now, when you print out <code>fl_accidents</code>, you’ll see some extra information at the top of the print
-out, including the objects <strong>bounding box</strong> (<code>bbox</code>) and <strong>projection</strong> (<code>epsg</code>, <code>proj4string</code>)
-(which we currently haven’t set).</p>
+<p>Now, when you print out <code>fl_accidents</code>, you’ll see some extra information at the top of the print-out,
+including the objects <strong>bounding box</strong> (<code>bbox</code>) and <strong>projection</strong> (<code>epsg</code>, <code>proj4string</code>).</p>
 <pre class="sourceCode r"><code class="sourceCode r">fl_accidents</code></pre>
 <pre><code>## Simple feature collection with 37 features and 3 fields
 ## geometry type:  POINT
@@ -292,16 +295,13 @@ out, including the objects <strong>bounding box</strong> (<code>bbox</code>) and
 ## 10 12031 2017-09-12      1 (-81.76086 30.37913)
 ## # … with 27 more rows</code></pre>
 <p>A second way to create an <code>sf</code> object in R is to read in data from a geographic data file, like
-a <strong>shapefile</strong><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>
-If you followed the “Prerequisites”, you should have downloaded a file called
-“al112017_best_track.zip”. This is a zipped file that includes shapefiles for the track of
-Hurricane Irma from the National Hurricane Center ([website]).</p>
-<p>First, you’ll need to unzip this file to “unpack” it as a directory of files. On many
-computers, you can do this by double-clicking on the zipped file. However, you can also
-unzip files from R. Just run:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unzip</span>(<span class="st">&quot;data/al112017_best_track.zip&quot;</span>, 
-      <span class="dt">exdir =</span> <span class="st">&quot;data/al112017_best_track&quot;</span>)</code></pre>
-<p>Once the file is unzipped, if you look at the “al112017_best_track” directory created,
+a <strong>shapefile</strong><a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>
+If you followed the “Prerequisites”, you should have downloaded a shapefile as a subdirectory called
+“al112017_best_track” in the “data” subdirectory.
+I downloaded this as a zipped data file from the National Hurricane Center and unzipped it.
+The shapefile includes shapefiles for the track of
+Hurricane Irma.</p>
+<p>If you look at the “al112017_best_track” directory,
 you will see that it contains a collection of files starting with one of several roots
 (e.g., “al112017_lin”) and with one of several suffixes (e.g., “.dbf”, “.prj”, “.shx”).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(<span class="st">&quot;data/al112017_best_track/&quot;</span>)</code></pre>
@@ -319,9 +319,14 @@ you will see that it contains a collection of files starting with one of several
 of geographic information. For example, the “al112017_lin.<em>" files provides the
 line of the hurricane’s track, while the "al112017_windswarth.</em>” layer provides windswaths
 (how severe the wind was in certain locations surrounding the storm track).</p>
-<p>You can read in any of these layers into R as an <code>sf</code> object using <code>irma_tracks</code> and specifying
-the layer you’d like from the directory with the <code>layer</code> parameter (put the root of the filenames
-for the layer you want). For example, to read in a line with the track of irma, you can run:</p>
+<p>You can read in any of these layers into R as an <code>sf</code> object using <code>st_read</code> and specifying
+the layer you’d like from the shapefile directory with the <code>layer</code> parameter
+(put the root of the filenames
+for the layer you want).
+Since we’ll be plotting this with the accident data, we should transform the data’s
+projection from its original projection to the one we set for the <code>fl_accidents</code>
+data. You can do that with the <code>st_transform</code> function.
+For example, to read in a line with the track of irma, you can run:</p>
 <pre class="sourceCode r"><code class="sourceCode r">irma_tracks &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;data/al112017_best_track/&quot;</span>,
                        <span class="dt">layer =</span> <span class="st">&quot;al112017_lin&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">st_transform</span>(<span class="dt">crs =</span> <span class="dv">4326</span>)</code></pre>
@@ -334,7 +339,7 @@ for the layer you want). For example, to read in a line with the track of irma, 
 ## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_defs</code></pre>
 <p>If you print out <code>irma_tracks</code>, you can see that it looks like a dataframe, but with extra
 geographic information (bounding box, projection, etc.) as well as a special column for
-geometry, which gives the latitude and longitude …</p>
+geometry, which gives the latitude and longitude of each accident.</p>
 <pre class="sourceCode r"><code class="sourceCode r">irma_tracks</code></pre>
 <pre><code>## Simple feature collection with 20 features and 3 fields
 ## geometry type:  LINESTRING
@@ -354,18 +359,23 @@ geometry, which gives the latitude and longitude …</p>
 ## 8        11          Hurricane4  4 LINESTRING (-53.9 16.7, -55...
 ## 9        11          Hurricane5  5 LINESTRING (-57.8 16.7, -59...
 ## 10       11          Hurricane4  4 LINESTRING (-73 21.5, -73.2...</code></pre>
+<p>Finally, there are some packages available now that allow you to read data, including spatial
+data, directly into R from large open data databases, using R functions that wrap the database’s
+Application Programming Interfaces (APIs). For example, the <code>tigris</code> package lets you pull
+spatial data into R directly from the US Census. To get spatial data for all the counties in
+Florida, you can run:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tigris)
 fl_counties &lt;-<span class="st"> </span><span class="kw">counties</span>(<span class="dt">state =</span> <span class="st">&quot;FL&quot;</span>, <span class="dt">cb =</span> <span class="ot">TRUE</span>, <span class="dt">class =</span> <span class="st">&quot;sf&quot;</span>)</code></pre>
 <p>If, for any reason, you’re not able to get the above code to work, I pulled and saved this data
 with the example data, and you can load it with the following code if you followed all the
-directions in the “Prerequisites”:</p>
+directions in the “Prerequisites” and are having problems with the previous code:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/fl_counties.RData&quot;</span>)</code></pre>
 </div>
 <div id="basic-mapping" class="section level2">
 <h2><span class="header-section-number">3.2</span> Basic mapping</h2>
 <p>If you don’t have <code>ggplot2</code> still loaded from the exercises in the “Plot” section, you’ll need to
 load it. Then, you can create a <code>ggplot</code> object and add an <code>sf</code> layer to it with <code>geom_sf</code>, specifying
-the <code>sf</code> data set to plot.<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a>
+the <code>sf</code> data set to plot.<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>
 Add a coordinate layer (<code>coord_sf</code>) appropriate for a map (otherwise,
 you might end up with a map that’s “stretched” out in either the x- or y-direction):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)
@@ -373,7 +383,7 @@ you might end up with a map that’s “stretched” out in either the x- or y-d
 <span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_counties) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">coord_sf</span>()</code></pre>
-<p><img src="navy_public_health_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>You can add other <code>sf</code> layers to this map, to add points for the location of each fatal accident
 and a line for the track of Hurricane Irma. Since the track for Irma began much further south than
 Florida and continues north of Florida, you’ll need to set <code>xlim</code> and <code>ylim</code> in the <code>coord_sf</code> call
@@ -386,7 +396,7 @@ default size.</p>
 <span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> fl_accidents, <span class="kw">aes</span>(<span class="dt">color =</span> date)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> irma_tracks, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">88</span>, <span class="dv">-80</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="fl">24.5</span>, <span class="fl">31.5</span>)) </code></pre>
-<p><img src="navy_public_health_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>You can do anything to this map that you would to a regular <code>ggplot</code> object. For example, instead of
 using color to show the date of an accident, you could use faceting to add a small map of each date
 using <code>facet_wrap</code>. This example code also adds some elements for the plot’s theme, including
@@ -402,7 +412,7 @@ changing the background color and taking out the axis ticks and labels.</p>
         <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),
         <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.grid =</span> <span class="kw">element_line</span>(<span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="fl">0.8</span>))</code></pre>
-<p><img src="navy_public_health_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="navy_public_health_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
 <div id="learn-more-1" class="section level2">
 <h2><span class="header-section-number">3.3</span> Learn more</h2>
@@ -417,6 +427,9 @@ is currently available online and will be available in print sometime in 2019.</
 other examples of using the package, many people have recently written blog posts with examples
 of using it, so it’s worth googling something like “blog post map r sf”. Finally, some of the
 <code>ggplot</code> references listed in the “Plot” section’s “Learn More” include sections on mapping.</p>
+<p>There’s an <a href="https://journal.r-project.org/archive/2016/RJ-2016-043/index.html">article</a> on the
+<code>tigris</code> package, if you’d like to find out more about how to use that package to read in
+US Census spatial data.</p>
 
 </div>
 </div>
@@ -429,27 +442,28 @@ of using it, so it’s worth googling something like “blog post map r sf”. F
 <div class="footnotes">
 <hr />
 <ol start="20">
-<li id="fn20"><p><strong>list column</strong><a href="map.html#fnref20" class="footnote-back">↩</a></p></li>
-<li id="fn21"><p><strong>sf.</strong> Short for “simple features”,
+<li id="fn20"><p><strong>sf.</strong> Short for “simple features”,
 the name of both an R package and the object class created and used by the data. This class
 includes a special column called “geometry” for geographic information about each observation.
 Objects with this class can be used for mapping spatial data, but also can be manipulated
-using tidyverse tools very similarly to tibbles.<a href="map.html#fnref21" class="footnote-back">↩</a></p></li>
-<li id="fn22"><p>
+using tidyverse tools very similarly to tibbles.<a href="map.html#fnref20" class="footnote-back">↩</a></p></li>
+<li id="fn21"><p>
 Most of the functions in the <code>st</code> package start with <code>st_</code>. Since R studio allows <strong>tab completion</strong>,
 this makes it very easy to look up a function in the package whose name you might have forgotten.
 Just try typing <code>st_</code> and then the Tab key in your R console—you should get a pop-up with a list of
-suggestions for possible function names.<a href="map.html#fnref22" class="footnote-back">↩</a></p></li>
-<li id="fn23"><p>Here, the
+suggestions for possible function names.<a href="map.html#fnref21" class="footnote-back">↩</a></p></li>
+<li id="fn22"><p>Here, the
 compound pipe operator, <code>%&lt;&gt;%</code>, applies the function to <code>fl_accidents</code> and then overwrites the
 <code>fl_accidents</code> with the modified version, updating the object so you’re ready to use it for later
-code.<a href="map.html#fnref23" class="footnote-back">↩</a></p></li>
-<li id="fn24"><p><strong>shapefile.</strong> …<a href="map.html#fnref24" class="footnote-back">↩</a></p></li>
-<li id="fn25"><p>If you are
+code.<a href="map.html#fnref22" class="footnote-back">↩</a></p></li>
+<li id="fn23"><p><strong>shapefile.</strong> A format for storing geographical data common for GIS. The data
+will typically be stored in a directory (often zipped to a single file), with separate files
+that give geographic data and other characteristics of the data.<a href="map.html#fnref23" class="footnote-back">↩</a></p></li>
+<li id="fn24"><p>If you are
 running this on a Mac, there’s a chance that you might get an error message about “polygon
 edge not found.” There seems to be a bug that’s still being resolved involving the default graphics
 driver on Macs with this package. If you get this error message, try fixing it by adding the
-following layer to the <code>ggplot</code> code: <code>+ theme(axis.text = element_blank(), axis.ticks = element_blank()</code><a href="map.html#fnref25" class="footnote-back">↩</a></p></li>
+following layer to the <code>ggplot</code> code: <code>+ theme(axis.text = element_blank(), axis.ticks = element_blank()</code><a href="map.html#fnref24" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

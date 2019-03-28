@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  28 MAR 2019 10:38
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2018) (preloaded format=xelatex 2019.3.25)  28 MAR 2019 12:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1513,9 +1513,6 @@ Chapter 3.
 
 LaTeX Warning: Marginpar on page 29 moved.
 
-
-LaTeX Warning: Marginpar on page 29 moved.
-
 [29
 
 ]
@@ -1529,53 +1526,51 @@ LaTeX Warning: Marginpar on page 30 moved.
 LaTeX Warning: Marginpar on page 30 moved.
 
 
-Overfull \hbox (97.5pt too wide) in paragraph at lines 1180--1180
+Class tufte-book Warning: Proper spacing of small-caps letters has not been set
+ up.
+This message occurred on input line 1182.
+
+[30]
+Overfull \hbox (97.5pt too wide) in paragraph at lines 1182--1182
 []\TU/lmtt/m/n/10 ## bbox:           xmin: -87.3797 ymin: 25.6876 xmax: -80.323
 32 ymax: 30.65894[] 
  []
 
 
-Class tufte-book Warning: Proper spacing of small-caps letters has not been set
- up.
-This message occurred on input line 1180.
+Overfull \hbox (12.46765pt too wide) in paragraph at lines 1184--1193
+\TU/GillSans(0)/m/sc/10 should have downloaded a shapefile as a subdirectory ca
+lled “al112017_best_track” 
+ []
 
-[30]
 
 LaTeX Warning: Marginpar on page 31 moved.
 
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1229.
+This message occurred on input line 1225.
 
 [31]
-Overfull \hbox (4.61742pt too wide) in paragraph at lines 1236--1239
-[]\TU/GillSans(0)/m/sc/10 You can read in any of these layers into R as an \TU/
-lmtt/m/n/10 sf \TU/GillSans(0)/m/sc/10 object using \TU/lmtt/m/n/10 irma_tracks
- 
- []
-
-
-Overfull \hbox (585.75pt too wide) in paragraph at lines 1255--1255
+Overfull \hbox (585.75pt too wide) in paragraph at lines 1256--1256
 []\TU/lmtt/m/n/10 ## Reading layer `al112017_lin' from data source `/Users/geor
 gianaanderson/Documents/r_workshops/navy_public_health/data/al112017_best_track
 ' using driver `ESRI Shapefile'[] 
  []
 
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 1255--1255
+Overfull \hbox (24.0pt too wide) in paragraph at lines 1256--1256
 []\TU/lmtt/m/n/10 ## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 3
 6.8[] 
  []
 
 
-Overfull \hbox (18.75pt too wide) in paragraph at lines 1255--1255
+Overfull \hbox (18.75pt too wide) in paragraph at lines 1256--1256
 []\TU/lmtt/m/n/10 ## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_de
 fs[] 
  []
 
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 1297--1297
+Overfull \hbox (24.0pt too wide) in paragraph at lines 1298--1298
 []\TU/lmtt/m/n/10 ## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 3
 6.8[] 
  []
@@ -1583,31 +1578,31 @@ Overfull \hbox (24.0pt too wide) in paragraph at lines 1297--1297
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1297.
+This message occurred on input line 1298.
 
 [32]
 
-LaTeX Warning: Marginpar on page 33 moved.
+Class tufte-book Warning: Proper spacing of small-caps letters has not been set
+ up.
+This message occurred on input line 1336.
+
+[33]
+
+LaTeX Warning: Marginpar on page 34 moved.
+
+File: navy_public_health_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file
+ (type pdf)
+<use navy_public_health_files/figure-latex/unnamed-chunk-20-1.pdf>
+
+Overfull \hbox (12.0442pt too wide) in paragraph at lines 1345--1346
+[][]  
+ []
 
 File: navy_public_health_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file
  (type pdf)
 <use navy_public_health_files/figure-latex/unnamed-chunk-21-1.pdf>
 
-Overfull \hbox (12.0442pt too wide) in paragraph at lines 1338--1339
-[][]  
- []
-
-
-Class tufte-book Warning: Proper spacing of small-caps letters has not been set
- up.
-This message occurred on input line 1340.
-
-[33]
-File: navy_public_health_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file
- (type pdf)
-<use navy_public_health_files/figure-latex/unnamed-chunk-22-1.pdf>
-
-Overfull \hbox (12.03123pt too wide) in paragraph at lines 1357--1358
+Overfull \hbox (12.03123pt too wide) in paragraph at lines 1364--1365
 [][]  
  []
 
@@ -1617,22 +1612,22 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1359.
+This message occurred on input line 1366.
 
 [34]
-File: navy_public_health_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file
+File: navy_public_health_files/figure-latex/unnamed-chunk-22-1.pdf Graphic file
  (type pdf)
-<use navy_public_health_files/figure-latex/unnamed-chunk-23-1.pdf>
+<use navy_public_health_files/figure-latex/unnamed-chunk-22-1.pdf>
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1399.
+This message occurred on input line 1408.
 
 [35]
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1399.
+This message occurred on input line 1410.
 
 [36]
 Chapter 4.
@@ -1646,21 +1641,21 @@ File: navy_public_health_files/figure-latex/dt_example-1.pdf Graphic file (type
  pdf)
 <use navy_public_health_files/figure-latex/dt_example-1.pdf>
 
-Overfull \hbox (11.9917pt too wide) in paragraph at lines 1461--1462
+Overfull \hbox (11.9917pt too wide) in paragraph at lines 1472--1473
 [][]  
  []
 
 
-Overfull \hbox (2.8146pt too wide) in paragraph at lines 1463--1466
+Overfull \hbox (2.8146pt too wide) in paragraph at lines 1474--1477
 []\TU/GillSans(0)/m/sc/10 In your R Studio session, the interactive table shoul
 d show up in the “Viewer” 
  []
 
-File: navy_public_health_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file
+File: navy_public_health_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file
  (type pdf)
-<use navy_public_health_files/figure-latex/unnamed-chunk-25-1.pdf>
+<use navy_public_health_files/figure-latex/unnamed-chunk-24-1.pdf>
 
-Overfull \hbox (11.99861pt too wide) in paragraph at lines 1481--1482
+Overfull \hbox (11.99861pt too wide) in paragraph at lines 1492--1493
 [][]  
  []
 
@@ -1670,21 +1665,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1483.
+This message occurred on input line 1494.
 
 [38]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1483
+Package hyperref Warning: Suppressing link with empty target on input line 1494
 .
 
 
-Overfull \hbox (7.39967pt too wide) in paragraph at lines 1483--1484
+Overfull \hbox (7.39967pt too wide) in paragraph at lines 1494--1495
 []\TU/GillSans(0)/m/sc/10 To get more details on all the options available, see
  the helpfile for \TU/lmtt/m/n/10 datatable 
  []
 
 
-Overfull \hbox (5.07346pt too wide) in paragraph at lines 1493--1499
+Overfull \hbox (5.07346pt too wide) in paragraph at lines 1504--1510
 \TU/GillSans(0)/m/sc/10 from the “Plot” section.[] First, save the plot to an o
 bject called \TU/lmtt/m/n/10 fatality_plot 
  []
@@ -1696,7 +1691,7 @@ File: navy_public_health_files/figure-latex/plotly1-1.pdf Graphic file (type pd
 f)
 <use navy_public_health_files/figure-latex/plotly1-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1523--1524
+Underfull \hbox (badness 10000) in paragraph at lines 1534--1535
 
  []
 
@@ -1704,30 +1699,30 @@ File: navy_public_health_files/figure-latex/plotly2-1.pdf Graphic file (type pd
 f)
 <use navy_public_health_files/figure-latex/plotly2-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 1538--1539
+Underfull \hbox (badness 10000) in paragraph at lines 1549--1550
 
  []
 
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1545.
+This message occurred on input line 1556.
 
 [39]
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1545.
+This message occurred on input line 1556.
 
 [40]
 
 LaTeX Warning: Marginpar on page 41 moved.
 
-File: navy_public_health_files/figure-latex/unnamed-chunk-28-1.pdf Graphic file
+File: navy_public_health_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file
  (type pdf)
-<use navy_public_health_files/figure-latex/unnamed-chunk-28-1.pdf>
+<use navy_public_health_files/figure-latex/unnamed-chunk-27-1.pdf>
 
-Overfull \hbox (12.02463pt too wide) in paragraph at lines 1588--1589
+Overfull \hbox (12.02463pt too wide) in paragraph at lines 1599--1600
 [][]  
  []
 
@@ -1737,23 +1732,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1590.
+This message occurred on input line 1601.
 
 [41]
-Overfull \hbox (585.75pt too wide) in paragraph at lines 1613--1613
+Overfull \hbox (585.75pt too wide) in paragraph at lines 1624--1624
 []\TU/lmtt/m/n/10 ## Reading layer `al112017_lin' from data source `/Users/geor
 gianaanderson/Documents/r_workshops/navy_public_health/data/al112017_best_track
 ' using driver `ESRI Shapefile'[] 
  []
 
 
-Overfull \hbox (24.0pt too wide) in paragraph at lines 1613--1613
+Overfull \hbox (24.0pt too wide) in paragraph at lines 1624--1624
 []\TU/lmtt/m/n/10 ## bbox:           xmin: -90.1 ymin: 16.1 xmax: -26.9 ymax: 3
 6.8[] 
  []
 
 
-Overfull \hbox (18.75pt too wide) in paragraph at lines 1613--1613
+Overfull \hbox (18.75pt too wide) in paragraph at lines 1624--1624
 []\TU/lmtt/m/n/10 ## proj4string:    +proj=longlat +a=6371200 +b=6371200 +no_de
 fs[] 
  []
@@ -1761,25 +1756,25 @@ fs[]
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1629.
+This message occurred on input line 1640.
 
 [42]
-File: navy_public_health_files/figure-latex/unnamed-chunk-30-1.pdf Graphic file
+File: navy_public_health_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file
  (type pdf)
-<use navy_public_health_files/figure-latex/unnamed-chunk-30-1.pdf>
+<use navy_public_health_files/figure-latex/unnamed-chunk-29-1.pdf>
 
-Overfull \hbox (12.02463pt too wide) in paragraph at lines 1632--1633
+Overfull \hbox (12.02463pt too wide) in paragraph at lines 1643--1644
 [][]  
  []
 
 
 LaTeX Warning: Marginpar on page 43 moved.
 
-File: navy_public_health_files/figure-latex/unnamed-chunk-31-1.pdf Graphic file
+File: navy_public_health_files/figure-latex/unnamed-chunk-30-1.pdf Graphic file
  (type pdf)
-<use navy_public_health_files/figure-latex/unnamed-chunk-31-1.pdf>
+<use navy_public_health_files/figure-latex/unnamed-chunk-30-1.pdf>
 
-Overfull \hbox (12.02463pt too wide) in paragraph at lines 1658--1659
+Overfull \hbox (12.02463pt too wide) in paragraph at lines 1669--1670
 [][]  
  []
 
@@ -1789,7 +1784,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1660.
+This message occurred on input line 1671.
 
 [43]
 
@@ -1798,31 +1793,63 @@ LaTeX Warning: Marginpar on page 44 moved.
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1691.
+This message occurred on input line 1702.
 
 [44]
 Chapter 5.
 [45
 
 ]
-Overfull \hbox (7.54019pt too wide) in paragraph at lines 1746--1761
+
+LaTeX Warning: Marginpar on page 46 moved.
+
+
+Overfull \hbox (7.54019pt too wide) in paragraph at lines 1774--1789
 [][]  
  []
 
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1796.
+This message occurred on input line 1820.
 
 [46]
+File: images/flexdashboard_example.png Graphic file (type bmp)
+<images/flexdashboard_example.png>
+
+Overfull \hbox (849.4927pt too wide) in paragraph at lines 1822--1823
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1822--1823
+
+ []
+
+
+LaTeX Warning: Float too large for page by 19.00453pt on input line 1823.
+
+
+Overfull \hbox (12.97777pt too wide) in paragraph at lines 1830--1840
+\TU/GillSans(0)/m/sc/10 creating a dashboard in the “reports” subdirectory’s “f
+lexdashboard_example.Rmd” 
+ []
+
+
+LaTeX Warning: Marginpar on page 47 moved.
+
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1799.
+This message occurred on input line 1865.
 
-[47] [48
+[47]
 
-]
+Class tufte-book Warning: Proper spacing of small-caps letters has not been set
+ up.
+This message occurred on input line 1865.
+
+[48]
 Chapter 6.
 
 LaTeX Warning: Marginpar on page 49 moved.
@@ -1833,20 +1860,22 @@ LaTeX Warning: Marginpar on page 49 moved.
 
 LaTeX Warning: Marginpar on page 49 moved.
 
-[49]
+[49
+
+]
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1902.
+This message occurred on input line 1966.
 
 [50]
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 1952.
+This message occurred on input line 2017.
 
 [51]
-Overfull \hbox (3.96046pt too wide) in paragraph at lines 1989--2007
+Overfull \hbox (3.96046pt too wide) in paragraph at lines 2057--2075
 []\TU/GillSans(0)/m/sc/10 This function takes the large original dataset. It fi
 rst \TU/GillSans(0)/m/it/10 renames \TU/GillSans(0)/m/sc/10 all the columns— 
  []
@@ -1854,19 +1883,19 @@ rst \TU/GillSans(0)/m/it/10 renames \TU/GillSans(0)/m/sc/10 all the columns—
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 2007.
+This message occurred on input line 2075.
 
 [52]
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 2065.
+This message occurred on input line 2119.
 
 [53]
 
 Class tufte-book Warning: Proper spacing of small-caps letters has not been set
  up.
-This message occurred on input line 2079.
+This message occurred on input line 2147.
 
 [54]
 Chapter 7.
@@ -1877,25 +1906,25 @@ Chapter 7.
 ]
 Chapter 8.
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2111.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2179.
 [57]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2111.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2179.
 (./navy_public_health.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2111.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2111.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 2179.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2179.
 
 Package rerunfilecheck Info: File `navy_public_health.out' has not changed.
 (rerunfilecheck)             Checksum: BA56080483015F0EF6383D6B89833192.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2111.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2179.
  ) 
 Here is how much of TeX's memory you used:
- 24503 strings out of 494921
- 456944 string characters out of 6174292
- 591182 words of memory out of 5000000
- 28079 multiletter control sequences out of 15000+600000
+ 24513 strings out of 494921
+ 457195 string characters out of 6174292
+ 590403 words of memory out of 5000000
+ 28088 multiletter control sequences out of 15000+600000
  537891 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  55i,12n,116p,536b,488s stack positions out of 5000i,500n,10000p,200000b,80000s

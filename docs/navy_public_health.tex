@@ -1056,17 +1056,18 @@ and you'll get a good idea of the range of plots \texttt{ggplot2} can be used to
 \chapter{Map}\label{map}}
 
 \newthought{R has had tools for mapping spatial} data for a long time, but some of these
-tools, but they could take a while to learn if you were just used to basic plotting
+tools could take a while to learn if you were just used to basic plotting
 in R. Recently, some packages have been developed for mapping spatial data that fit within
 the \texttt{ggplot} framework, so they allow you to take what you've learned about creating non-geographical
 plots and apply them to create maps.
 
 The \texttt{sf} package \citep{R-sf} is a fantastic new(-ish) package for mapping in R. The ``Tidy'' section
-of this handout describes the ``tidy'' data framework used as an input for \texttt{ggplot} code. The
+of this handout describes how the tidyverse framework is based on a ``tidy'' data format. The
 ``tidy'' data framework is also convenient for cleaning, merging, and manipulating data
 before plotting or modeling it. The \texttt{sf} package allows you to read in and work with geographical
 data in a tidy format. It turns out that this is very powerful, as you can learn how to do a
-few things well (plotting {[}see the ``Plot'' section{]} and working with data {[}see the ``Tidy'' section{]}),
+few things well (plotting {[}see the ``Plot'' section{]} and working with data {[}see the ``Tidy'' section
+and its ``Learn More'' references{]}),
 and then apply these tools in the same way, whether you're working with geographical or
 non-geographical data.
 
@@ -1074,7 +1075,7 @@ non-geographical data.
 \section{Geographical data in a tidy format}\label{geographical-data-in-a-tidy-format}}
 
 The \texttt{sf} package allows you to create a dataframe object with one special characteristic: a
-special \textbf{list column}\footnote{\textbf{list column}}
+special column
 called ``geometry'' that contains the geometrical data needed to draw
 an observation. For example, if you have a dataset of motor vehicle accidents, where each
 row gives the data for an accident, the \texttt{geometry} column might include the latitude and
@@ -1088,14 +1089,14 @@ These special dataframes are given a class called \textbf{sf}\footnote{\textbf{s
   includes a special column called ``geometry'' for geographic information about each observation.
   Objects with this class can be used for mapping spatial data, but also can be manipulated
   using tidyverse tools very similarly to tibbles.}
-
 There are several ways for you to create this special type of dataframe. We'll create a few
-to use in the later mapping examples. First, if you have a regular dataframe, you can
+to use in the later mapping examples to demonstrate some of the ways to get an \texttt{sf} object.
+
+First, if you have a regular dataframe, you can
 convert it into an \texttt{sf} object, specifying which parts of the dataframe include geographical
 information.
-
 If you followed all the set-up instructions in the ``Prerequisites'', you should have downloaded a
-dataset called ``fl\_accidents.csv'' and saved it in the ``data'' subdirectory of the R Project directory
+dataset called ``fl\_accidents.csv'' and in the ``data'' subdirectory of the R Project directory
 for the examples. You can use \texttt{readr} to read it in. If you print out the start of it, you'll see
 that it's got observations (rows) of fatal motor vehicle accidents. These accidents all occurred in
 Florida within a week of Hurricane Irma's landfall on September 10, 2017. The columns give
@@ -1135,7 +1136,9 @@ just a regular dataframe. To convert it to an \texttt{sf} class object, you can 
 specifying the columns with the geogrphical coordinates using the \texttt{coords} parameter.\footnote{Here, the
   compound pipe operator, \texttt{\%\textless{}\textgreater{}\%}, applies the function to \texttt{fl\_accidents} and then overwrites the
   \texttt{fl\_accidents} with the modified version, updating the object so you're ready to use it for later
-  code.}
+  code.} We also want to go ahead and set the projection to something reasonable for latitude-longitude
+data; the ``4326'' code is a good pick. That can be set with the \texttt{st\_sf} function (for a lot more
+on map projections, see the resources in ``Learn More'').
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1145,9 +1148,8 @@ specifying the columns with the geogrphical coordinates using the \texttt{coords
 \end{Highlighting}
 \end{Shaded}
 
-Now, when you print out \texttt{fl\_accidents}, you'll see some extra information at the top of the print
-out, including the objects \textbf{bounding box} (\texttt{bbox}) and \textbf{projection} (\texttt{epsg}, \texttt{proj4string})
-(which we currently haven't set).
+Now, when you print out \texttt{fl\_accidents}, you'll see some extra information at the top of the print-out,
+including the objects \textbf{bounding box} (\texttt{bbox}) and \textbf{projection} (\texttt{epsg}, \texttt{proj4string}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1180,22 +1182,16 @@ out, including the objects \textbf{bounding box} (\texttt{bbox}) and \textbf{pro
 \end{verbatim}
 
 A second way to create an \texttt{sf} object in R is to read in data from a geographic data file, like
-a \textbf{shapefile}\footnote{\textbf{shapefile.} \ldots{}}
-If you followed the ``Prerequisites'', you should have downloaded a file called
-``al112017\_best\_track.zip''. This is a zipped file that includes shapefiles for the track of
-Hurricane Irma from the National Hurricane Center ({[}website{]}).
+a \textbf{shapefile}\footnote{\textbf{shapefile.} A format for storing geographical data common for GIS. The data
+  will typically be stored in a directory (often zipped to a single file), with separate files
+  that give geographic data and other characteristics of the data.}
+If you followed the ``Prerequisites'', you should have downloaded a shapefile as a subdirectory called
+``al112017\_best\_track'' in the ``data'' subdirectory.
+I downloaded this as a zipped data file from the National Hurricane Center and unzipped it.
+The shapefile includes shapefiles for the track of
+Hurricane Irma.
 
-First, you'll need to unzip this file to ``unpack'' it as a directory of files. On many
-computers, you can do this by double-clicking on the zipped file. However, you can also
-unzip files from R. Just run:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{unzip}\NormalTok{(}\StringTok{"data/al112017_best_track.zip"}\NormalTok{, }\DataTypeTok{exdir =} \StringTok{"data/al112017_best_track"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Once the file is unzipped, if you look at the ``al112017\_best\_track'' directory created,
+If you look at the ``al112017\_best\_track'' directory,
 you will see that it contains a collection of files starting with one of several roots
 (e.g., ``al112017\_lin'') and with one of several suffixes (e.g., ``.dbf'', ``.prj'', ``.shx'').
 
@@ -1233,9 +1229,14 @@ of geographic information. For example, the ``al112017\_lin.\emph{" files provid
 line of the hurricane's track, while the "al112017\_windswarth.}'' layer provides windswaths
 (how severe the wind was in certain locations surrounding the storm track).
 
-You can read in any of these layers into R as an \texttt{sf} object using \texttt{irma\_tracks} and specifying
-the layer you'd like from the directory with the \texttt{layer} parameter (put the root of the filenames
-for the layer you want). For example, to read in a line with the track of irma, you can run:
+You can read in any of these layers into R as an \texttt{sf} object using \texttt{st\_read} and specifying
+the layer you'd like from the shapefile directory with the \texttt{layer} parameter
+(put the root of the filenames
+for the layer you want).
+Since we'll be plotting this with the accident data, we should transform the data's
+projection from its original projection to the one we set for the \texttt{fl\_accidents}
+data. You can do that with the \texttt{st\_transform} function.
+For example, to read in a line with the track of irma, you can run:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1256,7 +1257,7 @@ for the layer you want). For example, to read in a line with the track of irma, 
 
 If you print out \texttt{irma\_tracks}, you can see that it looks like a dataframe, but with extra
 geographic information (bounding box, projection, etc.) as well as a special column for
-geometry, which gives the latitude and longitude \ldots{}
+geometry, which gives the latitude and longitude of each accident.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1296,6 +1297,12 @@ geometry, which gives the latitude and longitude \ldots{}
 ## 10 LINESTRING (-73 21.5, -73.2...
 \end{verbatim}
 
+Finally, there are some packages available now that allow you to read data, including spatial
+data, directly into R from large open data databases, using R functions that wrap the database's
+Application Programming Interfaces (APIs). For example, the \texttt{tigris} package lets you pull
+spatial data into R directly from the US Census. To get spatial data for all the counties in
+Florida, you can run:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tigris)}
@@ -1306,7 +1313,7 @@ geometry, which gives the latitude and longitude \ldots{}
 
 If, for any reason, you're not able to get the above code to work, I pulled and saved this data
 with the example data, and you can load it with the following code if you followed all the
-directions in the ``Prerequisites'':
+directions in the ``Prerequisites'' and are having problems with the previous code:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1335,7 +1342,7 @@ you might end up with a map that's ``stretched'' out in either the x- or y-direc
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-21-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-20-1}
 
 You can add other \texttt{sf} layers to this map, to add points for the location of each fatal accident
 and a line for the track of Hurricane Irma. Since the track for Irma began much further south than
@@ -1354,7 +1361,7 @@ default size.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-21-1}
 
 You can do anything to this map that you would to a regular \texttt{ggplot} object. For example, instead of
 using color to show the date of an accident, you could use faceting to add a small map of each date
@@ -1376,7 +1383,7 @@ changing the background color and taking out the axis ticks and labels.
 \end{Shaded}
 
 \begin{figure*}
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-23-1} \end{figure*}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-22-1} \end{figure*}
 
 \hypertarget{learn-more-1}{%
 \section{Learn more}\label{learn-more-1}}
@@ -1394,6 +1401,10 @@ Both these sources go in depth to describe the \texttt{sf} package and how to us
 other examples of using the package, many people have recently written blog posts with examples
 of using it, so it's worth googling something like ``blog post map r sf''. Finally, some of the
 \texttt{ggplot} references listed in the ``Plot'' section's ``Learn More'' include sections on mapping.
+
+There's an \href{https://journal.r-project.org/archive/2016/RJ-2016-043/index.html}{article} on the
+\texttt{tigris} package, if you'd like to find out more about how to use that package to read in
+US Census spatial data.
 
 \hypertarget{interact}{%
 \chapter{Interact}\label{interact}}
@@ -1478,7 +1489,7 @@ changes can change the table's appearance:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-25-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-24-1}
 
 To get more details on all the options available, see the helpfile for \texttt{datatable} (run \texttt{?datatable}) or read through the \href{}{online tutorial} for the package.
 
@@ -1585,7 +1596,7 @@ using the \texttt{addMarkers} call, specifying the dataset to use with the \text
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-28-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-27-1}
 
 The result is an interactive map, with a marker at the location of each accident. Try using the
 plus and minus buttons to zoom in and out, and click on the map to pan around the map.
@@ -1629,7 +1640,7 @@ the each marker should show the date of the accident when you click on it.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-30-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-29-1}
 
 The ``pop-ups'' for the markers can be developed to be pretty fancy. You can use \texttt{paste} to paste
 together elements from the data with other words to create nice labels. You can also format these, using
@@ -1655,7 +1666,7 @@ be used for the pop-up with \texttt{popup\ =\ \textasciitilde{}\ popup}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-31-1}
+\includegraphics{navy_public_health_files/figure-latex/unnamed-chunk-30-1}
 
 The \texttt{leaflet} package has extensive \href{https://rstudio.github.io/leaflet/}{online documentation}.
 Browse through the sections of this online documentation to get a lot more ideas of how you can
@@ -1690,30 +1701,45 @@ and \href{https://www.showmeshiny.com/}{Show Me Shiny}.
 \hypertarget{report}{%
 \chapter{Report}\label{report}}
 
-\textbf{Literate programming}, an idea developed by Donald Knuth, mixes code that can be executed with regular text. The files you create can then be rendered, to run any embedded code. The final output will have results from your code and the regular text.
+\textbf{Literate programming}, an idea developed by Donald Knuth, mixes code that can be executed with
+regular text. The files you create can then be rendered, to run any embedded code. The final output
+will have results from your code and the regular text.
 
-The \texttt{knitr} package can be used for literate programming in R. In essence, \texttt{knitr} allows you to write an R Markdown file that can be rendered into a pdf, Word, or HTML document.
+R has a collection of packages that extend these ideas of literate programming, allowing you to
+create reports that interweave R code, the results from that code, and text. This collection
+include the packages \texttt{knitr} and \texttt{rmarkdown}. I believe both are automatically installed to your
+computer when you install RStudio.
+
+This section will walk you through some of the basics of creating two types of reports using
+RMarkdown: a basic RMarkdown report and a dashboard. The R project directory you downloaded in
+the ``Prerequisites'' section includes example files for both in its ``reports'' subdirectory.
 
 \hypertarget{rmarkdown}{%
 \section{RMarkdown}\label{rmarkdown}}
+
+The RMarkdown framework makes it very easy to create nice reports from R code in RStudio.
 
 Here are the basics of opening and rendering an R Markdown file in RStudio:
 
 \begin{itemize}
 \tightlist
 \item
-  To open a new R Markdown file, go to ``File'' -\textgreater{} ``New File'' -\textgreater{} ``RMarkdown\ldots{}'' -\textgreater{} for now, chose a ``Document'' in ``HTML'' format.
+  To open a new R Markdown file, go to ``File'' -\textgreater{} ``New File'' -\textgreater{} ``RMarkdown\ldots{}''. In the
+  box that pops up, chose a ``Document'' in ``HTML'' format.
 \item
   This will open a new R Markdown file in RStudio. The file extension for R Markdown files is ``.Rmd''.
 \item
-  The new file comes with some example code and text. You can run the file as-is to try out the example. You will ultimately delete this example code and text and replace it with your own.
+  The new file comes with some example code and text. You can run the file as-is to try out the example.
+  You will ultimately delete this example code and text and replace it with your own.
 \item
-  Once you ``knit'' the R Markdown file, R will render an HTML file with the output. This is automatically saved in the same directory where you saved your .Rmd file.
+  Once you ``knit'' the R Markdown file, R will render an HTML file with the output. This is automatically
+  saved in the same directory where you saved your .Rmd file.
 \item
-  Write everything besides R code using Markdown syntax.
+  Write everything besides R code using Markdown syntax (explained below).
 \end{itemize}
 
-To include R code in an RMarkdown document, you need to separate off the code chunk using the following syntax:
+To include R code in an RMarkdown document, you need to separate off the code chunk using the
+following syntax (here, the code assigns the numbers one to 10 to the object \texttt{my\_vec}):
 
 \begin{verbatim}
 ```{r}
@@ -1721,27 +1747,29 @@ my_vec <- 1:10
 ```
 \end{verbatim}
 
-This syntax tells R how to find the start and end of pieces of R code when the file is rendered. R will walk through, find each piece of R code, run it and create output (printed output or figures, for example), and then pass the file along to another program to complete rendering (e.g., Tex for pdf files).
+This syntax might look unusual, but it tells R how to find the start and end of pieces of R code
+when the file is processed by R. R will walk through, find each piece of R code inside these
+special sections, run it and create
+output (printed output or figures, for example). R will ignore anything not in one of these
+sections, including the text of the report.
+The output from this R processing will then pass into another program to complete
+rendering (e.g., a LaTeX engine for pdf files).
 
-R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand what markup languages like Markdown are and how they work.
+R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand
+what markup languages like Markdown are and how they work.
 
-In Word and other word processing programs you have used, you can add formatting using buttons and keyboard shortcuts (e.g., ``Ctrl-B'' for bold). The file saves the words you type. It also saves the formatting, but you see the final output, rather than the formatting markup, when you edit the file (WYSIWYG -- what you see is what you get).
+In Word and other word processing programs you have used, you can add formatting using buttons and
+keyboard shortcuts (e.g., ``Ctrl-B'' for bold). The file saves the words you type. It also saves the
+formatting, but you see the final output, rather than the formatting markup, when you edit the file
+(WYSIWYG -- what you see is what you get).
 
-In markup languages, on the other hand, you markup the document directly to show what formatting the final version should have (e.g., you type \texttt{**bold**} in the file to end up with a document with \textbf{bold}).
+In markup languages,\footnote{Examples include HTML, LaTeX, and Markdown} on the other hand, you markup the
+document directly to show what formatting the
+final version should have (e.g., you type \texttt{**bold**} in the file to end up with a document with
+\textbf{bold}).
 
-Examples of markup languages include:
-
-\begin{itemize}
-\tightlist
-\item
-  HTML (HyperText Markup Language)
-\item
-  LaTex
-\item
-  Markdown (a ``lightweight'' markup language)
-\end{itemize}
-
-To write a file in Markdown, you'll need to learn the conventions for creating formatting. This table shows what you would need to write in a flat file for some common formatting choices:
+To write a file in Markdown, you'll need to learn the conventions for creating formatting. This table
+shows the markup for some common formatting choices:
 
 \begin{tabular}{l|l|l}
 \hline
@@ -1777,23 +1805,61 @@ Some other simple things you can do in Markdown include:
   Superscripts
 \end{itemize}
 
+See the resources listed in ``Learn More'' for links to some helpful resources for learning
+RMarkdown, including more of these Markdown formatting mark-ups.
+
 \hypertarget{dashboards}{%
 \section{Dashboards}\label{dashboards}}
+
+In RStudio, you can also now create a ``dashboard'' using RMarkdown. A dashboard might be
+a good choice if you need to summarize or show a lot of information on a single webpage
+in a way that everything can be viewed in one window. Figure \ref{fig:dashboardexample}
+gives an example dashboard (although this is just a screenshot---if posted online, the
+leaflet map in this
+would be interactive).
+
+\begin{figure}
+\includegraphics[width=39.81in]{images/flexdashboard_example} \caption[Example of a dashboard created with RMarkdown]{Example of a dashboard created with RMarkdown.}\label{fig:dashboardexample}
+\end{figure}
+
+To create a dashboard, you'll need to have the \texttt{flexdashboard} package \citep{R-flexdashboard}
+installed. If you have this package installed, you can create a dashboard by opening your
+RStudio session and selecting ``File'' -\textgreater{} ``New File'' -\textgreater{} ``RMarkdown''. In the box that pops
+up, go to the ``From Template'' tab and select ``Flexdashboard''.
+
+The R Project with examples for this workshop includes an example file for creating
+a dashboard in the ``reports'' subdirectory's ``flexdashboard\_example.Rmd'' file.\footnote{You might
+  notice that there are some other files in this subdirectory that start with ``flexdashboard\_example''.
+  These are the files that are written out when you knit the RMarkdown file. You should never
+  change these by hand, but these include the files you'll want to share or post online as
+  the output of the RMarkdown file (e.g., ``flexdashboard\_example.html'').}
+Open this
+file and try creating the dashboard using the ``Knit'' button. You can get an idea for how
+the code converts to elements of the dashboard by changing some of the code in the
+RMarkdown file.
+
+The \texttt{flexdashboard} package is extensively documented through \href{https://rmarkdown.rstudio.com/flexdashboard/}{its website}, where you can find many examples of
+how to create dashboards with RMarkdown.
 
 \hypertarget{learn-more-3}{%
 \section{Learn more}\label{learn-more-3}}
 
-For more Markdown conventions, see \href{https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf}{RStudio's R Markdown Reference Guide} (link also available through ``Help'' in RStudio).
+For more Markdown conventions, see \href{https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf}{RStudio's R Markdown Reference Guide} (link also available through ``Help'' in RStudio). There are several great books on \texttt{knitr} and RMarkdown now;
+\href{https://bookdown.org/yihui/rmarkdown/}{R Markdown: The Definitive Guide} is particularly
+good, and includes the creater of \texttt{knitr} and \texttt{rmarkdown} as a coauthor.
 
-If you'd like to find out more, here are two good how-to books on reproducible research in R are:
+For more on creating dashboards using RMarkdown, see \href{https://rmarkdown.rstudio.com/flexdashboard/}{\texttt{flexdashboard} package's website}, which includes many examples
+of code and output for these dashboards.
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Reproducible Research with R and RStudio}, Christopher Gandrud
-\item
-  \emph{Dynamic Documents with R and knitr}, Yihui Xie
-\end{itemize}
+You can post the output of an RMarkdown file for free (note that it will be public) through
+\href{http://www.rpubs.com/}{RPubs}. This is also a great site for exploring reports others have
+created using RMarkdown.
+For more on posting your own files to RPubs, \href{http://www.rpubs.com/about/getting-started}{see here}.
+
+A collection of books published with R using RMarkdown is available through
+\href{https://bookdown.org/}{bookdown.org}. You can also use RMarkdown to create your own website
+with a blog using the \texttt{blogdown} package, which is explained in
+\href{https://bookdown.org/yihui/blogdown/}{blogdown: Creating Websites with R Markdown}.
 
 \hypertarget{tidy}{%
 \chapter{Tidy}\label{tidy}}
@@ -1807,8 +1873,10 @@ data in a what's called a ``tidy'' format.
 In the previous section, I used an example dataset that was already in this
 format, to make it easier for you to get started with plotting. However,
 to leverage the power of \textbf{ggplot2} for real datasets, you have to know
-how to get them into this tidy format. This section will explain this format,
-as well as how you can clean real datasets to convert them into this format.
+how to get them into this tidy format. This section will explain introduce
+you to how you can clean real datasets to convert them into this format
+using tidyverse tools, as well as provide some resources for you to use
+to develop your skills in ``tidying'' data.
 
 \hypertarget{tidyverse-tools}{%
 \section{Tidyverse tools}\label{tidyverse-tools}}

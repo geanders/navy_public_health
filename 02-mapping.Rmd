@@ -1,24 +1,25 @@
 # Map
 
 `r newthought("R has had tools for mapping spatial")` data for a long time, but some of these
-tools, but they could take a while to learn if you were just used to basic plotting
+tools could take a while to learn if you were just used to basic plotting
 in R. Recently, some packages have been developed for mapping spatial data that fit within 
 the `ggplot` framework, so they allow you to take what you've learned about creating non-geographical
 plots and apply them to create maps. 
 
 The `sf` package [@R-sf] is a fantastic new(-ish) package for mapping in R. The "Tidy" section
-of this handout describes the "tidy" data framework used as an input for `ggplot` code. The
+of this handout describes how the tidyverse framework is based on a "tidy" data format. The
 "tidy" data framework is also convenient for cleaning, merging, and manipulating data 
 before plotting or modeling it. The `sf` package allows you to read in and work with geographical
 data in a tidy format. It turns out that this is very powerful, as you can learn how to do a 
-few things well (plotting [see the "Plot" section] and working with data [see the "Tidy" section]),
+few things well (plotting [see the "Plot" section] and working with data [see the "Tidy" section
+and its "Learn More" references]),
 and then apply these tools in the same way, whether you're working with geographical or 
 non-geographical data. 
 
 ## Geographical data in a tidy format
 
 The `sf` package allows you to create a dataframe object with one special characteristic: a 
-special **list column**^[**list column**] 
+special column
 called "geometry" that contains the geometrical data needed to draw 
 an observation. For example, if you have a dataset of motor vehicle accidents, where each 
 row gives the data for an accident, the `geometry` column might include the latitude and
@@ -32,14 +33,14 @@ the name of both an R package and the object class created and used by the data.
 includes a special column called "geometry" for geographic information about each observation. 
 Objects with this class can be used for mapping spatial data, but also can be manipulated
 using tidyverse tools very similarly to tibbles.]
-
 There are several ways for you to create this special type of dataframe. We'll create a few
-to use in the later mapping examples. First, if you have a regular dataframe, you can 
+to use in the later mapping examples to demonstrate some of the ways to get an `sf` object. 
+
+First, if you have a regular dataframe, you can 
 convert it into an `sf` object, specifying which parts of the dataframe include geographical 
 information.
-
 If you followed all the set-up instructions in the "Prerequisites", you should have downloaded a 
-dataset called "fl_accidents.csv" and saved it in the "data" subdirectory of the R Project directory
+dataset called "fl_accidents.csv" and in the "data" subdirectory of the R Project directory
 for the examples. You can use `readr` to read it in. If you print out the start of it, you'll see 
 that it's got observations (rows) of fatal motor vehicle accidents. These accidents all occurred in 
 Florida within a week of Hurricane Irma's landfall on September 10, 2017. The columns give
@@ -61,7 +62,9 @@ suggestions for possible function names.]
 specifying the columns with the geogrphical coordinates using the `coords` parameter.^[Here, the 
 compound pipe operator, `%<>%`, applies the function to `fl_accidents` and then overwrites the 
 `fl_accidents` with the modified version, updating the object so you're ready to use it for later
-code.]
+code.] We also want to go ahead and set the projection to something reasonable for latitude-longitude
+data; the "4326" code is a good pick. That can be set with the `st_sf` function (for a lot more
+on map projections, see the resources in "Learn More").
 
 ```{r}
 library("sf")
@@ -70,30 +73,24 @@ fl_accidents %<>%
   st_sf(crs = 4326)
 ```
 
-Now, when you print out `fl_accidents`, you'll see some extra information at the top of the print
-out, including the objects **bounding box** (`bbox`) and **projection** (`epsg`, `proj4string`)
-(which we currently haven't set).
+Now, when you print out `fl_accidents`, you'll see some extra information at the top of the print-out,
+including the objects **bounding box** (`bbox`) and **projection** (`epsg`, `proj4string`).
 
 ```{r}
 fl_accidents
 ```
 
 A second way to create an `sf` object in R is to read in data from a geographic data file, like
-a **shapefile**^[**shapefile.** ...]
-If you followed the "Prerequisites", you should have downloaded a file called 
-"al112017_best_track.zip". This is a zipped file that includes shapefiles for the track of 
-Hurricane Irma from the National Hurricane Center ([website]).
+a **shapefile**^[**shapefile.** A format for storing geographical data common for GIS. The data
+will typically be stored in a directory (often zipped to a single file), with separate files
+that give geographic data and other characteristics of the data.]
+If you followed the "Prerequisites", you should have downloaded a shapefile as a subdirectory called 
+"al112017_best_track" in the "data" subdirectory. 
+I downloaded this as a zipped data file from the National Hurricane Center and unzipped it. 
+The shapefile includes shapefiles for the track of 
+Hurricane Irma.
 
-First, you'll need to unzip this file to "unpack" it as a directory of files. On many 
-computers, you can do this by double-clicking on the zipped file. However, you can also 
-unzip files from R. Just run: 
-
-```{r eval = FALSE}
-unzip("data/al112017_best_track.zip", 
-      exdir = "data/al112017_best_track")
-```
-
-Once the file is unzipped, if you look at the "al112017_best_track" directory created,
+If you look at the "al112017_best_track" directory,
 you will see that it contains a collection of files starting with one of several roots
 (e.g., "al112017_lin") and with one of several suffixes (e.g., ".dbf", ".prj", ".shx"). 
 
@@ -106,9 +103,14 @@ of geographic information. For example, the "al112017_lin.*" files provides the
 line of the hurricane's track, while the "al112017_windswarth.*" layer provides windswaths
 (how severe the wind was in certain locations surrounding the storm track).
 
-You can read in any of these layers into R as an `sf` object using `irma_tracks` and specifying
-the layer you'd like from the directory with the `layer` parameter (put the root of the filenames
-for the layer you want). For example, to read in a line with the track of irma, you can run:
+You can read in any of these layers into R as an `sf` object using `st_read` and specifying
+the layer you'd like from the shapefile directory with the `layer` parameter 
+(put the root of the filenames
+for the layer you want). 
+Since we'll be plotting this with the accident data, we should transform the data's 
+projection from its original projection to the one we set for the `fl_accidents`
+data. You can do that with the `st_transform` function.
+For example, to read in a line with the track of irma, you can run:
 
 ```{r}
 irma_tracks <- st_read("data/al112017_best_track/",
@@ -118,12 +120,17 @@ irma_tracks <- st_read("data/al112017_best_track/",
 
 If you print out `irma_tracks`, you can see that it looks like a dataframe, but with extra
 geographic information (bounding box, projection, etc.) as well as a special column for 
-geometry, which gives the latitude and longitude ...
+geometry, which gives the latitude and longitude of each accident.
 
 ```{r}
 irma_tracks
 ```
 
+Finally, there are some packages available now that allow you to read data, including spatial
+data, directly into R from large open data databases, using R functions that wrap the database's
+Application Programming Interfaces (APIs). For example, the `tigris` package lets you pull
+spatial data into R directly from the US Census. To get spatial data for all the counties in 
+Florida, you can run:
 
 ```{r eval = FALSE}
 library(tigris)
@@ -132,12 +139,11 @@ fl_counties <- counties(state = "FL", cb = TRUE, class = "sf")
 
 If, for any reason, you're not able to get the above code to work, I pulled and saved this data
 with the example data, and you can load it with the following code if you followed all the
-directions in the "Prerequisites": 
+directions in the "Prerequisites" and are having problems with the previous code: 
 
 ```{r}
 load("data/fl_counties.RData")
 ```
-
 
 
 ## Basic mapping
@@ -211,3 +217,7 @@ Both these sources go in depth to describe the `sf` package and how to use it. I
 other examples of using the package, many people have recently written blog posts with examples
 of using it, so it's worth googling something like "blog post map r sf". Finally, some of the
 `ggplot` references listed in the "Plot" section's "Learn More" include sections on mapping.
+
+There's an [article](https://journal.r-project.org/archive/2016/RJ-2016-043/index.html) on the 
+`tigris` package, if you'd like to find out more about how to use that package to read in 
+US Census spatial data. 

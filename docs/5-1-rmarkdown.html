@@ -169,29 +169,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-12">
 <div id="rmarkdown" class="section level2">
 <h2><span class="header-section-number">5.1</span> RMarkdown</h2>
+<p>The RMarkdown framework makes it very easy to create nice reports from R code in RStudio.</p>
 <p>Here are the basics of opening and rendering an R Markdown file in RStudio:</p>
 <ul>
-<li>To open a new R Markdown file, go to “File” -&gt; “New File” -&gt; “RMarkdown…” -&gt; for now, chose a “Document” in “HTML” format.</li>
+<li>To open a new R Markdown file, go to “File” -&gt; “New File” -&gt; “RMarkdown…”. In the
+box that pops up, chose a “Document” in “HTML” format.</li>
 <li>This will open a new R Markdown file in RStudio. The file extension for R Markdown files is “.Rmd”.</li>
-<li>The new file comes with some example code and text. You can run the file as-is to try out the example. You will ultimately delete this example code and text and replace it with your own.</li>
-<li>Once you “knit” the R Markdown file, R will render an HTML file with the output. This is automatically saved in the same directory where you saved your .Rmd file.</li>
-<li>Write everything besides R code using Markdown syntax.</li>
+<li>The new file comes with some example code and text. You can run the file as-is to try out the example.
+You will ultimately delete this example code and text and replace it with your own.</li>
+<li>Once you “knit” the R Markdown file, R will render an HTML file with the output. This is automatically
+saved in the same directory where you saved your .Rmd file.</li>
+<li>Write everything besides R code using Markdown syntax (explained below).</li>
 </ul>
-<p>To include R code in an RMarkdown document, you need to separate off the code chunk using the following syntax:</p>
+<p>To include R code in an RMarkdown document, you need to separate off the code chunk using the
+following syntax (here, the code assigns the numbers one to 10 to the object <code>my_vec</code>):</p>
 <pre><code>```{r}
 my_vec &lt;- 1:10
 ```</code></pre>
-<p>This syntax tells R how to find the start and end of pieces of R code when the file is rendered. R will walk through, find each piece of R code, run it and create output (printed output or figures, for example), and then pass the file along to another program to complete rendering (e.g., Tex for pdf files).</p>
-<p>R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand what markup languages like Markdown are and how they work.</p>
-<p>In Word and other word processing programs you have used, you can add formatting using buttons and keyboard shortcuts (e.g., “Ctrl-B” for bold). The file saves the words you type. It also saves the formatting, but you see the final output, rather than the formatting markup, when you edit the file (WYSIWYG – what you see is what you get).</p>
-<p>In markup languages, on the other hand, you markup the document directly to show what formatting the final version should have (e.g., you type <code>**bold**</code> in the file to end up with a document with <strong>bold</strong>).</p>
-<p>Examples of markup languages include:</p>
-<ul>
-<li>HTML (HyperText Markup Language)</li>
-<li>LaTex</li>
-<li>Markdown (a “lightweight” markup language)</li>
-</ul>
-<p>To write a file in Markdown, you’ll need to learn the conventions for creating formatting. This table shows what you would need to write in a flat file for some common formatting choices:</p>
+<p>This syntax might look unusual, but it tells R how to find the start and end of pieces of R code
+when the file is processed by R. R will walk through, find each piece of R code inside these
+special sections, run it and create
+output (printed output or figures, for example). R will ignore anything not in one of these
+sections, including the text of the report.
+The output from this R processing will then pass into another program to complete
+rendering (e.g., a LaTeX engine for pdf files).</p>
+<p>R Markdown files are mostly written using Markdown. To write R Markdown files, you need to understand
+what markup languages like Markdown are and how they work.</p>
+<p>In Word and other word processing programs you have used, you can add formatting using buttons and
+keyboard shortcuts (e.g., “Ctrl-B” for bold). The file saves the words you type. It also saves the
+formatting, but you see the final output, rather than the formatting markup, when you edit the file
+(WYSIWYG – what you see is what you get).</p>
+<p>In markup languages,<label for="tufte-sn-30" class="margin-toggle sidenote-number">30</label><input type="checkbox" id="tufte-sn-30" class="margin-toggle"><span class="sidenote"><span class="sidenote-number">30</span> Examples include HTML, LaTeX, and Markdown</span> on the other hand, you markup the
+document directly to show what formatting the
+final version should have (e.g., you type <code>**bold**</code> in the file to end up with a document with
+<strong>bold</strong>).</p>
+<p>To write a file in Markdown, you’ll need to learn the conventions for creating formatting. This table
+shows the markup for some common formatting choices:</p>
 <table>
 <thead>
 <tr class="header">
@@ -237,6 +250,8 @@ my_vec &lt;- 1:10
 <li>Block quotes</li>
 <li>Superscripts</li>
 </ul>
+<p>See the resources listed in “Learn More” for links to some helpful resources for learning
+RMarkdown, including more of these Markdown formatting mark-ups.</p>
 </div>
 <p style="text-align: center;">
 <a href="5-report.html"><button class="btn btn-default">Previous</button></a>

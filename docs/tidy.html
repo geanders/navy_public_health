@@ -214,8 +214,10 @@ data in a what’s called a “tidy” format.</p>
 <p>In the previous section, I used an example dataset that was already in this
 format, to make it easier for you to get started with plotting. However,
 to leverage the power of <strong>ggplot2</strong> for real datasets, you have to know
-how to get them into this tidy format. This section will explain this format,
-as well as how you can clean real datasets to convert them into this format.</p>
+how to get them into this tidy format. This section will explain introduce
+you to how you can clean real datasets to convert them into this format
+using tidyverse tools, as well as provide some resources for you to use
+to develop your skills in “tidying” data.</p>
 <div id="tidyverse-tools" class="section level2">
 <h2><span class="header-section-number">6.1</span> Tidyverse tools</h2>
 <p><span class="newthought">As an epidemiologist,</span> I meet many people who learned SAS as students
@@ -223,12 +225,12 @@ and continue
 to use it. A common misperception is that R is good for visualizations, but bad for
 cleaning data. While in the past this might have been (somewhat) valid, now it couldn’t
 be further from the truth. With a collection of tools available through the
-<strong>tidyverse</strong>,<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>
+<strong>tidyverse</strong>,<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>
 you can write clean and compact code to clean even very large and
 messy datasets.</p>
 <p>The tidyverse works as well as it does because, for many parts of it, it requires
 a common input and output, and those input and output specifications are
-identical (the tidy data format).<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>
+identical (the tidy data format).<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a>
 If you want to get a better idea of this concept, and why it’s so powerful,
 think of some of the
 classic toys, like Legos (train sets and Lincoln logs also
@@ -425,15 +427,15 @@ keeping them handy as you try to apply R to explore your own data.</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="31">
-<li id="fn31"><p><strong>tidyverse.</strong> A collection of packages to work with data in a
+<ol start="32">
+<li id="fn32"><p><strong>tidyverse.</strong> A collection of packages to work with data in a
 “tidy” format, or to convert it to that format if needed. Many of these packages
 are developed and maintained by people at RStudio. If you run <code>library("tidyverse")</code>,
 you can load the core tidyverse packages in your R session. This way, you avoid
-having to load them one by one.<a href="tidy.html#fnref31" class="footnote-back">↩</a></p></li>
-<li id="fn32"><p>There are some clear specifications for this
+having to load them one by one.<a href="tidy.html#fnref32" class="footnote-back">↩</a></p></li>
+<li id="fn33"><p>There are some clear specifications for this
 format. I’m not going to go into them here, but several of the references given
-in the “Learn More” section go into depth in describing and defining this format.<a href="tidy.html#fnref32" class="footnote-back">↩</a></p></li>
+in the “Learn More” section go into depth in describing and defining this format.<a href="tidy.html#fnref33" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
